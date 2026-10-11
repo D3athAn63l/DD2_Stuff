@@ -18,7 +18,7 @@ The Lua paths inside the mod folders mirror the real `reframework/autorun/` loca
 - Executable inspector script: `tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`.
 - Offline scripts/test harnesses: `tools/DD2DataDumper/tools/`.
 - Mod metadata: `tools/DD2DataDumper/modinfo.ini`.
-- The first simple item catalog used v5.1, **tested in-game**. v5.2 detailed extraction subsequently succeeded; see [v5.2 audit](../research/dumps/items/2026-10-11/detailed-v5.2/AUDIT.md).
+- The first simple item catalog used v5.1, **tested in-game**. v5.2 detailed extraction subsequently succeeded; see the [versioned equipment findings](../research/dumps/items/2026-10-11/detailed-v5.2/README.md) and [complete v1.1 enhancement findings](../research/dumps/items/2026-10-11/detailed-v5.2/current/v1.1/FINDINGS.md).
 
 ## Confirmed API baselines (`research/baselines/`)
 
