@@ -1,0 +1,16 @@
+﻿category,found,targeted,missing
+affinity,7,7,0
+characters,11,11,0
+combat,13,13,0
+enemies,1,6,5
+enhance,3,4,1
+enums,9,17,8
+health,7,7,0
+items,9,12,3
+pawn_ai,5,23,18
+performance,10,10,0
+quests,1,4,3
+shops,3,3,0
+singletons,25,25,0
+vocation,9,9,0
+warfarer,7,7,0

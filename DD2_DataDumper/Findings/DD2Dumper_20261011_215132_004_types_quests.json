@@ -1,0 +1,3092 @@
+{
+  "captured": {
+    "capturedLocalTime": "2026-10-11 21:51:33 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.1-alpha",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "group": "quests",
+  "kind": "type-profile",
+  "rows": [
+    {
+      "exists": true,
+      "fieldCount": 137,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "<GameSaveDataHash>k__BackingField",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "<GameSaveDataVersion>k__BackingField",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "<IsAllExistQuestSceneFolder>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<IsExclusivePlayEvent>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<IsSatisfyFirstRequiredCondition>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<IsSatisfySecondRequiredCondition>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<IsTGSThankYou>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<OldExclusiveQuest>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<PawnInputOrder>k__BackingField",
+          "type": "app.PawnOrderController.PawnOrder"
+        },
+        {
+          "isStatic": false,
+          "name": "<QuestProgressData>k__BackingField",
+          "type": "app.QuestProgressData"
+        },
+        {
+          "isStatic": false,
+          "name": "<QuestSkipData>k__BackingField",
+          "type": "app.QuestSkipData"
+        },
+        {
+          "isStatic": false,
+          "name": "<UpdatedQuestContext>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "AchievementUserData",
+          "type": "app.QuestAchievementUserData"
+        },
+        {
+          "isStatic": false,
+          "name": "AfterStoryDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.Int32,app.QuestAfterStoryEntity>"
+        },
+        {
+          "isStatic": false,
+          "name": "AfterStoryDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "AfterStoryUpdateIndex",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "AfterStoryUpdateRequestList",
+          "type": "System.Collections.Generic.List`1<app.QuestDefine.ID>"
+        },
+        {
+          "isStatic": false,
+          "name": "BackStageUserData",
+          "type": "app.QuestBackStageData"
+        },
+        {
+          "isStatic": false,
+          "name": "CompletedResetEventAreaAction",
+          "type": "System.Action"
+        },
+        {
+          "isStatic": false,
+          "name": "Contents0014Tree",
+          "type": "app.QuestManager.QuestTree"
+        },
+        {
+          "isStatic": false,
+          "name": "Contents0014TreeLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "CurrentActiveQuestIDList",
+          "type": "System.Collections.Generic.List`1<app.QuestDefine.ID>"
+        },
+        {
+          "isStatic": false,
+          "name": "CurrentActiveQuestIDListLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "CurrentNpcOverrideDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,app.QuestNpcOverrideEntiry>"
+        },
+        {
+          "isStatic": false,
+          "name": "CurrentPhase",
+          "type": "app.QuestManager.UpdatePhase"
+        },
+        {
+          "isStatic": false,
+          "name": "CurrentQuestOverrideIndex",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "DisableQuestSaveDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.String,app.QuestManager.DisableQuestSaveData>"
+        },
+        {
+          "isStatic": false,
+          "name": "DisableQuestSaveLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "DistributedProcessorUpdateIndex",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "DistributedQuestProcessorLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "DistributedQuestProcessors",
+          "type": "System.Collections.Generic.List`1<app.QuestProcessor>"
+        },
+        {
+          "isStatic": false,
+          "name": "EntityDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.Int32,app.QuestManager.QuestEntity>"
+        },
+        {
+          "isStatic": false,
+          "name": "EventAreaLoadFlag",
+          "type": "System.UInt64"
+        },
+        {
+          "isStatic": false,
+          "name": "ExclusiveCharacterDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<app.CharacterID>>"
+        },
+        {
+          "isStatic": false,
+          "name": "ExclusiveCharacterLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "ExclusiveQuestIDList",
+          "type": "System.Collections.Generic.List`1<System.Int32>"
+        },
+        {
+          "isStatic": false,
+          "name": "ExclusiveQuestKey",
+          "type": "System.String"
+        },
+        {
+          "isStatic": false,
+          "name": "ExtendDeliverItemData",
+          "type": "app.QuestDefine.ExtendItemDataStruct"
+        },
+        {
+          "isStatic": false,
+          "name": "FerrystoneControlList",
+          "type": "System.Collections.Generic.List`1<app.quest.action.QuestFerrystoneControl>"
+        },
+        {
+          "isStatic": false,
+          "name": "FerrystoneControlLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "FerrystoneDisableDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.String,app.QuestDefine.FerrystoneDisableParam>"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_000",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_001",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_002",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_003",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_004",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_005",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_006",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_007",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_008",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_009",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_010",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_011",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_012",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_013",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_014",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_015",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_016",
+          "type": "System.Boolean[]"
+        },
+        {
+          "isStatic": false,
+          "name": "Flag_017",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "ForceIgnoreReactionCircle",
+          "type": "System.Collections.Generic.HashSet`1<app.CharacterID>"
+        },
+        {
+          "isStatic": false,
+          "name": "ForceIgnoreReactionCircleLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "ForceNpcGenerateRefCountDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<app.NameHash>>"
+        },
+        {
+          "isStatic": false,
+          "name": "GameSaveDataBuff",
+          "type": "app.QuestManager.GameSaveData_0x03"
+        },
+        {
+          "isStatic": false,
+          "name": "GuardTargetNpcDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<app.NameHash>>"
+        },
+        {
+          "isStatic": false,
+          "name": "GuardTargetNpcDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "GuiHidePopupHudRefCountList",
+          "type": "System.Collections.Generic.List`1<System.String>"
+        },
+        {
+          "isStatic": false,
+          "name": "GuiHidePopupHudRefCountLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "IsInGameSetup",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "IsRegisterCatalog",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "IsRequestQu040060SoundCall",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "IsRestoreSaveData",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "NpcLayerScoreModifyBlackoutRefCountDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<app.NameHash>>"
+        },
+        {
+          "isStatic": false,
+          "name": "NpcLayerScoreModifyBlackoutRefCountLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "NpcOverrideDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>>"
+        },
+        {
+          "isStatic": false,
+          "name": "NpcOverrideDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "OnFinishedNrdBattle",
+          "type": "System.Action`1<app.quest.action.UniqueAction088.EventType>"
+        },
+        {
+          "isStatic": false,
+          "name": "PawnInputOrderCache",
+          "type": "app.PawnOrderController.PawnOrder"
+        },
+        {
+          "isStatic": true,
+          "name": "ProcessorUpdateNum",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestCatalogDict",
+          "type": "app.DictionaryCatalog`2<System.UInt32,app.QuestCatalogData>"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestCatalogDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestClearRecordDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.Int32,app.QuestManager.QuestClearRecordData>"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestClearRecordDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestOverrideCharacterIDList",
+          "type": "System.Collections.Generic.List`1<app.CharacterID>"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestProgressDataLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestSaveRequest",
+          "type": "System.Collections.Generic.List`1<System.String>"
+        },
+        {
+          "isStatic": false,
+          "name": "QuestSaveRequestLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "RegisterCatalogHashSet",
+          "type": "System.Collections.Generic.HashSet`1<System.UInt32>"
+        },
+        {
+          "isStatic": false,
+          "name": "RegisterCatalogHashSetLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestExclusiveQuestID",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestLoadEventAreaArgList",
+          "type": "System.Collections.Generic.List`1<app.QuestManager.RequestEventAreaArg>"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestLoadEventAreaArgListLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestProgressData",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestProgressIndex",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestSkipData",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestUnload",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "RewardDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.UInt32,app.QuestRewardData>"
+        },
+        {
+          "isStatic": false,
+          "name": "RewardDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "SceneCollectorDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.UInt32,app.QuestSceneCollector>"
+        },
+        {
+          "isStatic": false,
+          "name": "Title_Flag_000",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "Tree",
+          "type": "app.QuestManager.QuestTree"
+        },
+        {
+          "isStatic": false,
+          "name": "TreeLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "UniqueAction013TargetCharacterDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<app.NameHash>>"
+        },
+        {
+          "isStatic": false,
+          "name": "UniqueAction013TargetCharacterDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "UpdateNpcOverrideCharacterIDList",
+          "type": "System.Collections.Generic.List`1<app.CharacterID>"
+        },
+        {
+          "isStatic": false,
+          "name": "VariableDict",
+          "type": "System.Collections.Generic.Dictionary`2<System.Int32,System.Collections.Generic.Dictionary`2<System.UInt32,app.QuestVariable>>"
+        },
+        {
+          "isStatic": false,
+          "name": "VariableDictLocker",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_CompleteRetireUA010",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_CompleteRetireUA010Action",
+          "type": "System.Action"
+        },
+        {
+          "isStatic": false,
+          "name": "_CompleteRetryUA010",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_CompleteRetryUA010Action",
+          "type": "System.Action"
+        },
+        {
+          "isStatic": false,
+          "name": "_InGameStartLockCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_IsInGameStartLock",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_IsRequestJumpNrdBattleArea",
+          "type": "app.AppraiseCycleDefine.VoidEventType"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleAcceptHintDatabase",
+          "type": "System.Collections.Generic.Dictionary`2<app.QuestDefine.ID,app.QuestOracleHint[]>"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleAcceptHintLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleCost",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleDeadNpcSettingData",
+          "type": "app.QuestOracleSetting[]"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleFinishedSettingData",
+          "type": "app.QuestOracleSetting"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleHintDatabase",
+          "type": "System.Collections.Generic.Dictionary`2<app.QuestDefine.ID,app.QuestOracleHint[]>"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleHintLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleHintSettingData",
+          "type": "app.QuestOracleHintSetting[]"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleImpossibleSettingData",
+          "type": "app.QuestOracleSetting"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleNoHintSettingData",
+          "type": "app.QuestOracleSetting[]"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleTargetCharacter",
+          "type": "System.Collections.Generic.Dictionary`2<app.QuestDefine.ID,System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<System.String>>>"
+        },
+        {
+          "isStatic": false,
+          "name": "_OracleTargetCharacterLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_RequestRetireUA010",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_RequestRetryUA010",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_SelectedOracleAreaLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_SelectedOracleCoffinAreaMsg",
+          "type": "System.Guid"
+        },
+        {
+          "isStatic": false,
+          "name": "_SelectedOracleHint",
+          "type": "app.QuestOracleHint"
+        },
+        {
+          "isStatic": false,
+          "name": "_SelectedOracleHintLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_SelectedOracleNpcLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_SelectedOracleNpcNames",
+          "type": "System.Collections.Generic.List`1<System.Guid>"
+        },
+        {
+          "isStatic": false,
+          "name": "_UA010Mode",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_qu050200_DropItem",
+          "type": "app.Gm82_000_01"
+        },
+        {
+          "isStatic": false,
+          "name": "onUpdateContextEvent",
+          "type": "System.Action`1<app.QuestDefine.ID>"
+        },
+        {
+          "isStatic": false,
+          "name": "onUpdateProcessorEvent",
+          "type": "System.Action`3<app.QuestDefine.ID,System.UInt32,System.Int32>"
+        }
+      ],
+      "methodCount": 231,
+      "methods": [
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "IsActiveUniqueAction015",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "IsActiveUniqueAction015()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "addQuestOverrideDict",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>"
+          ],
+          "returnType": "System.Void",
+          "signature": "addQuestOverrideDict(System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "add_onUpdateContextEvent",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action`1<app.QuestDefine.ID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_onUpdateContextEvent(System.Action`1<app.QuestDefine.ID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "add_onUpdateProcessorEvent",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action`3<app.QuestDefine.ID,System.UInt32,System.Int32>"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_onUpdateProcessorEvent(System.Action`3<app.QuestDefine.ID,System.UInt32,System.Int32>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "applyGameSaveData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "applyGameSaveData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "applyQuestOverride",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestNpcOverride"
+          ],
+          "returnType": "System.Void",
+          "signature": "applyQuestOverride(app.QuestNpcOverride)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "cancelProgressData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "cancelProgressData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "cancelSkipData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "cancelSkipData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkActivated",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkActivated(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkActive",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkActive()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkActuallyClear",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestManager.QuestEntity"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkActuallyClear(app.QuestManager.QuestEntity)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkBackStageUnderseaTempleSchedule",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.Int32",
+            "app.QuestBackStageData.EvacuateData.Data"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkBackStageUnderseaTempleSchedule(System.Int32, app.QuestBackStageData.EvacuateData.Data)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkCh259000Condition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkCh259000Condition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkDisableQuestSave",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkDisableQuestSave()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkDragonPossessionCondition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkDragonPossessionCondition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkEnableCurrentOverrideData",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.QuestNpcOverrideEntiry",
+            "System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkEnableCurrentOverrideData(app.QuestNpcOverrideEntiry, System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkEnableMainFlowStateUA010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkEnableMainFlowStateUA010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkExclusiveCharacter",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkExclusiveCharacter(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkFirstRequiredCondition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "checkFirstRequiredCondition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkQuestAchivement",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "checkQuestAchivement(app.QuestDefine.ID, System.UInt32, System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkQuestConditionEnd",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkQuestConditionEnd(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkRequiredCondition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "checkRequiredCondition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkSecondRequiredCondition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "checkSecondRequiredCondition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkSetupEnd",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkSetupEnd()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkSkipStartEvent",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkSkipStartEvent()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "checkWolfTalkInteract",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "checkWolfTalkInteract()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "clear",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "clear()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "clearExclusiveCharacter",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "clearExclusiveCharacter(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "clearPawnInputOrder",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "clearPawnInputOrder()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "clearQuestOverride",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Void",
+          "signature": "clearQuestOverride(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "clearUA010Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "clearUA010Param()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "convertGameSaveData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.SaveDataBase"
+          ],
+          "returnType": "app.SaveDataBase",
+          "signature": "convertGameSaveData(app.SaveDataBase)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "endAfterStory",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "endAfterStory()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "endNpcOverride",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "endNpcOverride()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "finishedNrdBattle",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.quest.action.UniqueAction088.EventType"
+          ],
+          "returnType": "System.Void",
+          "signature": "finishedNrdBattle(app.quest.action.UniqueAction088.EventType)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getActiveQuestIDList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.QuestDefine.ID>",
+          "signature": "getActiveQuestIDList()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getClearRecordCount",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Int32",
+          "signature": "getClearRecordCount(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getCurrentProgressDataIndex",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "getCurrentProgressDataIndex()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getCurrentSkipData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestSkipData",
+          "signature": "getCurrentSkipData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getDropItem",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Gm82_000_01",
+          "signature": "getDropItem()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getExtendDeliverItemData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestDefine.ExtendItemDataStruct",
+          "signature": "getExtendDeliverItemData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_001",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_001()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_002",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_002()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_003",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "getFlag_003()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_004",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_004()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_005",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_005()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_006",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "getFlag_006()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_007",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "getFlag_007()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_008",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "getFlag_008()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_009",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_009()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_011",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "getFlag_011()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_012",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_012()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_013",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_013()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_014",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_014()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_015",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_015()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_016",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean[]",
+          "signature": "getFlag_016()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getFlag_017",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "getFlag_017()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getGuardTargetNpc",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.CharacterID>",
+          "signature": "getGuardTargetNpc()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getMainFlowSetupData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestManager.MainFlowSetupData",
+          "signature": "getMainFlowSetupData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getOracleCost",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "getOracleCost()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getOracleHintCharacter",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Collections.Generic.List`1<app.CharacterID>",
+          "signature": "getOracleHintCharacter(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestAISituation",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "app.QuestAISituation",
+          "signature": "getQuestAISituation(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestActionResultNo",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32"
+          ],
+          "returnType": "System.Int32",
+          "signature": "getQuestActionResultNo(app.QuestDefine.ID, System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestEndTime",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.Int32",
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "getQuestEndTime(app.QuestDefine.ID, System.Int32, System.Int32, System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestEnity",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "app.QuestManager.QuestEntity",
+          "signature": "getQuestEnity(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestRecommendedLevel",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Int32",
+          "signature": "getQuestRecommendedLevel(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestResultNo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Int32",
+          "signature": "getQuestResultNo(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getQuestResultNoNotReadLock",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Int32",
+          "signature": "getQuestResultNoNotReadLock(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleCoffinAreaMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleCoffinAreaMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleDeadNpcMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<System.Guid>",
+          "signature": "getSelectedOracleDeadNpcMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleHintAreaMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleHintAreaMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleHintEnemyMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleHintEnemyMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleHintItem2Msg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleHintItem2Msg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleHintItemMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleHintItemMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleHintNpcMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleHintNpcMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getSelectedOracleHintTimeMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "getSelectedOracleHintTimeMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getTitleSetupData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestManager.TitleSetupData",
+          "signature": "getTitleSetupData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "getUniqueAction013TargetCharacter",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.CharacterID[]",
+          "signature": "getUniqueAction013TargetCharacter()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_CompleteRetireUA010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_CompleteRetireUA010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_CompleteRetryUA010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_CompleteRetryUA010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_GameSaveDataHash",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "get_GameSaveDataHash()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_GameSaveDataVersion",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "get_GameSaveDataVersion()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsActiveExclusiveEvent",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsActiveExclusiveEvent()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsAllExistQuestSceneFolder",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsAllExistQuestSceneFolder()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsExclusivePlayEvent",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsExclusivePlayEvent()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsExclusiveQuest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsExclusiveQuest()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsRequestJumpNrdBattleArea",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.AppraiseCycleDefine.VoidEventType",
+          "signature": "get_IsRequestJumpNrdBattleArea()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsSatisfyFirstRequiredCondition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsSatisfyFirstRequiredCondition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsSatisfySecondRequiredCondition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsSatisfySecondRequiredCondition()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsStartSetup",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsStartSetup()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_IsTGSThankYou",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsTGSThankYou()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_OldExclusiveQuest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_OldExclusiveQuest()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_PawnInputOrder",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.PawnOrderController.PawnOrder",
+          "signature": "get_PawnInputOrder()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_QuestProgressData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestProgressData",
+          "signature": "get_QuestProgressData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_QuestSkipData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestSkipData",
+          "signature": "get_QuestSkipData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_RequestedRetireUA010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_RequestedRetireUA010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_RequestedRetryUA010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_RequestedRetryUA010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_UA010Mode",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_UA010Mode()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "get_UpdatedQuestContext",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_UpdatedQuestContext()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isApplyGameSaveData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isApplyGameSaveData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isContainForceGenerateNpc",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isContainForceGenerateNpc(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isContainsForceIgnoreReactionCircle",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isContainsForceIgnoreReactionCircle(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isLoadingScene",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isLoadingScene()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isUnloadedAllScene",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isUnloadedAllScene()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isUnloadingScene",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isUnloadingScene()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isUseFerrystone",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isUseFerrystone()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "isUseFerrystone",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.Position"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isUseFerrystone(via.Position)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "loadGameSaveData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.SaveDataBase"
+          ],
+          "returnType": "System.Void",
+          "signature": "loadGameSaveData(app.SaveDataBase)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "notifyCompletedRetireUniqueAction010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "notifyCompletedRetireUniqueAction010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "notifyCompletedRetryUniqueAction010",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "notifyCompletedRetryUniqueAction010()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "notifyEndQuestTravelouge",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "notifyEndQuestTravelouge(app.QuestDefine.ID, System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onApplyProgressData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onApplyProgressData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onApplySkipData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onApplySkipData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onBackStageNextDateHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "onBackStageNextDateHandler(System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onCompletedResetEnvHandler",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onCompletedResetEnvHandler()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onDestroy",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onDestroy()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onLateUpdate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onLateUpdate()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onPawnInputOrderAlwaysEvent",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.PawnOrderController.PawnOrder"
+          ],
+          "returnType": "System.Void",
+          "signature": "onPawnInputOrderAlwaysEvent(app.PawnOrderController.PawnOrder)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onRestoreSaveData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onRestoreSaveData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onStart",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onStart()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onUpdate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onUpdate()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "onUpdateProcessorResult",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "onUpdateProcessorResult(app.QuestDefine.ID, System.UInt32, System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerContents0014QuestCatalog",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.UInt32",
+            "app.QuestCatalogData"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerContents0014QuestCatalog(System.UInt32, app.QuestCatalogData)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerDisableQuestSave",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "System.String",
+            "app.QuestDefine.ID",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerDisableQuestSave(System.String, app.QuestDefine.ID, System.Single)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerDropItem",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Gm82_000_01"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerDropItem(app.Gm82_000_01)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerExclusiveCharacter",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.String",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerExclusiveCharacter(System.String, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerExclusiveQuest",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "System.String",
+            "System.Int32",
+            "System.Collections.Generic.List`1<System.Int32>"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "registerExclusiveQuest(System.String, System.Int32, System.Collections.Generic.List`1<System.Int32>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerFerrystoneControl",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.String",
+            "app.QuestDefine.FerrystoneDisableParam"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerFerrystoneControl(System.String, app.QuestDefine.FerrystoneDisableParam)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerForceGenerateNpc",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerForceGenerateNpc(app.NameHash, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerForceIgnoreReactionCircle",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerForceIgnoreReactionCircle(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerGuardTargetNpc",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerGuardTargetNpc(app.NameHash, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerIsHidePopupHud",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerIsHidePopupHud(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerNpcLayerScoreModifyBlackout",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerNpcLayerScoreModifyBlackout(app.NameHash, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerOracleHintCharacter",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.String",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerOracleHintCharacter(app.QuestDefine.ID, System.String, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerQuestCatalog",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.UInt32",
+            "app.QuestCatalogData"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerQuestCatalog(System.UInt32, app.QuestCatalogData)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerQuestController",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestController"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerQuestController(app.QuestController)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerQuestSceneCollector",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestSceneCollector"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerQuestSceneCollector(app.QuestSceneCollector)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerUniqueAction013TargetCharacter",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "app.CharacterID"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerUniqueAction013TargetCharacter(app.NameHash, app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "registerUpdateProcessor",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestProcessor"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerUpdateProcessor(app.QuestProcessor)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "removeQuestOverrideDict",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>"
+          ],
+          "returnType": "System.Void",
+          "signature": "removeQuestOverrideDict(System.Collections.Generic.List`1<app.QuestNpcOverrideEntiry>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "remove_onUpdateContextEvent",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action`1<app.QuestDefine.ID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_onUpdateContextEvent(System.Action`1<app.QuestDefine.ID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "remove_onUpdateProcessorEvent",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action`3<app.QuestDefine.ID,System.UInt32,System.Int32>"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_onUpdateProcessorEvent(System.Action`3<app.QuestDefine.ID,System.UInt32,System.Int32>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestCancel",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestCancel(app.QuestDefine.ID, System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestEventArea",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "app.EnvironmentEvent.EventId",
+            "System.Boolean",
+            "System.Boolean",
+            "System.Action"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestEventArea(app.EnvironmentEvent.EventId, System.Boolean, System.Boolean, System.Action)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestJumpNrdBattle",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "requestJumpNrdBattle()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestNpcOverrideCharacter",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestNpcOverrideCharacter(System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestProgressData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestProgressData(System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestQuestSave",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestQuestSave(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestRetireUniqueAction010",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestRetireUniqueAction010(System.Action)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestRetryUniqueAction010",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestRetryUniqueAction010(System.Action)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestSkipData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestSkipData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestUnloadScene",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestUnloadScene()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "requestUpdateAfterStory",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestUpdateAfterStory(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "resetHudList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "resetHudList()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "resetRequestJumpFlag",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "resetRequestJumpFlag()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "resetRequiredConditionFlag",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "resetRequiredConditionFlag()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "saveGameSaveData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.SaveDataBase",
+          "signature": "saveGameSaveData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "selectOracleAcceptHint",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestOracleHint",
+          "signature": "selectOracleAcceptHint()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "selectOracleHint",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "app.QuestOracleHint",
+          "signature": "selectOracleHint(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "selectOracleHintMsg",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestOracleHint"
+          ],
+          "returnType": "System.Guid",
+          "signature": "selectOracleHintMsg(app.QuestOracleHint)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "selectOracleMsg",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestDefine.ID"
+          ],
+          "returnType": "System.Guid",
+          "signature": "selectOracleMsg(app.QuestDefine.ID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "selectOracleNoHintMsg",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Guid",
+          "signature": "selectOracleNoHintMsg()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setDefeatTravelogueFlag",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "setDefeatTravelogueFlag()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setEnableUniqueAction010Mode",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setEnableUniqueAction010Mode(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setExtendDeliverItemData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.ItemDefine.StorageData[]"
+          ],
+          "returnType": "System.Void",
+          "signature": "setExtendDeliverItemData(app.ItemDefine.StorageData[])"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_000",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_000(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_001",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_001(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_002",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_002(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_003",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_003(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_004",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_004(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_005",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_005(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_006",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_006(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_007",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_007(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_008",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_008(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_009",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_009(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_010",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_010(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_011",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_011(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_012",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_012(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_013",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_013(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_014",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_014(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_015",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_015(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_016",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean[]"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_016(System.Boolean[])"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_016",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.PawnManager.PawnID",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_016(app.PawnManager.PawnID, System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setFlag_017",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setFlag_017(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_IsAllExistQuestSceneFolder",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsAllExistQuestSceneFolder(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_IsExclusivePlayEvent",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsExclusivePlayEvent(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_IsSatisfyFirstRequiredCondition",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsSatisfyFirstRequiredCondition(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_IsSatisfySecondRequiredCondition",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsSatisfySecondRequiredCondition(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_IsTGSThankYou",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsTGSThankYou(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_OldExclusiveQuest",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_OldExclusiveQuest(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_PawnInputOrder",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.PawnOrderController.PawnOrder"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_PawnInputOrder(app.PawnOrderController.PawnOrder)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_QuestProgressData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestProgressData"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_QuestProgressData(app.QuestProgressData)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_QuestSkipData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestSkipData"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_QuestSkipData(app.QuestSkipData)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "set_UpdatedQuestContext",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_UpdatedQuestContext(System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setupContents0014QuestTree",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "setupContents0014QuestTree()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "setupQuestTree",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "setupQuestTree()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetCurrentProgressData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.QuestProgressData.Data",
+          "signature": "tryGetCurrentProgressData()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetDeadQuestNPCIDs",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "app.CharacterID[]",
+            "app.CharacterID[]"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "tryGetDeadQuestNPCIDs(app.QuestDefine.ID, app.CharacterID[], app.CharacterID[])"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetProgressData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "app.QuestProgressData.Data",
+          "signature": "tryGetProgressData(System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetReward",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.UInt32",
+            "app.QuestRewardData"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "tryGetReward(System.UInt32, app.QuestRewardData)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetVariable",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "System.Boolean"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "tryGetVariable(app.QuestDefine.ID, System.UInt32, System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetVariable",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "System.Int32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "tryGetVariable(app.QuestDefine.ID, System.UInt32, System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "tryGetVariable",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "app.QuestVariable"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "tryGetVariable(app.QuestDefine.ID, System.UInt32, app.QuestVariable)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "trySetVariable",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "System.Boolean"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "trySetVariable(app.QuestDefine.ID, System.UInt32, System.Boolean)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "trySetVariable",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.UInt32",
+            "System.Int32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "trySetVariable(app.QuestDefine.ID, System.UInt32, System.Int32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterDisableQuestSave",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterDisableQuestSave(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterDropItem",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Gm82_000_01"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterDropItem(app.Gm82_000_01)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterExclusiveQuest",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterExclusiveQuest(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterFerrystoneControl",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterFerrystoneControl(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterForceGenerateNpc",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterForceGenerateNpc(app.NameHash, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterForceIgnoreReactionCircle",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterForceIgnoreReactionCircle(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterGuardTargetNpc",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterGuardTargetNpc(app.NameHash, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterIsHidePopupHud",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterIsHidePopupHud(System.String)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterNpcLayerScoreModifyBlackout",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterNpcLayerScoreModifyBlackout(app.NameHash, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterOracleHintCharacter",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.QuestDefine.ID",
+            "System.String",
+            "System.Collections.Generic.List`1<app.CharacterID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterOracleHintCharacter(app.QuestDefine.ID, System.String, System.Collections.Generic.List`1<app.CharacterID>)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterQuestCatalog",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterQuestCatalog(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterQuestController",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestController"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterQuestController(app.QuestController)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterQuestSceneCollector",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterQuestSceneCollector(System.UInt32)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterUniqueAction013TargetCharacter",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.NameHash",
+            "app.CharacterID"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterUniqueAction013TargetCharacter(app.NameHash, app.CharacterID)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "unregisterUpdateProcessor",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.QuestProcessor"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "unregisterUpdateProcessor(app.QuestProcessor)"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateAfterStory",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateAfterStory()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateDisableQuestSave",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateDisableQuestSave()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateExclusiveQuest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateExclusiveQuest()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateHud",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateHud()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateInGameStartLockCount",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateInGameStartLockCount()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateNpcOverride",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateNpcOverride()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updatePawnInputOrder",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updatePawnInputOrder()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateQuestSaveRequest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateQuestSaveRequest()"
+        },
+        {
+          "declaringType": "app.QuestManager",
+          "isStatic": false,
+          "name": "updateUniqueAction010Mode",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateUniqueAction010Mode()"
+        }
+      ],
+      "name": "app.QuestManager",
+      "parent": "app.AppSingleton`1<app.QuestManager>"
+    },
+    {
+      "exists": false,
+      "name": "app.QuestType",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.QuestState",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.QuestData",
+      "reason": "type not exposed by this TDB"
+    }
+  ],
+  "title": "Quests"
+}

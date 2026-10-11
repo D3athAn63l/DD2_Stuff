@@ -1,0 +1,184 @@
+{
+  "battleMode": 0,
+  "captured": {
+    "capturedLocalTime": "2026-10-11 21:51:05 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.1-alpha",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "kind": "runtime-readonly",
+  "managers": [
+    {
+      "available": true,
+      "name": "app.ItemManager",
+      "type": "app.ItemManager"
+    },
+    {
+      "available": true,
+      "name": "app.EnemyManager",
+      "type": "app.EnemyManager"
+    },
+    {
+      "available": true,
+      "name": "app.CharacterManager",
+      "type": "app.CharacterManager"
+    },
+    {
+      "available": true,
+      "name": "app.PawnManager",
+      "type": "app.PawnManager"
+    },
+    {
+      "available": true,
+      "name": "app.QuestManager",
+      "type": "app.QuestManager"
+    },
+    {
+      "available": true,
+      "name": "app.GimmickManager",
+      "type": "app.GimmickManager"
+    },
+    {
+      "available": true,
+      "name": "app.InteractManager",
+      "type": "app.InteractManager"
+    },
+    {
+      "available": true,
+      "name": "app.BattleManager",
+      "type": "app.BattleManager"
+    },
+    {
+      "available": true,
+      "name": "app.HitManager",
+      "type": "app.HitManager"
+    },
+    {
+      "available": true,
+      "name": "app.TimeManager",
+      "type": "app.TimeManager"
+    },
+    {
+      "available": true,
+      "name": "app.WeatherManager",
+      "type": "app.WeatherManager"
+    },
+    {
+      "available": true,
+      "name": "app.CameraManager",
+      "type": "app.CameraManager"
+    },
+    {
+      "available": true,
+      "name": "app.NetworkManager",
+      "type": "app.NetworkManager"
+    },
+    {
+      "available": true,
+      "name": "app.NPCManager",
+      "type": "app.NPCManager"
+    },
+    {
+      "available": true,
+      "name": "app.TalkManager",
+      "type": "app.TalkManager"
+    },
+    {
+      "available": true,
+      "name": "app.CampManager",
+      "type": "app.CampManager"
+    },
+    {
+      "available": true,
+      "name": "app.MovieManager",
+      "type": "app.MovieManager"
+    },
+    {
+      "available": true,
+      "name": "app.AIManager",
+      "type": "app.AIManager"
+    },
+    {
+      "available": true,
+      "name": "app.NavigationManager",
+      "type": "app.NavigationManager"
+    },
+    {
+      "available": true,
+      "name": "app.GuiManager",
+      "type": "app.GuiManager"
+    },
+    {
+      "available": true,
+      "name": "app.SoundVoiceManager",
+      "type": "app.SoundVoiceManager"
+    },
+    {
+      "available": true,
+      "name": "app.GenerateManager",
+      "type": "app.GenerateManager"
+    },
+    {
+      "available": true,
+      "name": "app.EnvironmentLoadManager",
+      "type": "app.EnvironmentLoadManager"
+    },
+    {
+      "available": true,
+      "name": "app.SuddenQuestManager",
+      "type": "app.SuddenQuestManager"
+    },
+    {
+      "available": true,
+      "name": "app.TalkEventManager",
+      "type": "app.TalkEventManager"
+    }
+  ],
+  "party": {
+    "listType": "System.Collections.Generic.List`1<app.Character>",
+    "pawnCount": 2,
+    "pawns": [
+      {
+        "available": true,
+        "hitType": "app.HitController",
+        "hp": 906.0,
+        "lossGaugeDeficit": 0.0,
+        "originalMaxHp": 906.0,
+        "reducedMaxHp": 906.0,
+        "type": "app.Character"
+      },
+      {
+        "available": true,
+        "hitType": "app.HitController",
+        "hp": 525.9166870117188,
+        "lossGaugeDeficit": 0.0,
+        "originalMaxHp": 578.0,
+        "reducedMaxHp": 578.0,
+        "type": "app.Character"
+      }
+    ],
+    "player": {
+      "available": true,
+      "hitType": "app.HitController",
+      "hp": 910.5453491210938,
+      "lossGaugeDeficit": 0.0,
+      "originalMaxHp": 925.4000244140625,
+      "reducedMaxHp": 925.4000244140625,
+      "type": "app.Character"
+    }
+  },
+  "paused": true,
+  "warfarer": {
+    "get_EquipItemCtrl": "app.EquipItemController",
+    "get_Job10WeaponManager": "app.Job10WeaponManager",
+    "get_SkillAvailability": "app.HumanSkillAvailability",
+    "get_SkillContext": "app.HumanSkillContext",
+    "humanType": "app.Human"
+  }
+}

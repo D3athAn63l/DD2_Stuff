@@ -1,0 +1,3172 @@
+{
+  "captured": {
+    "capturedLocalTime": "2026-10-11 21:51:33 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.1-alpha",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "group": "vocation",
+  "kind": "type-profile",
+  "rows": [
+    {
+      "exists": true,
+      "fieldCount": 10,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "Job01Parameter",
+          "type": "app.Job01Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job02Parameter",
+          "type": "app.Job02Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job03Parameter",
+          "type": "app.Job03Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job04Parameter",
+          "type": "app.Job04Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job05Parameter",
+          "type": "app.Job05Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job06Parameter",
+          "type": "app.Job06Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job07Parameter",
+          "type": "app.Job07Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job08Parameter",
+          "type": "app.Job08Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job09Parameter",
+          "type": "app.Job09Parameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Job10Parameter",
+          "type": "app.Job10Parameter"
+        }
+      ],
+      "methodCount": 10,
+      "methods": [
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job01Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job01Parameter",
+          "signature": "get_Job01Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job02Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job02Parameter",
+          "signature": "get_Job02Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job03Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job03Parameter",
+          "signature": "get_Job03Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job04Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job04Parameter",
+          "signature": "get_Job04Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job05Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job05Parameter",
+          "signature": "get_Job05Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job06Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job06Parameter",
+          "signature": "get_Job06Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job07Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job07Parameter",
+          "signature": "get_Job07Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job08Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job08Parameter",
+          "signature": "get_Job08Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job09Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job09Parameter",
+          "signature": "get_Job09Param()"
+        },
+        {
+          "declaringType": "app.JobParameter",
+          "isStatic": false,
+          "name": "get_Job10Param",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Job10Parameter",
+          "signature": "get_Job10Param()"
+        }
+      ],
+      "name": "app.JobParameter",
+      "parent": "via.UserData"
+    },
+    {
+      "exists": true,
+      "fieldCount": 39,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "AdditionalConsumeFactorPerArmorLevel",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "AdditionalConsumeFactorPerWeaponLevel",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "CommonConsumeList",
+          "type": "app.HumanStaminaParameter.ConsumeData[]"
+        },
+        {
+          "isStatic": false,
+          "name": "ConsumeParameters",
+          "type": "app.StaminaParameterBase[]"
+        },
+        {
+          "isStatic": false,
+          "name": "ConsumeRateByAngleOnClimbing",
+          "type": "via.AnimationCurve"
+        },
+        {
+          "isStatic": false,
+          "name": "FactorConsumeOnNotBattleDash",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FactorConsumeOnNotBattleDashOnNormalMode",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FactorPawnRageRecover",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FactorPawnRecover",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FactorSpeedUpDash",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameWaitOnRunningOutOfStamina",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameWalkOnRunningOutOfStamina",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "InfinityDashAreaData",
+          "type": "app.HumanInfinityDashAreaData"
+        },
+        {
+          "isStatic": false,
+          "name": "IsSyncAddBlendAndRemainingRatio",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "LotionWetConsumeRate",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "LowestGuardStaminaValue",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "MaxValueEndRunningOutOfStamina",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "MaxValueRecoverByInteract",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "PLJob03FactorPawnRecover",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "PLJob09FactorPawnRecover",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateEndRunningOutOfStamina",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateNearlyRunOutOfStamina",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateRecoverL",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateRecoverM",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateRecoverNegativeStamina",
+          "type": "via.AnimationCurve"
+        },
+        {
+          "isStatic": false,
+          "name": "RateRecoverS",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateRecoverXL",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RateRecoverXS",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RatioRecoverByInteract",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RatioStaminaOfMaxAddBlend",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RatioStaminaOfMinAddBlend",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "RecoverDataList",
+          "type": "app.HumanStaminaParameter.RecoverData[]"
+        },
+        {
+          "isStatic": false,
+          "name": "RecoverSlopeRatio",
+          "type": "via.AnimationCurve"
+        },
+        {
+          "isStatic": false,
+          "name": "SecDisableMoveOnRunningOutOfStamina",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecDisableRecoverAfterDash",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecReduceAddBlend",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SlopeRate",
+          "type": "via.AnimationCurve"
+        },
+        {
+          "isStatic": false,
+          "name": "ValuePenaltyAction",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "ValueSmallPenaltyAction",
+          "type": "System.Single"
+        }
+      ],
+      "methodCount": 34,
+      "methods": [
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getConsumeData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.IEnumerable`1<app.HumanStaminaParameter.ConsumeData>",
+          "signature": "getConsumeData()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getConsumeRateByAngleOnClimbing",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Single",
+          "signature": "getConsumeRateByAngleOnClimbing(System.Single)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getConsumeRateBySlope",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Single",
+          "signature": "getConsumeRateBySlope(System.Single)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getConsumeStaminaParams",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.IEnumerable`1<app.StaminaParameterBase>",
+          "signature": "getConsumeStaminaParams()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getRateRecover",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Single",
+          "signature": "getRateRecover(System.Single)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getRecoverData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.IEnumerable`1<app.HumanStaminaParameter.RecoverData>",
+          "signature": "getRecoverData()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getRecoverRateBySize",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character.ScaleEnum"
+          ],
+          "returnType": "System.Single",
+          "signature": "getRecoverRateBySize(app.Character.ScaleEnum)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getRecoverRatioBySlope",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Single",
+          "signature": "getRecoverRatioBySlope(System.Single)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getRecoverValueByInteract",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Single",
+          "signature": "getRecoverValueByInteract(System.Single)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "getValueEndRunningOutOfStamina",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Single",
+          "signature": "getValueEndRunningOutOfStamina(System.Single)"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_AdditionalConsumeFactorPerArmorLevelProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_AdditionalConsumeFactorPerArmorLevelProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_AdditionalConsumeFactorPerWeaponLevelProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_AdditionalConsumeFactorPerWeaponLevelProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FactorConsumeOnNotBattleDashOnNormalModeProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FactorConsumeOnNotBattleDashOnNormalModeProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FactorConsumeOnNotBattleDashProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FactorConsumeOnNotBattleDashProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FactorPawnRageRecoverProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FactorPawnRageRecoverProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FactorPawnRecoverProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FactorPawnRecoverProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FactorSpeedUpDashProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FactorSpeedUpDashProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FrameWaitOnRunningOutOfStaminaProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameWaitOnRunningOutOfStaminaProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_FrameWalkOnRunningOutOfStaminaProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameWalkOnRunningOutOfStaminaProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_InfinityDashAreaDataProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanInfinityDashAreaData",
+          "signature": "get_InfinityDashAreaDataProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_IsSyncAddBlendAndRemainingRatioProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsSyncAddBlendAndRemainingRatioProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_LotionWetConsumeRateProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_LotionWetConsumeRateProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_LowestGuardStaminaValueProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_LowestGuardStaminaValueProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_PLJob03FactorPawnRecoverProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_PLJob03FactorPawnRecoverProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_PLJob09FactorPawnRecoverProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_PLJob09FactorPawnRecoverProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_RateNearlyRunOutOfStaminaProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_RateNearlyRunOutOfStaminaProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_RatioStaminaOfMaxAddBlendProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_RatioStaminaOfMaxAddBlendProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_RatioStaminaOfMinAddBlendProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_RatioStaminaOfMinAddBlendProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_SecDisableMoveOnRunningOutOfStaminaProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecDisableMoveOnRunningOutOfStaminaProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_SecDisableRecoverAfterDashProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecDisableRecoverAfterDashProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_SecReduceAddBlendProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecReduceAddBlendProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_ValuePenaltyActionProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_ValuePenaltyActionProp()"
+        },
+        {
+          "declaringType": "app.HumanStaminaParameter",
+          "isStatic": false,
+          "name": "get_ValueSmallPenaltyActionProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_ValueSmallPenaltyActionProp()"
+        }
+      ],
+      "name": "app.HumanStaminaParameter",
+      "parent": "via.UserData"
+    },
+    {
+      "exists": true,
+      "fieldCount": 5,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "CapLVupParam",
+          "type": "app.JobStatusParam"
+        },
+        {
+          "isStatic": false,
+          "name": "DefaultParam",
+          "type": "app.JobStatusParam"
+        },
+        {
+          "isStatic": false,
+          "name": "GrouthRate",
+          "type": "System.Collections.Generic.List`1<app.JobStatusParam>"
+        },
+        {
+          "isStatic": false,
+          "name": "JobCorrection",
+          "type": "System.Collections.Generic.List`1<app.JobStatusParam>"
+        },
+        {
+          "isStatic": false,
+          "name": "LVupParams",
+          "type": "System.Collections.Generic.List`1<app.LVupParam>"
+        }
+      ],
+      "methodCount": 12,
+      "methods": [
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": true,
+          "name": "<getIncreaseStatus>g__setCapParam|19_0",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "System.Single",
+            "System.Single",
+            "System.Single",
+            "System.Single"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "<getIncreaseStatus>g__setCapParam|19_0(System.Single, System.Single, System.Single, System.Single)"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "getIncreaseStatus",
+          "parameterCount": 6,
+          "parameterTypes": [
+            "System.Int32",
+            "System.Int32",
+            "app.Character.JobEnum",
+            "System.Single",
+            "System.Boolean",
+            "app.IncreaseStatus"
+          ],
+          "returnType": "app.IncreaseStatus",
+          "signature": "getIncreaseStatus(System.Int32, System.Int32, app.Character.JobEnum, System.Single, System.Boolean, app.IncreaseStatus)"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "getLVFromEXPandLevel",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "System.Int32",
+            "System.Int32",
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "getLVFromEXPandLevel(System.Int32, System.Int32, System.Int32, System.Int32)"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "getRequiredEXP",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.Int32",
+            "System.Int32"
+          ],
+          "returnType": "System.Int32",
+          "signature": "getRequiredEXP(System.Int32, System.Int32)"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "getValidJobStatusParam",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character.JobEnum"
+          ],
+          "returnType": "app.JobStatusParam",
+          "signature": "getValidJobStatusParam(app.Character.JobEnum)"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "get_CapLVupParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.JobStatusParam",
+          "signature": "get_CapLVupParamProp()"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "get_DefaultParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.JobStatusParam",
+          "signature": "get_DefaultParamProp()"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "get_GrouthRateProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.JobStatusParam>",
+          "signature": "get_GrouthRateProp()"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "get_JobCorrectionProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.JobStatusParam>",
+          "signature": "get_JobCorrectionProp()"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "get_LVupParamsProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.LVupParam>",
+          "signature": "get_LVupParamsProp()"
+        },
+        {
+          "declaringType": "app.LVupParameterUserData",
+          "isStatic": false,
+          "name": "get_MaxLevel",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_MaxLevel()"
+        }
+      ],
+      "name": "app.LVupParameterUserData",
+      "parent": "app.AppUserdataBase"
+    },
+    {
+      "exists": true,
+      "fieldCount": 122,
+      "fields": [
+        {
+          "isStatic": true,
+          "name": "Job01_Ascertain",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_BlinkStrike",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_BravesRaid",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_CymbalAttack",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_DivineDefense",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_FullMoonGuard",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_FullMoonSlash",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_HindsightSlash",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_RisingLunge",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_RushAttack",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_ShieldCounter",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_ShieldSummons",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_Springboard",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job01_ViolentStab",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_BodyBinder",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_FlightShot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_FullBlast",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_HeavyRain",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_MeteorShot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_RandomShot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_SpecialAllowBomb",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_SpecialAllowOil",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_SpecialAllowPoison",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_SpecialAllowWater",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_ThreefoldArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_TriadShot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02_WhirlingArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_CureSpot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_DivineShot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_FireBoon",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_Firestorm",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_Frigor",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_FullRecover",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_GuardBit",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_HasteSpot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_HolyGlare",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_HolyShine",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_IceBoon",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_Levin",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_Reraise",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_SpellBreak",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_SpellStock",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03_ThunderBoon",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_AbsoluteAvoidance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_AdvancedTrigger",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_Attract",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_CarpetBombing",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_CuttingWind",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_FakeMaster",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_FlameBlade",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_Guillotine",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_HollowOut",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_ParryCounter",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_RemoteBomb",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_SmokeScreen",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_Snatch",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_Stealth",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04_WindWave",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_ArcOfObliteration",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_CounterAttack",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_CrescentSlash",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_CycloneSlash",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_DashSlashUp",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_GroundDrill",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_Guts",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_HeavyRunningThrust",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_HorizontalSlash",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_IndomitableLash",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_LandSlide",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_ScarletVow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_Springboard",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05_WarCry",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_AddFlare",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_Blizzard",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_FrozenStorm",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_MeteorFall",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_MineVolt",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_RockBeat",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_SaintDrain",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_Salamander",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_ThunderWhip",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06_VortexRage",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_BladeShoot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_DanceOfDeath",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_DragonStinger",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_EnergyDrain",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_FarThrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_GravityField",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_Gungnir",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_MirageDance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_PsychoShoot",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_QuickShield",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_SkyDive",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07_TwoSeconds",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_AbsorbArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_BurningLight",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_CounterArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_DivineArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_FlameLance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_FrostBlock",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_FrostTrace",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_LifeReturn",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_ReflectThunder",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_SeriesArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_ShadowBinding",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_SleepArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_SpiritArrow",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08_ThunderChain",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_AttentionFregrance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_DetectFregrance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_FocusAimSmoke",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_HealingSmoke",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_PossessionSmoke",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_RageFregrance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_SmokeDragon",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_SmokeGiants",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_SmokeGround",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_SmokeWall",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09_TripFregrance",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "Job10_00",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": true,
+          "name": "None",
+          "type": "app.HumanCustomSkillID"
+        },
+        {
+          "isStatic": false,
+          "name": "value__",
+          "type": "System.Int32"
+        }
+      ],
+      "methodCount": 0,
+      "methods": null,
+      "name": "app.HumanCustomSkillID",
+      "parent": "System.Enum"
+    },
+    {
+      "exists": true,
+      "fieldCount": 2,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "AdditionalItemParam",
+          "type": "app.AbilityParameter.AdditionalItemParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "JobAbilityParameters",
+          "type": "app.AbilityParameter.JobAbilityParameter[]"
+        }
+      ],
+      "methodCount": 5,
+      "methods": [
+        {
+          "declaringType": "app.AbilityParameter",
+          "isStatic": false,
+          "name": "getParam",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanAbilityID"
+          ],
+          "returnType": "app.AbilityParameter.Ability",
+          "signature": "getParam(app.HumanAbilityID)"
+        },
+        {
+          "declaringType": "app.AbilityParameter",
+          "isStatic": false,
+          "name": "getValue",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanAbilityID",
+            "System.Single"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "getValue(app.HumanAbilityID, System.Single)"
+        },
+        {
+          "declaringType": "app.AbilityParameter",
+          "isStatic": false,
+          "name": "getValue",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.HumanAbilityID",
+            "System.Single",
+            "System.Single"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "getValue(app.HumanAbilityID, System.Single, System.Single)"
+        },
+        {
+          "declaringType": "app.AbilityParameter",
+          "isStatic": false,
+          "name": "getValue",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.HumanAbilityID",
+            "System.String",
+            "System.Single"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "getValue(app.HumanAbilityID, System.String, System.Single)"
+        },
+        {
+          "declaringType": "app.AbilityParameter",
+          "isStatic": false,
+          "name": "get_AdditionalItemParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.AbilityParameter.AdditionalItemParameter",
+          "signature": "get_AdditionalItemParamProp()"
+        }
+      ],
+      "name": "app.AbilityParameter",
+      "parent": "via.UserData"
+    },
+    {
+      "exists": true,
+      "fieldCount": 67,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "AttackSizeRateOnLarge",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "BareHandAttackParam",
+          "type": "app.HumanActionParameter.BareHandAttackParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "BodyScaleActionParam",
+          "type": "app.HumanActionParameter.BodyScaleActionParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "BrinParam",
+          "type": "app.HumanActionParameter.BrineParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "CarryBumpParam",
+          "type": "app.HumanActionParameter.CarryBumpParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "CarryParam",
+          "type": "app.HumanActionParameter.CarryParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Ch255HeadParam",
+          "type": "app.HumanActionParameter.Ch255HeadParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ClimbBridgeParam",
+          "type": "app.HumanActionParameter.ClimbBridgeParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ClimbLadderParam",
+          "type": "app.HumanActionParameter.ClimbLadderParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ClimbParam",
+          "type": "app.HumanActionParameter.ClimbParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ClimbWallParam",
+          "type": "app.HumanActionParameter.ClimbWallParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "CommandWaitFrontDegree",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DashJumpForceAddRatio",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DashTriggerKeepFrame",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DepthWaterUnsafeCoord",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DiffAngleDegCatchCollider",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DisableRootRotateLength",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DistanceStableHanging",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "DivingRescueParam",
+          "type": "app.HumanActionParameter.DivingRescueParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "DownParam",
+          "type": "app.HumanActionParameter.DownParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "EvasionCancelCustomSkill",
+          "type": "System.Collections.Generic.List`1<app.HumanCustomSkillID>"
+        },
+        {
+          "isStatic": false,
+          "name": "FaintCameraVibrationID",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "FallParam",
+          "type": "app.HumanActionParameter.FallParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameAimHold",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameAimHoldKeep",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameAutoBuffer",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameGrabAfterSheathed",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameGrabFeatureChange",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrameIntervalItemUseEffect",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "FrontPenetrationAvoidParam",
+          "type": "app.HumanActionParameter.FrontPenetrationAvoidParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "HealAmountParam",
+          "type": "app.HumanActionParameter.HealAmountParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "HighFiveParam",
+          "type": "app.HumanActionParameter.HighFiveParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "HoldDownParam",
+          "type": "app.HumanActionParameter.HoldDownParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "JumpOverWallParam",
+          "type": "app.HumanActionParameter.JumpOverWallParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "JumpParam",
+          "type": "app.HumanActionParameter.JumpParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "LanternParam",
+          "type": "app.HumanActionParameter.LanternParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "LivPickupParam",
+          "type": "app.HumanActionParameter.LivPickupParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "LivPointHandParam",
+          "type": "app.HumanActionParameter.LivPointHandParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "LivWaveHandsParam",
+          "type": "app.HumanActionParameter.LivWaveHandsParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "LocomotionParam",
+          "type": "app.HumanActionParameter.LocomotionParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "MagicBookParam",
+          "type": "app.HumanActionParameter.MagicBookParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "MaxActionSpeedRate",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "NelsonHoldParam",
+          "type": "app.HumanActionParameter.NelsonHoldParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "NonPlayerAttackRatioParam",
+          "type": "app.HumanActionParameter.NonPlayerAttackRatioParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ObjectCarryParam",
+          "type": "app.HumanActionParameter.ObjectCarryParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "OpenDoorParam",
+          "type": "app.HumanActionParameter.OpenDoorParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "PreventFallParam",
+          "type": "app.HumanActionParameter.PreventFallParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "PushAndPullParam",
+          "type": "app.HumanActionParameter.PushAndPullParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ReactionOnFlyingCharacterParam",
+          "type": "app.HumanActionParameter.ReactionOnFlyingCharacterParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ReactionToObstacleParam",
+          "type": "app.HumanActionParameter.ReactionToObstacleParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "ReduceMaxHpParam",
+          "type": "app.HumanActionParameter.ReduceMaxHpParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "RevivePawnParam",
+          "type": "app.HumanActionParameter.RevivePawnParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "SealBottleParam",
+          "type": "app.HumanActionParameter.SealBottleParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "SecAutoSheathe",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecContinueHanging",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecDisableAttackWithAllStrength",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecDisableInputSameToDecideCancel",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecEnableDashAction",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecInvincibleSincStartOxcartRaidAttack",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecKeepBattleMode",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SecStableHanging",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "SlideDownParam",
+          "type": "app.HumanActionParameter.SlideDownParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "SpineControlParam",
+          "type": "app.HumanActionParameter.SpineControlParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "StepBackLength",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "StepParam",
+          "type": "app.EnvironmentChecker.StepParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "UnbalanceParam",
+          "type": "app.HumanActionParameter.UnbalanceParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "WakestoneParam",
+          "type": "app.HumanActionParameter.WakestoneParameter"
+        }
+      ],
+      "methodCount": 68,
+      "methods": [
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_AttackSizeRateOnLargeProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_AttackSizeRateOnLargeProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_BareHandAttackParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.BareHandAttackParameter",
+          "signature": "get_BareHandAttackParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_BodyScaleActionParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.BodyScaleActionParameter",
+          "signature": "get_BodyScaleActionParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_BrinParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.BrineParameter",
+          "signature": "get_BrinParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_CarryBumpParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.CarryBumpParameter",
+          "signature": "get_CarryBumpParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_CarryParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.CarryParameter",
+          "signature": "get_CarryParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_Ch255HeadParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.Ch255HeadParameter",
+          "signature": "get_Ch255HeadParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ClimbBridgeParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ClimbBridgeParameter",
+          "signature": "get_ClimbBridgeParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ClimbLadderParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ClimbLadderParameter",
+          "signature": "get_ClimbLadderParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ClimbParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ClimbParameter",
+          "signature": "get_ClimbParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ClimbWallParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ClimbWallParameter",
+          "signature": "get_ClimbWallParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_CommandWaitFrontDegreeProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_CommandWaitFrontDegreeProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DashJumpForceAddRatioProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_DashJumpForceAddRatioProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DashTriggerKeepFrameProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_DashTriggerKeepFrameProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DepthWaterUnsafeCoordProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_DepthWaterUnsafeCoordProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DiffAngleDegCatchColliderProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_DiffAngleDegCatchColliderProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DisableRootRotateLengthProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_DisableRootRotateLengthProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DistanceStableHangingProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_DistanceStableHangingProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DivingRescueParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.DivingRescueParameter",
+          "signature": "get_DivingRescueParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_DownParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.DownParameter",
+          "signature": "get_DownParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FaintCameraVibrationIDProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "get_FaintCameraVibrationIDProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FallParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.FallParameter",
+          "signature": "get_FallParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrameAimHoldKeepProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameAimHoldKeepProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrameAimHoldProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameAimHoldProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrameAutoBufferProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameAutoBufferProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrameGrabAfterSheathedProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameGrabAfterSheathedProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrameGrabFeatureChangeProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameGrabFeatureChangeProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrameIntervalItemUseEffectProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_FrameIntervalItemUseEffectProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_FrontPenetrationAvoidParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.FrontPenetrationAvoidParameter",
+          "signature": "get_FrontPenetrationAvoidParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_HealAmountParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.HealAmountParameter",
+          "signature": "get_HealAmountParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_HighFiveParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.HighFiveParameter",
+          "signature": "get_HighFiveParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_HoldDownParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.HoldDownParameter",
+          "signature": "get_HoldDownParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_JumpOverWallParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.JumpOverWallParameter",
+          "signature": "get_JumpOverWallParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_JumpParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.JumpParameter",
+          "signature": "get_JumpParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_LanternParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.LanternParameter",
+          "signature": "get_LanternParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_LivPickupParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.LivPickupParameter",
+          "signature": "get_LivPickupParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_LivPointHandParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.LivPointHandParameter",
+          "signature": "get_LivPointHandParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_LivWaveHandsParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.LivWaveHandsParameter",
+          "signature": "get_LivWaveHandsParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_LocomotionParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.LocomotionParameter",
+          "signature": "get_LocomotionParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_MagicBookParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.MagicBookParameter",
+          "signature": "get_MagicBookParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_MaxActionSpeedRateProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_MaxActionSpeedRateProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_NelsonHoldParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.NelsonHoldParameter",
+          "signature": "get_NelsonHoldParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_NonPlayerAttackRationParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.NonPlayerAttackRatioParameter",
+          "signature": "get_NonPlayerAttackRationParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ObjectCarryParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ObjectCarryParameter",
+          "signature": "get_ObjectCarryParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_OpenDoorParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.OpenDoorParameter",
+          "signature": "get_OpenDoorParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_PreventFallParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.PreventFallParameter",
+          "signature": "get_PreventFallParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_PushAndPullParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.PushAndPullParameter",
+          "signature": "get_PushAndPullParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ReactionOnFlyingCharacterParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ReactionOnFlyingCharacterParameter",
+          "signature": "get_ReactionOnFlyingCharacterParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ReactionToObstacleParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ReactionToObstacleParameter",
+          "signature": "get_ReactionToObstacleParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_ReduceMaxHpParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.ReduceMaxHpParameter",
+          "signature": "get_ReduceMaxHpParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_RevivePawnParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.RevivePawnParameter",
+          "signature": "get_RevivePawnParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SealBottleParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.SealBottleParameter",
+          "signature": "get_SealBottleParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecAutoSheatheProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecAutoSheatheProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecContinueHangingProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecContinueHangingProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecDisableAttackWithAllStrengthProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecDisableAttackWithAllStrengthProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecDisableInputSameToDecideCancelProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecDisableInputSameToDecideCancelProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecEnableDashActionProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecEnableDashActionProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecInvincibleSincStartOxcartRaidAttackProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecInvincibleSincStartOxcartRaidAttackProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecKeepBattleModeProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecKeepBattleModeProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SecStableHangingProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_SecStableHangingProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SlideDownParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.SlideDownParameter",
+          "signature": "get_SlideDownParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_SpineControlParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.SpineControlParameter",
+          "signature": "get_SpineControlParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_StepBackLengthProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "get_StepBackLengthProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_StepParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.EnvironmentChecker.StepParameter",
+          "signature": "get_StepParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_UnbalanceParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.UnbalanceParameter",
+          "signature": "get_UnbalanceParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "get_WakestoneParamProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HumanActionParameter.WakestoneParameter",
+          "signature": "get_WakestoneParamProp()"
+        },
+        {
+          "declaringType": "app.HumanActionParameter",
+          "isStatic": false,
+          "name": "isEvasionCancelCustomSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isEvasionCancelCustomSkill(app.HumanCustomSkillID)"
+        }
+      ],
+      "name": "app.HumanActionParameter",
+      "parent": "via.UserData"
+    },
+    {
+      "exists": true,
+      "fieldCount": 5,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "Chara",
+          "type": "app.Character"
+        },
+        {
+          "isStatic": false,
+          "name": "Human",
+          "type": "app.Human"
+        },
+        {
+          "isStatic": false,
+          "name": "IsPlayerOrPawn",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "JobContext",
+          "type": "app.JobContext"
+        },
+        {
+          "isStatic": false,
+          "name": "SkillContext",
+          "type": "app.HumanSkillContext"
+        }
+      ],
+      "methodCount": 15,
+      "methods": [
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "hasArrow",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "hasArrow(System.Int32)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "hasItemNeededByCustomSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "hasItemNeededByCustomSkill(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isCustomSkillAvailable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillAvailable(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isCustomSkillAvailableWithoutItemCondition",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillAvailableWithoutItemCondition(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isEquipCurrentJobWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEquipCurrentJobWeapon()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isEquipLeftWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEquipLeftWeapon()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isEquipRightWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEquipRightWeapon()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isJobNormalAttackAvailable",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isJobNormalAttackAvailable()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isJobSpecialSkillAvailable",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isJobSpecialSkillAvailable()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isJobSubNormalAttackAvailable",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isJobSubNormalAttackAvailable()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isLeftWeaponSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isLeftWeaponSkill(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isLeftWeaponSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isLeftWeaponSkill(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isNormalSkillAvailable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillAvailable(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isRestrictedJobSkill",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isRestrictedJobSkill()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "setup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Human"
+          ],
+          "returnType": "System.Void",
+          "signature": "setup(app.Human)"
+        }
+      ],
+      "name": "app.HumanSkillAvailability",
+      "parent": "System.Object"
+    },
+    {
+      "exists": true,
+      "fieldCount": 10,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "EnableNormalSkills",
+          "type": "System.Collections.Generic.List`1<app.HumanSkillContext.EnableNormalSkill>"
+        },
+        {
+          "isStatic": false,
+          "name": "EnabledCustomSkills",
+          "type": "System.Collections.Generic.List`1<app.HumanSkillContext.EnabledCustomSkill>"
+        },
+        {
+          "isStatic": false,
+          "name": "EquipedSkills",
+          "type": "app.HumanSkillContext.EquipedSkill[]"
+        },
+        {
+          "isStatic": false,
+          "name": "IsAllSkillEnable",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "IsNormalSkillEnable",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxCustomSkillCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxEquipList",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxNormalSkillCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "NumSkillSlot",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "SkillSlotValues",
+          "type": "app.HumanSkillContext.SkillSlot[]"
+        }
+      ],
+      "methodCount": 31,
+      "methods": [
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": true,
+          "name": ".cctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".cctor()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "callConvert",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.ContextVersionHolder",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "callConvert(app.ContextVersionHolder, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "copyFrom",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Context",
+            "app.ContextMemberType"
+          ],
+          "returnType": "System.Void",
+          "signature": "copyFrom(app.Context, app.ContextMemberType)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getCustomSkillLevel",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "app.HumanCustomSkillLevelNo",
+          "signature": "getCustomSkillLevel(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getEnableNormalSkillIDs",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.HumanNormalSkillID>",
+          "signature": "getEnableNormalSkillIDs()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getEquipList",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character.JobEnum"
+          ],
+          "returnType": "app.HumanSkillContext.EquipedSkill",
+          "signature": "getEquipList(app.Character.JobEnum)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getSkillID",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "app.HumanSkillContext.SkillSlot"
+          ],
+          "returnType": "app.HumanCustomSkillID",
+          "signature": "getSkillID(app.Character.JobEnum, app.HumanSkillContext.SkillSlot)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "get_ContainsMemberType",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.ContextMemberType",
+          "signature": "get_ContainsMemberType()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "get_IsNormalSkillEnableProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsNormalSkillEnableProp()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "hasEquipedSkill",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "hasEquipedSkill(app.Character.JobEnum, app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isCustomSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillEnable(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isCustomSkillReachLevel",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanCustomSkillID",
+            "app.HumanCustomSkillLevelNo"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillReachLevel(app.HumanCustomSkillID, app.HumanCustomSkillLevelNo)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isCustomSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillViewedNew(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isNormalSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillEnable(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": true,
+          "name": "isNormalSkillEnableWithQuest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillEnableWithQuest()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isNormalSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillViewedNew(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "prepare",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "prepare()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "prepareEnableCustomSkillList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "prepareEnableCustomSkillList()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "prepareEnableNormalSkillList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "prepareEnableNormalSkillList()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillEnable",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>",
+            "app.HumanCustomSkillLevelNo"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillEnable(System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>, app.HumanCustomSkillLevelNo)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillEnable",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanCustomSkillID",
+            "app.HumanCustomSkillLevelNo"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillEnable(app.HumanCustomSkillID, app.HumanCustomSkillLevelNo)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillLevelUp",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillLevelUp(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillViewedNew(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setNormalSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Collections.Generic.IEnumerable`1<app.HumanNormalSkillID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "setNormalSkillEnable(System.Collections.Generic.IEnumerable`1<app.HumanNormalSkillID>)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setNormalSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setNormalSkillEnable(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setNormalSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setNormalSkillViewedNew(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setSkill",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "app.HumanCustomSkillID",
+            "app.HumanSkillContext.SkillSlot"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "setSkill(app.Character.JobEnum, app.HumanCustomSkillID, app.HumanSkillContext.SkillSlot)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setSkills",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "setSkills(app.Character.JobEnum, System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "set_IsNormalSkillEnableProp",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsNormalSkillEnableProp(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "setup(app.Character)"
+        }
+      ],
+      "name": "app.HumanSkillContext",
+      "parent": "app.Context"
+    },
+    {
+      "exists": true,
+      "fieldCount": 12,
+      "fields": [
+        {
+          "isStatic": true,
+          "name": "Job01",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job02",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job03",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job04",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job05",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job06",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job07",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job08",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job09",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "Job10",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": true,
+          "name": "None",
+          "type": "app.Character.JobEnum"
+        },
+        {
+          "isStatic": false,
+          "name": "value__",
+          "type": "System.Int32"
+        }
+      ],
+      "methodCount": 0,
+      "methods": null,
+      "name": "app.Character.JobEnum",
+      "parent": "System.Enum"
+    }
+  ],
+  "title": "Vocations and Skills"
+}

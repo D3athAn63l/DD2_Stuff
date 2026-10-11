@@ -1,0 +1,939 @@
+{
+  "captured": {
+    "capturedLocalTime": "2026-10-11 21:51:32 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.1-alpha",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "group": "enhance",
+  "kind": "type-profile",
+  "rows": [
+    {
+      "exists": true,
+      "fieldCount": 18,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "_Blow",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_BlowGuard",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_Element",
+          "type": "app.AttackUserData.ElementType"
+        },
+        {
+          "isStatic": false,
+          "name": "_ElementStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_MagicAttack",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_OilStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_PhysicalAttack",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_PoisonStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_Shake",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_ShakeGuard",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_SilentStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_SlashRate",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_SleepStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_StaminaReduce",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_StoneStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_StrikeRate",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_StrikeStore",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_WaterStore",
+          "type": "System.Int16"
+        }
+      ],
+      "methodCount": 19,
+      "methods": [
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_Blow",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_Blow()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_BlowGuard",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_BlowGuard()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_Element",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.AttackUserData.ElementType",
+          "signature": "get_Element()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_ElementStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_ElementStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_MagicAttack",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_MagicAttack()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_OilStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_OilStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_PhysicalAttack",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_PhysicalAttack()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_PoisonStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_PoisonStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_Shake",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_Shake()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_ShakeGuard",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_ShakeGuard()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_SilentStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_SilentStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_SlashRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_SlashRate()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_SleepStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_SleepStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_StaminaReduce",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_StaminaReduce()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_StoneStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_StoneStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_StrikeRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_StrikeRate()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_StrikeStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_StrikeStore()"
+        },
+        {
+          "declaringType": "app.WeaponEnhanceParam",
+          "isStatic": false,
+          "name": "get_WaterStore",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_WaterStore()"
+        }
+      ],
+      "name": "app.WeaponEnhanceParam",
+      "parent": "app.EnhanceParamBase"
+    },
+    {
+      "exists": true,
+      "fieldCount": 22,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "_BlowResistRate",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_ColdResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_DarkDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_FaintResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_FireDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_FireResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_IceDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_IceResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_LightDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_MagicDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_OilResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_PhysicalDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_PoisonResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_ShakeResistRate",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_SilentResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_SlashDefenceRate",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_SleepResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_StoneResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_StrikeDefenceRate",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_ThunderDefence",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_ThunderResist",
+          "type": "System.Int16"
+        },
+        {
+          "isStatic": false,
+          "name": "_WaterResist",
+          "type": "System.Int16"
+        }
+      ],
+      "methodCount": 23,
+      "methods": [
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_BlowResistRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_BlowResistRate()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_ColdResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_ColdResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_DarkDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_DarkDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_FaintResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_FaintResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_FireDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_FireDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_FireResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_FireResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_IceDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_IceDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_IceResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_IceResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_LightDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_LightDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_MagicDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_MagicDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_OilResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_OilResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_PhysicalDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_PhysicalDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_PoisonResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_PoisonResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_ShakeResistRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_ShakeResistRate()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_SilentResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_SilentResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_SlashDefenceRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_SlashDefenceRate()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_SleepResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_SleepResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_StoneResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_StoneResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_StrikeDefenceRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_StrikeDefenceRate()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_ThunderDefence",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_ThunderDefence()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_ThunderResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_ThunderResist()"
+        },
+        {
+          "declaringType": "app.ArmorEnhanceParam",
+          "isStatic": false,
+          "name": "get_WaterResist",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Int32",
+          "signature": "get_WaterResist()"
+        }
+      ],
+      "name": "app.ArmorEnhanceParam",
+      "parent": "app.EnhanceParamBase"
+    },
+    {
+      "exists": true,
+      "fieldCount": 61,
+      "fields": [
+        {
+          "isStatic": true,
+          "name": "None",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type1",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type10",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type11",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type12",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type13",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type14",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type15",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type16",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type17",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type18",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type19",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type2",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type20",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type21",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type22",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type23",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type24",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type25",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type26",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type27",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type28",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type29",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type3",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type30",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type31",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type32",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type33",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type34",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type35",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type36",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type37",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type38",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type39",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type4",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type40",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type41",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type42",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type43",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type44",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type45",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type46",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type47",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type48",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type49",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type5",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type50",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type51",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type52",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type53",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type54",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type55",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type56",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type57",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type58",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type59",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type6",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type7",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type8",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": true,
+          "name": "Type9",
+          "type": "app.EquipSpecial"
+        },
+        {
+          "isStatic": false,
+          "name": "value__",
+          "type": "System.Byte"
+        }
+      ],
+      "methodCount": 0,
+      "methods": null,
+      "name": "app.EquipSpecial",
+      "parent": "System.Enum"
+    },
+    {
+      "exists": false,
+      "name": "app.EquipEnchantType",
+      "reason": "type not exposed by this TDB"
+    }
+  ],
+  "title": "Enhancements"
+}
