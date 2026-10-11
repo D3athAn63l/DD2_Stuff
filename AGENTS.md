@@ -46,5 +46,8 @@ Never declare a method missing just because reflection enumeration failed. Uncha
 - Do not mix cleanup/reorganization with Lua behavior changes in the same commit.
 - Note version discrepancies instead of guessing a version; currently the weight mod source and metadata disagree.
 
+## Research capture handoff
+For owner-submitted ZIPs, follow [docs/RESEARCH_CAPTURE_WORKFLOW.md](docs/RESEARCH_CAPTURE_WORKFLOW.md): audit, hash, version, preserve raw bytes, create a reviewable PR, and distinguish locally analyzed data from bytes actually committed to GitHub.
+
 ## Collaboration
 Create reviewable PRs; do not merge without the owner's approval. Preserve source contributor credits and community redistribution restrictions. Never commit personal saves, credentials, local account files or sensitive diagnostics.
