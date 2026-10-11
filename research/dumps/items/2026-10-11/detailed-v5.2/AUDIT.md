@@ -26,6 +26,8 @@ The checkpoint's exported ID list matches the exact 2,152 IDs across all three d
 
 **Unresolved:** raw `common._Weight` is **zero for all 2,152 records**, even where the other stats are meaningful. This is not evidence that DD2 gear is truly weightless; check alternate getter `app.ItemCommonParam.get_WeightF()`, runtime item overrides or manager behavior in a later focused diagnostic.
 
+**Important mod-interference hypothesis:** the repo's `mods/WeightSystemTweaks/reframework/autorun/weight_system_tweaks.lua` calls `param:set_field("_Weight", target)` on entries in the **same** `_ItemDataDict` collection, with zero targets controlled by the `Visuals_ShowZeroFor*` settings. If this or another inventory/weight mod was installed while dumping, the exported values could be *post-mutation runtime values* rather than vanilla data. Defaults in that script do not zero all equipment, so this does **not** establish the cause. For a clean reference, compare a short read-only weight sample with the weight mod disabled and avoid bulk re-export until behavior is understood.
+
 ## Environment
 
 The capture reports **REFramework `d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee`**, built **11 October 2026 01:52**—newer than the September `d1461375...` used by the affinity and health baselines. TDB is unchanged at 83. The Steam/executable build ID is still unverified.
