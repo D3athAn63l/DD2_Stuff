@@ -1,0 +1,21 @@
+{
+  "schema": "dd2-equipment-enhancements/v1.1-research-summary",
+  "status": "complete-live-capture-for-sampled-enhancement-dictionaries",
+  "captureDate": "2026-10-11",
+  "sourceZipName": "EQ Prove v1.1.zip",
+  "sourceZipSha256": "a0536ba99aaa23ea6f39e5a61d2bf1c14ccbe288bf2b8d0bfed17a34c0e3f3bf",
+  "tdbVersion": 83,
+  "reframeworkCommit": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+  "enhancementKeys": {"weapon": 180, "armor": 288, "total": 468},
+  "elementsPerKey": 13,
+  "totalElementRecords": 6084,
+  "incompleteArrays": 0,
+  "reportedErrors": 0,
+  "keysMatchingV52BaseCatalog": 466,
+  "keysMissingV52BaseItem": [1014, 2008],
+  "weightSample": {"sampled": 100, "nonzero": 98, "zeroItemIds": [6120, 6121]},
+  "arrayGroupInterpretation": "4x3+1: likely Vermundian/Battahli/Elven/Dwarven and Wyrmfire; not confirmed by enum or smithing UI",
+  "unverified": ["enhancement cost/material recipes", "cumulative-vs-incremental semantics", "valid EX/passive rolls", "online validation requirements"],
+  "rawZipCommittedToRepository": false,
+  "completeCsvCommittedToRepository": false
+}
