@@ -13,7 +13,7 @@ This is a research repository. **Read-only reflection is not a gameplay test**, 
 | [`mods/`](mods/) | Playable mod Lua, assets and metadata | [Choose Your Beloved](mods/ChooseYourBeloved/), [CompleteHealthRestoration](mods/CompleteHealthRestoration/), [WeightSystemTweaks](mods/WeightSystemTweaks/) |
 | [`tools/`](tools/) | Read-only data dumper, offline merge/comparison scripts, tests | [DD2 Data Dumper](tools/DD2DataDumper/README.md) |
 | [`research/baselines/`](research/baselines/) | Known-working affinity and HP API captures, probes, references | [Affinity](research/baselines/affinity/2026-10-11/README.md), [Health](research/baselines/health/2026-10-11/README.md) |
-| [`research/dumps/`](research/dumps/) | Raw type profiles, item catalogs, runtime data and audits | [Basic item catalog](research/dumps/items/2026-10-11/basic-catalog/AUDIT.md), [v5.2 detailed audit](research/dumps/items/2026-10-11/detailed-v5.2/AUDIT.md) |
+| [`research/dumps/`](research/dumps/) | Raw type profiles, item catalogs, runtime data and audits | [Basic item catalog](research/dumps/items/2026-10-11/basic-catalog/AUDIT.md), [current equipment research (v1.1)](research/dumps/items/2026-10-11/detailed-v5.2/README.md) |
 | [`releases/`](releases/) | Previously built ZIP distributions, separate from editable source | [Choose Your Beloved](releases/ChooseYourBeloved/), [Health](releases/CompleteHealthRestoration/), [Dumper](releases/DD2DataDumper/) |
 | [`docs/`](docs/) | Navigation, agent guidance, update and migration instructions | [Map](docs/REPO_MAP.md), [update playbook](docs/UPDATE_PLAYBOOK.md), [migration guide](docs/MIGRATION_GUIDE.md) |
 
