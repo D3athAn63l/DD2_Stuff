@@ -1,55 +1,50 @@
-# Agent instructions — DD2_Stuff
+# AGENTS.md — DD2_Stuff
 
-These instructions apply across the repository. Read a project's README, live source and baseline docs before editing it. Preserve the mod's intended scope; **do not add features merely because they are technically possible**.
+Scope: all repository files. Use [docs/REPO_MAP.md](docs/REPO_MAP.md) for the definitive source and evidence paths. Do not modify original captures or release ZIPs during ordinary code refactors.
 
-## Source-of-truth hierarchy
-1. **Current source code** in each project's loose `*.lua` files describes what the repository actually runs. Check metadata versions separately; don't assume they agree.
-2. **Original, dated runtime JSON snapshots** support observed type signatures and read paths for the captured game/REFramework revision.
-3. **Owner's documented in-game test results** support specific gameplay behavior, not every possible save/scene.
-4. Mock tests support only the simulated cases exercised.
-5. Old ZIPs, community mods, forum posts and inferred names are references, not automatically current facts.
+## Evidence hierarchy
+1. Current **loose Lua** in `mods/` or `tools/DD2DataDumper/` defines what this repo currently contains.
+2. Original **dated JSON captures** in `research/` establish what one running game exposed at that time.
+3. Reported owner in-game outcomes establish *specific* behavior only.
+4. Mock tests establish simulated behavior, not runtime safety.
+5. External mods, community data and older ZIPs are secondary references, never automatically the latest game truth.
 
-Never turn a missing reflection result into "removed by Capcom" without checking probe errors and enumeration status. An unchanged signature doesn't guarantee unchanged game behavior.
+Never declare a method missing just because reflection enumeration failed. Unchanged signatures do not guarantee unchanged engine semantics.
 
-## Repo layout and ownership
-- `Choose Your Beloved/reframework/autorun/BelovedCap.lua` — beloved Lock/Unlock, 199 locked cap, 299 unlocked, anti-loss + HUD.
-- `Loss Gauge/CompleteHealthRestoration.lua` — HP/Loss Gauge recovery and JSON settings.
-- `DD2_DataDumper/reframework/autorun/DD2_DataDumper.lua` — optional read-only diagnostics and bounded exports.
-- `WeightSystemTweaks/reframework/autorun/weight_system_tweaks.lua` — weight mod; note version discrepancy.
-- `docs/REPO_MAP.md` — complete navigation and reference provenance.
+## Project entry points
+- Beloved gameplay: `mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua`.
+- Health gameplay: `mods/CompleteHealthRestoration/reframework/autorun/CompleteHealthRestoration.lua`.
+- Weight gameplay: `mods/WeightSystemTweaks/reframework/autorun/weight_system_tweaks.lua`.
+- Data dumper: `tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`.
+- Tool tests and offline data processors: `tools/DD2DataDumper/tools/`.
+- Baselines and read-only probe scripts: `research/baselines/`; captured catalog and schemas: `research/dumps/`.
+- Distributions: `releases/` — not authoritative editable source.
 
-Do not install baseline `reframework/autorun/*Probe.lua` files permanently by accident, or deploy archives and loose files together as duplicates.
+## Coding and safety
+- Maintain intended mod features and user-facing settings unless explicitly asked to change them.
+- Prefer method/signature evidence from TDB reflection, but verify behavior in game before claiming a fix.
+- Distinguish frame callbacks from installed `sdk.hook()` hooks.
+- Guard against invalid objects during loading and scene transitions.
+- When `json.dump_file` is used, verify its boolean result; a successful `pcall` may still return `false`.
+- Avoid unsafe unbounded work in one frame; use incremental, cancellable exports and persistent checkpoints.
+- Keep probe/dumper code read-only unless the owner explicitly authorizes gameplay mutation.
+- Never assume base item stats reveal valid affix/picker rolls.
+- Preserve exact snapshots, their dates, the actual TDB/REFramework revision, and community data provenance.
 
-## REFramework coding
-- Prefer exact `sdk.find_type_definition()` results and overload-specific `get_method()` lookups where needed; validate type, parameters and return type on the running game's TDB.
-- Distinguish `re.on_frame`, `re.on_draw_ui`, and application-entry callbacks from actual `sdk.hook()` interception.
-- Never assume a `pcall` alone proves `json.dump_file` saved anything: check for a `false` return and keep prior config safely.
-- Avoid heavy whole-dictionary or reflection sweeps in one frame; use bounded stages and permit cancellation.
-- Treat userdata, collections, and scene transitions as potentially invalid/volatile. Check availability before dereferencing.
-- Diagnostic/probe code should default to **read-only**; do not install hooks, write fields, call game setters, or change saves unless the owner explicitly requests that functionality.
-- Back up game saves and configuration before mutating character, affinity, item or quest state.
-- Separate vanilla data, DLC/modded data, and community mappings. Preserve source revision and capture timestamp.
-- Do not call a value a valid in-game equipment roll based only on a reflected field or unsourced table.
+## Testing
+- Run a Lua syntax check and the relevant mock tests when available.
+- The DataDumper tools expect Python and, for Lua test harnesses, Linux `liblua5.4.so.0`:
+  `python tools/DD2DataDumper/tools/check_lua.py tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`
+  `python tools/DD2DataDumper/tools/run_mock_tests.py`
+  `python tools/DD2DataDumper/tools/run_detail_tests.py`
+- Other comparisons and tests are located inside their corresponding `research/baselines/{affinity,health}/2026-10-11/` directories.
+- Tests inside a GitHub/cloud environment cannot replace validation in the owner's actual DD2 installation.
 
-## Editing workflow
-1. Inspect existing functionality and identify which tests or snapshots support it.
-2. Make narrowly scoped changes; preserve user-facing settings and backwards-compatible config behavior where possible.
-3. Run Lua syntax checks and the project's relevant mock tests; mention if any were unavailable.
-4. For game-facing changes, provide a reproducible in-game test plan with expected/actual observations. **Never claim runtime validation from mock tests.**
-5. For breaking patches, follow `docs/UPDATE_PLAYBOOK.md` and compare captured API snapshots first.
-6. Keep scripts, changelog and `modinfo.ini` consistent; flag mismatches rather than guessing which version is authoritative.
-7. Prefer a PR for review and **never merge without the owner's request**. Don't rewrite historical snapshots or release archives as part of documentation cleanup.
+## Changing paths
+- Read [docs/MIGRATION_GUIDE.md](docs/MIGRATION_GUIDE.md); GitHub paths are not game install paths.
+- After future restructures, update root README, AGENTS, map, update playbook and applicable test/document links together.
+- Do not mix cleanup/reorganization with Lua behavior changes in the same commit.
+- Note version discrepancies instead of guessing a version; currently the weight mod source and metadata disagree.
 
-## Testing commands and limitations
-- The DataDumper tools expect a Linux environment with `liblua5.4.so.0`, e.g.:
-  - `python DD2_DataDumper/tools/check_lua.py DD2_DataDumper/reframework/autorun/DD2_DataDumper.lua`
-  - `python DD2_DataDumper/tools/run_mock_tests.py`
-  - `python DD2_DataDumper/tools/run_detail_tests.py`
-- Other baseline folders include their own probe and comparator tests; inspect their READMEs.
-- Actual in-game behavior requires the owner's running DD2 + REFramework build. Do not assume a full game runtime is available inside CI or an agent sandbox.
-
-## Integrity and safety
-- Original capture JSONs and their manifests are immutable evidence; add new captures rather than overwriting.
-- Never commit user saves, private account identifiers, personal configuration, crash dumps with sensitive paths, or injected executable binaries without an explicit reason.
-- Do not prune existing archived ZIPs or large findings merely to make the repo look clean. Discuss proposed reorganization first.
-- Use links to exact files and state uncertainty precisely. A game patch can break behavior without changing method signatures.
+## Collaboration
+Create reviewable PRs; do not merge without the owner's approval. Preserve source contributor credits and community redistribution restrictions. Never commit personal saves, credentials, local account files or sensitive diagnostics.
