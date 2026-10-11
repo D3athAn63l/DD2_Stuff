@@ -1,0 +1,17 @@
+# Only ignore newly generated local clutter; never erase existing research archives.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.bak
+# Local game-side configuration/saves (keep deliberate historical JSON snapshots tracked)
+reframework/data/
+*.sav
+*.save
