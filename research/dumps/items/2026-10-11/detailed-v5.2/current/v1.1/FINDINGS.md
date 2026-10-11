@@ -35,7 +35,7 @@ Names are **inferences**: the patterns agree with the four smithing styles and W
 
 ## Weight repeatability and system inventory
 
-The probe's new 100-item weight sample exactly matches the prior **weight-mod-disabled** capture, including the same two zero-weight armor IDs, **6120 and 6121**. The other 98 are nonzero. This reinforces the paired A/B evidence in [EQUIPMENT_PROBE_V1_AUDIT.md](EQUIPMENT_PROBE_V1_AUDIT.md), rather than requiring a third weight experiment.
+The probe's new 100-item weight sample exactly matches the prior **weight-mod-disabled** capture, including the same two zero-weight armor IDs, **6120 and 6121**. The other 98 are nonzero. This reinforces the paired A/B evidence in [archived v1.0 findings](../../history/v1.0/FINDINGS.md), rather than requiring a third weight experiment.
 
 The systems inventory is unchanged: `EquipmentAbilityData` (176 reported abilities, 97 settings), 12 weapon and 3 armor special efficacy entries, appraisal item sets (69 all / 67 equipment), and an accessible `ExItemParams` object. **Only types/presence/counts have been captured** for these systems.
 
