@@ -1,0 +1,140 @@
+{
+    "capturedLocalTime": "2026-10-11 16:59:25 +0800",
+    "engine": {
+        "draw": {
+            "filled_quad": true,
+            "filled_rect": true,
+            "text": true,
+            "world_to_screen": true
+        },
+        "imgui": {
+            "get_display_size": true
+        },
+        "json": {
+            "dump_file": true,
+            "load_file": true
+        },
+        "re": {
+            "on_draw_ui": true,
+            "on_frame": true,
+            "on_script_reset": true
+        },
+        "reframework": {
+            "get_delta_time": false
+        },
+        "sdk": {
+            "find_type_definition": true,
+            "get_managed_singleton": true,
+            "get_tdb_version": true,
+            "hook": true
+        }
+    },
+    "gameBuild": "UNVERIFIED: fill from Steam build ID / game executable",
+    "probeVersion": "1.0",
+    "runtime": {
+        "characterManagerAvailable": true,
+        "npcHolderCountReadable": true,
+        "npcHolderDictionaryReadable": true,
+        "npcManagerAvailable": true,
+        "playerAvailable": true,
+        "playerCharacterIDReadable": true,
+        "sampleSentimentInfoAvailable": true,
+        "sampleSentimentValueReadable": true
+    },
+    "source": "REFW runtime reflection (read-only)",
+    "tdbVersion": "83",
+    "types": {
+        "app.Character": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": null,
+            "methods": null,
+            "missing": [
+                "get_CharaID",
+                "get_GameObject"
+            ]
+        },
+        "app.CharacterManager": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": null,
+            "methods": null,
+            "missing": [
+                "get_ManualPlayer"
+            ]
+        },
+        "app.GUIBase": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": null,
+            "methods": null,
+            "missing": [
+                "getName"
+            ]
+        },
+        "app.NPCHolder": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": null,
+            "methods": null,
+            "missing": [
+                "addSentimentValue",
+                "getSentimentInfo",
+                "get_CachedCharacter",
+                "get_Position",
+                "onUpdate_Sentiment",
+                "setSentimentValue"
+            ]
+        },
+        "app.NPCManager": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": {
+                "NPCHolderDic": true
+            },
+            "methods": null,
+            "missing": [
+                "getNPCHolder",
+                "onUpdate"
+            ]
+        },
+        "via.GameObject": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": null,
+            "methods": null,
+            "missing": [
+                "get_Transform"
+            ]
+        },
+        "via.Transform": {
+            "errors": [
+                "get_methods unavailable"
+            ],
+            "exists": true,
+            "fields": null,
+            "methods": null,
+            "missing": [
+                "getJointByName",
+                "get_Position"
+            ]
+        }
+    },
+    "warnings": [
+        "Type/method existence does not prove the hook executes or NPC state is mutable.",
+        "A successful probe does not certify quest/romance logic or same-session save reload.",
+        "Confirm the current Steam/game build ID separately."
+    ]
+}

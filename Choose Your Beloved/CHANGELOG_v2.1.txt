@@ -1,0 +1,23 @@
+Choose Your Beloved v2.1 - experimental standalone update (2026-10-11)
+
+- Keeps the original model: all NPCs locked unless manually unlocked; 199 default ceiling; unlocked NPCs can reach 299.
+- Optional new standalone heart + relationship bar: draws above the nearby NPC closest to the middle of your screen, with LOCKED / UNLOCKED status. Does not require Affinity Bar, image assets, fonts, or Direct2D plugins.
+- Existing PreventDecay setting now prevents ALL affinity decreases for BOTH locked and unlocked NPCs (gains still work). Manual adjustment in this mod intentionally resets the remembered baseline, including when lowering affinity.
+- Session-only remembered affinity values, reset when a new player managed object is detected. The game's save data remains the source of truth on a fresh session. This is a best-effort cross-save guard, not a verified save-slot fingerprint.
+- Old global UnlockedNPCMaxAffinity JSON data removed during config migration. UnlockedNPCs selections preserved. Back up BelovedCap.json before upgrading if needed.
+- Fix REFramework ImGui button style indices, guard NPC iteration against despawn, use REFramework delta time when available.
+- Improved visibility of unlocked NPCs at 0 affinity in the NPC list.
+- version / metadata now 2.1.
+
+INSTALL:
+1. Back up reframework/data/BelovedCap.json or whichever location REFramework uses for your BelovedCap.json file, if present.
+2. Remove/replace old reframework/autorun/BelovedCap.lua (do not run two copies).
+3. Copy the archive contents to your Dragon's Dogma 2 game installation or install via your mod manager, preserving the reframework/autorun/ structure.
+4. In game open REFramework > BelovedCap and verify the defaults: Enabled, Prevent Affinity Loss, and Show Floating Heart + Affinity Bar.
+5. TEST ON A BACKUP SAVE. The mod was static-checked and mock-tested, but not exercised in the actual game/REFramework engine.
+
+NOTES:
+- The overlay follows the closest NPC near your camera centre within ~8m; it is intentionally NOT the full Affinity Bar mod.
+- Affinity drops from quests and negative actions are reversed as well as daily decay.
+- The script does not protect your main pawn's separate favorability stat (not an NPC sentiment).
+- REFramework overlay / value APIs should be verified in your game build.

@@ -1,0 +1,221 @@
+{
+    "capturedLocalTime": "2026-10-11 17:07:29 +0800",
+    "engine": {
+        "draw": {
+            "filled_quad": true,
+            "filled_rect": true,
+            "text": true,
+            "world_to_screen": true
+        },
+        "imgui": {
+            "get_display_size": true
+        },
+        "json": {
+            "dump_file": true,
+            "load_file": true
+        },
+        "re": {
+            "on_draw_ui": true,
+            "on_frame": true,
+            "on_script_reset": true
+        },
+        "reframework": {
+            "get_delta_time": false
+        },
+        "sdk": {
+            "find_type_definition": true,
+            "get_managed_singleton": true,
+            "get_tdb_version": true,
+            "hook": true
+        }
+    },
+    "gameBuild": "UNVERIFIED: fill from Steam build ID / game executable",
+    "probeVersion": "1.1",
+    "reframeworkInfo": {
+        "buildDate": "16.09.2026",
+        "buildTime": "16:39",
+        "commitHash": "d1461375aee4ec3f313170f8eaad12064eb542d9",
+        "gameName": "dd2"
+    },
+    "runtime": {
+        "characterManagerAvailable": true,
+        "npcHolderCountReadable": true,
+        "npcHolderDictionaryReadable": true,
+        "npcManagerAvailable": true,
+        "playerAvailable": true,
+        "playerCharacterIDReadable": true,
+        "sampleSentimentInfoAvailable": true,
+        "sampleSentimentValueReadable": true
+    },
+    "source": "REFW runtime reflection (read-only)",
+    "tdbVersion": "83",
+    "types": {
+        "app.Character": {
+            "enumeratedMethodCount": 1021,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methods": [
+                {
+                    "name": "get_CharaID",
+                    "resolvedBy": "enumeration",
+                    "signature": "get_CharaID(<parameters-unresolved>)"
+                },
+                {
+                    "name": "get_GameObject",
+                    "resolvedBy": "direct-lookup",
+                    "signature": "get_GameObject(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "unresolved": null
+        },
+        "app.CharacterManager": {
+            "enumeratedMethodCount": 233,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methods": [
+                {
+                    "name": "get_ManualPlayer",
+                    "resolvedBy": "enumeration",
+                    "signature": "get_ManualPlayer(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "unresolved": null
+        },
+        "app.GUIBase": {
+            "enumeratedMethodCount": 565,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methods": [
+                {
+                    "name": "getName",
+                    "resolvedBy": "enumeration",
+                    "signature": "getName(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "unresolved": null
+        },
+        "app.NPCHolder": {
+            "enumeratedMethodCount": 346,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methods": [
+                {
+                    "name": "addSentimentValue",
+                    "resolvedBy": "enumeration",
+                    "signature": "addSentimentValue(<parameters-unresolved>)"
+                },
+                {
+                    "name": "getSentimentInfo",
+                    "resolvedBy": "enumeration",
+                    "signature": "getSentimentInfo(<parameters-unresolved>)"
+                },
+                {
+                    "name": "get_CachedCharacter",
+                    "resolvedBy": "enumeration",
+                    "signature": "get_CachedCharacter(<parameters-unresolved>)"
+                },
+                {
+                    "name": "get_Position",
+                    "resolvedBy": "enumeration",
+                    "signature": "get_Position(<parameters-unresolved>)"
+                },
+                {
+                    "name": "onUpdate_Sentiment",
+                    "resolvedBy": "enumeration",
+                    "signature": "onUpdate_Sentiment(<parameters-unresolved>)"
+                },
+                {
+                    "name": "setSentimentValue",
+                    "resolvedBy": "enumeration",
+                    "signature": "setSentimentValue(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 6,
+            "missing": null,
+            "unresolved": null
+        },
+        "app.NPCManager": {
+            "enumeratedMethodCount": 415,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": {
+                "NPCHolderDic": true
+            },
+            "methods": [
+                {
+                    "name": "getNPCHolder",
+                    "resolvedBy": "enumeration",
+                    "signature": "getNPCHolder(<parameters-unresolved>)"
+                },
+                {
+                    "name": "onUpdate",
+                    "resolvedBy": "enumeration",
+                    "signature": "onUpdate(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "unresolved": null
+        },
+        "via.GameObject": {
+            "enumeratedMethodCount": 36,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methods": [
+                {
+                    "name": "get_Transform",
+                    "resolvedBy": "enumeration",
+                    "signature": "get_Transform(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "unresolved": null
+        },
+        "via.Transform": {
+            "enumeratedMethodCount": 50,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methods": [
+                {
+                    "name": "getJointByName",
+                    "resolvedBy": "enumeration",
+                    "signature": "getJointByName(<parameters-unresolved>)"
+                },
+                {
+                    "name": "get_Position",
+                    "resolvedBy": "enumeration",
+                    "signature": "get_Position(<parameters-unresolved>)"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "unresolved": null
+        }
+    },
+    "warnings": [
+        "Type/method existence does not prove the hook executes or NPC state is mutable.",
+        "A successful probe does not certify quest/romance logic or same-session save reload.",
+        "Confirm the current Steam/game build ID separately.",
+        "If enumerationStatus is not ok, a method absent from methods is UNRESOLVED, not proven missing."
+    ]
+}

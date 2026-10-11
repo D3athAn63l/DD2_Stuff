@@ -1,0 +1,18 @@
+{
+  "Choose_Your_Beloved_API_Hook_Reference.md": "b41b00bbfc90a1758d5d1c2ac972dbc18288f8a20a04eeb9c0e803ccab8ac0b4",
+  "MOD_API_BASELINE_TEMPLATE.md": "aed204ff4bf6fb3c5aba7ad59601689e9de471e62720e638f268e91fa1fec7b5",
+  "NICKS_DEVTOOLS_REVIEW.md": "f17db745e088a9730d83cdaf395d09f132d66ed7fdf8616f74ffc54ffa032179",
+  "README.md": "31a84764c401802b4e5e42f6786cd089d349a75c5c4284f947103d9f764aeb18",
+  "REGRESSION_CHECKLIST.md": "1803b996948ea6de1dd8fabba9b2673baba2d1a67912595db4df6ec1fc37dc54",
+  "RUNTIME_METHOD_SIGNATURES_2026-10-11.md": "640c375535b76f8ba66a9de108caedaf395db0d41224456fdac75de30a2ee21a",
+  "capture_game_build.ps1": "fa7f44e6a7c0ecf0efc749e3caf32ad9223f7f26784b713ce655f20a0b6c15d4",
+  "compare_probes_v12.py": "1762cf59a68698502eb6768e974466c0ce527541a66439c5274e45309c5db05e",
+  "reframework/autorun/Beloved_API_Probe.lua": "1230815c477a1bd81bb2be2e6593262fc25856c91e8b4cb0a528ca6dd97a98e1",
+  "snapshots/Beloved_API_Probe_20261011_165925.json": "8d961a2006f4e761588a235171cd5a830b56079da06bed789f914c9a06d6902a",
+  "snapshots/Beloved_API_Probe_20261011_170729.json": "3dbf775c885391c087a92871c1234e95daa2442c4f7d01bfc403c22df3abee77",
+  "snapshots/Beloved_API_Probe_20261011_171345.json": "b50bd637ff3a14d5ac7bda686093757dab87d32cf5e4147b8f416fa7734b0e33",
+  "snapshots/Beloved_API_Probe_20261011_172358.json": "5b144fe2ddb00143c8195fcc20eca031994892f46aee9168c6149e8df9b9b55e",
+  "tests/run_lua_test.py": "cdcd1b4a7d85040278075948ab61bca68ce3f9278f3e75d2aee5754bbbb82f45",
+  "tests/test_comparator.py": "6139bb92af8527076ab1a7eea48975c183c10ac31627fb1058c63b21ca5a85e5",
+  "tests/test_probe_v12.lua": "48382359c8bfa470094beb2845771c648e9e32ce450d98644ebdc16e88715232"
+}

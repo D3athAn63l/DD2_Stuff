@@ -1,0 +1,582 @@
+{
+    "capturedLocalTime": "2026-10-11 17:23:58 +0800",
+    "engine": {
+        "draw": {
+            "filled_quad": true,
+            "filled_rect": true,
+            "text": true,
+            "world_to_screen": true
+        },
+        "imgui": {
+            "get_display_size": true
+        },
+        "json": {
+            "dump_file": true,
+            "load_file": true
+        },
+        "re": {
+            "on_draw_ui": true,
+            "on_frame": true,
+            "on_script_reset": true
+        },
+        "reframework": {
+            "get_delta_time": false
+        },
+        "sdk": {
+            "find_type_definition": true,
+            "get_managed_singleton": true,
+            "get_tdb_version": true,
+            "hook": true
+        }
+    },
+    "gameBuild": "UNVERIFIED: capture Steam build/executable separately",
+    "probeVersion": "1.2",
+    "reframeworkInfo": {
+        "buildDate": "16.09.2026",
+        "buildTime": "16:39",
+        "commitHash": "d1461375aee4ec3f313170f8eaad12064eb542d9",
+        "gameName": "dd2"
+    },
+    "runtime": {
+        "characterManagerAvailable": true,
+        "npcHolderCountReadable": true,
+        "npcHolderDictionaryReadable": true,
+        "npcManagerAvailable": true,
+        "playerAvailable": true,
+        "playerCharacterIDReadable": true,
+        "sampleSentimentInfoAvailable": true,
+        "sampleSentimentValueReadable": true
+    },
+    "source": "REFramework runtime reflection (read-only)",
+    "tdbVersion": "83",
+    "types": {
+        "app.Character": {
+            "enumeratedMethodCount": 1021,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 2,
+            "methods": [
+                {
+                    "declaringType": "app.Character",
+                    "isStatic": false,
+                    "name": "get_CharaID",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.CharacterID",
+                    "signature": "get_CharaID()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "via.Component",
+                    "isStatic": false,
+                    "name": "get_GameObject",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "direct-lookup",
+                    "returnType": "via.GameObject",
+                    "signature": "get_GameObject()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "overloadsByName": {
+                "get_CharaID": 1,
+                "get_GameObject": 1
+            },
+            "resolvedSignatureCount": 2,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.CharacterManager": {
+            "enumeratedMethodCount": 233,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "app.CharacterManager",
+                    "isStatic": false,
+                    "name": "get_ManualPlayer",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.Character",
+                    "signature": "get_ManualPlayer()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "overloadsByName": {
+                "get_ManualPlayer": 1
+            },
+            "resolvedSignatureCount": 1,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.GUIBase": {
+            "enumeratedMethodCount": 565,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "app.GUIBase",
+                    "isStatic": true,
+                    "name": "getName",
+                    "overloadOrdinal": 4,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.Character"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.String",
+                    "signature": "getName(app.Character)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.GUIBase",
+                    "isStatic": true,
+                    "name": "getName",
+                    "overloadOrdinal": 5,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.String",
+                    "signature": "getName(app.CharacterID)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.GUIBase",
+                    "isStatic": true,
+                    "name": "getName",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 4,
+                    "parameterNames": [
+                        "",
+                        "",
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID",
+                        "app.PawnDataContext",
+                        "System.Boolean",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.String",
+                    "signature": "getName(app.CharacterID, app.PawnDataContext, System.Boolean, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.GUIBase",
+                    "isStatic": true,
+                    "name": "getName",
+                    "overloadOrdinal": 2,
+                    "parameterCount": 3,
+                    "parameterNames": [
+                        "",
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID",
+                        "app.PlayerPersonalDataContext",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.String",
+                    "signature": "getName(app.CharacterID, app.PlayerPersonalDataContext, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.GUIBase",
+                    "isStatic": true,
+                    "name": "getName",
+                    "overloadOrdinal": 3,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.GUIBase.CharaData"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.String",
+                    "signature": "getName(app.GUIBase.CharaData)",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 5,
+            "missing": null,
+            "overloadsByName": {
+                "getName": 5
+            },
+            "resolvedSignatureCount": 5,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.NPCHolder": {
+            "enumeratedMethodCount": 346,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 6,
+            "methods": [
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "addSentimentValue",
+                    "overloadOrdinal": 2,
+                    "parameterCount": 5,
+                    "parameterNames": [
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.Int32",
+                        "app.CharacterID",
+                        "System.Boolean",
+                        "System.Boolean",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "addSentimentValue(System.Int32, app.CharacterID, System.Boolean, System.Boolean, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "addSentimentValue",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 4,
+                    "parameterNames": [
+                        "",
+                        "",
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID",
+                        "app.SentimentInfo",
+                        "System.Int32",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "addSentimentValue(app.CharacterID, app.SentimentInfo, System.Int32, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "getSentimentInfo",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 2,
+                    "parameterNames": [
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.SentimentInfo",
+                    "signature": "getSentimentInfo(app.CharacterID, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "get_CachedCharacter",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.Character",
+                    "signature": "get_CachedCharacter()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "get_Position",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "via.vec3",
+                    "signature": "get_Position()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "onUpdate_Sentiment",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.Int32"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "onUpdate_Sentiment(System.Int32)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "setSentimentValue",
+                    "overloadOrdinal": 2,
+                    "parameterCount": 3,
+                    "parameterNames": [
+                        "",
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID",
+                        "System.Int32",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "setSentimentValue(app.CharacterID, System.Int32, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCHolder",
+                    "isStatic": false,
+                    "name": "setSentimentValue",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 4,
+                    "parameterNames": [
+                        "",
+                        "",
+                        "",
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID",
+                        "app.SentimentInfo",
+                        "System.Int32",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "setSentimentValue(app.CharacterID, app.SentimentInfo, System.Int32, System.Boolean)",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 8,
+            "missing": null,
+            "overloadsByName": {
+                "addSentimentValue": 2,
+                "getSentimentInfo": 1,
+                "get_CachedCharacter": 1,
+                "get_Position": 1,
+                "onUpdate_Sentiment": 1,
+                "setSentimentValue": 2
+            },
+            "resolvedSignatureCount": 8,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.NPCManager": {
+            "enumeratedMethodCount": 415,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": {
+                "NPCHolderDic": true
+            },
+            "methodNamesFoundCount": 2,
+            "methods": [
+                {
+                    "declaringType": "app.NPCManager",
+                    "isStatic": false,
+                    "name": "getNPCHolder",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "app.CharacterID"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.NPCHolder",
+                    "signature": "getNPCHolder(app.CharacterID)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.NPCManager",
+                    "isStatic": false,
+                    "name": "onUpdate",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.Single"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "onUpdate(System.Single)",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "overloadsByName": {
+                "getNPCHolder": 1,
+                "onUpdate": 1
+            },
+            "resolvedSignatureCount": 2,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "via.GameObject": {
+            "enumeratedMethodCount": 36,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "via.GameObject",
+                    "isStatic": false,
+                    "name": "get_Transform",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "via.Transform",
+                    "signature": "get_Transform()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "overloadsByName": {
+                "get_Transform": 1
+            },
+            "resolvedSignatureCount": 1,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "via.Transform": {
+            "enumeratedMethodCount": 50,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 2,
+            "methods": [
+                {
+                    "declaringType": "via.Transform",
+                    "isStatic": false,
+                    "name": "getJointByName",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 1,
+                    "parameterNames": [
+                        ""
+                    ],
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.String"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "via.Joint",
+                    "signature": "getJointByName(System.String)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "via.Transform",
+                    "isStatic": false,
+                    "name": "get_Position",
+                    "overloadOrdinal": 1,
+                    "parameterCount": 0,
+                    "parameterNames": null,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "via.vec3",
+                    "signature": "get_Position()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "overloadsByName": {
+                "getJointByName": 1,
+                "get_Position": 1
+            },
+            "resolvedSignatureCount": 2,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        }
+    },
+    "warnings": [
+        "Reflection confirms exposed methods, not successful execution or affinity write persistence.",
+        "Do not compare unresolved overload signatures as though they were complete.",
+        "Same-session save reload and final beloved selection are not tested.",
+        "Installed game build ID/executable hash still needs separate verification."
+    ]
+}
