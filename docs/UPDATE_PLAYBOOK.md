@@ -1,36 +1,28 @@
 # DD2 / REFramework Update Playbook
 
-Use this after a game patch, a REFramework update, or a previously working mod regression.
+## 1. Freeze the environment
+Before changing Lua, record the game's exact executable or Steam build, REFramework commit, RE Engine TDB version, reproducer and whether older captures were made on a different revision. Back up saves and `reframework/data/`.
 
-## 1. Freeze and identify the environment
+As of 11 Oct 2026, the verified affinity/health baselines used TDB 83, REFramework `d1461375...` (16 Sep); the new item dump also used TDB 83 but REFramework `d052e8fd...` (11 Oct). The actual game's executable build remains unverified.
 
-Record the date, Steam game build/executable version or hash, REFramework revision, RE Engine TDB, relevant Lua/mod versions, and crash/reproduction steps. Back up saves and `reframework/data/` before modifying files. The 11 October 2026 reference has **TDB 83** and REFramework `d1461375aee4ec3f313170f8eaad12064eb542d9`; the installed DD2 executable build was **not** established.
+## 2. Run the *same* read-only probes
+- Affinity: `research/baselines/affinity/2026-10-11/reframework/autorun/Beloved_API_Probe.lua`. Compare with `research/baselines/affinity/2026-10-11/snapshots/Beloved_API_Probe_20261011_172358.json` using `compare_probes_v12.py` in that baseline folder.
+- HP / Loss Gauge: `research/baselines/health/2026-10-11/reframework/autorun/Health_API_Probe.lua`. Compare with `research/baselines/health/2026-10-11/baseline/Health_API_Probe_20261011_180252.json` using `compare_health_probes.py` from there.
+- DataDumper: use `tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua` only when needed. Inspect output for actual new field types, completeness and write errors.
 
-## 2. Compare APIs without modifying game state
+A missing method reported by a failed enumeration is unresolved, *not proven removed*. Unchanged signatures do not guarantee working game behavior.
 
-For **affinity**, reuse `Choose Your Beloved/DD2_API_Baseline_2026-10-11_v1.2_Confirmed/reframework/autorun/Beloved_API_Probe.lua` and compare with `snapshots/Beloved_API_Probe_20261011_172358.json` using `compare_probes_v12.py`.
+## 3. Behavioral regression checklist
+| Component | Minimum hands-on verification |
+|---|---|
+| Choose Your Beloved | Locked NPC <=199; unlocked NPC >199; anti-loss, manual changes, HUD, cross-save safeguards |
+| CompleteHealthRestoration | Regular HP and reduced-max HP recovery, pawn toggles, combat/pause gating, saved settings after restart |
+| Data Dumper | Bounded type scan, item export uniqueness, checkpoint resume, JSON writer errors, field coverage |
+| WeightSystemTweaks | Effective carried weights, equip/unequip, dragonforging, Warfarer, persisted settings |
 
-For **HP/Loss Gauge**, reuse `Loss Gauge/DD2_Health_API_Baseline_2026-10-11_Confirmed/reframework/autorun/Health_API_Probe.lua` and compare with `baseline/Health_API_Probe_20261011_180252.json` using `compare_health_probes.py`.
+Never test risky save mutations without a backup.
 
-Do not infer that a method vanished if enumeration failed. Compare identical probe versions where possible; a changed probe can reveal metadata previously hidden without any game change.
+## 4. Patch and document
+Make the smallest necessary code fix, run local tests, then validate in real DD2. Preserve the historical raw JSONs and publish a **new dated snapshot**. Record reproduction, environment, what changed, exact files, simulated tests and observed in-game results in the PR.
 
-## 3. Reproduce gameplay separately
-
-| System | Minimum behavioral checks |
-| --- | --- |
-| Beloved | Locked NPC capped at 199; unlocked NPC can exceed 199; anti-loss and manual reductions; HUD; save reload/new playthrough isolation |
-| Health | Regular HP regeneration; reduced-max HP recovery; pawn toggles; combat and pause settings; settings persist after restart |
-| Dumper | Single bounded profile; small item batch; ID dedup/restart resume; JSON write failure reported; detailed export coverage before bulk use |
-| Weight | Default and modified weights; equip/unequip, Warfarer; dragonforging behavior; changing config and restarting |
-
-A matching API snapshot **does not** certify these outcomes. Use expendable test saves for risky changes.
-
-## 4. Change narrowly, verify, record
-
-Patch the smallest broken path, retain config compatibility, run available Lua syntax/mock tests, and then have the owner verify the actual DD2 session. Capture errors and before/after behavior. Don't silently change gameplay balance or mix in unrelated feature additions.
-
-Record findings in an issue/PR with: build identifiers, precise script paths, API delta, reproduction, observed results, tests performed, remaining uncertainty and any migration steps. Add a new dated baseline rather than altering the original snapshot.
-
-## 5. Review before release
-
-Keep README, changelog and mod metadata aligned; check installation paths, dependencies, credits, and archive contents. Prefer a reviewable PR; do not merge without the owner's approval.
+For repository layout changes use [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md). Do not merge without the owner's approval.
