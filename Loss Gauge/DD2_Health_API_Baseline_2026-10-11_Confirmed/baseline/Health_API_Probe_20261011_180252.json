@@ -1,0 +1,524 @@
+{
+    "capturedLocalTime": "2026-10-11 18:02:52 +0800",
+    "engine": {
+        "json": {
+            "dump_file": true
+        },
+        "re": {
+            "on_application_entry": true,
+            "on_draw_ui": true,
+            "on_frame": true
+        },
+        "sdk": {
+            "find_type_definition": true,
+            "get_managed_singleton": true
+        }
+    },
+    "gameBuild": "UNVERIFIED: capture Steam build ID or executable hash separately",
+    "probeVersion": "1.0",
+    "reframeworkInfo": {
+        "buildDate": "16.09.2026",
+        "buildTime": "16:39",
+        "commitHash": "d1461375aee4ec3f313170f8eaad12064eb542d9",
+        "gameName": "dd2"
+    },
+    "runtime": {
+        "battleMode": 0,
+        "battleModeReadPath": "get_BattleMode()",
+        "hitControllerTypeResolved": "app.HitController",
+        "managers": {
+            "battle": true,
+            "character": true,
+            "gui": true,
+            "pawn": true
+        },
+        "paused": false,
+        "pausedReadPath": "isPausedGUI()",
+        "pawnListAvailable": true,
+        "pawnListCount": 2,
+        "pawnListCountReadPath": "get_Count()",
+        "pawnListReadPath": "get_PawnCharacterList()",
+        "pawnListType": "System.Collections.Generic.List`1<app.Character>",
+        "pawnSamples": [
+            {
+                "available": true,
+                "class": "app.Character",
+                "hitAccessPath": "character.<Hit>k__BackingField",
+                "hitAvailable": true,
+                "hitBackingFieldAccessible": true,
+                "hitRuntimeType": "app.HitController",
+                "hp": 556.0858764648438,
+                "hpRead": "character:get_Hp()",
+                "lossGaugeDeficit": 38.5302734375,
+                "lossGaugeRatio": 0.9395129145408163,
+                "originalMaxHp": 637.0,
+                "originalMaxHpRead": "character:get_OriginalMaxHp()",
+                "reducedMaxHp": 598.4697265625,
+                "reducedMaxHpRead": "character:get_ReducedMaxHp()",
+                "valid": true,
+                "validRead": "get_Valid()"
+            },
+            {
+                "available": true,
+                "class": "app.Character",
+                "hitAccessPath": "character.<Hit>k__BackingField",
+                "hitAvailable": true,
+                "hitBackingFieldAccessible": true,
+                "hitRuntimeType": "app.HitController",
+                "hp": 578.0,
+                "hpRead": "character:get_Hp()",
+                "lossGaugeDeficit": 0,
+                "lossGaugeRatio": 1.0,
+                "originalMaxHp": 578.0,
+                "originalMaxHpRead": "character:get_OriginalMaxHp()",
+                "reducedMaxHp": 578.0,
+                "reducedMaxHpRead": "character:get_ReducedMaxHp()",
+                "valid": true,
+                "validRead": "get_Valid()"
+            }
+        ],
+        "player": {
+            "available": true,
+            "class": "app.Character",
+            "hitAccessPath": "character.<Hit>k__BackingField",
+            "hitAvailable": true,
+            "hitBackingFieldAccessible": true,
+            "hitRuntimeType": "app.HitController",
+            "hp": 640.889892578125,
+            "hpRead": "character:get_Hp()",
+            "lossGaugeDeficit": 98.76849365234375,
+            "lossGaugeRatio": 0.8722766129426263,
+            "originalMaxHp": 773.2999877929688,
+            "originalMaxHpRead": "character:get_OriginalMaxHp()",
+            "reducedMaxHp": 674.531494140625,
+            "reducedMaxHpRead": "character:get_ReducedMaxHp()",
+            "valid": true,
+            "validRead": "get_Valid()"
+        },
+        "playerReadPath": "get_ManualPlayer()"
+    },
+    "scope": "HP / Loss Gauge runtime + method/field reflection",
+    "source": "Read-only REFramework runtime inspection; no setters invoked",
+    "tdbVersion": "83",
+    "types": {
+        "System.Collections.Generic.List`1<app.Character>": {
+            "discovery": "app.PawnManager.get_PawnCharacterList runtime type",
+            "enumeratedMethodCount": 45,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 2,
+            "methods": [
+                {
+                    "declaringType": "System.Collections.Generic.List`1<app.Character>",
+                    "isStatic": false,
+                    "name": "get_Count",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Int32",
+                    "signature": "get_Count()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "System.Collections.Generic.List`1<app.Character>",
+                    "isStatic": false,
+                    "name": "get_Item",
+                    "parameterCount": 1,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.Int32"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.Character",
+                    "signature": "get_Item(System.Int32)",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "overloadsByName": {
+                "get_Count": 1,
+                "get_Item": 1
+            },
+            "resolvedSignatureCount": 2,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.BattleManager": {
+            "enumeratedMethodCount": 123,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 2,
+            "methods": [
+                {
+                    "declaringType": "app.BattleManager",
+                    "isStatic": false,
+                    "name": "get_BattleMode",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.BattleManager.BattleModeEnum",
+                    "signature": "get_BattleMode()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.BattleManager",
+                    "isStatic": false,
+                    "name": "get_IsBattleMode",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Boolean",
+                    "signature": "get_IsBattleMode()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 2,
+            "missing": null,
+            "overloadsByName": {
+                "get_BattleMode": 1,
+                "get_IsBattleMode": 1
+            },
+            "resolvedSignatureCount": 2,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.Character": {
+            "enumeratedMethodCount": 1021,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": {
+                "<Hit>k__BackingField": {
+                    "declaringType": "app.Character",
+                    "exists": true,
+                    "isStatic": false,
+                    "type": "app.HitController"
+                }
+            },
+            "methodNamesFoundCount": 6,
+            "methods": [
+                {
+                    "declaringType": "app.Character",
+                    "isStatic": false,
+                    "name": "get_Hit",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.HitController",
+                    "signature": "get_Hit()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.Character",
+                    "isStatic": false,
+                    "name": "get_Hp",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Single",
+                    "signature": "get_Hp()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.Character",
+                    "isStatic": false,
+                    "name": "get_Human",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.Human",
+                    "signature": "get_Human()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.Character",
+                    "isStatic": false,
+                    "name": "get_OriginalMaxHp",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Single",
+                    "signature": "get_OriginalMaxHp()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.Character",
+                    "isStatic": false,
+                    "name": "get_ReducedMaxHp",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Single",
+                    "signature": "get_ReducedMaxHp()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "via.Component",
+                    "isStatic": false,
+                    "name": "get_Valid",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "direct-lookup",
+                    "returnType": "System.Boolean",
+                    "signature": "get_Valid()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 6,
+            "missing": null,
+            "overloadsByName": {
+                "get_Hit": 1,
+                "get_Hp": 1,
+                "get_Human": 1,
+                "get_OriginalMaxHp": 1,
+                "get_ReducedMaxHp": 1,
+                "get_Valid": 1
+            },
+            "resolvedSignatureCount": 6,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.CharacterManager": {
+            "enumeratedMethodCount": 233,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": {
+                "<ManualPlayer>k__BackingField": {
+                    "declaringType": "app.CharacterManager",
+                    "exists": true,
+                    "isStatic": false,
+                    "type": "app.Character"
+                }
+            },
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "app.CharacterManager",
+                    "isStatic": false,
+                    "name": "get_ManualPlayer",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.Character",
+                    "signature": "get_ManualPlayer()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "overloadsByName": {
+                "get_ManualPlayer": 1
+            },
+            "resolvedSignatureCount": 1,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.GuiManager": {
+            "enumeratedMethodCount": 1356,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "app.GuiManager",
+                    "isStatic": false,
+                    "name": "isPausedGUI",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Boolean",
+                    "signature": "isPausedGUI()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "overloadsByName": {
+                "isPausedGUI": 1
+            },
+            "resolvedSignatureCount": 1,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.HitController": {
+            "discovery": "character.<Hit>k__BackingField runtime type / field metadata",
+            "enumeratedMethodCount": 446,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 5,
+            "methods": [
+                {
+                    "declaringType": "app.HitController",
+                    "isStatic": false,
+                    "name": "get_Hp",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Single",
+                    "signature": "get_Hp()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.HitController",
+                    "isStatic": false,
+                    "name": "get_OriginalMaxHp",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Single",
+                    "signature": "get_OriginalMaxHp()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.HitController",
+                    "isStatic": false,
+                    "name": "get_ReducedMaxHp",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Single",
+                    "signature": "get_ReducedMaxHp()",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.HitController",
+                    "isStatic": false,
+                    "name": "setHpValue",
+                    "parameterCount": 2,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.Single",
+                        "System.Boolean"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "setHpValue(System.Single, System.Boolean)",
+                    "signatureStatus": "resolved"
+                },
+                {
+                    "declaringType": "app.HitController",
+                    "isStatic": false,
+                    "name": "set_ReducedMaxHp",
+                    "parameterCount": 1,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": [
+                        "System.Single"
+                    ],
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Void",
+                    "signature": "set_ReducedMaxHp(System.Single)",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 5,
+            "missing": null,
+            "overloadsByName": {
+                "get_Hp": 1,
+                "get_OriginalMaxHp": 1,
+                "get_ReducedMaxHp": 1,
+                "setHpValue": 1,
+                "set_ReducedMaxHp": 1
+            },
+            "resolvedSignatureCount": 5,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.Human": {
+            "discovery": "app.Character.get_Human legacy path",
+            "enumeratedMethodCount": 686,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": {
+                "Hit": {
+                    "exists": false,
+                    "status": "not-found"
+                }
+            },
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "app.Human",
+                    "isStatic": false,
+                    "name": "get_Hit",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "app.HitController",
+                    "signature": "get_Hit()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "overloadsByName": {
+                "get_Hit": 1
+            },
+            "resolvedSignatureCount": 1,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        },
+        "app.PawnManager": {
+            "enumeratedMethodCount": 383,
+            "enumerationStatus": "ok",
+            "errors": null,
+            "exists": true,
+            "fields": null,
+            "methodNamesFoundCount": 1,
+            "methods": [
+                {
+                    "declaringType": "app.PawnManager",
+                    "isStatic": false,
+                    "name": "get_PawnCharacterList",
+                    "parameterCount": 0,
+                    "parameterReadMethod": "ipairs",
+                    "parameterTypes": null,
+                    "resolvedBy": "enumeration",
+                    "returnType": "System.Collections.Generic.List`1<app.Character>",
+                    "signature": "get_PawnCharacterList()",
+                    "signatureStatus": "resolved"
+                }
+            ],
+            "methodsFoundCount": 1,
+            "missing": null,
+            "overloadsByName": {
+                "get_PawnCharacterList": 1
+            },
+            "resolvedSignatureCount": 1,
+            "unresolved": null,
+            "unresolvedSignatureCount": 0
+        }
+    },
+    "warnings": [
+        "Method signature availability does not prove behavior or hook execution.",
+        "Character HP values depend on damage, equipment and scene; compare availability/path, not numeric equality.",
+        "Inspecting a setter's signature DOES NOT invoke the setter.",
+        "An unchanged API does not guarantee that loss-gauge writes will work after a game update.",
+        "The live probe samples current HP and loss gauge; no character identities are collected."
+    ]
+}

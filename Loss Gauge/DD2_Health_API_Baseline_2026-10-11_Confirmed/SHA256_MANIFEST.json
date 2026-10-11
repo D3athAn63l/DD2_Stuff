@@ -1,0 +1,21 @@
+{
+  "title": "DD2 Health API confirmed baseline",
+  "captureDate": "2026-10-11T18:02:52+08:00",
+  "probeVersion": "1.0",
+  "sourceCaptureSHA256": "60ccdb9bdd34f1a7a10690f2f66e0fd387a5dc83bc1e883d5de5426f7d9926b3",
+  "methodsResolved": 19,
+  "typeCount": 8,
+  "status": "Read-only runtime method reflection complete; gameplay setter behavior separately user-reported",
+  "files": {
+    "README.md": "77d9ccc1b2bc23bf29953662b2e7a8c711d7d34b91a407c400d406c42383fed5",
+    "REGRESSION_CHECKLIST.md": "752fcb6c4e7aa9dff1e4d2594f6bdadcc62d9ed1ee1f8e13e59518a72e1e0bd4",
+    "__pycache__/compare_health_probes.cpython-313.pyc": "4edd49b5ab0bddccd00d92710358b096065ece167184b10d258b678ba38de595",
+    "baseline/Health_API_Probe_20261011_180252.json": "60ccdb9bdd34f1a7a10690f2f66e0fd387a5dc83bc1e883d5de5426f7d9926b3",
+    "compare_health_probes.py": "0377c16a2adfec831a92d109251f219116e162025e33e0d6e3fac0701aa8b9ea",
+    "reference/HEALTH_API_REFERENCE.md": "5e5350b9a9ab7026e134e4c6a19bc3b63412b096ad95271b8b6a187168329f39",
+    "reframework/autorun/Health_API_Probe.lua": "cc44d359243e400664de53f72cd10a131cb7a18d615ab49d1cde81386118b5fa",
+    "tests/run_lua_test.py": "306a5d03ab2e7df5e9e62a813ce933e9a8df4a03beabfafb19928acec77aa066",
+    "tests/test_comparator.py": "8bc1f9077a26643cf39f2027e2309a48deb37ef2738ced0d4aec0711fd4d9635",
+    "tests/test_health_probe.lua": "bf7d112bd9ac35a3509839487a8ca92a09fbb73cb32639514f7a2185336fa4a3"
+  }
+}
