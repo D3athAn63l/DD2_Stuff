@@ -1,0 +1,41 @@
+{
+  "schema": "dd2-capture-import-manifest/v1",
+  "sourceArchive": "EQ Prove v1.1.zip",
+  "sourceArchiveSha256": "a0536ba99aaa23ea6f39e5a61d2bf1c14ccbe288bf2b8d0bfed17a34c0e3f3bf",
+  "sourceArchiveBytes": 57363,
+  "captureFiles": [
+    {
+      "file": "DD2Research_enhance_armor_20261011_233410_003.json",
+      "sha256": "94e21d3220bef28f79fb15996994a8a602d8ac313705a3be9773fa3c492feedc",
+      "sizeBytes": 1812184,
+      "kind": "enhance-armor",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_enhance_armor_20261011_233410_003.json"
+    },
+    {
+      "file": "DD2Research_enhance_weapon_20261011_233408_002.json",
+      "sha256": "791d07f7ab710bbf0b96703de46e41fc6c33667f8769ec18248c6b6fe453e2a2",
+      "sizeBytes": 1156272,
+      "kind": "enhance-weapon",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_enhance_weapon_20261011_233408_002.json"
+    },
+    {
+      "file": "DD2Research_system_inventory_20261011_233412_004.json",
+      "sha256": "9fbb74dab0bfa3b5937535005eeffed35af601ef9c5ae853dc9449c2108468c4",
+      "sizeBytes": 2288,
+      "kind": "equipment-system-inventory",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_system_inventory_20261011_233412_004.json"
+    },
+    {
+      "file": "DD2Research_weight_20261011_233407_001.json",
+      "sha256": "77570e82fca030aa3db2e70dfd8ac8db8db07650c29734f15d60494562696959",
+      "sizeBytes": 23024,
+      "kind": "weight",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_weight_20261011_233407_001.json"
+    }
+  ],
+  "note": "Raw bytes preserved; presence in repo is not validation of game mechanics."
+}

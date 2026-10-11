@@ -1,0 +1,193 @@
+{
+  "schema": "dd2-capture-import-manifest/v1",
+  "sourceArchive": "DataDump_v5.2.zip",
+  "sourceArchiveSha256": "5e7a022fa382671c7e3f1d739be7f73414593149844ff603b1034f70f978527e",
+  "sourceArchiveBytes": 722201,
+  "captureFiles": [
+    {
+      "file": "DD2Dumper_20261011_224527_001_runtime.json",
+      "sha256": "4677fa5bffb17ff53ecd407e87c6736deaa08197b799b1f4b3ba68916996bb24",
+      "sizeBytes": 4475,
+      "kind": "runtime-readonly",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224527_001_runtime.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_report.json",
+      "sha256": "89b2f633e896b5565593612867be934398bab5bded26ecb063f3129fe902268c",
+      "sizeBytes": 568,
+      "kind": "profiles",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_report.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_affinity.json",
+      "sha256": "d4d61611caf5c3ab3456d35fb69b4a26a47be2fd2fa35016ae54ac8b3c63100f",
+      "sizeBytes": 1053748,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_affinity.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_characters.json",
+      "sha256": "61bbad4d750c0f2c89799d6edc45b4a922c30eff764f03a3be391fb27bf3f4bc",
+      "sizeBytes": 1055830,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_characters.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_combat.json",
+      "sha256": "8d9a7584b3bdef4f49ebe4f74b55275dfbc31d8d3bf0a6f3709628f8de4b57dc",
+      "sizeBytes": 536188,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_combat.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_enemies.json",
+      "sha256": "3deffa2bb14ec057112875cf486c3d30b9742b66faa97148e02546605f6d7327",
+      "sizeBytes": 42718,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_enemies.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_enhance.json",
+      "sha256": "1fae1568e6b306b0ae75ee4f4f32bbab9dac32c15fff8cc4e1ddc424ba140855",
+      "sizeBytes": 25848,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_enhance.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_enums.json",
+      "sha256": "818acc5cf7e3be274ea8087235ec958b3081d210cf1faa49c0d8e4c5464d493f",
+      "sizeBytes": 350961,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_enums.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_health.json",
+      "sha256": "0de84d41bddaebf7c41703ef65d9b260c95b4371be6e314bb18ed1900e668597",
+      "sizeBytes": 1778963,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_health.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_items.json",
+      "sha256": "1793c8bc5ad35269d6511e563f9f89bb6c9b867386f06b94a907791eb599f8ce",
+      "sizeBytes": 485929,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_items.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_pawn_ai.json",
+      "sha256": "cd83d668ab41b068c6a45d5505aece98548e1c6ed0cfea70e8ed747c9128d0db",
+      "sizeBytes": 87789,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_pawn_ai.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_performance.json",
+      "sha256": "66546afacbd91fc7190a2d29d765c6a064217e560ef249890e326b77856b46c5",
+      "sizeBytes": 387451,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_performance.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_quests.json",
+      "sha256": "9979db33eec57c33ec2bbb406107765c7195eb8964bffeecc01dc50721633c23",
+      "sizeBytes": 102837,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_quests.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_shops.json",
+      "sha256": "c87cd868ac06830da947b979a19dd7fe80805ad4e90a642efa614435e33e084d",
+      "sizeBytes": 426699,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_shops.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_singletons.json",
+      "sha256": "9bfd46b20368d650ff5caa199ea2c211a02d8c94842f3ee3d161d86c5af80e8d",
+      "sizeBytes": 2575829,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_singletons.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_vocation.json",
+      "sha256": "b05bc294d213b637bed826d885676ca8d5d22d8ae15871357faf6a23105b2489",
+      "sizeBytes": 101729,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_vocation.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224542_002_types_warfarer.json",
+      "sha256": "c6e65f24979c2f70ccd8c677a0c3fc8ce1abc44b5b0af49183b5dcc89235de17",
+      "sizeBytes": 378997,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224542_002_types_warfarer.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224722_004_report.json",
+      "sha256": "e4813f25725299ccdd28d1e3db42c282dfb01750b31a6a437d39d676144f1598",
+      "sizeBytes": 565,
+      "kind": "profiles",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224722_004_report.json"
+    },
+    {
+      "file": "DD2Dumper_20261011_224722_004_types_equipment_deep.json",
+      "sha256": "ce760444ea779d7f23507606d8ebc57d5f75dbc8e9314e4fa4a0e7c51dc1c6cf",
+      "sizeBytes": 1012053,
+      "kind": "type-profile",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_20261011_224722_004_types_equipment_deep.json"
+    },
+    {
+      "file": "DD2Dumper_v52_detail_20261011_224626_003_d1_batch_0001.json",
+      "sha256": "3a1aa9da544f85e48b5b409c45e00395d2b0741f572deef219246b4aca09f322",
+      "sizeBytes": 1320473,
+      "kind": "item-detail-batch",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_v52_detail_20261011_224626_003_d1_batch_0001.json"
+    },
+    {
+      "file": "DD2Dumper_v52_detail_20261011_224626_003_d1_batch_0002.json",
+      "sha256": "f93aefa23c207fdaf3535d9f67eba63004e4c1cc40605d36312a16ea9a02c8ff",
+      "sizeBytes": 1281053,
+      "kind": "item-detail-batch",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_v52_detail_20261011_224626_003_d1_batch_0002.json"
+    },
+    {
+      "file": "DD2Dumper_v52_detail_20261011_224626_003_d1_batch_0003.json",
+      "sha256": "19017322e87712b66b511272a7259eec894bcfd7d13f25dd27831b51f0b87f30",
+      "sizeBytes": 243924,
+      "kind": "item-detail-batch",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_v52_detail_20261011_224626_003_d1_batch_0003.json"
+    },
+    {
+      "file": "DD2Dumper_v52_detail_progress.json",
+      "sha256": "9cf5d31d1248fe95b23ac0c72822007769bd8a53d356eae03f189b41412cea4f",
+      "sizeBytes": 23666,
+      "kind": "detailed-item-progress",
+      "tdbVersion": null,
+      "sourceZipEntry": "v5.2/DD2Dumper_v52_detail_progress.json"
+    }
+  ],
+  "note": "Raw bytes preserved; presence in repo is not validation of game mechanics."
+}

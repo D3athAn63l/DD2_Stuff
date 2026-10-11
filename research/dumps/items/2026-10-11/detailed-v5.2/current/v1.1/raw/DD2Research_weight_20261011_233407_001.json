@@ -1,0 +1,940 @@
+{
+  "categoryCounts": {
+    "armor": 35,
+    "other": 30,
+    "weapon": 35
+  },
+  "dictionary": "_ItemDataDict",
+  "dictionaryCount": 2152,
+  "dictionaryType": "System.Collections.Generic.Dictionary`2<System.Int32,app.ItemCommonParam>",
+  "enumerated": 664,
+  "environment": {
+    "capturedLocalTime": "2026-10-11 23:34:07 +0800",
+    "probeVersion": "1.1",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "errors": null,
+  "kind": "weight",
+  "recorded": 100,
+  "rows": [
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 600,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 1,
+      "getterWeightF": 0.009999999776482582,
+      "id": 534,
+      "itemType": "app.ItemDataParam",
+      "price": 500,
+      "rawWeight": 1
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 533,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 532,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 531,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 5,
+      "getterWeightF": 0.04999999701976776,
+      "id": 530,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 5
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 529,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 528,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 527,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 526,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 525,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 524,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 523,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 522,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 10,
+      "getterWeightF": 0.09999999403953552,
+      "id": 521,
+      "itemType": "app.ItemDataParam",
+      "price": 300,
+      "rawWeight": 10
+    },
+    {
+      "category": "other",
+      "getterWeight": 10,
+      "getterWeightF": 0.09999999403953552,
+      "id": 520,
+      "itemType": "app.ItemDataParam",
+      "price": 200,
+      "rawWeight": 10
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 519,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 518,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 517,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 516,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 515,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 514,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 513,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 5,
+      "getterWeightF": 0.04999999701976776,
+      "id": 512,
+      "itemType": "app.ItemDataParam",
+      "price": 10,
+      "rawWeight": 5
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 511,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 10,
+      "getterWeightF": 0.09999999403953552,
+      "id": 510,
+      "itemType": "app.ItemDataParam",
+      "price": 600,
+      "rawWeight": 10
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 509,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 508,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 507,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "other",
+      "getterWeight": 15,
+      "getterWeightF": 0.14999999105930328,
+      "id": 506,
+      "itemType": "app.ItemDataParam",
+      "price": 1000,
+      "rawWeight": 15
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 67,
+      "getterWeightF": 0.6699999570846558,
+      "id": 8200,
+      "itemType": "app.ItemWeaponParam",
+      "price": 810,
+      "rawWeight": 67
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 110,
+      "getterWeightF": 1.100000023841858,
+      "id": 8150,
+      "itemType": "app.ItemWeaponParam",
+      "price": 790,
+      "rawWeight": 110
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 87,
+      "getterWeightF": 0.8700000047683716,
+      "id": 8100,
+      "itemType": "app.ItemWeaponParam",
+      "price": 830,
+      "rawWeight": 87
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 147,
+      "getterWeightF": 1.46999990940094,
+      "id": 8050,
+      "itemType": "app.ItemWeaponParam",
+      "price": 530,
+      "rawWeight": 147
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 160,
+      "getterWeightF": 1.5999999046325684,
+      "id": 8000,
+      "itemType": "app.ItemWeaponParam",
+      "price": 850,
+      "rawWeight": 160
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 440,
+      "getterWeightF": 4.400000095367432,
+      "id": 2210,
+      "itemType": "app.ItemWeaponParam",
+      "price": 50000,
+      "rawWeight": 440
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 340,
+      "getterWeightF": 3.3999998569488525,
+      "id": 2209,
+      "itemType": "app.ItemWeaponParam",
+      "price": 40000,
+      "rawWeight": 340
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 320,
+      "getterWeightF": 3.1999998092651367,
+      "id": 2208,
+      "itemType": "app.ItemWeaponParam",
+      "price": 38000,
+      "rawWeight": 320
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 280,
+      "getterWeightF": 2.799999952316284,
+      "id": 2207,
+      "itemType": "app.ItemWeaponParam",
+      "price": 24900,
+      "rawWeight": 280
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 240,
+      "getterWeightF": 2.3999998569488525,
+      "id": 2206,
+      "itemType": "app.ItemWeaponParam",
+      "price": 17800,
+      "rawWeight": 240
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 208,
+      "getterWeightF": 2.0799999237060547,
+      "id": 2205,
+      "itemType": "app.ItemWeaponParam",
+      "price": 15000,
+      "rawWeight": 208
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 211,
+      "getterWeightF": 2.109999895095825,
+      "id": 2204,
+      "itemType": "app.ItemWeaponParam",
+      "price": 12500,
+      "rawWeight": 211
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 240,
+      "getterWeightF": 2.3999998569488525,
+      "id": 2203,
+      "itemType": "app.ItemWeaponParam",
+      "price": 8700,
+      "rawWeight": 240
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 120,
+      "getterWeightF": 1.1999999284744263,
+      "id": 2202,
+      "itemType": "app.ItemWeaponParam",
+      "price": 3800,
+      "rawWeight": 120
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 200,
+      "getterWeightF": 2.0,
+      "id": 2201,
+      "itemType": "app.ItemWeaponParam",
+      "price": 1600,
+      "rawWeight": 200
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 147,
+      "getterWeightF": 1.46999990940094,
+      "id": 2200,
+      "itemType": "app.ItemWeaponParam",
+      "price": 530,
+      "rawWeight": 147
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 253,
+      "getterWeightF": 2.5299999713897705,
+      "id": 2105,
+      "itemType": "app.ItemWeaponParam",
+      "price": 75000,
+      "rawWeight": 253
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 220,
+      "getterWeightF": 2.200000047683716,
+      "id": 2104,
+      "itemType": "app.ItemWeaponParam",
+      "price": 65000,
+      "rawWeight": 220
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 240,
+      "getterWeightF": 2.3999998569488525,
+      "id": 2103,
+      "itemType": "app.ItemWeaponParam",
+      "price": 50000,
+      "rawWeight": 240
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 160,
+      "getterWeightF": 1.5999999046325684,
+      "id": 2102,
+      "itemType": "app.ItemWeaponParam",
+      "price": 39000,
+      "rawWeight": 160
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 132,
+      "getterWeightF": 1.3199999332427979,
+      "id": 2101,
+      "itemType": "app.ItemWeaponParam",
+      "price": 26500,
+      "rawWeight": 132
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 107,
+      "getterWeightF": 1.0699999332427979,
+      "id": 2100,
+      "itemType": "app.ItemWeaponParam",
+      "price": 12250,
+      "rawWeight": 107
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 344,
+      "getterWeightF": 3.43999981880188,
+      "id": 2010,
+      "itemType": "app.ItemWeaponParam",
+      "price": 75000,
+      "rawWeight": 344
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 419,
+      "getterWeightF": 4.190000057220459,
+      "id": 2009,
+      "itemType": "app.ItemWeaponParam",
+      "price": 56000,
+      "rawWeight": 419
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 327,
+      "getterWeightF": 3.2699999809265137,
+      "id": 2007,
+      "itemType": "app.ItemWeaponParam",
+      "price": 68000,
+      "rawWeight": 327
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 270,
+      "getterWeightF": 2.700000047683716,
+      "id": 2006,
+      "itemType": "app.ItemWeaponParam",
+      "price": 25000,
+      "rawWeight": 270
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 330,
+      "getterWeightF": 3.299999952316284,
+      "id": 2005,
+      "itemType": "app.ItemWeaponParam",
+      "price": 32000,
+      "rawWeight": 330
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 267,
+      "getterWeightF": 2.669999837875366,
+      "id": 2004,
+      "itemType": "app.ItemWeaponParam",
+      "price": 45800,
+      "rawWeight": 267
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 220,
+      "getterWeightF": 2.200000047683716,
+      "id": 2003,
+      "itemType": "app.ItemWeaponParam",
+      "price": 15800,
+      "rawWeight": 220
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 236,
+      "getterWeightF": 2.359999895095825,
+      "id": 2002,
+      "itemType": "app.ItemWeaponParam",
+      "price": 22800,
+      "rawWeight": 236
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 187,
+      "getterWeightF": 1.8700000047683716,
+      "id": 2001,
+      "itemType": "app.ItemWeaponParam",
+      "price": 9900,
+      "rawWeight": 187
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 160,
+      "getterWeightF": 1.5999999046325684,
+      "id": 2000,
+      "itemType": "app.ItemWeaponParam",
+      "price": 2200,
+      "rawWeight": 160
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 120,
+      "getterWeightF": 1.1999999284744263,
+      "id": 1909,
+      "itemType": "app.ItemWeaponParam",
+      "price": 12800,
+      "rawWeight": 120
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 203,
+      "getterWeightF": 2.0299999713897705,
+      "id": 1908,
+      "itemType": "app.ItemWeaponParam",
+      "price": 75000,
+      "rawWeight": 203
+    },
+    {
+      "category": "weapon",
+      "getterWeight": 219,
+      "getterWeightF": 2.190000057220459,
+      "id": 1907,
+      "itemType": "app.ItemWeaponParam",
+      "price": 65000,
+      "rawWeight": 219
+    },
+    {
+      "category": "armor",
+      "getterWeight": 300,
+      "getterWeightF": 3.0,
+      "id": 10512,
+      "itemType": "app.ItemArmorParam",
+      "price": 48000,
+      "rawWeight": 300
+    },
+    {
+      "category": "armor",
+      "getterWeight": 659,
+      "getterWeightF": 6.589999675750732,
+      "id": 10409,
+      "itemType": "app.ItemArmorParam",
+      "price": 72000,
+      "rawWeight": 659
+    },
+    {
+      "category": "armor",
+      "getterWeight": 305,
+      "getterWeightF": 3.049999952316284,
+      "id": 10312,
+      "itemType": "app.ItemArmorParam",
+      "price": 30000,
+      "rawWeight": 305
+    },
+    {
+      "category": "armor",
+      "getterWeight": 10,
+      "getterWeightF": 0.09999999403953552,
+      "id": 7000,
+      "itemType": "app.ItemArmorParam",
+      "price": 280,
+      "rawWeight": 10
+    },
+    {
+      "category": "armor",
+      "getterWeight": 10,
+      "getterWeightF": 0.09999999403953552,
+      "id": 7001,
+      "itemType": "app.ItemArmorParam",
+      "price": 200,
+      "rawWeight": 10
+    },
+    {
+      "category": "armor",
+      "getterWeight": 1,
+      "getterWeightF": 0.009999999776482582,
+      "id": 8600,
+      "itemType": "app.ItemArmorParam",
+      "price": 5000,
+      "rawWeight": 1
+    },
+    {
+      "category": "armor",
+      "getterWeight": 104,
+      "getterWeightF": 1.0399999618530273,
+      "id": 6124,
+      "itemType": "app.ItemArmorParam",
+      "price": 150000,
+      "rawWeight": 104
+    },
+    {
+      "category": "armor",
+      "getterWeight": 156,
+      "getterWeightF": 1.559999942779541,
+      "id": 6123,
+      "itemType": "app.ItemArmorParam",
+      "price": 12500,
+      "rawWeight": 156
+    },
+    {
+      "category": "armor",
+      "getterWeight": 220,
+      "getterWeightF": 2.200000047683716,
+      "id": 6122,
+      "itemType": "app.ItemArmorParam",
+      "price": 15900,
+      "rawWeight": 220
+    },
+    {
+      "category": "armor",
+      "getterWeight": 0,
+      "getterWeightF": 0.0,
+      "id": 6121,
+      "itemType": "app.ItemArmorParam",
+      "price": 2900,
+      "rawWeight": 0
+    },
+    {
+      "category": "armor",
+      "getterWeight": 0,
+      "getterWeightF": 0.0,
+      "id": 6120,
+      "itemType": "app.ItemArmorParam",
+      "price": 2900,
+      "rawWeight": 0
+    },
+    {
+      "category": "armor",
+      "getterWeight": 101,
+      "getterWeightF": 1.0099999904632568,
+      "id": 6119,
+      "itemType": "app.ItemArmorParam",
+      "price": 7590,
+      "rawWeight": 101
+    },
+    {
+      "category": "armor",
+      "getterWeight": 108,
+      "getterWeightF": 1.0799999237060547,
+      "id": 6118,
+      "itemType": "app.ItemArmorParam",
+      "price": 200,
+      "rawWeight": 108
+    },
+    {
+      "category": "armor",
+      "getterWeight": 105,
+      "getterWeightF": 1.0499999523162842,
+      "id": 6117,
+      "itemType": "app.ItemArmorParam",
+      "price": 1480,
+      "rawWeight": 105
+    },
+    {
+      "category": "armor",
+      "getterWeight": 167,
+      "getterWeightF": 1.6699999570846558,
+      "id": 6116,
+      "itemType": "app.ItemArmorParam",
+      "price": 9800,
+      "rawWeight": 167
+    },
+    {
+      "category": "armor",
+      "getterWeight": 286,
+      "getterWeightF": 2.859999895095825,
+      "id": 6115,
+      "itemType": "app.ItemArmorParam",
+      "price": 37500,
+      "rawWeight": 286
+    },
+    {
+      "category": "armor",
+      "getterWeight": 277,
+      "getterWeightF": 2.7699999809265137,
+      "id": 6114,
+      "itemType": "app.ItemArmorParam",
+      "price": 32000,
+      "rawWeight": 277
+    },
+    {
+      "category": "armor",
+      "getterWeight": 202,
+      "getterWeightF": 2.0199999809265137,
+      "id": 6113,
+      "itemType": "app.ItemArmorParam",
+      "price": 29710,
+      "rawWeight": 202
+    },
+    {
+      "category": "armor",
+      "getterWeight": 138,
+      "getterWeightF": 1.3799999952316284,
+      "id": 6104,
+      "itemType": "app.ItemArmorParam",
+      "price": 2300,
+      "rawWeight": 138
+    },
+    {
+      "category": "armor",
+      "getterWeight": 266,
+      "getterWeightF": 2.6599998474121094,
+      "id": 6103,
+      "itemType": "app.ItemArmorParam",
+      "price": 44900,
+      "rawWeight": 266
+    },
+    {
+      "category": "armor",
+      "getterWeight": 253,
+      "getterWeightF": 2.5299999713897705,
+      "id": 6102,
+      "itemType": "app.ItemArmorParam",
+      "price": 15600,
+      "rawWeight": 253
+    },
+    {
+      "category": "armor",
+      "getterWeight": 221,
+      "getterWeightF": 2.2100000381469727,
+      "id": 6097,
+      "itemType": "app.ItemArmorParam",
+      "price": 9200,
+      "rawWeight": 221
+    },
+    {
+      "category": "armor",
+      "getterWeight": 194,
+      "getterWeightF": 1.9399999380111694,
+      "id": 6096,
+      "itemType": "app.ItemArmorParam",
+      "price": 56700,
+      "rawWeight": 194
+    },
+    {
+      "category": "armor",
+      "getterWeight": 181,
+      "getterWeightF": 1.809999942779541,
+      "id": 6095,
+      "itemType": "app.ItemArmorParam",
+      "price": 7200,
+      "rawWeight": 181
+    },
+    {
+      "category": "armor",
+      "getterWeight": 130,
+      "getterWeightF": 1.2999999523162842,
+      "id": 6092,
+      "itemType": "app.ItemArmorParam",
+      "price": 7600,
+      "rawWeight": 130
+    },
+    {
+      "category": "armor",
+      "getterWeight": 82,
+      "getterWeightF": 0.8199999928474426,
+      "id": 6091,
+      "itemType": "app.ItemArmorParam",
+      "price": 3300,
+      "rawWeight": 82
+    },
+    {
+      "category": "armor",
+      "getterWeight": 163,
+      "getterWeightF": 1.6299999952316284,
+      "id": 6090,
+      "itemType": "app.ItemArmorParam",
+      "price": 4500,
+      "rawWeight": 163
+    },
+    {
+      "category": "armor",
+      "getterWeight": 122,
+      "getterWeightF": 1.2200000286102295,
+      "id": 6088,
+      "itemType": "app.ItemArmorParam",
+      "price": 220,
+      "rawWeight": 122
+    },
+    {
+      "category": "armor",
+      "getterWeight": 243,
+      "getterWeightF": 2.429999828338623,
+      "id": 6087,
+      "itemType": "app.ItemArmorParam",
+      "price": 56700,
+      "rawWeight": 243
+    },
+    {
+      "category": "armor",
+      "getterWeight": 216,
+      "getterWeightF": 2.1599998474121094,
+      "id": 6085,
+      "itemType": "app.ItemArmorParam",
+      "price": 25200,
+      "rawWeight": 216
+    },
+    {
+      "category": "armor",
+      "getterWeight": 188,
+      "getterWeightF": 1.8799999952316284,
+      "id": 6081,
+      "itemType": "app.ItemArmorParam",
+      "price": 7900,
+      "rawWeight": 188
+    },
+    {
+      "category": "armor",
+      "getterWeight": 220,
+      "getterWeightF": 2.200000047683716,
+      "id": 6078,
+      "itemType": "app.ItemArmorParam",
+      "price": 14800,
+      "rawWeight": 220
+    },
+    {
+      "category": "armor",
+      "getterWeight": 150,
+      "getterWeightF": 1.5,
+      "id": 6075,
+      "itemType": "app.ItemArmorParam",
+      "price": 1240,
+      "rawWeight": 150
+    },
+    {
+      "category": "armor",
+      "getterWeight": 120,
+      "getterWeightF": 1.1999999284744263,
+      "id": 6074,
+      "itemType": "app.ItemArmorParam",
+      "price": 415,
+      "rawWeight": 120
+    },
+    {
+      "category": "armor",
+      "getterWeight": 122,
+      "getterWeightF": 1.2200000286102295,
+      "id": 6073,
+      "itemType": "app.ItemArmorParam",
+      "price": 26600,
+      "rawWeight": 122
+    }
+  ],
+  "source": "live app.ItemManager",
+  "started": {
+    "capturedLocalTime": "2026-10-11 23:34:05 +0800",
+    "probeVersion": "1.1",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "stopReason": "quota-reached"
+}

@@ -1,0 +1,1278 @@
+{
+  "captured": {
+    "capturedLocalTime": "2026-10-11 22:45:43 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.2-experimental",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "group": "enemies",
+  "kind": "type-profile",
+  "rows": [
+    {
+      "exists": true,
+      "fieldCount": 49,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "<Ch258002SuperBreathAvoidPositions>k__BackingField",
+          "type": "via.Position[]"
+        },
+        {
+          "isStatic": false,
+          "name": "<EvadePositionHolder>k__BackingField",
+          "type": "app.EvadePositionHolder"
+        },
+        {
+          "isStatic": false,
+          "name": "<_IsUnregisterCh258002SuperBreathAvoidPosition>k__BackingField",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "<app.IGameSaveData.GameSaveDataHash>k__BackingField",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "<app.IGameSaveData.GameSaveDataVersion>k__BackingField",
+          "type": "System.UInt32"
+        },
+        {
+          "isStatic": false,
+          "name": "<reserveCh258002SuperBreathAvoidPositions>k__BackingField",
+          "type": "via.Position[]"
+        },
+        {
+          "isStatic": false,
+          "name": "BattleRangeTime",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": true,
+          "name": "EatShareMaxCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "ExclusiveOccupationLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxLargeObstacle",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "OccupationInfos",
+          "type": "System.Collections.Generic.List`1<app.EnemyManager.ExclusiveOccupationInfo>"
+        },
+        {
+          "isStatic": false,
+          "name": "RequestList",
+          "type": "System.Collections.Generic.List`1<app.Character>"
+        },
+        {
+          "isStatic": false,
+          "name": "StatusChangeActionTypeList",
+          "type": "System.Collections.Generic.List`1<app.EnemyManager.StatusChangeActionTypeInfo>"
+        },
+        {
+          "isStatic": false,
+          "name": "StatusChangeConditionTypeList",
+          "type": "System.Collections.Generic.List`1<app.EnemyManager.StatusChangeConditionTypeInfo>"
+        },
+        {
+          "isStatic": false,
+          "name": "_BattleMessageRegistDataList",
+          "type": "System.Collections.Generic.List`1<app.EnemyManager.BattleMessageRegistData>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch225002TargetingHashSet",
+          "type": "System.Collections.Generic.HashSet`1<via.GameObject>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch225002TargetingList",
+          "type": "System.Collections.Generic.List`1<via.GameObject>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch225002TargetingListMutex",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch227003Progress",
+          "type": "System.Byte"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch230004CooperationManager",
+          "type": "app.Ch230004CooperationManager"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch230004Manager",
+          "type": "app.Ch230004Manager"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch251002StealItemList",
+          "type": "System.Collections.Generic.List`1<app.EnemyManager.GameSaveData.Ch251002StealItem>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch251002StealItemList_Mutex",
+          "type": "app.MutexObject"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch251Data",
+          "type": "app.EnemyManager.GameSaveData.Ch251Data"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch251LockObj",
+          "type": "app.MutexObject"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch251UsableHeadNo",
+          "type": "System.Collections.Generic.List`1<System.Int32>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch251UsingHeadNo",
+          "type": "System.Collections.Generic.List`1<System.Int32>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch258002InstantData",
+          "type": "app.Ch258002.ManagerData"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ch259InstantData",
+          "type": "app.Ch259000.Ch259InstantData"
+        },
+        {
+          "isStatic": false,
+          "name": "_CurrentHateReactionMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_DeadCountManager",
+          "type": "app.EnemyDeadCountManager"
+        },
+        {
+          "isStatic": false,
+          "name": "_DropPartsControllerManager",
+          "type": "app.DropPartsControllerManager"
+        },
+        {
+          "isStatic": false,
+          "name": "_EnemyHardModeParam",
+          "type": "app.EnemyHardModeParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "_EnemyList",
+          "type": "System.Collections.Generic.List`1<app.Ch200000>"
+        },
+        {
+          "isStatic": false,
+          "name": "_EnemyListReadWriteLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_EnemyTable",
+          "type": "System.Collections.Generic.Dictionary`2<app.CharacterID,System.Collections.Generic.List`1<app.Ch200000>>"
+        },
+        {
+          "isStatic": false,
+          "name": "_GroundPositionManager",
+          "type": "app.GroundPositionManager"
+        },
+        {
+          "isStatic": false,
+          "name": "_GroupBattleInfoList",
+          "type": "System.Collections.Generic.List`1<app.EnemyManager.BattleGroupInfo>"
+        },
+        {
+          "isStatic": false,
+          "name": "_GroupBattleInfoListIDDict",
+          "type": "System.Collections.Generic.Dictionary`2<app.GeneratorID,app.EnemyManager.BattleGroupInfo>"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateReactionLockObj",
+          "type": "app.MutexObject"
+        },
+        {
+          "isStatic": true,
+          "name": "_HateReactionMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateReactionTable",
+          "type": "System.Collections.Generic.Dictionary`2<app.Ch200000,System.Single>"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateReactionTimer",
+          "type": "app.Timer"
+        },
+        {
+          "isStatic": false,
+          "name": "_HideGrassPositionManager",
+          "type": "app.HideGrassPositionManager"
+        },
+        {
+          "isStatic": false,
+          "name": "_LargeObstacleController",
+          "type": "app.LargeObstacleController"
+        },
+        {
+          "isStatic": true,
+          "name": "_MAX_EXIST_ENEMY",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "_ReactionRandMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_ThrowObjectMediator",
+          "type": "app.ThrowObjectMediator"
+        },
+        {
+          "isStatic": false,
+          "name": "_WaypointGenerator",
+          "type": "app.EnemyWaypointGenerator"
+        }
+      ],
+      "methodCount": 95,
+      "methods": [
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": true,
+          "name": ".cctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".cctor()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "addCh251LickRecord",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "app.Character",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "addCh251LickRecord(app.Character, app.Character, System.Int32)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "addWaypointData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.EnemyWaypointGenerator.EnemyWaypointGeneratorUserData"
+          ],
+          "returnType": "System.Void",
+          "signature": "addWaypointData(app.EnemyWaypointGenerator.EnemyWaypointGeneratorUserData)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "app.IGameSaveData.convertGameSaveData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.SaveDataBase"
+          ],
+          "returnType": "app.SaveDataBase",
+          "signature": "app.IGameSaveData.convertGameSaveData(app.SaveDataBase)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "app.IGameSaveData.get_GameSaveDataHash",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "app.IGameSaveData.get_GameSaveDataHash()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "app.IGameSaveData.get_GameSaveDataVersion",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.UInt32",
+          "signature": "app.IGameSaveData.get_GameSaveDataVersion()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "app.IGameSaveData.loadGameSaveData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.SaveDataBase"
+          ],
+          "returnType": "System.Void",
+          "signature": "app.IGameSaveData.loadGameSaveData(app.SaveDataBase)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "app.IGameSaveData.saveGameSaveData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.SaveDataBase",
+          "signature": "app.IGameSaveData.saveGameSaveData()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "checkOccupation",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "via.GameObject",
+            "app.EnemyManager.OccupationTypeEnum"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "checkOccupation(app.Character, via.GameObject, app.EnemyManager.OccupationTypeEnum)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "clearCh251LickRecord",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "clearCh251LickRecord(app.Character)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "clearCh251LickRecordAll",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "clearCh251LickRecordAll()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "createLargeObstacle",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "via.Position",
+            "via.Quaternion",
+            "via.vec3",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "createLargeObstacle(via.Position, via.Quaternion, via.vec3, System.Single)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "createStatusChangeTypeList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "createStatusChangeTypeList()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "existEnemy",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "existEnemy(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "existOccupation",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.EnemyManager.OccupationTypeEnum"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "existOccupation(via.GameObject, app.EnemyManager.OccupationTypeEnum)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "existsCh225002TargetingList",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "existsCh225002TargetingList(via.GameObject)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "findEnemies",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Predicate`1<app.Ch200000>"
+          ],
+          "returnType": "app.Ch200000[]",
+          "signature": "findEnemies(System.Predicate`1<app.Ch200000>)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "findEnemies",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID"
+          ],
+          "returnType": "app.Ch200000[]",
+          "signature": "findEnemies(app.CharacterID)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "findEnemies",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.CharacterID[]"
+          ],
+          "returnType": "app.Ch200000[]",
+          "signature": "findEnemies(app.CharacterID[])"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getAllEnemies",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Ch200000[]",
+          "signature": "getAllEnemies()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getAndUnregisterCh251002StealItem",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.UniqueID"
+          ],
+          "returnType": "app.GimmickItemData[]",
+          "signature": "getAndUnregisterCh251002StealItem(app.UniqueID)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getBattleGroupInfo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "app.EnemyManager.BattleGroupInfo",
+          "signature": "getBattleGroupInfo(app.Character)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getBattleGroupInfo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.GeneratorID"
+          ],
+          "returnType": "app.EnemyManager.BattleGroupInfo",
+          "signature": "getBattleGroupInfo(app.GeneratorID)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getCh227003Progress",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Byte",
+          "signature": "getCh227003Progress()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getCh251LickRecord",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.UniqueID",
+          "signature": "getCh251LickRecord()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getCh251TargetLickRecord",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "app.UniqueID",
+          "signature": "getCh251TargetLickRecord(app.Character)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getStatusChangeActionClassName",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.StatusChangeDef.StatusChangeActionCategory"
+          ],
+          "returnType": "System.String",
+          "signature": "getStatusChangeActionClassName(app.StatusChangeDef.StatusChangeActionCategory)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "getStatusChangeConditionClassName",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.StatusChangeDef.StatusChangeConditionCategory"
+          ],
+          "returnType": "System.String",
+          "signature": "getStatusChangeConditionClassName(app.StatusChangeDef.StatusChangeConditionCategory)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_Ch230004CooperationManager",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Ch230004CooperationManager",
+          "signature": "get_Ch230004CooperationManager()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_Ch230004Manager",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Ch230004Manager",
+          "signature": "get_Ch230004Manager()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_Ch258002InstantData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Ch258002.ManagerData",
+          "signature": "get_Ch258002InstantData()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_Ch258002SuperBreathAvoidPositions",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "via.Position[]",
+          "signature": "get_Ch258002SuperBreathAvoidPositions()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_Ch259InstantData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Ch259000.Ch259InstantData",
+          "signature": "get_Ch259InstantData()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_DeadCountManager",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.EnemyDeadCountManager",
+          "signature": "get_DeadCountManager()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_DropPartsControllerManager",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.DropPartsControllerManager",
+          "signature": "get_DropPartsControllerManager()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_EnemyHardModeParam",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.EnemyHardModeParameter",
+          "signature": "get_EnemyHardModeParam()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_EvadePositionHolder",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.EvadePositionHolder",
+          "signature": "get_EvadePositionHolder()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_GroundPositionManager",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.GroundPositionManager",
+          "signature": "get_GroundPositionManager()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_HideGrassPositionManager",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HideGrassPositionManager",
+          "signature": "get_HideGrassPositionManager()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_ThrowObjectMediator",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.ThrowObjectMediator",
+          "signature": "get_ThrowObjectMediator()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_WaypointGenerator",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.EnemyWaypointGenerator",
+          "signature": "get_WaypointGenerator()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get__IsUnregisterCh258002SuperBreathAvoidPosition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get__IsUnregisterCh258002SuperBreathAvoidPosition()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "get_reserveCh258002SuperBreathAvoidPositions",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "via.Position[]",
+          "signature": "get_reserveCh258002SuperBreathAvoidPositions()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "init",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "init()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "initCh225002TargetingList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "initCh225002TargetingList()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "initCh258002SuperBreathAvoidPosition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "initCh258002SuperBreathAvoidPosition()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "initHateReaction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "initHateReaction()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "isExclusive",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.EnemyManager.OccupationTypeEnum",
+            "via.GameObject"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isExclusive(app.EnemyManager.OccupationTypeEnum, via.GameObject)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "isExistch258000_30",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isExistch258000_30()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "isHateReactionTimerFinish",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isHateReactionTimerFinish()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "isInPartyCh251LickRecord",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isInPartyCh251LickRecord()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onCampSleepEvent",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onCampSleepEvent()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onCh251002Dead",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.UniqueID",
+            "via.Position"
+          ],
+          "returnType": "System.Void",
+          "signature": "onCh251002Dead(app.UniqueID, via.Position)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onCh251002DestroyOrWeathering",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.UniqueID",
+            "System.Nullable`1<via.Position>"
+          ],
+          "returnType": "System.Void",
+          "signature": "onCh251002DestroyOrWeathering(app.UniqueID, System.Nullable`1<via.Position>)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onChangeMainFlowPhase",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.MainFlowManager.Phase"
+          ],
+          "returnType": "System.Void",
+          "signature": "onChangeMainFlowPhase(app.MainFlowManager.Phase)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onChangeWorldMode",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "onChangeWorldMode(System.Boolean)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onDestroy",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onDestroy()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onLoadCh251002StealItemData",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onLoadCh251002StealItemData()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onStart",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onStart()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "onUpdate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onUpdate()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "progBattleMessage",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "progBattleMessage()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "progBattleMessageGroupCaution",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.EnemyManager.BattleMessageRegistData"
+          ],
+          "returnType": "System.Void",
+          "signature": "progBattleMessageGroupCaution(app.EnemyManager.BattleMessageRegistData)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "progClearHateTarget",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.EnemyManager.BattleMessageRegistData"
+          ],
+          "returnType": "System.Void",
+          "signature": "progClearHateTarget(app.EnemyManager.BattleMessageRegistData)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registBattleGroup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "registBattleGroup(app.Character)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registBattleMessage",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.EnemyManager.BattleMessageRegistData"
+          ],
+          "returnType": "System.Void",
+          "signature": "registBattleMessage(app.EnemyManager.BattleMessageRegistData)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registExclusiveOccupation",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "via.GameObject",
+            "app.EnemyManager.OccupationTypeEnum"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "registExclusiveOccupation(app.Character, via.GameObject, app.EnemyManager.OccupationTypeEnum)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registHateReaction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Ch200000",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "registHateReaction(app.Ch200000, System.Single)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registerCh251002Nest",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.UniqueID",
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerCh251002Nest(app.UniqueID, System.Int32)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registerCh251002StealItem",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.UniqueID",
+            "app.GimmickItemData[]"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerCh251002StealItem(app.UniqueID, app.GimmickItemData[])"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registerCh258002SuperBreathAvoidPosition",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.Position[]"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerCh258002SuperBreathAvoidPosition(via.Position[])"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "registerEnemy",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Ch200000"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerEnemy(app.Ch200000)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "releaseCh251HeadNo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Void",
+          "signature": "releaseCh251HeadNo(System.Int32)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "releaseExclusiveOccupation",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "via.GameObject",
+            "app.EnemyManager.OccupationTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "releaseExclusiveOccupation(app.Character, via.GameObject, app.EnemyManager.OccupationTypeEnum)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "removeCh225002TargetingList",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Void",
+          "signature": "removeCh225002TargetingList(via.GameObject)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "removeEnemy",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Ch200000"
+          ],
+          "returnType": "System.Void",
+          "signature": "removeEnemy(app.Ch200000)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "removeHateReaction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Ch200000"
+          ],
+          "returnType": "System.Void",
+          "signature": "removeHateReaction(app.Ch200000)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "requestCh259000ForceCombat",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestCh259000ForceCombat()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "selectCh251HeadNo",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.Collections.Generic.List`1<System.Int32>",
+            "System.Boolean"
+          ],
+          "returnType": "System.Int32",
+          "signature": "selectCh251HeadNo(System.Collections.Generic.List`1<System.Int32>, System.Boolean)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "setCh227003Progress",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Byte"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCh227003Progress(System.Byte)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "setLargeObstaclePrefab",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.Prefab"
+          ],
+          "returnType": "System.Void",
+          "signature": "setLargeObstaclePrefab(via.Prefab)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "set_Ch258002SuperBreathAvoidPositions",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.Position[]"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_Ch258002SuperBreathAvoidPositions(via.Position[])"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "set_EvadePositionHolder",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.EvadePositionHolder"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_EvadePositionHolder(app.EvadePositionHolder)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "set__IsUnregisterCh258002SuperBreathAvoidPosition",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set__IsUnregisterCh258002SuperBreathAvoidPosition(System.Boolean)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "set_reserveCh258002SuperBreathAvoidPositions",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.Position[]"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_reserveCh258002SuperBreathAvoidPositions(via.Position[])"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "setup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.EnemyManager.Parameter"
+          ],
+          "returnType": "System.Void",
+          "signature": "setup(app.EnemyManager.Parameter)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "setupBattleRelationship",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "setupBattleRelationship()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "tryAddCh225002TargetingList",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "tryAddCh225002TargetingList(via.GameObject)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "unregisterCh251002StealItem",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.UniqueID"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterCh251002StealItem(app.UniqueID)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "unregisterCh258002SuperBreathAvoidPosition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "unregisterCh258002SuperBreathAvoidPosition()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "updateBattleGroupInfo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "updateBattleGroupInfo(System.Single)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "updateCh258002SuperBreathAvoidPosition",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateCh258002SuperBreathAvoidPosition()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "updateExclusiveOccupation",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateExclusiveOccupation()"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "updateHateReaction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "updateHateReaction(System.Single)"
+        },
+        {
+          "declaringType": "app.EnemyManager",
+          "isStatic": false,
+          "name": "useCh251HeadNo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Int32",
+          "signature": "useCh251HeadNo(app.Character)"
+        }
+      ],
+      "name": "app.EnemyManager",
+      "parent": "app.AppSingleton`1<app.EnemyManager>"
+    },
+    {
+      "exists": false,
+      "name": "app.Enemy",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.EnemyCharacter",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.EnemyData",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.HumanEnemyBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.EnemyBrain",
+      "reason": "type not exposed by this TDB"
+    }
+  ],
+  "title": "Enemies"
+}

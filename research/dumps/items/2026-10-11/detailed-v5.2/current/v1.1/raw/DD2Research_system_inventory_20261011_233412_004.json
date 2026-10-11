@@ -1,0 +1,74 @@
+{
+  "caveat": "Presence, runtime type and size only. Not the data contents and not evidence of valid EX/passive rolls.",
+  "environment": {
+    "capturedLocalTime": "2026-10-11 23:34:12 +0800",
+    "probeVersion": "1.1",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "kind": "equipment-system-inventory",
+  "sources": {
+    "AllAppraisalItemSet": {
+      "available": true,
+      "count": 69,
+      "runtimeType": "System.Collections.Generic.HashSet`1<app.ItemIDEnum>"
+    },
+    "AppraisalItemDropWeight": {
+      "available": true,
+      "runtimeType": "app.AppraisalItemDropWeightManager"
+    },
+    "AppraisalItemInfo": {
+      "available": true,
+      "runtimeType": "app.AppraisalItemInfoManager"
+    },
+    "ArmorSpecialEfficacyParam": {
+      "available": true,
+      "count": 3,
+      "runtimeType": "app.ArmorSpecialEfficacyParameter[]"
+    },
+    "EquipAppraisalItemSet": {
+      "available": true,
+      "count": 67,
+      "runtimeType": "System.Collections.Generic.HashSet`1<app.ItemIDEnum>"
+    },
+    "EquipmentAbilityData": {
+      "abilityNum": 176,
+      "available": true,
+      "runtimeType": "app.EquipmentAbilityData",
+      "settings": {
+        "available": true,
+        "count": 97,
+        "runtimeType": "app.EquipmentAbilityData.Setting[]"
+      }
+    },
+    "ExItemParams": {
+      "available": true,
+      "runtimeType": "app.ExItemParameters"
+    },
+    "WeaponSpecialEfficacyParam": {
+      "available": true,
+      "count": 12,
+      "runtimeType": "app.WeaponSpecialEfficacyParameter[]"
+    },
+    "WeightDict": {
+      "available": true,
+      "count": 3,
+      "runtimeType": "System.Collections.Generic.Dictionary`2<System.UInt32,System.Int32>"
+    },
+    "_ArmorEnhanceDict": {
+      "available": true,
+      "count": 288,
+      "runtimeType": "System.Collections.Generic.Dictionary`2<System.Int32,app.ArmorEnhanceParam[]>"
+    },
+    "_WeaponEnhanceDict": {
+      "available": true,
+      "count": 180,
+      "runtimeType": "System.Collections.Generic.Dictionary`2<System.Int32,app.WeaponEnhanceParam[]>"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "captured": {
+    "capturedLocalTime": "2026-10-11 22:47:22 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.2-experimental",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "count": 27,
+  "errors": null,
+  "filesWritten": 1,
+  "found": 27,
+  "id": "20261011_224722_004",
+  "kind": "profiles",
+  "started": "2026-10-11 22:47:22 +0800"
+}

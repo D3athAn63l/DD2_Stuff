@@ -1,0 +1,2630 @@
+{
+  "captured": {
+    "capturedLocalTime": "2026-10-11 22:45:44 +0800",
+    "gameBuild": "UNVERIFIED: capture Steam build ID separately",
+    "probeVersion": "5.2-experimental",
+    "reframework": {
+      "buildDate": "11.10.2026",
+      "buildTime": "01:52",
+      "commitHash": "d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee",
+      "gameName": "dd2"
+    },
+    "tdbVersion": 83
+  },
+  "group": "pawn_ai",
+  "kind": "type-profile",
+  "rows": [
+    {
+      "exists": false,
+      "name": "app.PawnBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.HumanEnemyBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.HumanBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.CharacterBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.AIBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.EnemyBrain",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": true,
+      "fieldCount": 9,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "AttackedWithAllStrength",
+          "type": "System.Collections.Generic.List`1<app.HumanActionSelector.FinishingMoveInfo>"
+        },
+        {
+          "isStatic": false,
+          "name": "CurrentSelector",
+          "type": "app.HumanActionSelectorImpl"
+        },
+        {
+          "isStatic": false,
+          "name": "Invalid",
+          "type": "app.HumanActionSelectorImpl"
+        },
+        {
+          "isStatic": false,
+          "name": "IsEnabled",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "IsNextComboActionValid",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": true,
+          "name": "LivUpperBodyActionHashes",
+          "type": "System.Collections.Generic.HashSet`1<System.UInt32>"
+        },
+        {
+          "isStatic": false,
+          "name": "NextComboActionInternal",
+          "type": "System.String"
+        },
+        {
+          "isStatic": false,
+          "name": "Param",
+          "type": "app.HumanActionSelectorParameter"
+        },
+        {
+          "isStatic": false,
+          "name": "Selectors",
+          "type": "System.Collections.Generic.List`1<app.HumanActionSelectorImpl>"
+        }
+      ],
+      "methodCount": 84,
+      "methods": [
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": true,
+          "name": ".cctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".cctor()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "<updateFinishingMove>b__94_0",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanActionSelector.FinishingMoveInfo"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "<updateFinishingMove>b__94_0(app.HumanActionSelector.FinishingMoveInfo)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "addCommonSelectors",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "addCommonSelectors()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "addJobSelector",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "addJobSelector(app.Character)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "addNormalJobSelectors",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "addNormalJobSelectors()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "addPartyCommonSelectors",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "addPartyCommonSelectors()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "addPlayerSelectors",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "addPlayerSelectors()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "calcAbsDiffAngleDegBetweenTargetMoveAndCurrent",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Single",
+          "signature": "calcAbsDiffAngleDegBetweenTargetMoveAndCurrent()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "cancelUpperBodyAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "cancelUpperBodyAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": true,
+          "name": "convertMoveTypeToSpeedType",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanActionSelector.MoveType"
+          ],
+          "returnType": "app.LocomotionSpeedTypeEnum",
+          "signature": "convertMoveTypeToSpeedType(app.HumanActionSelector.MoveType)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": true,
+          "name": "gatherUpperBodyActionHashes",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "gatherUpperBodyActionHashes()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getCustomSkillAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanCustomSkillID",
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.String",
+          "signature": "getCustomSkillAction(app.HumanCustomSkillID, app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getIdleAction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.String",
+          "signature": "getIdleAction(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getJumpAction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.String",
+          "signature": "getJumpAction(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getMoveAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum",
+            "System.Boolean"
+          ],
+          "returnType": "System.String",
+          "signature": "getMoveAction(app.LocomotionSpeedTypeEnum, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getMoveActionOnPreventFall",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.String",
+          "signature": "getMoveActionOnPreventFall()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getNormalAttackAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanActionSelector.MoveType",
+            "System.UInt32"
+          ],
+          "returnType": "System.String",
+          "signature": "getNormalAttackAction(app.HumanActionSelector.MoveType, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getSubNormalAttackAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanActionSelector.MoveType",
+            "System.UInt32"
+          ],
+          "returnType": "System.String",
+          "signature": "getSubNormalAttackAction(app.HumanActionSelector.MoveType, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getUpperBodyDefaultAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.String",
+          "signature": "getUpperBodyDefaultAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "getUpperBodyDefaultActionHash",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Nullable`1<System.UInt32>",
+          "signature": "getUpperBodyDefaultActionHash()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "get_HasAimMode",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_HasAimMode()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "get_NextComboAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.String",
+          "signature": "get_NextComboAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "get_SelectorFor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Character.JobEnum",
+          "signature": "get_SelectorFor()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "hasHighPriorityUpperBodyDefaultAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "hasHighPriorityUpperBodyDefaultAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isContinueStopInFrontOfWall",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isContinueStopInFrontOfWall()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableChangeAimMode",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableChangeAimMode()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableDash",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableDash()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableFinishingMove",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isEnableFinishingMove(app.Character)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableJob10GrabingCustomSkill",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableJob10GrabingCustomSkill()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": true,
+          "name": "isEnableLivOrRolActionWithoutDrawWeapon",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character",
+            "app.Human"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isEnableLivOrRolActionWithoutDrawWeapon(app.Character, app.Human)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": true,
+          "name": "isEnableLivOrRolUpperBodyActionWithoutDrawWeapon",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "app.Human",
+            "System.Boolean"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isEnableLivOrRolUpperBodyActionWithoutDrawWeapon(app.Character, app.Human, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableLocomotionOnAir",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableLocomotionOnAir()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableRequestIdle",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableRequestIdle()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableStepBack",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableStepBack()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isEnableUseLanternItem",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEnableUseLanternItem()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isIgnoreRestrictedAggressive",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isIgnoreRestrictedAggressive()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": true,
+          "name": "isLivUpperBodyAction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.UInt32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isLivUpperBodyAction(System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isRequestFullBodyCancelActionOnJob10CustomSkill",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isRequestFullBodyCancelActionOnJob10CustomSkill()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isRestricted",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanRuleMonitor.RestrictFlag"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isRestricted(app.HumanRuleMonitor.RestrictFlag)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isStopInFrontOfWallAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isStopInFrontOfWallAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isStopMove",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isStopMove()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "isUseStrafeJump",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isUseStrafeJump()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "notifyFinishingMove",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "System.Single",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "notifyFinishingMove(app.Character, System.Single, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.String",
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestAction(System.String, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestActionForInteractAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.String",
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestActionForInteractAction(System.String, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestActionForItemAction",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.String",
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestActionForItemAction(System.String, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestActionSheatheWeapon",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.String",
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestActionSheatheWeapon(System.String, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestAimAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestAimAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestComboAction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestComboAction(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestCustomSkill",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanCustomSkillID",
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestCustomSkill(app.HumanCustomSkillID, app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestDamageRagdollFallWithLimitedSpeedAfterClimb",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestDamageRagdollFallWithLimitedSpeedAfterClimb()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestDrawWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestDrawWeapon()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestEndAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestEndAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestEndUpperBodyLivOrRolOnRun",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestEndUpperBodyLivOrRolOnRun(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestFullBodyActionJob10CustomSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character.JobEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestFullBodyActionJob10CustomSkill(app.Character.JobEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestIdleImpl",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestIdleImpl(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestJob10CustomSkill",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestJob10CustomSkill()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestJump",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestJump(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestJump",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum",
+            "via.vec3"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestJump(app.LocomotionSpeedTypeEnum, via.vec3)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestJumpCommon",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestJumpCommon(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestLanding",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestLanding(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestLocomotionImpl",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestLocomotionImpl(app.LocomotionSpeedTypeEnum, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestNormalAttack",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanActionSelector.MoveType"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestNormalAttack(app.HumanActionSelector.MoveType)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestNormalAttack",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestNormalAttack(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestNormalGreetingTo",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestNormalGreetingTo(via.GameObject)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestNormalIdleImpl",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestNormalIdleImpl()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestRelease",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "requestRelease()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestResetAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestResetAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestSheatheWeapon",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestSheatheWeapon(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestShoot",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "requestShoot()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestSubNormalAttack",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.LocomotionSpeedTypeEnum"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestSubNormalAttack(app.LocomotionSpeedTypeEnum)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestToggleCh255HeadEquipmentAction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestToggleCh255HeadEquipmentAction(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestToggleLanternAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestToggleLanternAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "requestUpperBodyDefaultAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "requestUpperBodyDefaultAction()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "setAction",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "System.String",
+            "System.Boolean",
+            "System.UInt32"
+          ],
+          "returnType": "System.Void",
+          "signature": "setAction(System.String, System.Boolean, System.UInt32)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "setEnabled",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "setEnabled(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "set_NextComboAction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.String"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_NextComboAction(System.String)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "setup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "setup(app.Character)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "setupSelectors",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "setupSelectors(app.Character)"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "update",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "update()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "updateCurrentSelector",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateCurrentSelector()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "updateFinishingMove",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateFinishingMove()"
+        },
+        {
+          "declaringType": "app.HumanActionSelector",
+          "isStatic": false,
+          "name": "updateNextComboAction",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateNextComboAction()"
+        }
+      ],
+      "name": "app.HumanActionSelector",
+      "parent": "app.CharacterCommonActionSelector"
+    },
+    {
+      "exists": false,
+      "name": "app.PawnActionSelector",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.EnemyActionSelector",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.CharacterActionSelector",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.CommonActionSelector",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.HumanActionController",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.PawnActionController",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.PawnSkillContext",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": true,
+      "fieldCount": 10,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "EnableNormalSkills",
+          "type": "System.Collections.Generic.List`1<app.HumanSkillContext.EnableNormalSkill>"
+        },
+        {
+          "isStatic": false,
+          "name": "EnabledCustomSkills",
+          "type": "System.Collections.Generic.List`1<app.HumanSkillContext.EnabledCustomSkill>"
+        },
+        {
+          "isStatic": false,
+          "name": "EquipedSkills",
+          "type": "app.HumanSkillContext.EquipedSkill[]"
+        },
+        {
+          "isStatic": false,
+          "name": "IsAllSkillEnable",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "IsNormalSkillEnable",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxCustomSkillCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxEquipList",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxNormalSkillCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "NumSkillSlot",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "SkillSlotValues",
+          "type": "app.HumanSkillContext.SkillSlot[]"
+        }
+      ],
+      "methodCount": 31,
+      "methods": [
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": true,
+          "name": ".cctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".cctor()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "callConvert",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.ContextVersionHolder",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "callConvert(app.ContextVersionHolder, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "copyFrom",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Context",
+            "app.ContextMemberType"
+          ],
+          "returnType": "System.Void",
+          "signature": "copyFrom(app.Context, app.ContextMemberType)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getCustomSkillLevel",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "app.HumanCustomSkillLevelNo",
+          "signature": "getCustomSkillLevel(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getEnableNormalSkillIDs",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.HumanNormalSkillID>",
+          "signature": "getEnableNormalSkillIDs()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getEquipList",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character.JobEnum"
+          ],
+          "returnType": "app.HumanSkillContext.EquipedSkill",
+          "signature": "getEquipList(app.Character.JobEnum)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "getSkillID",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "app.HumanSkillContext.SkillSlot"
+          ],
+          "returnType": "app.HumanCustomSkillID",
+          "signature": "getSkillID(app.Character.JobEnum, app.HumanSkillContext.SkillSlot)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "get_ContainsMemberType",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.ContextMemberType",
+          "signature": "get_ContainsMemberType()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "get_IsNormalSkillEnableProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "get_IsNormalSkillEnableProp()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "hasEquipedSkill",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "hasEquipedSkill(app.Character.JobEnum, app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isCustomSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillEnable(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isCustomSkillReachLevel",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanCustomSkillID",
+            "app.HumanCustomSkillLevelNo"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillReachLevel(app.HumanCustomSkillID, app.HumanCustomSkillLevelNo)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isCustomSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillViewedNew(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isNormalSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillEnable(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": true,
+          "name": "isNormalSkillEnableWithQuest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillEnableWithQuest()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "isNormalSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillViewedNew(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "prepare",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "prepare()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "prepareEnableCustomSkillList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "prepareEnableCustomSkillList()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "prepareEnableNormalSkillList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "prepareEnableNormalSkillList()"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillEnable",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>",
+            "app.HumanCustomSkillLevelNo"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillEnable(System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>, app.HumanCustomSkillLevelNo)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillEnable",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HumanCustomSkillID",
+            "app.HumanCustomSkillLevelNo"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillEnable(app.HumanCustomSkillID, app.HumanCustomSkillLevelNo)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillLevelUp",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillLevelUp(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setCustomSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomSkillViewedNew(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setNormalSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Collections.Generic.IEnumerable`1<app.HumanNormalSkillID>"
+          ],
+          "returnType": "System.Void",
+          "signature": "setNormalSkillEnable(System.Collections.Generic.IEnumerable`1<app.HumanNormalSkillID>)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setNormalSkillEnable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setNormalSkillEnable(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setNormalSkillViewedNew",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Void",
+          "signature": "setNormalSkillViewedNew(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setSkill",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "app.HumanCustomSkillID",
+            "app.HumanSkillContext.SkillSlot"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "setSkill(app.Character.JobEnum, app.HumanCustomSkillID, app.HumanSkillContext.SkillSlot)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setSkills",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.Character.JobEnum",
+            "System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "setSkills(app.Character.JobEnum, System.Collections.Generic.IEnumerable`1<app.HumanCustomSkillID>)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "set_IsNormalSkillEnableProp",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_IsNormalSkillEnableProp(System.Boolean)"
+        },
+        {
+          "declaringType": "app.HumanSkillContext",
+          "isStatic": false,
+          "name": "setup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "setup(app.Character)"
+        }
+      ],
+      "name": "app.HumanSkillContext",
+      "parent": "app.Context"
+    },
+    {
+      "exists": true,
+      "fieldCount": 5,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "Chara",
+          "type": "app.Character"
+        },
+        {
+          "isStatic": false,
+          "name": "Human",
+          "type": "app.Human"
+        },
+        {
+          "isStatic": false,
+          "name": "IsPlayerOrPawn",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "JobContext",
+          "type": "app.JobContext"
+        },
+        {
+          "isStatic": false,
+          "name": "SkillContext",
+          "type": "app.HumanSkillContext"
+        }
+      ],
+      "methodCount": 15,
+      "methods": [
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "hasArrow",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "hasArrow(System.Int32)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "hasItemNeededByCustomSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "hasItemNeededByCustomSkill(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isCustomSkillAvailable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillAvailable(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isCustomSkillAvailableWithoutItemCondition",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isCustomSkillAvailableWithoutItemCondition(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isEquipCurrentJobWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEquipCurrentJobWeapon()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isEquipLeftWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEquipLeftWeapon()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isEquipRightWeapon",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isEquipRightWeapon()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isJobNormalAttackAvailable",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isJobNormalAttackAvailable()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isJobSpecialSkillAvailable",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isJobSpecialSkillAvailable()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isJobSubNormalAttackAvailable",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isJobSubNormalAttackAvailable()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isLeftWeaponSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanCustomSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isLeftWeaponSkill(app.HumanCustomSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isLeftWeaponSkill",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isLeftWeaponSkill(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isNormalSkillAvailable",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HumanNormalSkillID"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isNormalSkillAvailable(app.HumanNormalSkillID)"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "isRestrictedJobSkill",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Boolean",
+          "signature": "isRestrictedJobSkill()"
+        },
+        {
+          "declaringType": "app.HumanSkillAvailability",
+          "isStatic": false,
+          "name": "setup",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Human"
+          ],
+          "returnType": "System.Void",
+          "signature": "setup(app.Human)"
+        }
+      ],
+      "name": "app.HumanSkillAvailability",
+      "parent": "System.Object"
+    },
+    {
+      "exists": true,
+      "fieldCount": 40,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "AddNormalHateRateAdjustHandler",
+          "type": "app.HateSystem.CalcAdjustHateRate"
+        },
+        {
+          "isStatic": false,
+          "name": "AddNotForgetHateRateAdjustHandler",
+          "type": "app.HateSystem.CalcAdjustHateRate"
+        },
+        {
+          "isStatic": false,
+          "name": "DecreaseHatAdjustHandler",
+          "type": "app.HateSystem.CalcAdjustHateRate"
+        },
+        {
+          "isStatic": false,
+          "name": "DisableAddHateValueCheckHandler",
+          "type": "System.Func`2<via.GameObject,System.Boolean>"
+        },
+        {
+          "isStatic": false,
+          "name": "DisableFriendHitHateCheckHandlr",
+          "type": "System.Func`2<app.CharacterID,System.Boolean>"
+        },
+        {
+          "isStatic": true,
+          "name": "HateRecvCategoryLength",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "HateRecvSetting",
+          "type": "app.HateRecvSettingData"
+        },
+        {
+          "isStatic": true,
+          "name": "HateRequestMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "MaxCalculateCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "MinimumHate",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": true,
+          "name": "MinimumHateRate",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": true,
+          "name": "StandardHateMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "StandardNotForgetHateMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": true,
+          "name": "StandardNotForgetTypeBiasHateMax",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "UpdateRankingEndHandler",
+          "type": "app.HateSystem.EventSortRankingEnd"
+        },
+        {
+          "isStatic": false,
+          "name": "_Chara",
+          "type": "app.Character"
+        },
+        {
+          "isStatic": false,
+          "name": "_Contents0014DamageToHateRate",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "_ForceDamageInfo",
+          "type": "app.HitController.DamageInfo"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateCalculators",
+          "type": "System.Collections.Generic.List`1<app.HateCalculator>"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateCalculatorsReadWriteLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateLowerTrack",
+          "type": "app.HateTrack"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateRequestCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateRequestInfos",
+          "type": "app.HateRequestInfo[]"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateSensor",
+          "type": "app.HateSensor"
+        },
+        {
+          "isStatic": false,
+          "name": "_HateUpperTrack",
+          "type": "app.HateTrack"
+        },
+        {
+          "isStatic": false,
+          "name": "_HitCtrl",
+          "type": "app.HitController"
+        },
+        {
+          "isStatic": false,
+          "name": "_InRangeHateNodeList",
+          "type": "System.Collections.Generic.List`1<app.HateManager.SendHateNode>"
+        },
+        {
+          "isStatic": false,
+          "name": "_Intervals",
+          "type": "System.Collections.Generic.Dictionary`2<System.Guid,app.Timer>"
+        },
+        {
+          "isStatic": false,
+          "name": "_IsBossCharacter",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_IsNormalUpdate",
+          "type": "System.Boolean"
+        },
+        {
+          "isStatic": false,
+          "name": "_OverwriteHateRecvSetting",
+          "type": "app.HateRecvSettingData"
+        },
+        {
+          "isStatic": false,
+          "name": "_PrevEnemiesCount",
+          "type": "System.Int32"
+        },
+        {
+          "isStatic": false,
+          "name": "_ProcessingDistributionRequester",
+          "type": "app.IProcessingDistributionRequester"
+        },
+        {
+          "isStatic": false,
+          "name": "_RandomFast",
+          "type": "app.RandomFast"
+        },
+        {
+          "isStatic": false,
+          "name": "_Ranking",
+          "type": "app.HateCalculator[]"
+        },
+        {
+          "isStatic": false,
+          "name": "_Receiver",
+          "type": "app.ForceReceiver"
+        },
+        {
+          "isStatic": false,
+          "name": "_RecvHateValueParams",
+          "type": "app.HateRecvSettingData.HateValueParam[]"
+        },
+        {
+          "isStatic": false,
+          "name": "_SeqCtrl",
+          "type": "app.SequenceController"
+        },
+        {
+          "isStatic": false,
+          "name": "_UpdateDeltaTime",
+          "type": "System.Single"
+        },
+        {
+          "isStatic": false,
+          "name": "_UpdateInRangeHateNodeListTimer",
+          "type": "app.Timer"
+        }
+      ],
+      "methodCount": 65,
+      "methods": [
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": true,
+          "name": ".cctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".cctor()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "AddHateToSpecificEnemies",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.Character",
+            "app.CharacterID",
+            "app.HateSendTypeID"
+          ],
+          "returnType": "System.Void",
+          "signature": "AddHateToSpecificEnemies(app.Character, app.CharacterID, app.HateSendTypeID)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": true,
+          "name": "CompareTargetHate",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.HateCalculator",
+            "app.HateCalculator"
+          ],
+          "returnType": "System.Int32",
+          "signature": "CompareTargetHate(app.HateCalculator, app.HateCalculator)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "addHateParam",
+          "parameterCount": 7,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateRecvCategory",
+            "app.HateSystem.WriteType",
+            "System.Single",
+            "System.Single",
+            "System.Single",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "addHateParam(via.GameObject, app.HateRecvCategory, app.HateSystem.WriteType, System.Single, System.Single, System.Single, System.Single)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "addHateParam",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateSendSettingData.SendHateParam",
+            "System.Nullable`1<System.Single>"
+          ],
+          "returnType": "System.Void",
+          "signature": "addHateParam(via.GameObject, app.HateSendSettingData.SendHateParam, System.Nullable`1<System.Single>)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "addHateParam",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateSendTypeID",
+            "System.Nullable`1<System.Single>"
+          ],
+          "returnType": "System.Void",
+          "signature": "addHateParam(via.GameObject, app.HateSendTypeID, System.Nullable`1<System.Single>)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "addHateParamImpl",
+          "parameterCount": 7,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateRecvCategory",
+            "app.HateSystem.WriteType",
+            "System.Single",
+            "System.Single",
+            "System.Single",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "addHateParamImpl(via.GameObject, app.HateRecvCategory, app.HateSystem.WriteType, System.Single, System.Single, System.Single, System.Single)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "add_AddNormalHateRateAdjustHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.CalcAdjustHateRate"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_AddNormalHateRateAdjustHandler(app.HateSystem.CalcAdjustHateRate)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "add_AddNotForgetHateRateAdjustHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.CalcAdjustHateRate"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_AddNotForgetHateRateAdjustHandler(app.HateSystem.CalcAdjustHateRate)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "add_DecreaseHatAdjustHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.CalcAdjustHateRate"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_DecreaseHatAdjustHandler(app.HateSystem.CalcAdjustHateRate)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "add_DisableAddHateValueCheckHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Func`2<via.GameObject,System.Boolean>"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_DisableAddHateValueCheckHandler(System.Func`2<via.GameObject,System.Boolean>)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "add_UpdateRankingEndHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.EventSortRankingEnd"
+          ],
+          "returnType": "System.Void",
+          "signature": "add_UpdateRankingEndHandler(app.HateSystem.EventSortRankingEnd)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "applyAttackNoHitDecHate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "applyAttackNoHitDecHate()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "awake",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "awake()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "calcSendHateDistanceRate",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateSendSettingData.SendHateParam"
+          ],
+          "returnType": "System.Single",
+          "signature": "calcSendHateDistanceRate(via.GameObject, app.HateSendSettingData.SendHateParam)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "clear",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Void",
+          "signature": "clear(via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "clearAllHate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "clearAllHate()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "clearCustomHateRate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "clearCustomHateRate()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "clearType",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateRecvCategory",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "clearType(via.GameObject, app.HateRecvCategory, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "clearTypeBit",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "via.GameObject",
+            "System.Int32",
+            "System.Boolean"
+          ],
+          "returnType": "System.Void",
+          "signature": "clearTypeBit(via.GameObject, System.Int32, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getAddNormalHateRate",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.HateRecvCategory",
+            "System.Single",
+            "via.GameObject"
+          ],
+          "returnType": "System.Single",
+          "signature": "getAddNormalHateRate(app.HateRecvCategory, System.Single, via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getAddNotForgetHateRate",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.HateRecvCategory",
+            "System.Single",
+            "via.GameObject"
+          ],
+          "returnType": "System.Single",
+          "signature": "getAddNotForgetHateRate(app.HateRecvCategory, System.Single, via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getCustomRate",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Single",
+          "signature": "getCustomRate(via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getDamageCategory",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HitController.DamageInfo"
+          ],
+          "returnType": "app.HateRecvCategory",
+          "signature": "getDamageCategory(app.HitController.DamageInfo)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getDamageToHate",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "app.HateRecvCategory",
+            "app.HitController.DamageInfo",
+            "System.Boolean"
+          ],
+          "returnType": "System.Single",
+          "signature": "getDamageToHate(app.HateRecvCategory, app.HitController.DamageInfo, System.Boolean)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getHateValueParam",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateRecvCategory"
+          ],
+          "returnType": "app.HateRecvSettingData.HateValueParam",
+          "signature": "getHateValueParam(app.HateRecvCategory)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getRawTotalNotForgetHate",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Single",
+          "signature": "getRawTotalNotForgetHate(via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getRawTotalTempHate",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Single",
+          "signature": "getRawTotalTempHate(via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "getTotalHate",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "via.GameObject"
+          ],
+          "returnType": "System.Single",
+          "signature": "getTotalHate(via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "get_Chara",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Character",
+          "signature": "get_Chara()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "get_HateRecvSettingProp",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HateRecvSettingData",
+          "signature": "get_HateRecvSettingProp()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "get_InRangeHateNodeList",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.List`1<app.HateManager.SendHateNode>",
+          "signature": "get_InRangeHateNodeList()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "get_Intervals",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Collections.Generic.Dictionary`2<System.Guid,app.Timer>",
+          "signature": "get_Intervals()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "get_Ranking",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.HateCalculator[]",
+          "signature": "get_Ranking()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "get_UpdateInRangeHateNodeListTimer",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "app.Timer",
+          "signature": "get_UpdateInRangeHateNodeListTimer()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "isUpdateHateImpl",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Int32"
+          ],
+          "returnType": "System.Boolean",
+          "signature": "isUpdateHateImpl(System.Int32)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onAtkCalcDamageEnd",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HitController.DamageInfo"
+          ],
+          "returnType": "System.Void",
+          "signature": "onAtkCalcDamageEnd(app.HitController.DamageInfo)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onCalcDamageEnd",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HitController.DamageInfo"
+          ],
+          "returnType": "System.Void",
+          "signature": "onCalcDamageEnd(app.HitController.DamageInfo)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onDamageReaction",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HitController.DamageInfo"
+          ],
+          "returnType": "System.Void",
+          "signature": "onDamageReaction(app.HitController.DamageInfo)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onDestroy",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onDestroy()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onReceiveForce",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HitController.DamageInfo"
+          ],
+          "returnType": "System.Void",
+          "signature": "onReceiveForce(app.HitController.DamageInfo)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onUnbalance",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "via.vec3",
+            "via.GameObject",
+            "via.GameObject"
+          ],
+          "returnType": "System.Void",
+          "signature": "onUnbalance(via.vec3, via.GameObject, via.GameObject)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onUpdate",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "onUpdate()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "onUseItemHate",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.ItemDataParam",
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "onUseItemHate(app.ItemDataParam, app.Character)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "removeHateParam",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "via.GameObject",
+            "app.HateRecvCategory"
+          ],
+          "returnType": "System.Void",
+          "signature": "removeHateParam(via.GameObject, app.HateRecvCategory)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "remove_AddNormalHateRateAdjustHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.CalcAdjustHateRate"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_AddNormalHateRateAdjustHandler(app.HateSystem.CalcAdjustHateRate)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "remove_AddNotForgetHateRateAdjustHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.CalcAdjustHateRate"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_AddNotForgetHateRateAdjustHandler(app.HateSystem.CalcAdjustHateRate)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "remove_DecreaseHatAdjustHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.CalcAdjustHateRate"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_DecreaseHatAdjustHandler(app.HateSystem.CalcAdjustHateRate)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "remove_DisableAddHateValueCheckHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Func`2<via.GameObject,System.Boolean>"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_DisableAddHateValueCheckHandler(System.Func`2<via.GameObject,System.Boolean>)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "remove_UpdateRankingEndHandler",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateSystem.EventSortRankingEnd"
+          ],
+          "returnType": "System.Void",
+          "signature": "remove_UpdateRankingEndHandler(app.HateSystem.EventSortRankingEnd)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "requestSendHateNode",
+          "parameterCount": 3,
+          "parameterTypes": [
+            "via.GameObject",
+            "via.GameObject",
+            "app.HateSendTypeID"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestSendHateNode(via.GameObject, via.GameObject, app.HateSendTypeID)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "requestSendHateNode",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "via.GameObject",
+            "via.GameObject",
+            "app.HateSendTypeID",
+            "app.HateSendSettingData.SendHateParam"
+          ],
+          "returnType": "System.Void",
+          "signature": "requestSendHateNode(via.GameObject, via.GameObject, app.HateSendTypeID, app.HateSendSettingData.SendHateParam)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "setCustomRate",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.UniqueID",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomRate(app.UniqueID, System.Single)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "setCustomRate",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "via.GameObject",
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "setCustomRate(via.GameObject, System.Single)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "setForceTotalHate",
+          "parameterCount": 4,
+          "parameterTypes": [
+            "via.GameObject",
+            "System.Nullable`1<System.Single>",
+            "System.Nullable`1<System.Single>",
+            "System.Nullable`1<System.Single>"
+          ],
+          "returnType": "System.Void",
+          "signature": "setForceTotalHate(via.GameObject, System.Nullable`1<System.Single>, System.Nullable`1<System.Single>, System.Nullable`1<System.Single>)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "setOverwriteHateRecvSettingData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateRecvSettingData"
+          ],
+          "returnType": "System.Void",
+          "signature": "setOverwriteHateRecvSettingData(app.HateRecvSettingData)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "set_Chara",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.Character"
+          ],
+          "returnType": "System.Void",
+          "signature": "set_Chara(app.Character)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "setupHateValueParams",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.HateRecvSettingData"
+          ],
+          "returnType": "System.Void",
+          "signature": "setupHateValueParams(app.HateRecvSettingData)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "start",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "start()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "update",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "update()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "updateHateImpl",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "updateHateImpl(System.Single)"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "updateHateRanking",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateHateRanking()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "updateHateTrackRequest",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": "updateHateTrackRequest()"
+        },
+        {
+          "declaringType": "app.HateSystem",
+          "isStatic": false,
+          "name": "updateInfluenceHate",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Single"
+          ],
+          "returnType": "System.Void",
+          "signature": "updateInfluenceHate(System.Single)"
+        }
+      ],
+      "name": "app.HateSystem",
+      "parent": "via.Behavior"
+    },
+    {
+      "exists": false,
+      "name": "app.HateController",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.ThreatTable",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.ThreatController",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": false,
+      "name": "app.AggroSystem",
+      "reason": "type not exposed by this TDB"
+    },
+    {
+      "exists": true,
+      "fieldCount": 4,
+      "fields": [
+        {
+          "isStatic": false,
+          "name": "_PersonalityDataDB",
+          "type": "System.Collections.Generic.Dictionary`2<System.UInt32,app.PersonalityData>"
+        },
+        {
+          "isStatic": false,
+          "name": "_PersonalityDataDBLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_PersonalityPolictDBLock",
+          "type": "via.threading.SimpleReaderWriterLock"
+        },
+        {
+          "isStatic": false,
+          "name": "_PersonalityPolicyDB",
+          "type": "System.Collections.Generic.Dictionary`2<System.UInt16,System.Collections.Generic.Dictionary`2<System.UInt32,System.Single>>"
+        }
+      ],
+      "methodCount": 6,
+      "methods": [
+        {
+          "declaringType": "app.AIManager",
+          "isStatic": false,
+          "name": ".ctor",
+          "parameterCount": 0,
+          "parameterTypes": null,
+          "returnType": "System.Void",
+          "signature": ".ctor()"
+        },
+        {
+          "declaringType": "app.AIManager",
+          "isStatic": false,
+          "name": "doPersonalityPolicyData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "System.Action`2<app.AIDecisionDefine.Policy,System.Collections.Generic.Dictionary`2<System.UInt32,System.Single>>"
+          ],
+          "returnType": "System.Void",
+          "signature": "doPersonalityPolicyData(System.Action`2<app.AIDecisionDefine.Policy,System.Collections.Generic.Dictionary`2<System.UInt32,System.Single>>)"
+        },
+        {
+          "declaringType": "app.AIManager",
+          "isStatic": false,
+          "name": "getPersonalityData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.PersonalityDefine.PersonalityID"
+          ],
+          "returnType": "app.PersonalityData",
+          "signature": "getPersonalityData(app.PersonalityDefine.PersonalityID)"
+        },
+        {
+          "declaringType": "app.AIManager",
+          "isStatic": false,
+          "name": "registerPersonalityData",
+          "parameterCount": 2,
+          "parameterTypes": [
+            "app.PersonalityDefine.PersonalityID",
+            "app.PersonalityData"
+          ],
+          "returnType": "System.Void",
+          "signature": "registerPersonalityData(app.PersonalityDefine.PersonalityID, app.PersonalityData)"
+        },
+        {
+          "declaringType": "app.AIManager",
+          "isStatic": false,
+          "name": "setPersonalityPolicyDB",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.PersonalityPolicyTable"
+          ],
+          "returnType": "System.Void",
+          "signature": "setPersonalityPolicyDB(app.PersonalityPolicyTable)"
+        },
+        {
+          "declaringType": "app.AIManager",
+          "isStatic": false,
+          "name": "unregisterPersonalityData",
+          "parameterCount": 1,
+          "parameterTypes": [
+            "app.PersonalityDefine.PersonalityID"
+          ],
+          "returnType": "System.Void",
+          "signature": "unregisterPersonalityData(app.PersonalityDefine.PersonalityID)"
+        }
+      ],
+      "name": "app.AIManager",
+      "parent": "app.AppSingleton`1<app.AIManager>"
+    },
+    {
+      "exists": false,
+      "name": "app.AIController",
+      "reason": "type not exposed by this TDB"
+    }
+  ],
+  "title": "Pawn Brain and AI"
+}

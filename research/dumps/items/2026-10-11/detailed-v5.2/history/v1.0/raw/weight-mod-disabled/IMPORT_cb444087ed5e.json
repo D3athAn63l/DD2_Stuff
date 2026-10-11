@@ -1,0 +1,41 @@
+{
+  "schema": "dd2-capture-import-manifest/v1",
+  "sourceArchive": "EQ Probe v1_WeightModDisabled.zip",
+  "sourceArchiveSha256": "cb444087ed5e1517e2a63c1dc20c5612458ad685925efe1b685ba0261aaf76cf",
+  "sourceArchiveBytes": 22385,
+  "captureFiles": [
+    {
+      "file": "DD2Research_enhance_armor_20261011_232324_003.json",
+      "sha256": "948747c62e9fd1139e0124398bb5a048776464afcb093161b39649a3a76751d2",
+      "sizeBytes": 595029,
+      "kind": "enhance-armor",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_enhance_armor_20261011_232324_003.json"
+    },
+    {
+      "file": "DD2Research_enhance_weapon_20261011_232323_002.json",
+      "sha256": "85fdd9acb8e4db7d64f05ae3023750bbf639426cbc7d58d3862586679fbdbe95",
+      "sizeBytes": 546301,
+      "kind": "enhance-weapon",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_enhance_weapon_20261011_232323_002.json"
+    },
+    {
+      "file": "DD2Research_system_inventory_20261011_232325_004.json",
+      "sha256": "7f6bd59026035cf73c1ff4866889e7eb568347238dc28a93507a06ffbe253fdf",
+      "sizeBytes": 2288,
+      "kind": "equipment-system-inventory",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_system_inventory_20261011_232325_004.json"
+    },
+    {
+      "file": "DD2Research_weight_20261011_232322_001.json",
+      "sha256": "b1873b29bd2f7d234c28a02f76ceffcc46fd4d13a677fe9ed404481af72ae273",
+      "sizeBytes": 23024,
+      "kind": "weight",
+      "tdbVersion": 83,
+      "sourceZipEntry": "DD2Research_weight_20261011_232322_001.json"
+    }
+  ],
+  "note": "Raw bytes preserved; presence in repo is not validation of game mechanics."
+}
