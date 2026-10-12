@@ -14,7 +14,7 @@ Never declare a method missing just because reflection enumeration failed. Uncha
 ## Project entry points
 - Beloved gameplay: `mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua`.
 - Health gameplay: `mods/CompleteHealthRestoration/reframework/autorun/CompleteHealthRestoration.lua`.
-- Weight gameplay: `mods/WeightSystemTweaks/reframework/autorun/weight_system_tweaks.lua`.
+- Weight gameplay: `mods/BurdenReforged/reframework/autorun/burden_reforged.lua` (source, notes and mock tests in this mod folder).
 - Data dumper: `tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`.
 - Tool tests and offline data processors: `tools/DD2DataDumper/tools/`.
 - Baselines and read-only probe scripts: `research/baselines/`; captured catalog and schemas: `research/dumps/`.
@@ -37,6 +37,7 @@ Never declare a method missing just because reflection enumeration failed. Uncha
   `python tools/DD2DataDumper/tools/check_lua.py tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`
   `python tools/DD2DataDumper/tools/run_mock_tests.py`
   `python tools/DD2DataDumper/tools/run_detail_tests.py`
+- Burden Reforged regression cases: `python mods/BurdenReforged/tests/run_lua.py` (Lua 5.4 shared library needed).
 - Other comparisons and tests are located inside their corresponding `research/baselines/{affinity,health}/2026-10-11/` directories.
 - Tests inside a GitHub/cloud environment cannot replace validation in the owner's actual DD2 installation.
 
@@ -44,7 +45,7 @@ Never declare a method missing just because reflection enumeration failed. Uncha
 - Read [docs/MIGRATION_GUIDE.md](docs/MIGRATION_GUIDE.md); GitHub paths are not game install paths.
 - After future restructures, update root README, AGENTS, map, update playbook and applicable test/document links together.
 - Do not mix cleanup/reorganization with Lua behavior changes in the same commit.
-- Note version discrepancies instead of guessing a version; currently the weight mod source and metadata disagree.
+- Do not restore the removed `mods/WeightSystemTweaks/` files in normal updates; `BurdenReforged` is an independently authored successor with separate provenance and metadata. Leave historical A/B weight research unchanged.
 
 ## Research capture handoff
 For owner-submitted ZIPs, follow [docs/RESEARCH_CAPTURE_WORKFLOW.md](docs/RESEARCH_CAPTURE_WORKFLOW.md): audit, hash, version, preserve raw bytes, create a reviewable PR, and distinguish locally analyzed data from bytes actually committed to GitHub.

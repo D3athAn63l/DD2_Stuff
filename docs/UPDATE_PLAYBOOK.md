@@ -18,7 +18,7 @@ A missing method reported by a failed enumeration is unresolved, *not proven rem
 | Choose Your Beloved | Locked NPC <=199; unlocked NPC >199; anti-loss, manual changes, HUD, cross-save safeguards |
 | CompleteHealthRestoration | Regular HP and reduced-max HP recovery, pawn toggles, combat/pause gating, saved settings after restart |
 | Data Dumper | Bounded type scan, item export uniqueness, checkpoint resume, JSON writer errors, field coverage |
-| WeightSystemTweaks | Effective carried weights, equip/unequip, dragonforging, Warfarer, persisted settings |
+| Burden Reforged | Arisen + pawn carried weights and enable/disable, equip/unequip, dragonforging, Warfarer, per-item tooltip values, persisted settings and hot-reload restoration. Run `python mods/BurdenReforged/tests/run_lua.py` for mocked regressions; owner confirmed full-party toggle recovery in v0.1.1. |
 
 Never test risky save mutations without a backup.
 

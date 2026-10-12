@@ -26,3 +26,11 @@ The affinity baseline's redundant ZIP was placed next to its extracted contents 
 
 ## What was not changed
 No Lua code, binary assets, baseline JSON, or ZIP bytes were rewritten by the relocation. The previous metadata version mismatch for WeightSystemTweaks is intentionally still open.
+
+## 12 October 2026 — Weight mod replacement (separate change)
+
+`mods/WeightSystemTweaks/` has been removed from the maintained project tree in favor of **independently implemented** `mods/BurdenReforged/` (v0.1.1 experimental). This is a gameplay implementation replacement, **not** a source-file rename; see the new mod's README and changelog.
+
+On an installed game, remove `reframework/autorun/weight_system_tweaks.lua`, then fully restart and install `reframework/autorun/burden_reforged.lua`. Only run one weight mod. Existing `reframework/data/WeightSystemTweaks.json` is left intact for one-time compatible boolean-settings import into `BurdenReforged.json`.
+
+This removes the old files from the branch's current tree only. Existing Git history and the 11 October 2026 weight-mod on/off research captures remain untouched. The historical version mismatch mentioned above applies to the removed mod, not to Burden Reforged.
