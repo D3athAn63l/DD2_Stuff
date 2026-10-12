@@ -1,6 +1,6 @@
 # Repository Map — DD2_Stuff
 
-All paths are relative to the repository root. Updated for the folder-only refactor on 11 October 2026. **Source, diagnostics, captures and ZIPs have different purposes.**
+All paths are relative to the repository root. Original folder-only refactor on 11 October 2026; weight-mod successor updated 12 October 2026. **Source, diagnostics, captures and ZIPs have different purposes.**
 
 ## Playable mods (`mods/`)
 
@@ -8,7 +8,7 @@ All paths are relative to the repository root. Updated for the folder-only refac
 |---|---|---|
 | Choose Your Beloved | [`BelovedCap.lua`](../mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua) | `mods/ChooseYourBeloved/modinfo.ini`, `CHANGELOG_v2.1.txt`, `Cover.png` |
 | CompleteHealthRestoration | [`CompleteHealthRestoration.lua`](../mods/CompleteHealthRestoration/reframework/autorun/CompleteHealthRestoration.lua) | Original release ZIPs live in `releases/CompleteHealthRestoration/` |
-| WeightSystemTweaks | [`weight_system_tweaks.lua`](../mods/WeightSystemTweaks/reframework/autorun/weight_system_tweaks.lua) | `modinfo.ini`, `Cover.png`; Lua header v3.0 conflicts with metadata v2.2-GeminiFix |
+| Burden Reforged | [`burden_reforged.lua`](../mods/BurdenReforged/reframework/autorun/burden_reforged.lua) | [README](../mods/BurdenReforged/README.md), changelog, `modinfo.ini`, `tests/` — v0.1.1 experimental; owner confirmed pawns recalculate when disabled |
 
 The Lua paths inside the mod folders mirror the real `reframework/autorun/` location used inside the game. The Health mod's loose file was normalized to that layout without changing its contents.
 
