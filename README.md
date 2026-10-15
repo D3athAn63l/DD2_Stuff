@@ -21,7 +21,7 @@ This is a research repository. **Read-only reflection is not a gameplay test**, 
 
 ## Current project status (15 October 2026)
 
-- **Choose Your Beloved v2.3 experimental:** preserves NPC cap/unlock and anti-loss; Main Pawn live 0–1000 dashboard confirmed working in v2.2. New HUD modes **On Change**, **Talk Window**, **Either** and **Always** are awaiting game validation. [Details](mods/ChooseYourBeloved/README.md).
+- **Choose Your Beloved v2.5 experimental:** fixes off-center global NPC/Main Pawn HUD and one-line NPC dialogue visibility; movable X/Y HUD sliders, independent pawn affinity toast. [Details](mods/ChooseYourBeloved/README.md).
 - **CompleteHealthRestoration v2.0:** HP and Loss Gauge recovery. Owner reports both work in-game.
 - **Burden Reforged v0.1.1 experimental:** independent weight-rule implementation replacing the old WeightSystemTweaks files. Owner confirms in-game master enable/disable and pawn weight restoration on disabling; further regression testing is ongoing. [Source and tests](mods/BurdenReforged/README.md).
 - **DD2 Data Dumper v5.2 experimental:** detailed catalog **now captured in-game**: 2,152 unique loaded dictionary IDs, including 495 weapon, 669 armor and 988 other parameter objects. Capture covers raw item fields; it does not establish valid EX/passive modifier combinations.

@@ -1,7 +1,10 @@
 -- =============================================================================
--- BelovedCap  v2.4
+-- BelovedCap  v2.5
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.5: Fix HUD placement and generic short-NPC conversation visibility.
+-- Centered default, configurable X/Y, one verified-talk grace window.
 --
 -- v2.4: One shared conversational NPC/Main Pawn HUD and pawn change toast.
 -- Live talking-state gate plus observational interaction target tracking.
@@ -21,7 +24,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.4"
+local modVersion = "2.5"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -36,6 +39,9 @@ local defaultConfig = {
     ShowMainPawnFloatingBar = true,
     PawnHudSeconds       = 5,
     ShowPawnChangeToast  = true,
+    HudXPercent = 50,
+    HudYPercent = 12,
+    DialogueMinSeconds = 4,
     CheatModeEnabled     = false,
     ManualAffinityChange = 50,
 }
@@ -68,6 +74,19 @@ local function validateConfig()
         config.PawnHudSeconds = math.max(2, math.min(12, math.floor(config.PawnHudSeconds)))
     end
 
+    for _, spec in ipairs({
+        { key = "HudXPercent", min = 10, max = 90 },
+        { key = "HudYPercent", min = 5, max = 85 },
+        { key = "DialogueMinSeconds", min = 2, max = 8 }
+    }) do
+        local n = config[spec.key]
+        if type(n) ~= "number" or n ~= n or
+            n == math.huge or n == -math.huge then
+            config[spec.key] = defaultConfig[spec.key]
+        else
+            config[spec.key] = math.max(spec.min, math.min(spec.max, math.floor(n)))
+        end
+    end
     -- Tables must be tables
     if type(config.UnlockedNPCs) ~= "table" then
         config.UnlockedNPCs = {}
@@ -311,14 +330,15 @@ local function refreshMainPawnStatus()
 end
 
 
--- BEGIN CONTEXTUAL HUD v2.4
+-- BEGIN CONTEXTUAL HUD v2.5
 -- Choose Your Beloved 2.4 -- contextual, read-only HUD extension.
 -- This block is spliced after refreshMainPawnStatus() in BelovedCap.lua.
 -- Original NPC sentiment enforcement remains in the parent mod.
 local pawnHud = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
 local talkTracker = {
     target = nil, eventTarget = nil, eventAt = 0, prompt = nil, promptAt = 0,
-    wasTalking = false, active = false, source = "none", hookStatus = "Not installed"
+    wasTalking = false, active = false, source = "none", hookStatus = "Not installed",
+    eventSerial = 0, handledEventSerial = 0, visibleUntil = 0
 }
 
 local function hudNow()
@@ -400,6 +420,7 @@ local function installConversationObservers()
                         if target and characterKey(target) then
                             talkTracker.eventTarget = target
                             talkTracker.eventAt = hudNow()
+                            talkTracker.eventSerial = talkTracker.eventSerial + 1
                             -- A new event can update the target mid-conversation.
                             if talkTracker.active then
                                 talkTracker.target = target
@@ -441,48 +462,75 @@ end
 installConversationObservers()
 
 local function activeTalkTarget()
+    local now = hudNow()
     local interact = safePawnAccess(function()
         return sdk.get_managed_singleton("app.InteractManager")
     end)
-    local flag = interact and safePawnAccess(function()
+    local isTalking = interact and safePawnAccess(function()
         return interact:get_field("IsPlayerTalking")
-    end)
-    if flag ~= true then
-        if talkTracker.wasTalking then
-            talkTracker.target = nil
-            talkTracker.eventTarget = nil
-            talkTracker.eventAt = 0
-        end
+    end) == true
+    local manager = getCharacterManager()
+    local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
+    if not player then
+        talkTracker.target = nil
         talkTracker.wasTalking = false
         talkTracker.active = false
         talkTracker.source = "none"
         return nil
     end
-    local now = hudNow()
-    local manager = getCharacterManager()
-    local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
-    if not player then return nil end
-    if not talkTracker.wasTalking then
-        talkTracker.target = nil
-        if talkTracker.eventTarget and now - talkTracker.eventAt <= 6 then
-            talkTracker.target = talkTracker.eventTarget
+
+    -- An explicit talk-event involving the Arisen can be shorter than one
+    -- IsPlayerTalking frame (especially one-line generic NPC responses).
+    -- Consume each event only once, never treat a proximity prompt as a talk.
+    local freshEvent = talkTracker.eventSerial ~= talkTracker.handledEventSerial
+        and talkTracker.eventTarget and now - talkTracker.eventAt <= 2
+    if talkTracker.eventSerial ~= talkTracker.handledEventSerial then
+        talkTracker.handledEventSerial = talkTracker.eventSerial
+    end
+
+    local target = talkTracker.target
+    if isTalking then
+        if freshEvent then
+            target = talkTracker.eventTarget
             talkTracker.source = "talk event"
-        elseif talkTracker.prompt and now - talkTracker.promptAt <= 3 then
-            talkTracker.target = talkTracker.prompt
-            talkTracker.source = "interaction prompt"
+        elseif not target or not talkTracker.wasTalking then
+            if talkTracker.eventTarget and now - talkTracker.eventAt <= 6 then
+                target = talkTracker.eventTarget
+                talkTracker.source = "talk event"
+            elseif talkTracker.prompt and now - talkTracker.promptAt <= 3 then
+                target = talkTracker.prompt
+                talkTracker.source = "interaction prompt"
+            end
         end
+        if target and sameHudCharacter(target, player) then target = nil end
+        if target and (freshEvent or not talkTracker.wasTalking
+            or not sameHudCharacter(target, talkTracker.target)) then
+            talkTracker.visibleUntil = now + config.DialogueMinSeconds
+        end
+        talkTracker.target = target
+        talkTracker.wasTalking = true
+        talkTracker.active = true
+        return target
     end
-    talkTracker.wasTalking = true
-    talkTracker.active = true
-    -- A dialogue selected after the first talking frame may identify the
-    -- partner better than the prompt's last advertised target.
-    if talkTracker.eventTarget and now - talkTracker.eventAt <= 6 and
-        not sameHudCharacter(talkTracker.eventTarget, talkTracker.target) then
+
+    -- No active dialogue: a verified Arisen dialogue event can still trigger
+    -- a brief HUD, even if the live talking flag never survived a full frame.
+    if freshEvent and not sameHudCharacter(talkTracker.eventTarget, player) then
         talkTracker.target = talkTracker.eventTarget
-        talkTracker.source = "talk event"
+        talkTracker.visibleUntil = now + config.DialogueMinSeconds
+        talkTracker.source = "short talk event"
+        target = talkTracker.target
+    elseif talkTracker.wasTalking then
+        talkTracker.source = "short dialogue grace"
     end
-    if sameHudCharacter(talkTracker.target, player) then return nil end
-    return talkTracker.target
+    talkTracker.wasTalking = false
+    talkTracker.active = false
+    if target and now < talkTracker.visibleUntil then return target end
+    talkTracker.target = nil
+    talkTracker.eventTarget = nil -- do not reuse the previous speaker on next dialogue
+    talkTracker.eventAt = 0
+    talkTracker.source = "none"
+    return nil
 end
 
 local function readGlobalAffinity(character)
@@ -526,7 +574,13 @@ local function drawGlobalAffinityHUD()
     pcall(function()
         local size = imgui.get_display_size()
         if not size or not size.x or not size.y or size.x < 320 or size.y < 280 then return end
-        local x, y, w = 42, math.floor(size.y * 0.73), 195
+        local w = 195
+        -- Center the widget around its configured screen-relative anchor.
+        -- Clamp to safe margins for ultrawide and smaller display resolutions.
+        local x = math.max(12, math.min(size.x - w - 24,
+            math.floor(size.x * config.HudXPercent * 0.01 - w * 0.5)))
+        local y = math.max(42, math.min(size.y - 66,
+            math.floor(size.y * config.HudYPercent * 0.01)))
         local value, max = info.value, math.max(1, info.max)
         local ratio = value >= 0 and math.min(1, value / max)
             or math.min(1, -value / 199)
@@ -558,7 +612,7 @@ local function drawPawnChangeToast()
             .. "  (" .. tostring(pawnState.value) .. "/1000)", x, y, color)
     end)
 end
--- END CONTEXTUAL HUD v2.4
+-- END CONTEXTUAL HUD v2.5
 
 local function runAffinityScan()
     local charMgr, npcMgr = getCharacterManager(), getNPCManager()
@@ -667,8 +721,17 @@ re.on_draw_ui(function()
     changed, config.ShowFloatingBar = imgui.checkbox("Show NPC Affinity During Conversation", config.ShowFloatingBar)
     if changed then saveConfig() end
     if imgui.is_item_hovered() then
-        imgui.set_tooltip("The shared affinity bar appears while you are talking to an NPC.")
+        imgui.set_tooltip("One shared affinity HUD, with a minimum display duration for short NPC remarks.")
     end
+    changed, config.HudXPercent = imgui.slider_int(
+        "Affinity HUD horizontal (%)", config.HudXPercent, 10, 90)
+    if changed then saveConfig() end
+    changed, config.HudYPercent = imgui.slider_int(
+        "Affinity HUD vertical (%)", config.HudYPercent, 5, 85)
+    if changed then saveConfig() end
+    changed, config.DialogueMinSeconds = imgui.slider_int(
+        "Short dialogue display seconds", config.DialogueMinSeconds, 2, 8)
+    if changed then saveConfig() end
 
     imgui.spacing()
 
@@ -841,6 +904,7 @@ re.on_script_reset(function()
     pawnHud         = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
     talkTracker     = {
         target = nil, eventTarget = nil, eventAt = 0, prompt = nil, promptAt = 0,
-        wasTalking = false, active = false, source = "none", hookStatus = talkTracker.hookStatus
+        wasTalking = false, active = false, source = "none", hookStatus = talkTracker.hookStatus,
+        eventSerial = 0, handledEventSerial = 0, visibleUntil = 0
     }
 end)

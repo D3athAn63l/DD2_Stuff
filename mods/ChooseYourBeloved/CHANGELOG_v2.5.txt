@@ -1,0 +1,7 @@
+Choose Your Beloved v2.5 — 15 Oct 2026 (experimental)
+- Fix X=42px hardcoded HUD position; centered 50% X / 12% Y with slider controls.
+- Fix one-line NPC responses vanishing immediately; minimum 4 seconds (config 2–8).
+- Support a verified Arisen dialogue event even without sustained IsPlayerTalking flag.
+- Guard against stale conversation targets; prompts alone never trigger.
+- Preserve special Main Pawn tint and read-only favorability, NPC rules and change toast.
+- Local Lua mock tests pass; in-game compatibility to be tested.
