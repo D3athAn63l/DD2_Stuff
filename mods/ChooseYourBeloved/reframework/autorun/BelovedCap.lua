@@ -1,7 +1,9 @@
 -- =============================================================================
--- BelovedCap  v2.1
+-- BelovedCap  v2.2
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.2: Separate, read-only Main Pawn favorability menu/HUD; NPC rules unchanged.
 --
 -- v2.1: Keeps the core LOCK/UNLOCK model. Adds a compact built-in HUD above
 -- the NPC closest to the camera centre, and opt-in affinity-loss protection
@@ -14,7 +16,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.1"
+local modVersion = "2.2"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -26,6 +28,7 @@ local defaultConfig = {
     UnlockedNPCs         = {},
     PreventDecay         = true,
     ShowFloatingBar      = true,
+    ShowMainPawnFloatingBar = true,
     CheatModeEnabled     = false,
     ManualAffinityChange = 50,
 }
@@ -45,7 +48,7 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
@@ -265,6 +268,112 @@ local function drawHeart(cx, cy, size, color)
     end
 end
 
+-- ---------------------------------------------------------------------------
+-- MAIN PAWN FAVORABILITY (read-only; deliberately separate from NPC sentiment)
+-- Uses the native MainPawnDataContext rating. No setters, rewards, cap or
+-- anti-decay logic is ever applied to the Main Pawn. Plays nicely with mods
+-- such as Johanne Affinity that award legitimate in-game favorability.
+-- ---------------------------------------------------------------------------
+local PAWN_FAVORABILITY_MAX = 1000
+local PAWN_BLUSH_THRESHOLD = 620
+local pawnState = { value = nil, character = nil, name = "Main Pawn", status = "Not checked" }
+
+local function safePawnAccess(callback)
+    local ok, value = pcall(callback)
+    if ok then return value end
+    return nil
+end
+
+local function refreshMainPawnStatus()
+    -- Always replace state: do not display a value from the previous save,
+    -- an absent pawn, or a failed scene-transition read as if it were current.
+    local state = { value = nil, character = nil, name = "Main Pawn", status = "Main Pawn unavailable" }
+    pawnState = state
+    local manager = safePawnAccess(function()
+        return sdk.get_managed_singleton("app.PawnManager")
+    end)
+    if not manager then return end
+
+    local mainPawn = safePawnAccess(function() return manager:get_MainPawn() end)
+        or safePawnAccess(function() return manager:call("get_MainPawn") end)
+    if not mainPawn then return end
+
+    state.character = safePawnAccess(function() return mainPawn:get_CachedCharacter() end)
+        or safePawnAccess(function() return mainPawn:call("get_CachedCharacter") end)
+    if state.character then
+        local id = safePawnAccess(function() return state.character:get_CharaID() end)
+        if id then
+            local resolved = safePawnAccess(function() return translateCharacterName(id) end)
+            if type(resolved) == "string" and resolved ~= "" and resolved ~= "Unknown" then
+                state.name = resolved
+            end
+        end
+    end
+
+    local context = safePawnAccess(function() return mainPawn.MainPawnDataContext end)
+        or safePawnAccess(function() return mainPawn:get_field("MainPawnDataContext") end)
+        or safePawnAccess(function() return mainPawn:call("get_MainPawnDataContext") end)
+    if not context then
+        state.status = "Main Pawn data is not loaded"
+        return
+    end
+
+    local raw = safePawnAccess(function() return context:get_FavorabilityRating() end)
+        or safePawnAccess(function() return context:call("get_FavorabilityRating") end)
+        or safePawnAccess(function() return context:get_field("_FavorabilityRating") end)
+    local value = tonumber(raw)
+    if not value or value ~= value or math.abs(value) >= 1000000 then
+        state.status = "FavorabilityRating unavailable"
+        return
+    end
+    state.value = math.floor(value + 0.5)
+    state.status = "OK"
+end
+
+local function drawMainPawnAffinity()
+    if not config.ShowMainPawnFloatingBar or not pawnState.character or not pawnState.value then return end
+    if not draw or not draw.world_to_screen or not draw.filled_rect or not draw.text then return end
+    -- We only overlay when facing a nearby pawn; off-screen, loading or
+    -- despawned characters are harmlessly skipped without modifying game data.
+    pcall(function()
+        local manager = getCharacterManager()
+        local player = manager and manager:get_ManualPlayer()
+        if not player then return end
+        local playerPos = player:get_GameObject():get_Transform():get_Position()
+        local pawnTransform = pawnState.character:get_GameObject():get_Transform()
+        local pawnPos = pawnTransform:get_Position()
+        if not playerPos or not pawnPos then return end
+        local dx = pawnPos.x - playerPos.x
+        local dy = pawnPos.y - playerPos.y
+        local dz = pawnPos.z - playerPos.z
+        if dx * dx + dy * dy + dz * dz > 64 then return end
+        local head = pawnTransform:getJointByName("Head_0")
+        if not head then return end
+        local headPos = head:get_Position()
+        if not headPos then return end
+        headPos.y = headPos.y + 0.65
+        local pt = draw.world_to_screen(headPos)
+        local size = imgui.get_display_size()
+        if not pt or not size or not size.x or not size.y or size.x <= 0 or size.y <= 0 then return end
+        local nx = math.abs(pt.x - size.x * 0.5) / size.x
+        local ny = math.abs(pt.y - size.y * 0.5) / size.y
+        if nx > 0.28 or ny > 0.34 then return end
+
+        local value = pawnState.value
+        local ratio = math.max(0, math.min(1, value / PAWN_FAVORABILITY_MAX))
+        local tint = value >= PAWN_BLUSH_THRESHOLD and 0xFF9C74E9 or 0xFF92C9D6
+        local x, y = pt.x - 63, pt.y
+        draw.filled_rect(x - 3, y - 3, 132, 16, 0xD0181818)
+        draw.filled_rect(x, y, 126, 10, 0xFF424242)
+        if ratio > 0 then draw.filled_rect(x, y, 126 * ratio, 10, tint) end
+        draw.filled_rect(x + 126 * PAWN_BLUSH_THRESHOLD / PAWN_FAVORABILITY_MAX,
+            y - 2, 2, 14, 0xCCB5B5B5)
+        draw.text("MAIN PAWN " .. tostring(value) .. " / " .. tostring(PAWN_FAVORABILITY_MAX),
+            x, y - 18, 0xFFF8F5EB)
+        if draw.filled_quad then drawHeart(x - 14, y + 4, 23, tint) end
+    end)
+end
+
 local function drawOverlay()
     if not config.Enabled or not config.ShowFloatingBar or not overlayTarget then return end
     if not draw or not draw.filled_rect or not draw.world_to_screen then return end
@@ -349,14 +458,23 @@ end
 
 re.on_frame(function()
     local dt = getDeltaTime()
-    if not config.Enabled then overlayTarget = nil; return end
     checkTimer = checkTimer + dt
     if checkTimer >= checkInterval then
         checkTimer = 0
-        local ok = pcall(runAffinityScan)
-        if not ok then overlayTarget = nil end
+        -- Read the Main Pawn even if the NPC affinity cap is disabled.
+        local ok = pcall(refreshMainPawnStatus)
+        if not ok then
+            pawnState = { value = nil, character = nil, name = "Main Pawn", status = "Read error" }
+        end
+        if config.Enabled then
+            local scanOK = pcall(runAffinityScan)
+            if not scanOK then overlayTarget = nil end
+        else
+            overlayTarget = nil
+        end
     end
-    drawOverlay()
+    if config.Enabled then drawOverlay() end
+    drawMainPawnAffinity()
 end)
 
 -- ---------------------------------------------------------------------------
@@ -429,6 +547,26 @@ re.on_draw_ui(function()
 
     imgui.spacing()
 
+    -- Main Pawn uses native FavorabilityRating (0..1000), NOT NPC SentimentInfo.
+    -- Its UI remains available even when NPC affinity capping is disabled.
+    imgui.separator()
+    if imgui.tree_node("Main Pawn Affinity (Read-only)") then
+        changed, config.ShowMainPawnFloatingBar = imgui.checkbox(
+            "Show Floating Main Pawn Affinity", config.ShowMainPawnFloatingBar)
+        if changed then saveConfig() end
+        if pawnState.value ~= nil then
+            imgui.text(pawnState.name .. ": " .. pawnState.value .. " / " .. PAWN_FAVORABILITY_MAX)
+            if pawnState.value >= PAWN_BLUSH_THRESHOLD then
+                imgui.text_colored("Blushing threshold reached (620)", 0xFF9C74E9)
+            else
+                imgui.text("Until blushing threshold: " .. (PAWN_BLUSH_THRESHOLD - pawnState.value))
+            end
+        else
+            imgui.text("Main Pawn affinity unavailable (" .. pawnState.status .. ")")
+        end
+        imgui.text("Display only. NPC caps, anti-loss and cheat controls do not apply to your pawn.")
+        imgui.tree_pop()
+    end
     -- ── Cheat Mode ──────────────────────────────────────────────────────────
     if imgui.tree_node("Cheat Mode Settings") then
         imgui.text_colored("Warning: Modifying affinity directly.", 0xFF60609C)
@@ -565,4 +703,5 @@ re.on_script_reset(function()
     npcSearchFilter = ""
     _charMgr        = nil
     _npcMgr         = nil
+    pawnState       = { value = nil, character = nil, name = "Main Pawn", status = "Not checked" }
 end)
