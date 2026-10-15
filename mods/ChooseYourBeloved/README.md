@@ -1,32 +1,26 @@
-# Choose Your Beloved v2.3 — contextual Main Pawn affinity HUD (experimental)
+# Choose Your Beloved v2.4 — one global affinity HUD (experimental)
 
-Maintains the known-working v2.2 native, read-only Main Pawn favorability display (0–1000) and all v2.1 NPC features unchanged. Owner tested v2.2 successfully in-game on 15 October 2026 and asked to avoid a permanently visible pawn bar.
+The Main Pawn reader in v2.2 was confirmed working by the owner. Version 2.4 consolidates conversational affinity into **one shared screen-fixed HUD**, for an NPC OR Main Pawn, and adds independent off-screen affinity change notifications.
 
-## Visibility modes
+## How the shared HUD works
 
-- **Changes (default):** floating bar appears for 5 seconds (configurable 2–12) when the loaded Main Pawn's numeric FavorabilityRating actually changes. Displays the delta (+/-) and current total. Initial load, unavailable pawn, and scene transition don't cause a false popup.
-- **Talk:** short temporary window after a matching Arisen ↔ Main Pawn `app.TalkEventManager.selectTalkEvent` hook. Experimental: it detects the start of dialogue, not precisely when the conversation ends. The hook must be available on your REFramework/TDB build; diagnostic appears in REFramework.
-- **Either:** trigger on change OR Arisen↔Pawn talk event.
-- **Always:** previous v2.2 behavior (nearby and camera-centred).
+- Only shown when `app.InteractManager.IsPlayerTalking` reports true **and** a conversation target can be identified. Disappears when the talking flag becomes false.
+- Observational `app.TalkEventManager.selectTalkEvent` hook identifies the Arisen's conversational partner. A recent `app.ui021301.reqDisp(via.GameObject, ...)` character prompt is a guarded fallback.
+- The HUD uses a shared layout and still selects distinctive colors per target: Main Pawn cyan/purple (620 reference threshold); NPC uses capped/unlocked/negative colors. No more always-on HUD just because your pawn follows you.
+- `ShowFloatingBar` controls NPC conversation affinity; `ShowMainPawnFloatingBar` controls pawn conversation affinity. Main Pawn's live 0–1000 value remains readable through the REFramework menu independently of NPC enable/disable.
 
-Main Pawn HUD remains optionally disabled via **Show Floating Main Pawn Affinity**, independently of these modes. The always-accessible numeric value is displayed in the REFramework > BelovedCap > Main Pawn Affinity (Read-only) menu regardless of HUD mode. Range, 620 reference threshold, and NPC features are preserved.
+## Main Pawn affinity toast
 
-## Implementation
+- Optional screen-fixed `MAIN PAWN +5 (625/1000)` appears even when the pawn is off-screen. Display lasts 2–12 seconds (default five).
+- `ShowPawnChangeToast` is enabled by default. Initial read, absent data, and pawn unload do not generate false changes.
+- This only **reads** the native `FavorabilityRating`; Johanne Affinity remains free to award points. No affinity setter, gameplay hook, modifier, cooldown, or NPC cap is added.
 
-The native reader still polls every ~0.25 seconds. No pawn favorability values, cooldowns, NPC caps or save slots are changed by the new feature. The conversation trigger installs an **observational** SDK hook for reflected `selectTalkEvent` overloads, checks that the speaker/listener are the Arisen and Main Pawn, and starts a configurable wall-clock time window. The hook does not alter arguments or return values. If the dialogue API is unavailable, Changes and Always still work.
+## Migration and testing
 
-Johanne Affinity can continue to grant Main Pawn affinity; Changes watches the final native rating rather than individual events. AffinityAnywhere is not required and is not bundled. Original reference source is not copied.
+Back up your save and `reframework/data/BelovedCap.json`. Replace the old `reframework/autorun/BelovedCap.lua`, then fully restart DD2. Previous unlock settings and HUD on/off toggles persist. The experimental v2.3 `PawnHudMode` setting is intentionally ignored in favor of actual dialogue state plus independent toast.
 
-## Installation / rollback
+To test: speak to an ordinary NPC and then your Main Pawn; verify each appears in the same HUD location, with correct color and value. End the conversations and confirm the HUD goes away. Use a Johanne combat reward to verify the off-screen pawn change toast. The REFramework Main Pawn menu shows hook diagnostics (observers/target source). If a game build doesn't expose target information, the bar hides rather than guessing.
 
-1. Back up saves and `reframework/data/BelovedCap.json`.
-2. Replace `reframework/autorun/BelovedCap.lua` from the ZIP (don't install two copies).
-3. Fully restart DD2 and open **REFramework > BelovedCap > Main Pawn Affinity (Read-only)** to cycle modes.
-4. To roll back, restore v2.2 Lua and choose the old Show Floating option; newer config keys are ignored by v2.2.
+## Evidence
 
-## Testing status
-
-- v2.2 Main Pawn read/display: **owner confirmed working in game**, including alongside their stated mod setup.
-- v2.3 event-driven HUD, live Talk hook, overlays during dialogue and multi-save transitions: **unverified in-game**. These require a fresh on-device test before merge.
-- For changes, first establish a baseline after loading. Then cause a genuine +1/+2/etc affinity event (for example via Johanne's gameplay actions); check that the bar disappears automatically afterward.
-- Talk windows may be invisible in dialogue scenes if the game's world-to-screen rendering is suppressed; use the diagnostic to distinguish hook absence from overlay visibility.
+The new contextual block passed 12 mocked Lua 5.4 behavior checks (talk gate, NPC/pawn identity, prompt fallback, change+expiry, unloaded pawn). The separate integrated Main Pawn test has updated assertions. **Live dialogue hooking and the combined mod remain unverified in your game.** Affinity Bar and AffinityAnywhere were consulted only for API behavior; their code and assets are not bundled or copied.

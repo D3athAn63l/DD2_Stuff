@@ -1,10 +1,12 @@
 -- =============================================================================
--- BelovedCap  v2.3
+-- BelovedCap  v2.4
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
 --
--- v2.3: Main Pawn HUD modes: affinity-change pop-up, talk window, both, always.
--- Uses read-only native rating plus optional dialogue-start signal; NPC unchanged.
+-- v2.4: One shared conversational NPC/Main Pawn HUD and pawn change toast.
+-- Live talking-state gate plus observational interaction target tracking.
+--
+-- v2.3: Experimental overhead popup and talk timer (superseded).
 --
 -- v2.2: Separate, read-only Main Pawn favorability menu/HUD; NPC rules unchanged.
 --
@@ -19,7 +21,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.3"
+local modVersion = "2.4"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -32,8 +34,8 @@ local defaultConfig = {
     PreventDecay         = true,
     ShowFloatingBar      = true,
     ShowMainPawnFloatingBar = true,
-    PawnHudMode          = "Changes", -- Changes, Talk, Either, Always
     PawnHudSeconds       = 5,
+    ShowPawnChangeToast  = true,
     CheatModeEnabled     = false,
     ManualAffinityChange = 50,
 }
@@ -53,16 +55,12 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
     end
 
-    local modes = { Changes = true, Talk = true, Either = true, Always = true }
-    if type(config.PawnHudMode) ~= "string" or not modes[config.PawnHudMode] then
-        config.PawnHudMode = defaultConfig.PawnHudMode
-    end
     if type(config.PawnHudSeconds) ~= "number"
         or config.PawnHudSeconds ~= config.PawnHudSeconds then
         config.PawnHudSeconds = defaultConfig.PawnHudSeconds
@@ -179,7 +177,6 @@ local baselinePlayerKey = nil
 local checkTimer = 0
 local checkInterval = 0.25
 local lastFrameTime = os.clock()
-local overlayTarget = nil
 
 local function getDeltaTime()
     if reframework and type(reframework.get_delta_time) == "function" then
@@ -195,7 +192,6 @@ end
 
 local function resetBaselines()
     sessionHighs = {}
-    overlayTarget = nil
 end
 
 local function checkPlayerSession(player)
@@ -230,38 +226,6 @@ local function applyCapAndProtection(info, key)
     elseif current < remembered then
         info.Value = remembered
     end
-end
-
--- Choose a single nearby NPC whose head is close to the screen centre.
--- Screen centre is a cheap, hook-free approximation for 'NPC I'm facing'.
--- A selected NPC is cached only until the next 0.25s scan.
-local function findOverlayTarget(holder, playerPos, screenW, screenH, best)
-    local char = holder:get_CachedCharacter()
-    if not char then return best end
-    local holderPos = holder:get_Position()
-    if not holderPos or not playerPos then return best end
-    local dx = holderPos.x - playerPos.x
-    local dy = holderPos.y - playerPos.y
-    local dz = holderPos.z - playerPos.z
-    local distSquared = dx * dx + dy * dy + dz * dz
-    if distSquared > 64 then return best end -- 8m max
-    local go = char:get_GameObject()
-    local transform = go and go:get_Transform()
-    if not transform then return best end
-    local joint = transform:getJointByName("Head_0")
-    local pos = joint and joint:get_Position()
-    if not pos then return best end
-    pos.y = pos.y + 0.65
-    local pt = draw.world_to_screen(pos)
-    if not pt then return best end
-    local nx = math.abs(pt.x - screenW / 2) / screenW
-    local ny = math.abs(pt.y - screenH / 2) / screenH
-    if nx > 0.28 or ny > 0.34 then return best end
-    local score = nx * nx * 3 + ny * ny + distSquared / 700
-    if not best or score < best.score then
-        return { character = char, id = getPermanentID(holder.CharaID), score = score }
-    end
-    return best
 end
 
 -- Compact, asset-free heart. Heart outline follows the usual parametric curve;
@@ -347,222 +311,265 @@ local function refreshMainPawnStatus()
 end
 
 
--- Show a temporary HUD only for real observed changes. The first successful
--- read after loading a pawn establishes a baseline; it is NOT a +X event.
--- Wall clock (os.time) is intentional: os.clock measures CPU time, which can
--- leave a five-second notification on screen for minutes on a quiet process.
-local pawnHud = { previous = nil, changeEnds = 0, talkEnds = 0, delta = 0 }
-local pawnTalkHookStatus = "Not installed"
+-- BEGIN CONTEXTUAL HUD v2.4
+-- Choose Your Beloved 2.4 -- contextual, read-only HUD extension.
+-- This block is spliced after refreshMainPawnStatus() in BelovedCap.lua.
+-- Original NPC sentiment enforcement remains in the parent mod.
+local pawnHud = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
+local talkTracker = {
+    target = nil, eventTarget = nil, eventAt = 0, prompt = nil, promptAt = 0,
+    wasTalking = false, active = false, source = "none", hookStatus = "Not installed"
+}
 
-local function pawnHudNow()
-    local ok, value = pcall(function() return os.time() end)
-    if ok and type(value) == "number" then return value end
-    return os.clock()
+local function hudNow()
+    -- Monotonic precision is not exposed by all DD2 REFramework builds. A
+    -- wall-clock seconds timer gives reliable expiry without os.clock CPU drift.
+    return os.time()
+end
+
+local function characterKey(character)
+    if not character then return nil end
+    local id = safePawnAccess(function() return character:get_CharaID() end)
+    if not id then return nil end
+    return getPermanentID(id)
+end
+
+local function sameHudCharacter(a, b)
+    if not a or not b then return false end
+    if a == b then return true end
+    local ak, bk = characterKey(a), characterKey(b)
+    return ak ~= nil and bk ~= nil and ak == bk
 end
 
 local function trackMainPawnChanges()
     local value = pawnState.value
-    if value == nil then
+    local key = characterKey(pawnState.character)
+    if value == nil or not key then
         pawnHud.previous = nil
+        pawnHud.pawnKey = nil
+        pawnHud.delta = 0
         pawnHud.changeEnds = 0
-        pawnHud.talkEnds = 0
+        return
+    end
+    if pawnHud.pawnKey ~= key then
+        pawnHud.previous = value  -- a fresh pawn/save read is a baseline, not a gain
+        pawnHud.pawnKey = key
+        pawnHud.changeEnds = 0
         pawnHud.delta = 0
         return
     end
-    if pawnHud.previous ~= nil and value ~= pawnHud.previous then
+    if pawnHud.previous ~= nil and pawnHud.previous ~= value then
         pawnHud.delta = value - pawnHud.previous
-        pawnHud.changeEnds = pawnHudNow() + config.PawnHudSeconds
+        pawnHud.changeEnds = hudNow() + config.PawnHudSeconds
     end
     pawnHud.previous = value
 end
 
-local function shouldDisplayPawnHUD()
-    if not config.ShowMainPawnFloatingBar or pawnState.value == nil then return false end
-    local mode = config.PawnHudMode
-    if mode == "Always" then return true end
-    local now = pawnHudNow()
-    local changed = now < pawnHud.changeEnds
-    local talking = now < pawnHud.talkEnds
-    if mode == "Changes" then return changed end
-    if mode == "Talk" then return talking end
-    if mode == "Either" then return changed or talking end
-    return false
+local function safeHook(method, before)
+    if not method or type(sdk.hook) ~= "function" then return false end
+    local success = pcall(function()
+        sdk.hook(method, function(args)
+            pcall(before, args)
+        end, function(retval) return retval end)
+    end)
+    return success
 end
 
-local function sameCharacter(a, b)
-    if not a or not b then return false end
-    if a == b then return true end
-    local aId = safePawnAccess(function() return a:get_CharaID() end)
-    local bId = safePawnAccess(function() return b:get_CharaID() end)
-    return aId ~= nil and bId ~= nil and getPermanentID(aId) == getPermanentID(bId)
-end
-
--- Experimental dialogue-start detection. There is no verified "dialogue has
--- ended" signal here, so this is a short talk window, not exact talk duration.
--- Args[3]/args[4] are expected to be speaking/listening app.Character objects,
--- as observed in an independently inspected mod; verify on the local TDB.
-local function installPawnTalkHooks()
-    if type(sdk.hook) ~= "function" then
-        pawnTalkHookStatus = "sdk.hook unavailable"
-        return
-    end
-    local td = safePawnAccess(function()
+local function installConversationObservers()
+    local installed, promptInstalled = 0, false
+    -- Source identity via selectTalkEvent: only recognize a conversation when
+    -- one explicit speaker/listener is the Arisen. No reward/cooldown hooks.
+    local talkType = safePawnAccess(function()
         return sdk.find_type_definition("app.TalkEventManager")
     end)
-    if not td then
-        pawnTalkHookStatus = "TalkEventManager unavailable"
-        return
-    end
-    local methods = safePawnAccess(function() return td:get_methods() end)
-    if not methods then
-        pawnTalkHookStatus = "Talk methods unavailable"
-        return
-    end
-    local installed = 0
-    for _, method in ipairs(methods) do
-        local name = safePawnAccess(function() return method:get_name() end)
-        if name == "selectTalkEvent" then
-            local hooked = pcall(function()
-                sdk.hook(method, function(args)
-                    pcall(function()
+    if talkType then
+        local methods = safePawnAccess(function() return talkType:get_methods() end)
+        if methods then
+            for _, method in ipairs(methods) do
+                if safePawnAccess(function() return method:get_name() end) == "selectTalkEvent" then
+                    if safeHook(method, function(args)
                         if not args then return end
-                        local speaker = sdk.to_managed_object(args[3])
-                        local listener = sdk.to_managed_object(args[4])
-                        local charMgr = getCharacterManager()
-                        local arisen = charMgr and charMgr:get_ManualPlayer()
-                        local pawn = pawnState.character
-                        if not speaker or not listener or not arisen or not pawn then return end
-                        local isPair = (sameCharacter(speaker, arisen)
-                            and sameCharacter(listener, pawn))
-                            or (sameCharacter(listener, arisen)
-                            and sameCharacter(speaker, pawn))
-                        if isPair then
-                            pawnHud.talkEnds = pawnHudNow() + config.PawnHudSeconds
+                        local first = sdk.to_managed_object(args[3])
+                        local second = sdk.to_managed_object(args[4])
+                        local manager = getCharacterManager()
+                        local player = manager and manager:get_ManualPlayer()
+                        if not player then return end
+                        local target = nil
+                        if sameHudCharacter(first, player) and second then target = second end
+                        if sameHudCharacter(second, player) and first then target = first end
+                        if target and characterKey(target) then
+                            talkTracker.eventTarget = target
+                            talkTracker.eventAt = hudNow()
+                            -- A new event can update the target mid-conversation.
+                            if talkTracker.active then
+                                talkTracker.target = target
+                                talkTracker.source = "talk event"
+                            end
                         end
-                    end)
-                end, function(retval) return retval end)
-            end)
-            if hooked then installed = installed + 1 end
+                    end) then installed = installed + 1 end
+                end
+            end
         end
     end
-    pawnTalkHookStatus = installed > 0 and
-        ("Hooked " .. tostring(installed) .. " dialogue overload(s)") or
-        "No compatible selectTalkEvent hook"
+    -- Fallback for versions where a dialogue event does not identify speakers.
+    -- Prompt tracking alone never triggers the HUD: IsPlayerTalking must be true.
+    local uiType = safePawnAccess(function()
+        return sdk.find_type_definition("app.ui021301")
+    end)
+    local charType = safePawnAccess(function()
+        return sdk.find_type_definition("app.Character")
+    end)
+    if uiType and charType then
+        local method = safePawnAccess(function()
+            return uiType:get_method("reqDisp(via.GameObject, System.Single, System.Guid)")
+        end)
+        promptInstalled = safeHook(method, function(args)
+            if not args then return end
+            local obj = sdk.to_managed_object(args[3])
+            if not obj then return end
+            local rt = charType:get_runtime_type()
+            local target = obj:call("getComponent(System.Type)", rt)
+            if target and characterKey(target) then
+                talkTracker.prompt = target
+                talkTracker.promptAt = hudNow()
+            end
+        end)
+    end
+    talkTracker.hookStatus = string.format("talk: %d, prompt: %s", installed,
+        promptInstalled and "yes" or "no")
 end
-installPawnTalkHooks()
+installConversationObservers()
 
-local function drawMainPawnAffinity()
-    if not config.ShowMainPawnFloatingBar or not pawnState.character or not pawnState.value then return end
-    if not shouldDisplayPawnHUD() then return end
-    if not draw or not draw.world_to_screen or not draw.filled_rect or not draw.text then return end
-    -- We only overlay when facing a nearby pawn; off-screen, loading or
-    -- despawned characters are harmlessly skipped without modifying game data.
-    pcall(function()
-        local manager = getCharacterManager()
-        local player = manager and manager:get_ManualPlayer()
-        if not player then return end
-        local playerPos = player:get_GameObject():get_Transform():get_Position()
-        local pawnTransform = pawnState.character:get_GameObject():get_Transform()
-        local pawnPos = pawnTransform:get_Position()
-        if not playerPos or not pawnPos then return end
-        local dx = pawnPos.x - playerPos.x
-        local dy = pawnPos.y - playerPos.y
-        local dz = pawnPos.z - playerPos.z
-        if dx * dx + dy * dy + dz * dz > 64 then return end
-        local head = pawnTransform:getJointByName("Head_0")
-        if not head then return end
-        local headPos = head:get_Position()
-        if not headPos then return end
-        headPos.y = headPos.y + 0.65
-        local pt = draw.world_to_screen(headPos)
-        local size = imgui.get_display_size()
-        if not pt or not size or not size.x or not size.y or size.x <= 0 or size.y <= 0 then return end
-        local nx = math.abs(pt.x - size.x * 0.5) / size.x
-        local ny = math.abs(pt.y - size.y * 0.5) / size.y
-        if nx > 0.28 or ny > 0.34 then return end
-
-        local value = pawnState.value
-        local ratio = math.max(0, math.min(1, value / PAWN_FAVORABILITY_MAX))
-        local tint = value >= PAWN_BLUSH_THRESHOLD and 0xFF9C74E9 or 0xFF92C9D6
-        local x, y = pt.x - 63, pt.y
-        draw.filled_rect(x - 3, y - 3, 132, 16, 0xD0181818)
-        draw.filled_rect(x, y, 126, 10, 0xFF424242)
-        if ratio > 0 then draw.filled_rect(x, y, 126 * ratio, 10, tint) end
-        draw.filled_rect(x + 126 * PAWN_BLUSH_THRESHOLD / PAWN_FAVORABILITY_MAX,
-            y - 2, 2, 14, 0xCCB5B5B5)
-        local caption = "MAIN PAWN " .. tostring(value) .. " / " .. tostring(PAWN_FAVORABILITY_MAX)
-        if pawnHudNow() < pawnHud.changeEnds and pawnHud.delta ~= 0 then
-            local sign = pawnHud.delta > 0 and "+" or ""
-            caption = "MAIN PAWN " .. sign .. tostring(pawnHud.delta)
-                .. " (" .. tostring(value) .. " / " .. tostring(PAWN_FAVORABILITY_MAX) .. ")"
+local function activeTalkTarget()
+    local interact = safePawnAccess(function()
+        return sdk.get_managed_singleton("app.InteractManager")
+    end)
+    local flag = interact and safePawnAccess(function()
+        return interact:get_field("IsPlayerTalking")
+    end)
+    if flag ~= true then
+        if talkTracker.wasTalking then
+            talkTracker.target = nil
+            talkTracker.eventTarget = nil
+            talkTracker.eventAt = 0
         end
-        draw.text(caption, x, y - 18, 0xFFF8F5EB)
-        if draw.filled_quad then drawHeart(x - 14, y + 4, 23, tint) end
+        talkTracker.wasTalking = false
+        talkTracker.active = false
+        talkTracker.source = "none"
+        return nil
+    end
+    local now = hudNow()
+    local manager = getCharacterManager()
+    local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
+    if not player then return nil end
+    if not talkTracker.wasTalking then
+        talkTracker.target = nil
+        if talkTracker.eventTarget and now - talkTracker.eventAt <= 6 then
+            talkTracker.target = talkTracker.eventTarget
+            talkTracker.source = "talk event"
+        elseif talkTracker.prompt and now - talkTracker.promptAt <= 3 then
+            talkTracker.target = talkTracker.prompt
+            talkTracker.source = "interaction prompt"
+        end
+    end
+    talkTracker.wasTalking = true
+    talkTracker.active = true
+    -- A dialogue selected after the first talking frame may identify the
+    -- partner better than the prompt's last advertised target.
+    if talkTracker.eventTarget and now - talkTracker.eventAt <= 6 and
+        not sameHudCharacter(talkTracker.eventTarget, talkTracker.target) then
+        talkTracker.target = talkTracker.eventTarget
+        talkTracker.source = "talk event"
+    end
+    if sameHudCharacter(talkTracker.target, player) then return nil end
+    return talkTracker.target
+end
+
+local function readGlobalAffinity(character)
+    if not character then return nil end
+    if pawnState.character and sameHudCharacter(character, pawnState.character) then
+        if not config.ShowMainPawnFloatingBar or pawnState.value == nil then return nil end
+        local value = pawnState.value
+        return {
+            name = pawnState.name or "Main Pawn", value = value, max = PAWN_FAVORABILITY_MAX,
+            tint = value >= PAWN_BLUSH_THRESHOLD and 0xFF9C74E9 or 0xFF92C9D6,
+            threshold = PAWN_BLUSH_THRESHOLD, pawn = true
+        }
+    end
+    if not config.Enabled or not config.ShowFloatingBar then return nil end
+    local charId = safePawnAccess(function() return character:get_CharaID() end)
+    local charMgr, npcMgr = getCharacterManager(), getNPCManager()
+    local player = charMgr and safePawnAccess(function() return charMgr:get_ManualPlayer() end)
+    local holder = npcMgr and charId and safePawnAccess(function()
+        return npcMgr:getNPCHolder(charId)
+    end)
+    local info = holder and player and safePawnAccess(function()
+        return holder:getSentimentInfo(player:get_CharaID(), false)
+    end)
+    local value = info and tonumber(info.Value)
+    if not value then return nil end
+    local unlocked = config.UnlockedNPCs[getPermanentID(charId)] == true
+    local max = unlocked and 299 or config.CapValue
+    return {
+        name = translateCharacterName(charId), value = value, max = max,
+        tint = value < 0 and 0xFF5A5ADD or
+            (value >= 200 and 0xFF9C74E9 or (unlocked and 0xFF84CE95 or 0xFFBBB9A9)),
+        threshold = unlocked and 200 or nil, pawn = false
+    }
+end
+
+local function drawGlobalAffinityHUD()
+    if not draw or not draw.filled_rect or not draw.text then return end
+    local target = activeTalkTarget()
+    local info = target and readGlobalAffinity(target)
+    if not info then return end
+    pcall(function()
+        local size = imgui.get_display_size()
+        if not size or not size.x or not size.y or size.x < 320 or size.y < 280 then return end
+        local x, y, w = 42, math.floor(size.y * 0.73), 195
+        local value, max = info.value, math.max(1, info.max)
+        local ratio = value >= 0 and math.min(1, value / max)
+            or math.min(1, -value / 199)
+        draw.filled_rect(x - 8, y - 29, w + 20, 54, 0xD0181818)
+        draw.filled_rect(x, y + 4, w, 12, 0xFF424242)
+        if ratio > 0 then draw.filled_rect(x, y + 4, w * ratio, 12, info.tint) end
+        if info.threshold then
+            draw.filled_rect(x + w * info.threshold / max, y + 1, 2, 17, 0xCCB5B5B5)
+        end
+        local prefix = info.pawn and "PAWN " or "NPC "
+        draw.text(prefix .. tostring(info.name) .. "  " .. tostring(math.floor(value))
+            .. " / " .. tostring(max), x, y - 21, 0xFFF8F5EB)
+        if draw.filled_quad then drawHeart(x + w + 7, y + 9, 20, info.tint) end
     end)
 end
 
-local function drawOverlay()
-    if not config.Enabled or not config.ShowFloatingBar or not overlayTarget then return end
-    if not draw or not draw.filled_rect or not draw.world_to_screen then return end
-    local ok, err = pcall(function()
-        local char = overlayTarget.character
-        local go = char and char:get_GameObject()
-        local tf = go and go:get_Transform()
-        local head = tf and tf:getJointByName("Head_0")
-        if not head then return end
-        local p = head:get_Position()
-        p.y = p.y + 0.65
-        local pt = draw.world_to_screen(p)
-        if not pt then return end
-        local npcMgr = getNPCManager()
-        local charMgr = getCharacterManager()
-        local player = charMgr and charMgr:get_ManualPlayer()
-        local holder = npcMgr and npcMgr:getNPCHolder(char:get_CharaID())
-        local info = holder and player and holder:getSentimentInfo(player:get_CharaID(), false)
-        if not info then return end
-        local key = overlayTarget.id
-        local unlocked = config.UnlockedNPCs[key] == true
-        local max = unlocked and 299 or config.CapValue
-        local val = tonumber(info.Value) or 0
-        -- Range for non-negative affection is 0..299 (or 0..cap).
-        -- Negative sentiment is shown by a red bar with magnitude up to -199.
-        local ratio = val >= 0 and math.min(1, val / math.max(1, max))
-            or math.min(1, -val / 199)
-        local label = (unlocked and "UNLOCKED " or "LOCKED ")
-            .. tostring(math.floor(val)) .. " / " .. tostring(max)
-        local x, y = pt.x - 63, pt.y
-        local background, border = 0xD0181818, 0xCCB5B5B5
-        local fill = (val < 0) and 0xFF5A5ADD
-            or ((val >= 200) and 0xFF9C74E9 or (unlocked and 0xFF84CE95 or 0xFFBBB9A9))
-        draw.filled_rect(x - 3, y - 3, 132, 16, background)
-        draw.filled_rect(x, y, 126, 10, 0xFF424242)
-        if ratio > 0 then draw.filled_rect(x, y, 126 * ratio, 10, fill) end
-        -- 200 is where DD2's NPC Love rank starts. Mark it only for unlocked NPCs.
-        if unlocked then draw.filled_rect(x + 126 * 200 / 299, y - 2, 2, 14, border) end
-        draw.text(label, x, y - 18, 0xFFF8F5EB)
-        drawHeart(x - 14, y + 4, 23, fill)
+local function drawPawnChangeToast()
+    if not config.ShowPawnChangeToast or pawnState.value == nil then return end
+    if pawnHud.delta == 0 or hudNow() >= pawnHud.changeEnds then return end
+    if not draw or not draw.filled_rect or not draw.text then return end
+    pcall(function()
+        local size = imgui.get_display_size()
+        if not size or not size.x or size.x < 350 then return end
+        local x, y = size.x - 290, 65
+        local sign = pawnHud.delta > 0 and "+" or ""
+        local color = pawnHud.delta > 0 and 0xFF84CE95 or 0xFF5A5ADD
+        draw.filled_rect(x - 7, y - 8, 263, 37, 0xD0181818)
+        draw.text("MAIN PAWN  " .. sign .. tostring(pawnHud.delta)
+            .. "  (" .. tostring(pawnState.value) .. "/1000)", x, y, color)
     end)
-    -- A despawned game object can make the cached target invalid. Hide it
-    -- until the next scan instead of filling the REFramework log every frame.
-    if not ok then overlayTarget = nil end
 end
+-- END CONTEXTUAL HUD v2.4
 
 local function runAffinityScan()
     local charMgr, npcMgr = getCharacterManager(), getNPCManager()
-    if not charMgr or not npcMgr then overlayTarget = nil; return end
+    if not charMgr or not npcMgr then return end
     local player = charMgr:get_ManualPlayer()
-    if not player then overlayTarget = nil; return end
+    if not player then return end
     checkPlayerSession(player)
     local playerID = player:get_CharaID()
     local dic = npcMgr.NPCHolderDic
-    if not dic then overlayTarget = nil; return end
+    if not dic then return end
 
-    local playerPos, size
-    if config.ShowFloatingBar and draw and draw.world_to_screen then
-        pcall(function() playerPos = player:get_GameObject():get_Transform():get_Position() end)
-        pcall(function() size = imgui.get_display_size() end)
-    end
-    local best = nil
     local okLen, length = pcall(function() return dic:get_Length() end)
     if not okLen or not length then return end
     for i = 0, length - 1 do
@@ -574,13 +581,8 @@ local function runAffinityScan()
             local key = getPermanentID(holder.CharaID)
             local info = holder:getSentimentInfo(playerID, false)
             if info then applyCapAndProtection(info, key) end
-            if info and playerPos and size and size.x and size.y
-                and size.x > 0 and size.y > 0 then
-                best = findOverlayTarget(holder, playerPos, size.x, size.y, best)
-            end
         end)
     end
-    overlayTarget = best
 end
 
 re.on_frame(function()
@@ -594,15 +596,10 @@ re.on_frame(function()
             pawnState = { value = nil, character = nil, name = "Main Pawn", status = "Read error" }
         end
         trackMainPawnChanges()
-        if config.Enabled then
-            local scanOK = pcall(runAffinityScan)
-            if not scanOK then overlayTarget = nil end
-        else
-            overlayTarget = nil
-        end
+        if config.Enabled then pcall(runAffinityScan) end
     end
-    if config.Enabled then drawOverlay() end
-    drawMainPawnAffinity()
+    drawGlobalAffinityHUD()
+    drawPawnChangeToast()
 end)
 
 -- ---------------------------------------------------------------------------
@@ -667,10 +664,10 @@ re.on_draw_ui(function()
         imgui.set_tooltip("Natural decay and ALL other decreases are reversed for both LOCKED and UNLOCKED NPCs.\nNatural increases remain allowed. Manual changes via this menu become the new baseline.")
     end
 
-    changed, config.ShowFloatingBar = imgui.checkbox("Show Floating Heart + Affinity Bar", config.ShowFloatingBar)
-    if changed then overlayTarget = nil; saveConfig() end
+    changed, config.ShowFloatingBar = imgui.checkbox("Show NPC Affinity During Conversation", config.ShowFloatingBar)
+    if changed then saveConfig() end
     if imgui.is_item_hovered() then
-        imgui.set_tooltip("Small relationship bar above the nearby NPC closest to screen centre.\nBuilt-in overlay: no extra mods or Direct2D plugins needed.")
+        imgui.set_tooltip("The shared affinity bar appears while you are talking to an NPC.")
     end
 
     imgui.spacing()
@@ -680,31 +677,17 @@ re.on_draw_ui(function()
     imgui.separator()
     if imgui.tree_node("Main Pawn Affinity (Read-only)") then
         changed, config.ShowMainPawnFloatingBar = imgui.checkbox(
-            "Show Floating Main Pawn Affinity", config.ShowMainPawnFloatingBar)
+            "Show Main Pawn Affinity During Conversation", config.ShowMainPawnFloatingBar)
         if changed then saveConfig() end
-        imgui.text("Pawn HUD visibility:")
-        local modes = { "Changes", "Talk", "Either", "Always" }
-        local modeLabels = {
-            Changes = "Only when affinity changes",
-            Talk = "After talking to the Main Pawn (experimental)",
-            Either = "On change OR talking",
-            Always = "Always while nearby"
-        }
-        if imgui.button(modeLabels[config.PawnHudMode] .. "##PawnHudMode") then
-            local nextIndex = 1
-            for i, name in ipairs(modes) do
-                if name == config.PawnHudMode then
-                    nextIndex = i % #modes + 1
-                    break
-                end
-            end
-            config.PawnHudMode = modes[nextIndex]
-            saveConfig()
-        end
+        changed, config.ShowPawnChangeToast = imgui.checkbox(
+            "Notify on Main Pawn Affinity Change", config.ShowPawnChangeToast)
+        if changed then saveConfig() end
         changed, config.PawnHudSeconds = imgui.slider_int(
-            "Pawn HUD seconds", config.PawnHudSeconds, 2, 12)
+            "Notification seconds", config.PawnHudSeconds, 2, 12)
         if changed then saveConfig() end
-        imgui.text("Dialogue trigger: " .. pawnTalkHookStatus)
+        imgui.text("Shared HUD: one target, only during active conversation.")
+        imgui.text("Observers: " .. talkTracker.hookStatus)
+        imgui.text("Target source: " .. talkTracker.source)
         if pawnState.value ~= nil then
             imgui.text(pawnState.name .. ": " .. pawnState.value .. " / " .. PAWN_FAVORABILITY_MAX)
             if pawnState.value >= PAWN_BLUSH_THRESHOLD then
@@ -855,5 +838,9 @@ re.on_script_reset(function()
     _charMgr        = nil
     _npcMgr         = nil
     pawnState       = { value = nil, character = nil, name = "Main Pawn", status = "Not checked" }
-    pawnHud         = { previous = nil, changeEnds = 0, talkEnds = 0, delta = 0 }
+    pawnHud         = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
+    talkTracker     = {
+        target = nil, eventTarget = nil, eventAt = 0, prompt = nil, promptAt = 0,
+        wasTalking = false, active = false, source = "none", hookStatus = talkTracker.hookStatus
+    }
 end)
