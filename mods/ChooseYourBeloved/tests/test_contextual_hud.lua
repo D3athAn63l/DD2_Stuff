@@ -35,7 +35,10 @@ local function getCharacterManager()return manager end
 local function getNPCManager()return npcManager end
 local function getPermanentID(id)return tostring(id)end
 local function translateCharacterName(id)return id==3 and 'Test NPC' or '?'end
-local function drawHeart()end
+local hearts = {}
+local function drawHeart(x, y, size, tint)
+ hearts[#hearts+1]={x=x,y=y,size=size,tint=tint}
+end
 local function clear()for i=#rendered,1,-1 do rendered[i]=nil end;for i=#rectangles,1,-1 do rectangles[i]=nil end end
 local env = {
  sdk=sdk, draw=draw, imgui=imgui, pawnState=pawnState, config=config,
@@ -48,9 +51,9 @@ setmetatable(env,{__index=_G})
 local dir = debug.getinfo(1,'S').source:sub(2):match('^(.*)[/\\]') or '.'
 local path = dir .. '/../reframework/autorun/BelovedCap.lua'
 local fp=assert(io.open(path,'r'));local script=fp:read('*a');fp:close()
-local bi=assert(script:find('-- BEGIN CONTEXTUAL HUD v2.5',1,true),'v2.5 block missing')
-local ei=assert(script:find('-- END CONTEXTUAL HUD v2.5',bi+1,true),'v2.5 end missing')
-local content=script:sub(bi,ei+#'-- END CONTEXTUAL HUD v2.5'-1)
+local bi=assert(script:find('-- BEGIN CONTEXTUAL HUD v2.6',1,true),'v2.5 block missing')
+local ei=assert(script:find('-- END CONTEXTUAL HUD v2.6',bi+1,true),'v2.5 end missing')
+local content=script:sub(bi,ei+#'-- END CONTEXTUAL HUD v2.6'-1)
 content=content..'\nreturn {pawnHud=pawnHud,talkTracker=talkTracker,trackMainPawnChanges=trackMainPawnChanges,drawGlobalAffinityHUD=drawGlobalAffinityHUD,drawPawnChangeToast=drawPawnChangeToast}\n'
 local f=assert(load(content,'mock contextual', 't', env))
 local api=f()
@@ -66,8 +69,12 @@ clear();drawGlobalAffinityHUD();assert(#rendered==0)
 -- A verified pawn talk event + talking flag displays Main Pawn
 registered[method]({[3]=player,[4]=pawn})
 talking=true;clear();drawGlobalAffinityHUD();assert(table.concat(rendered):find('PAWN Gwendolyn',1,true));assert(talkTracker.source=='talk event')
+assert(#hearts==1 and hearts[1].tint==0xFF92C9D6,'cyan heart restored')
+assert(table.concat(rendered):find('BOND',1,true),'pawn status restored')
 -- During conversation, switch to NPC and display NPC using exact same renderer
 registered[method]({[3]=npc,[4]=player});clear();drawGlobalAffinityHUD();assert(table.concat(rendered):find('NPC Test NPC',1,true));assert(not table.concat(rendered):find('PAWN Gwendolyn',1,true))
+assert(hearts[#hearts].tint==0xFFBBB9A9,'NPC locked affinity color retained')
+assert(table.concat(rendered):find('CAPPED',1,true),'NPC lock status retained')
 -- A short conversation must stay visible for at least four seconds.
 clear();talking=false;drawGlobalAffinityHUD();assert(table.concat(rendered):find('NPC Test NPC',1,true),'short NPC line survives temporary IsPlayerTalking=false')
 now=109;clear();drawGlobalAffinityHUD();assert(#rendered==0,'short conversation duration expired')
@@ -98,4 +105,4 @@ assert(rectangles[1].x > 230 and rectangles[1].x < 280,'HUD X position slider')
 assert(rectangles[1].y > 225 and rectangles[1].y < 250,'HUD Y position slider')
 -- Mere nearby prompts, without talking or an Arisen dialogue event, stay hidden.
 now=125;clear();drawGlobalAffinityHUD();assert(#rendered==0,'prompt proximity alone cannot trigger HUD')
-print('PASS: contextual HUD v2.5 simulated talk/bark/grace expiry, no ghost prompt, manual placement, pawn read-only')
+print('PASS: contextual HUD v2.6 classic heart, talk/grace expiry, color, placement, no ghost prompt')

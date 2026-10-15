@@ -1,7 +1,10 @@
 -- =============================================================================
--- BelovedCap  v2.5
+-- BelovedCap  v2.6
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.6: Restores the original heart-and-bar visuals in the shared dialogue HUD.
+-- Target detection, positioning, and short-dialogue timing remain unchanged.
 --
 -- v2.5: Fix HUD placement and generic short-NPC conversation visibility.
 -- Centered default, configurable X/Y, one verified-talk grace window.
@@ -24,7 +27,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.5"
+local modVersion = "2.6"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -330,7 +333,7 @@ local function refreshMainPawnStatus()
 end
 
 
--- BEGIN CONTEXTUAL HUD v2.5
+-- BEGIN CONTEXTUAL HUD v2.6
 -- Choose Your Beloved 2.4 -- contextual, read-only HUD extension.
 -- This block is spliced after refreshMainPawnStatus() in BelovedCap.lua.
 -- Original NPC sentiment enforcement remains in the parent mod.
@@ -566,6 +569,8 @@ local function readGlobalAffinity(character)
     }
 end
 
+-- The classic v2.1 procedural heart-and-bar style, within the v2.5
+-- shared conversational HUD. Target resolution and display timing unchanged.
 local function drawGlobalAffinityHUD()
     if not draw or not draw.filled_rect or not draw.text then return end
     local target = activeTalkTarget()
@@ -575,8 +580,6 @@ local function drawGlobalAffinityHUD()
         local size = imgui.get_display_size()
         if not size or not size.x or not size.y or size.x < 320 or size.y < 280 then return end
         local w = 195
-        -- Center the widget around its configured screen-relative anchor.
-        -- Clamp to safe margins for ultrawide and smaller display resolutions.
         local x = math.max(12, math.min(size.x - w - 24,
             math.floor(size.x * config.HudXPercent * 0.01 - w * 0.5)))
         local y = math.max(42, math.min(size.y - 66,
@@ -584,16 +587,37 @@ local function drawGlobalAffinityHUD()
         local value, max = info.value, math.max(1, info.max)
         local ratio = value >= 0 and math.min(1, value / max)
             or math.min(1, -value / 199)
-        draw.filled_rect(x - 8, y - 29, w + 20, 54, 0xD0181818)
-        draw.filled_rect(x, y + 4, w, 12, 0xFF424242)
-        if ratio > 0 then draw.filled_rect(x, y + 4, w * ratio, 12, info.tint) end
-        if info.threshold then
-            draw.filled_rect(x + w * info.threshold / max, y + 1, 2, 17, 0xCCB5B5B5)
-        end
+        local tint = info.tint
+        local panelX, panelY, panelW = x - 8, y - 29, w + 20
+        local barX, barY, barW = x + 2, y + 19, w - 4
+
+        draw.filled_rect(panelX, panelY, panelW, 64, 0xD41A1D25)
+        draw.filled_rect(panelX, panelY, panelW, 1, 0xA09A9590)
+        draw.filled_rect(panelX, panelY, 3, 64, tint)
+        draw.filled_rect(panelX, panelY + 63, panelW, 1, 0x886B737C)
+        draw.filled_rect(x + 27, y + 4, w - 31, 1, 0x5C9E9C99)
+
+        if draw.filled_quad then drawHeart(x + 9, y - 9, 24, tint) end
         local prefix = info.pawn and "PAWN " or "NPC "
-        draw.text(prefix .. tostring(info.name) .. "  " .. tostring(math.floor(value))
-            .. " / " .. tostring(max), x, y - 21, 0xFFF8F5EB)
-        if draw.filled_quad then drawHeart(x + w + 7, y + 9, 20, info.tint) end
+        local label = prefix .. tostring(info.name or "Unknown")
+        if #label > 22 then label = label:sub(1, 19) .. "..." end
+        draw.text(label, x + 30, y - 21, 0xFFF8F5EB)
+        draw.text(tostring(math.floor(value)) .. " / " .. tostring(max),
+            x + 30, y - 9, 0xFFD9D7D0)
+        local status = info.pawn and "BOND" or
+            (info.threshold == 200 and "FREE" or "CAPPED")
+        draw.text(status, x + w - 54, y - 9, tint)
+
+        draw.filled_rect(barX - 1, barY - 1, barW + 2, 11, 0xAA77756E)
+        draw.filled_rect(barX, barY, barW, 9, 0xFF393C46)
+        if ratio > 0 then
+            draw.filled_rect(barX, barY, barW * ratio, 9, tint)
+            draw.filled_rect(barX, barY, barW * ratio, 2, 0x55FFFFFF)
+        end
+        if info.threshold then
+            local markerX = barX + barW * info.threshold / max
+            draw.filled_rect(markerX, barY - 2, 2, 13, 0xFFEAE7DD)
+        end
     end)
 end
 
@@ -612,7 +636,7 @@ local function drawPawnChangeToast()
             .. "  (" .. tostring(pawnState.value) .. "/1000)", x, y, color)
     end)
 end
--- END CONTEXTUAL HUD v2.5
+-- END CONTEXTUAL HUD v2.6
 
 local function runAffinityScan()
     local charMgr, npcMgr = getCharacterManager(), getNPCManager()

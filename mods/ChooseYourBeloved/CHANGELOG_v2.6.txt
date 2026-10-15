@@ -1,0 +1,8 @@
+Choose Your Beloved v2.6 — Classic Heart/Bar HUD, 15 October 2026
+
+- Restore the original procedural heart beside the global affinity bar.
+- Layered translucent panel with tinted edge, status label and visual refinement.
+- Preserve Main Pawn cyan/purple tint and NPC capped/unlocked/Love color schemes.
+- Keep NPC 200 and Main Pawn 620 threshold reference markers.
+- NO conversation-target, 4-second short talk, UI position, affinity write, or config-rule changes.
+- Local renderer Lua 5.4 mock passed; v2.6 in-game styling awaits user check.

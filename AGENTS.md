@@ -12,7 +12,7 @@ Scope: all repository files. Use [docs/REPO_MAP.md](docs/REPO_MAP.md) for the de
 Never declare a method missing just because reflection enumeration failed. Unchanged signatures do not guarantee unchanged engine semantics.
 
 ## Project entry points
-- Beloved gameplay: `mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua`. v2.5 shows READ-ONLY Main Pawn rating and a single contextual affinity HUD; keep NPC `SentimentInfo` modification independent of `MainPawnDataContext:get_FavorabilityRating()`.
+- Beloved gameplay: `mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua`. v2.6 shows READ-ONLY Main Pawn rating and a single contextual heart-and-bar affinity HUD; keep NPC `SentimentInfo` modification independent of `MainPawnDataContext:get_FavorabilityRating()`.
 - Health gameplay: `mods/CompleteHealthRestoration/reframework/autorun/CompleteHealthRestoration.lua`.
 - Weight gameplay: `mods/BurdenReforged/reframework/autorun/burden_reforged.lua` (source, notes and mock tests in this mod folder).
 - Data dumper: `tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`.
@@ -37,7 +37,7 @@ Never declare a method missing just because reflection enumeration failed. Uncha
   `python tools/DD2DataDumper/tools/check_lua.py tools/DD2DataDumper/reframework/autorun/DD2_DataDumper.lua`
   `python tools/DD2DataDumper/tools/run_mock_tests.py`
   `python tools/DD2DataDumper/tools/run_detail_tests.py`
-- Choose Your Beloved v2.5 mock: `python mods/ChooseYourBeloved/tests/run_lua.py` (Lua 5.4 shared library; needs in-game validation).
+- Choose Your Beloved v2.6 mock: `python mods/ChooseYourBeloved/tests/run_lua.py` (Lua 5.4 shared library; needs in-game validation).
 - Burden Reforged regression cases: `python mods/BurdenReforged/tests/run_lua.py` (Lua 5.4 shared library needed).
 - Other comparisons and tests are located inside their corresponding `research/baselines/{affinity,health}/2026-10-11/` directories.
 - Tests inside a GitHub/cloud environment cannot replace validation in the owner's actual DD2 installation.
