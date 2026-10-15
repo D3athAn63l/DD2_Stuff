@@ -1,33 +1,32 @@
-# Choose Your Beloved v2.2 — Main Pawn Affinity Display (experimental)
+# Choose Your Beloved v2.3 — contextual Main Pawn affinity HUD (experimental)
 
-This version preserves all v2.1 NPC caps, unlocks, anti-loss protection, manual edits, and the NPC heart overlay. It **adds a read-only view of Main Pawn favorability** on the game's native 0–1000 scale.
+Maintains the known-working v2.2 native, read-only Main Pawn favorability display (0–1000) and all v2.1 NPC features unchanged. Owner tested v2.2 successfully in-game on 15 October 2026 and asked to avoid a permanently visible pawn bar.
 
-## Added
+## Visibility modes
 
-- **REFramework > BelovedCap > Main Pawn Affinity (Read-only):** displays the native Main Pawn FavorabilityRating, a threshold hint and an option for a small floating heart/bar over the pawn's head.
-- **Show Floating Main Pawn Affinity:** independent of the existing NPC overlay checkbox; default ON. The pawn appears only when loaded, close (~8m) and near camera centre.
-- Main Pawn affinity continues to display when **Enable Affinity Cap** is OFF; that switch only controls the NPC rules.
-- When no pawn or data context is loaded, shows **unavailable**, never a fabricated zero or a stale value.
+- **Changes (default):** floating bar appears for 5 seconds (configurable 2–12) when the loaded Main Pawn's numeric FavorabilityRating actually changes. Displays the delta (+/-) and current total. Initial load, unavailable pawn, and scene transition don't cause a false popup.
+- **Talk:** short temporary window after a matching Arisen ↔ Main Pawn `app.TalkEventManager.selectTalkEvent` hook. Experimental: it detects the start of dialogue, not precisely when the conversation ends. The hook must be available on your REFramework/TDB build; diagnostic appears in REFramework.
+- **Either:** trigger on change OR Arisen↔Pawn talk event.
+- **Always:** previous v2.2 behavior (nearby and camera-centred).
 
-## Compatibility and boundaries
+Main Pawn HUD remains optionally disabled via **Show Floating Main Pawn Affinity**, independently of these modes. The always-accessible numeric value is displayed in the REFramework > BelovedCap > Main Pawn Affinity (Read-only) menu regardless of HUD mode. Range, 620 reference threshold, and NPC features are preserved.
 
-This implementation reads `app.PawnManager:get_MainPawn()`, `MainPawnDataContext` and `get_FavorabilityRating()` (with a read-only `_FavorabilityRating` fallback) on a 0.25-second cadence. It does **not** hook pawn-affinity methods, write pawn affinity, modify pawn timers or affect Johanne Affinity's rewards. If Johanne increases the pawn's native rating, this display should reflect the changed value on its next refresh. This is an architectural compatibility assessment, **not a live dual-mod test**.
+## Implementation
 
-The reported Main Pawn favorability range is **0–1000** and the reported blushing threshold is **620**, unlike NPC sentiment's 0–299 range. The threshold should be verified against current-game behavior; it does not change gameplay.
+The native reader still polls every ~0.25 seconds. No pawn favorability values, cooldowns, NPC caps or save slots are changed by the new feature. The conversation trigger installs an **observational** SDK hook for reflected `selectTalkEvent` overloads, checks that the speaker/listener are the Arisen and Main Pawn, and starts a configurable wall-clock time window. The hook does not alter arguments or return values. If the dialogue API is unavailable, Changes and Always still work.
 
-**Do not install AffinityAnywhere merely to show your pawn's rating.** It modifies pawn and NPC affinity gains/cooldowns and may overlap with other affection-changing mods. The attached third-party scripts were used as API references, not copied or bundled.
+Johanne Affinity can continue to grant Main Pawn affinity; Changes watches the final native rating rather than individual events. AffinityAnywhere is not required and is not bundled. Original reference source is not copied.
 
 ## Installation / rollback
 
-1. Back up your save and `reframework/data/BelovedCap.json`.
-2. Replace only your existing `reframework/autorun/BelovedCap.lua` with the v2.2 file; don't run two copies.
-3. Restart DD2, enter a loaded save with your Main Pawn, and check the new **Main Pawn Affinity (Read-only)** section.
-4. For full rollback, reinstall the known-working v2.1 Lua. The added config key (`ShowMainPawnFloatingBar`) will be ignored by v2.1.
-
-No new binary dependencies or D2D plugins are needed.
+1. Back up saves and `reframework/data/BelovedCap.json`.
+2. Replace `reframework/autorun/BelovedCap.lua` from the ZIP (don't install two copies).
+3. Fully restart DD2 and open **REFramework > BelovedCap > Main Pawn Affinity (Read-only)** to cycle modes.
+4. To roll back, restore v2.2 Lua and choose the old Show Floating option; newer config keys are ignored by v2.2.
 
 ## Testing status
 
-- The original standalone accessor/HUD addition passed local Lua syntax and mocked read-only tests for native rating, updated values, missing pawn, optional HUD and fallback field reads.
-- The integrated v2.2 still requires owner in-game regression testing: NPC locked/unlocked cap, anti-loss, NPC HUD, pawn live value, HUD positioning, cutscenes/scene transitions, and Johanne rewards.
-- Exact installed Steam build ID is not recorded by the existing baseline. REFramework TDB 83 signature records do not prove runtime gameplay compatibility.
+- v2.2 Main Pawn read/display: **owner confirmed working in game**, including alongside their stated mod setup.
+- v2.3 event-driven HUD, live Talk hook, overlays during dialogue and multi-save transitions: **unverified in-game**. These require a fresh on-device test before merge.
+- For changes, first establish a baseline after loading. Then cause a genuine +1/+2/etc affinity event (for example via Johanne's gameplay actions); check that the bar disappears automatically afterward.
+- Talk windows may be invisible in dialogue scenes if the game's world-to-screen rendering is suppressed; use the diagnostic to distinguish hook absence from overlay visibility.

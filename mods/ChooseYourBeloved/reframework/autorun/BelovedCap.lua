@@ -1,7 +1,10 @@
 -- =============================================================================
--- BelovedCap  v2.2
+-- BelovedCap  v2.3
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.3: Main Pawn HUD modes: affinity-change pop-up, talk window, both, always.
+-- Uses read-only native rating plus optional dialogue-start signal; NPC unchanged.
 --
 -- v2.2: Separate, read-only Main Pawn favorability menu/HUD; NPC rules unchanged.
 --
@@ -16,7 +19,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.2"
+local modVersion = "2.3"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -29,6 +32,8 @@ local defaultConfig = {
     PreventDecay         = true,
     ShowFloatingBar      = true,
     ShowMainPawnFloatingBar = true,
+    PawnHudMode          = "Changes", -- Changes, Talk, Either, Always
+    PawnHudSeconds       = 5,
     CheatModeEnabled     = false,
     ManualAffinityChange = 50,
 }
@@ -52,6 +57,17 @@ local function validateConfig()
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
+    end
+
+    local modes = { Changes = true, Talk = true, Either = true, Always = true }
+    if type(config.PawnHudMode) ~= "string" or not modes[config.PawnHudMode] then
+        config.PawnHudMode = defaultConfig.PawnHudMode
+    end
+    if type(config.PawnHudSeconds) ~= "number"
+        or config.PawnHudSeconds ~= config.PawnHudSeconds then
+        config.PawnHudSeconds = defaultConfig.PawnHudSeconds
+    else
+        config.PawnHudSeconds = math.max(2, math.min(12, math.floor(config.PawnHudSeconds)))
     end
 
     -- Tables must be tables
@@ -330,8 +346,114 @@ local function refreshMainPawnStatus()
     state.status = "OK"
 end
 
+
+-- Show a temporary HUD only for real observed changes. The first successful
+-- read after loading a pawn establishes a baseline; it is NOT a +X event.
+-- Wall clock (os.time) is intentional: os.clock measures CPU time, which can
+-- leave a five-second notification on screen for minutes on a quiet process.
+local pawnHud = { previous = nil, changeEnds = 0, talkEnds = 0, delta = 0 }
+local pawnTalkHookStatus = "Not installed"
+
+local function pawnHudNow()
+    local ok, value = pcall(function() return os.time() end)
+    if ok and type(value) == "number" then return value end
+    return os.clock()
+end
+
+local function trackMainPawnChanges()
+    local value = pawnState.value
+    if value == nil then
+        pawnHud.previous = nil
+        pawnHud.changeEnds = 0
+        pawnHud.talkEnds = 0
+        pawnHud.delta = 0
+        return
+    end
+    if pawnHud.previous ~= nil and value ~= pawnHud.previous then
+        pawnHud.delta = value - pawnHud.previous
+        pawnHud.changeEnds = pawnHudNow() + config.PawnHudSeconds
+    end
+    pawnHud.previous = value
+end
+
+local function shouldDisplayPawnHUD()
+    if not config.ShowMainPawnFloatingBar or pawnState.value == nil then return false end
+    local mode = config.PawnHudMode
+    if mode == "Always" then return true end
+    local now = pawnHudNow()
+    local changed = now < pawnHud.changeEnds
+    local talking = now < pawnHud.talkEnds
+    if mode == "Changes" then return changed end
+    if mode == "Talk" then return talking end
+    if mode == "Either" then return changed or talking end
+    return false
+end
+
+local function sameCharacter(a, b)
+    if not a or not b then return false end
+    if a == b then return true end
+    local aId = safePawnAccess(function() return a:get_CharaID() end)
+    local bId = safePawnAccess(function() return b:get_CharaID() end)
+    return aId ~= nil and bId ~= nil and getPermanentID(aId) == getPermanentID(bId)
+end
+
+-- Experimental dialogue-start detection. There is no verified "dialogue has
+-- ended" signal here, so this is a short talk window, not exact talk duration.
+-- Args[3]/args[4] are expected to be speaking/listening app.Character objects,
+-- as observed in an independently inspected mod; verify on the local TDB.
+local function installPawnTalkHooks()
+    if type(sdk.hook) ~= "function" then
+        pawnTalkHookStatus = "sdk.hook unavailable"
+        return
+    end
+    local td = safePawnAccess(function()
+        return sdk.find_type_definition("app.TalkEventManager")
+    end)
+    if not td then
+        pawnTalkHookStatus = "TalkEventManager unavailable"
+        return
+    end
+    local methods = safePawnAccess(function() return td:get_methods() end)
+    if not methods then
+        pawnTalkHookStatus = "Talk methods unavailable"
+        return
+    end
+    local installed = 0
+    for _, method in ipairs(methods) do
+        local name = safePawnAccess(function() return method:get_name() end)
+        if name == "selectTalkEvent" then
+            local hooked = pcall(function()
+                sdk.hook(method, function(args)
+                    pcall(function()
+                        if not args then return end
+                        local speaker = sdk.to_managed_object(args[3])
+                        local listener = sdk.to_managed_object(args[4])
+                        local charMgr = getCharacterManager()
+                        local arisen = charMgr and charMgr:get_ManualPlayer()
+                        local pawn = pawnState.character
+                        if not speaker or not listener or not arisen or not pawn then return end
+                        local isPair = (sameCharacter(speaker, arisen)
+                            and sameCharacter(listener, pawn))
+                            or (sameCharacter(listener, arisen)
+                            and sameCharacter(speaker, pawn))
+                        if isPair then
+                            pawnHud.talkEnds = pawnHudNow() + config.PawnHudSeconds
+                        end
+                    end)
+                end, function(retval) return retval end)
+            end)
+            if hooked then installed = installed + 1 end
+        end
+    end
+    pawnTalkHookStatus = installed > 0 and
+        ("Hooked " .. tostring(installed) .. " dialogue overload(s)") or
+        "No compatible selectTalkEvent hook"
+end
+installPawnTalkHooks()
+
 local function drawMainPawnAffinity()
     if not config.ShowMainPawnFloatingBar or not pawnState.character or not pawnState.value then return end
+    if not shouldDisplayPawnHUD() then return end
     if not draw or not draw.world_to_screen or not draw.filled_rect or not draw.text then return end
     -- We only overlay when facing a nearby pawn; off-screen, loading or
     -- despawned characters are harmlessly skipped without modifying game data.
@@ -368,8 +490,13 @@ local function drawMainPawnAffinity()
         if ratio > 0 then draw.filled_rect(x, y, 126 * ratio, 10, tint) end
         draw.filled_rect(x + 126 * PAWN_BLUSH_THRESHOLD / PAWN_FAVORABILITY_MAX,
             y - 2, 2, 14, 0xCCB5B5B5)
-        draw.text("MAIN PAWN " .. tostring(value) .. " / " .. tostring(PAWN_FAVORABILITY_MAX),
-            x, y - 18, 0xFFF8F5EB)
+        local caption = "MAIN PAWN " .. tostring(value) .. " / " .. tostring(PAWN_FAVORABILITY_MAX)
+        if pawnHudNow() < pawnHud.changeEnds and pawnHud.delta ~= 0 then
+            local sign = pawnHud.delta > 0 and "+" or ""
+            caption = "MAIN PAWN " .. sign .. tostring(pawnHud.delta)
+                .. " (" .. tostring(value) .. " / " .. tostring(PAWN_FAVORABILITY_MAX) .. ")"
+        end
+        draw.text(caption, x, y - 18, 0xFFF8F5EB)
         if draw.filled_quad then drawHeart(x - 14, y + 4, 23, tint) end
     end)
 end
@@ -466,6 +593,7 @@ re.on_frame(function()
         if not ok then
             pawnState = { value = nil, character = nil, name = "Main Pawn", status = "Read error" }
         end
+        trackMainPawnChanges()
         if config.Enabled then
             local scanOK = pcall(runAffinityScan)
             if not scanOK then overlayTarget = nil end
@@ -554,6 +682,29 @@ re.on_draw_ui(function()
         changed, config.ShowMainPawnFloatingBar = imgui.checkbox(
             "Show Floating Main Pawn Affinity", config.ShowMainPawnFloatingBar)
         if changed then saveConfig() end
+        imgui.text("Pawn HUD visibility:")
+        local modes = { "Changes", "Talk", "Either", "Always" }
+        local modeLabels = {
+            Changes = "Only when affinity changes",
+            Talk = "After talking to the Main Pawn (experimental)",
+            Either = "On change OR talking",
+            Always = "Always while nearby"
+        }
+        if imgui.button(modeLabels[config.PawnHudMode] .. "##PawnHudMode") then
+            local nextIndex = 1
+            for i, name in ipairs(modes) do
+                if name == config.PawnHudMode then
+                    nextIndex = i % #modes + 1
+                    break
+                end
+            end
+            config.PawnHudMode = modes[nextIndex]
+            saveConfig()
+        end
+        changed, config.PawnHudSeconds = imgui.slider_int(
+            "Pawn HUD seconds", config.PawnHudSeconds, 2, 12)
+        if changed then saveConfig() end
+        imgui.text("Dialogue trigger: " .. pawnTalkHookStatus)
         if pawnState.value ~= nil then
             imgui.text(pawnState.name .. ": " .. pawnState.value .. " / " .. PAWN_FAVORABILITY_MAX)
             if pawnState.value >= PAWN_BLUSH_THRESHOLD then
@@ -704,4 +855,5 @@ re.on_script_reset(function()
     _charMgr        = nil
     _npcMgr         = nil
     pawnState       = { value = nil, character = nil, name = "Main Pawn", status = "Not checked" }
+    pawnHud         = { previous = nil, changeEnds = 0, talkEnds = 0, delta = 0 }
 end)
