@@ -42,8 +42,19 @@ local function setup(options, array, pawnGroups, useFallback)
         if id==123 then self.value=w end
         self.writes=(self.writes or 0)+1
     end
-    function weightDict:get_Item(id) return self.values[tostring(id)] end
-    local itemMgr={WeightDict=weightDict,StorageDict={get_Item=function(_,id) return inventories[id] end},
+    function weightDict:ContainsKey(id) return self.values[tostring(id)] ~= nil end
+    function weightDict:get_Item(id)
+        if not self:ContainsKey(id) then error('missing weight key') end
+        return self.values[tostring(id)]
+    end
+    local storageDict={
+      ContainsKey=function(_,id) return inventories[id] ~= nil end,
+      get_Item=function(_,id)
+          if inventories[id]==nil then error('missing storage key') end
+          return inventories[id]
+      end
+    }
+    local itemMgr={WeightDict=weightDict,StorageDict=storageDict,
       get_field=function(_,key) if key=='_ItemDataDict' then return dict end end,
       getPartyList=function()
           if useFallback then error('party list temporarily unavailable') end
@@ -148,21 +159,42 @@ eq(weightDict.values['123'],20,'fallback-arisen')
 eq(weightDict.values['124'],66,'fallback-pawn1')
 eq(weightDict.values['125'],123,'fallback-pawn2')
 
--- A pawn disappearing mid-transition does not prevent the Arisen refresh.
+-- Missing character storage must never call get_Item, since managed
+-- Dictionary.get_Item emits a REFramework exception even inside Lua pcall.
 setup({Enabled=false}, {makeItem(200,0,0,20,2,false)},
       {{makeItem(201,0,0,33,2,false)}})
 start()
 eq(weightDict.values['123'],40,'transition-arisen')
 local transientManager=sdk.get_managed_singleton('app.ItemManager')
-local getStorage=transientManager.StorageDict.get_Item
+local missed=0
 transientManager.StorageDict.get_Item=function(_,id)
-    if id==124 then error('pawn inventory has not loaded yet') end
-    return getStorage(nil,id)
+    if id==124 then missed=missed+1; error('managed KeyNotFoundException') end
+    return {get_Count=function() return #items end,
+            get_Item=function(_,i) return items[i+1] and items[i+1].row end}
 end
+transientManager.StorageDict.ContainsKey=function(_,id) return id~=124 end
 items[1].row._Param._Num=3
 local post
 for name,fn in pairs(hooks) do if name:find('addStorageEvent',1,true) then post=fn end end
 post(nil);callbacks.frame()
 eq(weightDict.values['123'],60,'missing-pawn-arisen-still-updates')
+eq(missed,0,'missing-storage-never-indexed')
 
-print('PASS: 11 independent cases including 3-pawn enable/disable, fallback, hot reload and deferred hooks')
+-- A known storage entry with no weight entry may be initialized using
+-- set_Item without ever calling the throwing weight dictionary getter.
+transientManager.StorageDict.ContainsKey=function() return true end
+transientManager.StorageDict.get_Item=function(_,id)
+    if id==123 then return {get_Count=function() return #items end,
+              get_Item=function(_,i) return items[i+1] and items[i+1].row end} end
+    return {get_Count=function() return 0 end, get_Item=function() return nil end}
+end
+weightDict.values['124']=nil
+local getter=weightDict.get_Item
+weightDict.get_Item=function(self,id)
+    if id==124 then error('unexpected missing-weight lookup') end
+    return getter(self,id)
+end
+post(nil);callbacks.frame()
+eq(weightDict.values['124'],0,'missing-weight-key-initialized')
+
+print('PASS: 12 independent cases including missing-key guards, party restore and hot reload')
