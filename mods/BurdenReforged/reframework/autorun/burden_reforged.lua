@@ -1,10 +1,10 @@
--- Burden Reforged 0.1.1 (experimental)
+-- Burden Reforged 0.1.2 (experimental)
 -- Independent REFramework weight-rule implementation for Dragon's Dogma 2.
 -- Inspired by the gameplay concept of "Weight System Tweaks" by lingsamuel.
 -- This is a new implementation, not a modified copy or redistribution of that mod.
 -- REFramework saves this configuration inside reframework/data/.
 
-local NAME, VERSION = 'Burden Reforged', '0.1.1-experimental'
+local NAME, VERSION = 'Burden Reforged', '0.1.2-experimental'
 local FILE, LEGACY_FILE = 'BurdenReforged.json', 'WeightSystemTweaks.json'
 local function note(message)
     if log and log.info then log.info('[Burden Reforged] ' .. tostring(message)) end
@@ -83,6 +83,7 @@ local state = {
     lastFailure = '',
     partySeen = 0,
     partySynced = 0,
+    membershipWarning = false,
 }
 
 local function warnOnce(message)
@@ -96,6 +97,22 @@ local function objField(object, name)
     if not object then return nil end
     local ok, value = pcall(function() return object[name] end)
     return ok and value or nil
+end
+
+-- A missing character (pawn loading/leaving) is normal. Dictionary:get_Item()
+-- throws a *managed* KeyNotFoundException before Lua's pcall can silence
+-- REFramework's diagnostic log. Never probe a key with get_Item alone.
+-- Fail closed if ContainsKey itself is unavailable on a new REFramework build.
+local function dictionaryHasKey(dict, id)
+    local ok, exists = pcall(function() return dict:ContainsKey(id) end)
+    if not ok then
+        if not state.membershipWarning then
+            state.membershipWarning = true
+            note('Dictionary.ContainsKey unavailable; skipping unsafe inventory lookups')
+        end
+        return nil
+    end
+    return exists == true
 end
 
 local function writeWeight(param, value)
@@ -347,31 +364,50 @@ local function synchronize()
     if state.visualsDirty then refreshVisuals() end
 
     local stores, weightDict = objField(manager, 'StorageDict'), objField(manager, 'WeightDict')
-    if not stores or not weightDict then return false end
+    if not stores or not weightDict then
+        state.weightDirty = false -- retry on periodic refresh, not every frame
+        return false
+    end
     local ids = collectPartyIds(manager)
     state.partySeen = #ids
     state.partySynced = 0
-    if #ids == 0 then return false end
+    if #ids == 0 then
+        state.weightDirty = false
+        return false
+    end
 
     for _, id in ipairs(ids) do
-        -- Pawns joining/leaving can temporarily lack a storage list. Do not let
-        -- a failed pawn lookup prevent the Arisen or other pawns from syncing.
-        local okList, list = pcall(function() return stores:get_Item(id) end)
-        if okList and list then
-            local okMass, newWeight = pcall(computeWeight, list)
-            if okMass and newWeight ~= nil then
-                local okOld, oldWeight = pcall(function() return weightDict:get_Item(id) end)
-                if not okOld or oldWeight ~= newWeight then
-                    local okWrite = pcall(function() weightDict:set_Item(id, newWeight) end)
-                    if okWrite then state.partySynced = state.partySynced + 1 end
-                else
-                    state.partySynced = state.partySynced + 1
+        -- StorageDict/WeightDict use CharacterID keys. When a pawn is joining
+        -- or leaving, the party list can outlive its storage dictionary entry.
+        -- pcall(get_Item) alone still emits a managed KeyNotFoundException.
+        if dictionaryHasKey(stores, id) then
+            local okList, list = pcall(function() return stores:get_Item(id) end)
+            if okList and list then
+                local okMass, newWeight = pcall(computeWeight, list)
+                if okMass and newWeight ~= nil then
+                    local hasWeight = dictionaryHasKey(weightDict, id)
+                    if hasWeight ~= nil then
+                        -- set_Item inserts a previously absent weight entry.
+                        local okOld, oldWeight = false, nil
+                        if hasWeight then
+                            okOld, oldWeight = pcall(function() return weightDict:get_Item(id) end)
+                        end
+                        if not hasWeight or not okOld or oldWeight ~= newWeight then
+                            local okWrite = pcall(function() weightDict:set_Item(id, newWeight) end)
+                            if okWrite then state.partySynced = state.partySynced + 1 end
+                        else
+                            state.partySynced = state.partySynced + 1
+                        end
+                    end
                 end
             end
         end
     end
 
-    state.weightDirty = state.partySynced < state.partySeen
+    -- Missing pawn inventories are transient, not a new dirty event.
+    -- Periodic retry is 0.75s on partial success, 0.25s when none sync.
+    -- Leaving this true triggers the on_frame() work on *every frame*.
+    state.weightDirty = false
     if state.partySynced == 0 then
         warnOnce('No party inventory weights could be refreshed yet')
         return false
