@@ -18,7 +18,14 @@ A missing method reported by a failed enumeration is unresolved, *not proven rem
 | Choose Your Beloved | Locked NPC <=199; unlocked NPC >199; anti-loss, manual changes, HUD, cross-save safeguards |
 | CompleteHealthRestoration | Regular HP and reduced-max HP recovery, pawn toggles, combat/pause gating, saved settings after restart |
 | Data Dumper | Bounded type scan, item export uniqueness, checkpoint resume, JSON writer errors, field coverage |
-| Burden Reforged | Arisen + pawn carried weights and enable/disable, equip/unequip, dragonforging, Warfarer, per-item tooltip values, persisted settings and hot-reload restoration. Run `python mods/BurdenReforged/tests/run_lua.py` for mocked regressions; owner confirmed full-party toggle recovery in v0.1.1. |
+| Burden Reforged | Arisen + pawn carried weights and enable/disable, equip/unequip, dragonforging, Warfarer, per-item tooltip values, persisted settings and hot-reload restoration. Run `python mods/BurdenReforged/tests/run_lua.py` for mocked regressions; owner confirmed full-party toggle recovery in v0.1.1 and reported that v0.1.2 eliminates the repeating missing-key exceptions. |
+
+### Burden Reforged managed-dictionary regression (16 October 2026)
+
+- **Failure, v0.1.1:** `StorageDict:get_Item(characterID)` could be called for a pawn whose ID was present in a party list but absent from `StorageDict`. A managed `Dictionary<UInt32, List<app.ItemManager.StorageMasterData>>.get_Item` `KeyNotFoundException` still appeared in the REFramework log despite surrounding Lua `pcall`. Partial refresh also left `weightDirty` set, leading to repeated work every frame.
+- **Fix, v0.1.2:** Check `ContainsKey` before `get_Item` on both storage and weight dictionaries; initialize missing weight entries using `set_Item`; let missing storage entries retry on the normal 0.25/0.75-second refresh interval rather than every frame. Unknown dictionary membership fails closed instead of probing an unsafe key.
+- **Owner verification:** A/B isolation showed v0.1.1 was responsible for the exception flood. After installing v0.1.2, the owner reported normal operation with **no more missing-key spam** on 16 October 2026. No post-fix raw log is attached to this documentation; do not infer broader performance or complete weight-rule validation.
+- **Future game update test:** With Burden Reforged enabled, inspect the log across game startup and pawn joins/leaves, compare exception counts, verify `Party weights refreshed: N/M`, and confirm the Arisen and each available pawn's *actual* carried weight changes correctly. A clean error log is necessary but not sufficient for full behavioral verification.
 
 Never test risky save mutations without a backup.
 
