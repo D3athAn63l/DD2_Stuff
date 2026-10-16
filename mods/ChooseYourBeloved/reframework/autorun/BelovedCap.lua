@@ -1,7 +1,10 @@
 -- =============================================================================
--- BelovedCap  v2.6
+-- BelovedCap  v2.7
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.7: Hide the conversational HUD and pawn change toast in game menus.
+-- Preserve conversation targets and restore display when menu closes.
 --
 -- v2.6: Restores the original heart-and-bar visuals in the shared dialogue HUD.
 -- Target detection, positioning, and short-dialogue timing remain unchanged.
@@ -27,7 +30,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.6"
+local modVersion = "2.7"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -42,6 +45,7 @@ local defaultConfig = {
     ShowMainPawnFloatingBar = true,
     PawnHudSeconds       = 5,
     ShowPawnChangeToast  = true,
+    HideDuringGameMenus  = true,
     HudXPercent = 50,
     HudYPercent = 12,
     DialogueMinSeconds = 4,
@@ -64,7 +68,7 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast", "HideDuringGameMenus" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
@@ -638,6 +642,41 @@ local function drawPawnChangeToast()
 end
 -- END CONTEXTUAL HUD v2.6
 
+-- v2.7: DD2 shop/buy/sell/pause menu overlay suppression.
+-- Do not clear the dialogue target or alter NPC/pawn values while suppressed.
+local menuGuard = { active = false, reason = "none", available = false }
+local function menuFlag(object, method)
+    if not object then return false end
+    local ok, result = pcall(function() return object:call(method) end)
+    return ok and result == true
+end
+local function updateMenuGuard()
+    menuGuard.active, menuGuard.reason, menuGuard.available = false, "none", false
+    if not config.HideDuringGameMenus then return false end
+    local gui = safePawnAccess(function()
+        return sdk.get_managed_singleton("app.GuiManager")
+    end)
+    local pause = safePawnAccess(function()
+        return sdk.get_managed_singleton("app.PauseManager")
+    end)
+    menuGuard.available = gui ~= nil or pause ~= nil
+    if menuFlag(gui, "isPausedGUI") then
+        menuGuard.active, menuGuard.reason = true, "GUI paused"
+    elseif menuFlag(gui, "get_IsLoadGui") then
+        menuGuard.active, menuGuard.reason = true, "full-screen GUI"
+    elseif menuFlag(pause, "isPausedAny") then
+        menuGuard.active, menuGuard.reason = true, "game paused"
+    else
+        local photo = safePawnAccess(function()
+            return gui and gui:get_field("<IsDispPhotoModeAll>k__BackingField")
+        end)
+        if photo == true then
+            menuGuard.active, menuGuard.reason = true, "photo mode"
+        end
+    end
+    return menuGuard.active
+end
+
 local function runAffinityScan()
     local charMgr, npcMgr = getCharacterManager(), getNPCManager()
     if not charMgr or not npcMgr then return end
@@ -676,8 +715,11 @@ re.on_frame(function()
         trackMainPawnChanges()
         if config.Enabled then pcall(runAffinityScan) end
     end
-    drawGlobalAffinityHUD()
-    drawPawnChangeToast()
+    -- Keep the last talk target while buying/selling; don't draw over menus.
+    if not updateMenuGuard() then
+        drawGlobalAffinityHUD()
+        drawPawnChangeToast()
+    end
 end)
 
 -- ---------------------------------------------------------------------------
@@ -756,6 +798,17 @@ re.on_draw_ui(function()
     changed, config.DialogueMinSeconds = imgui.slider_int(
         "Short dialogue display seconds", config.DialogueMinSeconds, 2, 8)
     if changed then saveConfig() end
+    changed, config.HideDuringGameMenus = imgui.checkbox(
+        "Hide Affinity HUD in Game Menus", config.HideDuringGameMenus)
+    if changed then saveConfig() end
+    if imgui.is_item_hovered() then
+        imgui.set_tooltip("Hide the HUD and affinity toast in shop, inventory and pause menus.\nThe conversation target is preserved when a menu opens.")
+    end
+    imgui.text("Menu checker: " .. (
+        not config.HideDuringGameMenus and "OFF" or
+        (menuGuard.active and menuGuard.reason or
+            (menuGuard.available and "no blocking menu" or "GUI state unavailable"))
+    ))
 
     imgui.spacing()
 
