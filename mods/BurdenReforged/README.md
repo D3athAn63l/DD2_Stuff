@@ -2,7 +2,7 @@
 
 An independently authored, feature-oriented REFramework weight rule mod for Dragon's Dogma 2. Inspired by the gameplay idea behind **Weight System Tweaks** (original Nexus #415, by **lingsamuel**); does not include or claim authorship of the original source or images. Not affiliated with the original author.
 
-**Status:** v0.1.2 hotfix candidate: guarded party storage/weight dictionary lookups and throttled retries for pawn transition states. Owner confirmation in live game is pending. Owner confirmed basic master enable/disable worked in v0.1.0, but reported stale zero pawn weights when disabled. **Owner confirmed v0.1.1 now restores pawns' carried weights correctly when toggled off in-game.** Other features remain subject to further hands-on regression tests. Back up your DD2 save and `reframework/data` first.
+**Status (16 October 2026):** **Owner confirmed v0.1.2 runs in DD2 without the repeating missing-key/`KeyNotFoundException` spam previously caused by Burden Reforged v0.1.1.** The owner had isolated v0.1.1 as the source by disabling that mod, then tested the v0.1.2 hotfix enabled and reported that the spam disappeared. This establishes the *reported log-noise fix*, not complete proof of every weight rule, pawn transition, or performance scenario. Previously, the owner confirmed v0.1.1 restored pawn carried weights when toggling the mod off, after v0.1.0 left stale zero weights. Other mechanics still need broader regression testing. Back up your DD2 save and `reframework/data` before changing mods.
 
 ## Installation
 
@@ -24,7 +24,7 @@ The config is saved to `reframework/data/BurdenReforged.json`. If it doesn't exi
 
 ## Known limitations
 
-- The game may report original mass differently for upgraded equipment and changes introduced in October 2026; runtime behavior is **not tested**.
+- Upgraded-equipment weight semantics and interactions introduced in October 2026 are **not yet comprehensively validated**. The owner's October 16 v0.1.2 report specifically verifies disappearance of missing-key log spam, not every item-weight scenario.
 - Item dictionary iteration uses native `_entries` as exposed by current REFramework. A new game build may change layout. The live 2026-10-11 TDB83 item dump confirms related field names but not arbitrary future compatibility.
 - On first startup, weight rules may begin applying after item/character managers initialize. v0.1.2 tests dictionary membership before accessing a per-character inventory or weight entry, so normal missing pawn keys do not flood REFramework with managed exceptions. Transient misses retry on the periodic refresh rather than every frame. If dictionary ContainsKey is not supported, this hotfix skips unsafe reads and logs one warning; investigate the changed API rather than bypassing the guard. Pawn inventory lists can be temporarily unavailable while pawns load or depart; the UI now reports `Party weights refreshed: N/M` for diagnosis.
 - Disabling the mod computes a simple unmodified-item-base-weight sum to restore baseline behavior; it does not reproduce undocumented game-side weight special cases.
@@ -38,7 +38,7 @@ The config is saved to `reframework/data/BurdenReforged.json`. If it doesn't exi
 4. Equip multiple Warfarer main-/off-hand weapons and verify the heaviest-per-hand behavior.
 5. Dragonforge a weapon and verify effective weight vs unenhanced copy.
 6. Toggle each tooltip option and verify displayed weight, then REFramework hot-reload and ensure original weight is intact.
-7. Save/reload, switch scenes, and check `re2_framework_log.txt` for hook or field errors.
+7. Save/reload, switch scenes, and check `re2_framework_log.txt` for hook or field errors. **For the v0.1.2 regression:** keep Burden Reforged enabled and confirm the old `Dictionary<UInt32, List<StorageMasterData>>.get_Item` / `KeyNotFoundException` spam does not recur (owner confirmed this in the reported Oct 16 session). Also verify party inventory/weight values still update; clean logs alone cannot prove this.
 8. Test with the October 2026 Dark Arisen expansion and Hard Mode. Verify pawn join/leave, transferring items between pawns, and restoring the native weights after disabling.
 
 **License/provenance note:** The Nexus listing for Weight System Tweaks restricts redistribution and modification of that author's files. This package intentionally ships none of those files; do not reuse its screenshot or source code. Public GitHub access still counts as sharing source; make a repository private if you do not intend to publish it.
