@@ -6,7 +6,7 @@
 - Check `ContainsKey` before accessing both storage and weight dictionaries. Unknown membership fails closed; missing weight entries are inserted via `set_Item` without first attempting a throwing getter.
 - **Fix:** A partially synchronized party no longer keeps `weightDirty=true` and repeats work every render frame. Failed/partial refreshes retry on the existing periodic 0.25s/0.75s schedule; item/equipment hooks still request immediate updates.
 - Add headless regression cases for a missing pawn storage key, a missing weight key and Arisen updates despite pawn transitions.
-- **Verification pending:** Owner confirmed disabling Burden Reforged eliminated the repeating exceptions. The updated hotfix has not yet been tested in the owner's running DD2 game.
+- **Owner-tested in DD2 (16 Oct 2026):** After confirming that disabling v0.1.1 stopped the exception spam, the owner ran v0.1.2 and reported that it works with **no more missing-key log spam**. This validates the reported exception-spam fix in that live session; it does not establish comprehensive correctness of every weight rule or future game build.
 
 
 ## 0.1.1-experimental — 12 October 2026
