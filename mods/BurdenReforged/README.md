@@ -1,8 +1,8 @@
-# Burden Reforged — experimental 0.1.1
+# Burden Reforged — experimental 0.1.2
 
 An independently authored, feature-oriented REFramework weight rule mod for Dragon's Dogma 2. Inspired by the gameplay idea behind **Weight System Tweaks** (original Nexus #415, by **lingsamuel**); does not include or claim authorship of the original source or images. Not affiliated with the original author.
 
-**Status:** Owner confirmed basic master enable/disable worked in v0.1.0, but reported stale zero pawn weights when disabled. **Owner confirmed v0.1.1 now restores pawns' carried weights correctly when toggled off in-game.** Other features remain subject to further hands-on regression tests. Back up your DD2 save and `reframework/data` first.
+**Status:** v0.1.2 hotfix candidate: guarded party storage/weight dictionary lookups and throttled retries for pawn transition states. Owner confirmation in live game is pending. Owner confirmed basic master enable/disable worked in v0.1.0, but reported stale zero pawn weights when disabled. **Owner confirmed v0.1.1 now restores pawns' carried weights correctly when toggled off in-game.** Other features remain subject to further hands-on regression tests. Back up your DD2 save and `reframework/data` first.
 
 ## Installation
 
@@ -26,7 +26,7 @@ The config is saved to `reframework/data/BurdenReforged.json`. If it doesn't exi
 
 - The game may report original mass differently for upgraded equipment and changes introduced in October 2026; runtime behavior is **not tested**.
 - Item dictionary iteration uses native `_entries` as exposed by current REFramework. A new game build may change layout. The live 2026-10-11 TDB83 item dump confirms related field names but not arbitrary future compatibility.
-- On first startup, weight rules may begin applying after item/character managers initialize. Pawn inventory lists can be temporarily unavailable while pawns load or depart; the UI now reports `Party weights refreshed: N/M` for diagnosis.
+- On first startup, weight rules may begin applying after item/character managers initialize. v0.1.2 tests dictionary membership before accessing a per-character inventory or weight entry, so normal missing pawn keys do not flood REFramework with managed exceptions. Transient misses retry on the periodic refresh rather than every frame. If dictionary ContainsKey is not supported, this hotfix skips unsafe reads and logs one warning; investigate the changed API rather than bypassing the guard. Pawn inventory lists can be temporarily unavailable while pawns load or depart; the UI now reports `Party weights refreshed: N/M` for diagnosis.
 - Disabling the mod computes a simple unmodified-item-base-weight sum to restore baseline behavior; it does not reproduce undocumented game-side weight special cases.
 - If the REFramework script is forcibly interrupted before `on_script_reset` runs, database tooltip patches can linger until the game fully restarts.
 
