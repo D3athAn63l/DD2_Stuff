@@ -19,11 +19,11 @@ This is a research repository. **Read-only reflection is not a gameplay test**, 
 
 **Important:** Folder placement in GitHub is *not* the game installation path. Install the appropriate loose Lua under your DD2 `reframework/autorun/` or use a mod ZIP; don't extract all of `research/` into the game.
 
-## Current project status (12 October 2026)
+## Current project status (16 October 2026)
 
 - **Choose Your Beloved v2.1:** locked NPC cap 199, unlocked NPCs can reach 299, anti-loss + floating relationship indicator. Owner reports gameplay working.
 - **CompleteHealthRestoration v2.0:** HP and Loss Gauge recovery. Owner reports both work in-game.
-- **Burden Reforged v0.1.1 experimental:** independent weight-rule implementation replacing the old WeightSystemTweaks files. Owner confirms in-game master enable/disable and pawn weight restoration on disabling; further regression testing is ongoing. [Source and tests](mods/BurdenReforged/README.md).
+- **Burden Reforged v0.1.2 experimental:** independent weight-rule implementation replacing the old WeightSystemTweaks files. Owner confirmed v0.1.1 restored pawn weights on disable and reported that v0.1.2 eliminates the repeated missing-key exceptions while enabled in-game (16 Oct). Other weight scenarios still require regression testing. [Source and tests](mods/BurdenReforged/README.md).
 - **DD2 Data Dumper v5.2 experimental:** detailed catalog **now captured in-game**: 2,152 unique loaded dictionary IDs, including 495 weapon, 669 armor and 988 other parameter objects. Capture covers raw item fields; it does not establish valid EX/passive modifier combinations.
 
 ### Known environment evidence
