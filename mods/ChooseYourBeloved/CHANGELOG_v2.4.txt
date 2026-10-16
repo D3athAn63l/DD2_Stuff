@@ -1,0 +1,10 @@
+Choose Your Beloved v2.4 — Global Contextual Affinity HUD (experimental; 15 October 2026)
+
+- One shared screen-fixed dialogue HUD for NPC or Main Pawn, never both at once.
+- Live InteractManager.IsPlayerTalking gate and read-only selectTalkEvent / reqDisp target observers.
+- Main Pawn cyan/purple tint preserved; NPC colors still reflect affinity and cap state.
+- Independent screen-corner +X/-X Main Pawn affinity toast, even if the pawn is off-screen.
+- New ShowPawnChangeToast config; persistent PawnHudSeconds controls notification duration.
+- Preserved NPC lock/unlock, anti-loss, cheat and Main Pawn read-only 0–1000 menu.
+- Legacy PawnHudMode is not used; the existing pawn/NPC display toggles remain supported.
+- Static Lua addon and 12 contextual simulated regressions passed; game compatibility pending.

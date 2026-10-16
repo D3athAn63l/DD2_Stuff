@@ -1,0 +1,12 @@
+Choose Your Beloved v2.2 — Main Pawn Affinity Display (experimental; 15 October 2026)
+
+- Read-only Main Pawn status from app.PawnManager -> MainPawn -> MainPawnDataContext -> FavorabilityRating.
+- Display native rating out of 1000, with reference marker at the reported 620 blushing threshold.
+- Optional floating heart/bar over the nearby main pawn. Independent toggle (default ON).
+- Pawn value refreshes even when NPC affinity cap is disabled. Unavailable pawn never displays a stale rating.
+- Keep all existing NPC-only cap/unlock, anti-loss, cheat and floating NPC overlay behavior.
+- No Main Pawn native value writes, gameplay hooks or affinity gain/cooldown changes.
+- Third-party mods AffinityAnywhere and Johanne Affinity consulted for API roles/compatibility only. No source copied or bundled.
+
+Tests: standalone Lua reader/HUD mock passed; integrated game and two-mod tests pending.
+Rollback: replace BelovedCap.lua with v2.1 and restart; preserve existing BelovedCap.json.

@@ -6,7 +6,7 @@ All paths are relative to the repository root. Original folder-only refactor on 
 
 | Mod | Working/source entry | Other files |
 |---|---|---|
-| Choose Your Beloved | [`BelovedCap.lua`](../mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua) | `mods/ChooseYourBeloved/modinfo.ini`, `CHANGELOG_v2.1.txt`, `Cover.png` |
+| Choose Your Beloved | [`BelovedCap.lua`](../mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua) | [v2.6 README](../mods/ChooseYourBeloved/README.md), `modinfo.ini`, v2.1–v2.6 changelogs, `tests/`, `Cover.png`; read-only Main Pawn HUD |
 | CompleteHealthRestoration | [`CompleteHealthRestoration.lua`](../mods/CompleteHealthRestoration/reframework/autorun/CompleteHealthRestoration.lua) | Original release ZIPs live in `releases/CompleteHealthRestoration/` |
 | Burden Reforged | [`burden_reforged.lua`](../mods/BurdenReforged/reframework/autorun/burden_reforged.lua) | [README](../mods/BurdenReforged/README.md), changelog, `modinfo.ini`, `tests/` — v0.1.2 experimental; owner confirmed missing-key exception spam resolved in-game; v0.1.1 had restored pawn weight recalculation on disable |
 

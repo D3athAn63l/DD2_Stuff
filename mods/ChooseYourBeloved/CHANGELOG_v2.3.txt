@@ -1,0 +1,9 @@
+Choose Your Beloved v2.3 (experimental; 15 October 2026)
+
+- Added Main Pawn HUD modes: Changes (default), Talk Window (experimental), Either, Always.
+- Show current native rating + signed delta for a temporary 2–12 second window after value changes.
+- Safely baseline the first pawn reading and reset after pawn unload; no fake affinity gains when loading or transitioning scenes.
+- Optional observational app.TalkEventManager.selectTalkEvent hook restricted to Arisen/Main Pawn pairs; no native writes.
+- Conversation mode is a fixed window after talk starts, NOT validated as precise dialogue open/close tracking.
+- Keep v2.1 NPC cap/anti-loss/HUD and v2.2 pawn read-only dashboard intact. Compatible by design with Johanne Affinity.
+- v2.2 verified by owner in-game; v2.3 still needs hands-on regression testing.
