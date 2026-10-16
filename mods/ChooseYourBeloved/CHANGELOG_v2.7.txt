@@ -1,0 +1,8 @@
+Choose Your Beloved v2.7 — Menu HUD Guard (experimental; 16 October 2026)
+
+- Suppress the classic contextual heart HUD and pawn affinity toast over blocking game/shop/pause menus.
+- Check guarded GuiManager isPausedGUI/get_IsLoadGui, PauseManager isPausedAny and photo-mode signals.
+- Preserve dialogue target while a menu is open; display may resume after the menu closes if the interaction is still active.
+- Added optional Hide Affinity HUD in Game Menus (ON by default) and Menu checker diagnostic.
+- Keep NPC cap/anti-loss/cheat, 0–1000 Main Pawn read-only rating, colors, position and short-dialogue timing unchanged.
+- Local Lua mock: PASS; merchant UI signals require in-game verification.
