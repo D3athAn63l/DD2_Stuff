@@ -1,6 +1,6 @@
 # Repository Map — DD2_Stuff
 
-All paths are relative to the repository root. Original folder-only refactor on 11 October 2026; weight-mod successor most recently updated 16 October 2026. **Source, diagnostics, captures and ZIPs have different purposes.**
+All paths are relative to the repository root. Original folder-only refactor on 11 October 2026; Pocket Universe replacement proposed 18 October 2026. **Source, diagnostics, captures and ZIPs have different purposes.**
 
 ## Playable mods (`mods/`)
 
@@ -8,7 +8,7 @@ All paths are relative to the repository root. Original folder-only refactor on 
 |---|---|---|
 | Choose Your Beloved | [`BelovedCap.lua`](../mods/ChooseYourBeloved/reframework/autorun/BelovedCap.lua) | [v2.6 README](../mods/ChooseYourBeloved/README.md), `modinfo.ini`, v2.1–v2.6 changelogs, `tests/`, `Cover.png`; read-only Main Pawn HUD |
 | CompleteHealthRestoration | [`CompleteHealthRestoration.lua`](../mods/CompleteHealthRestoration/reframework/autorun/CompleteHealthRestoration.lua) | Original release ZIPs live in `releases/CompleteHealthRestoration/` |
-| Burden Reforged | [`burden_reforged.lua`](../mods/BurdenReforged/reframework/autorun/burden_reforged.lua) | [README](../mods/BurdenReforged/README.md), changelog, `modinfo.ini`, `tests/` — v0.1.2 experimental; owner confirmed missing-key exception spam resolved in-game; v0.1.1 had restored pawn weight recalculation on disable |
+| Pocket Universe | [`pocket_universe.lua`](../mods/PocketUniverse/reframework/autorun/pocket_universe.lua) | [README](../mods/PocketUniverse/README.md), changelog, `modinfo.ini`, tests; one-toggle runtime weight/rank overrides, experimental |
 
 The Lua paths inside the mod folders mirror the real `reframework/autorun/` location used inside the game. The Health mod's loose file was normalized to that layout without changing its contents.
 
@@ -43,3 +43,7 @@ Read-only probes are stored in each baseline's `reframework/autorun/` directory.
 ## Before/after update
 
 Follow [UPDATE_PLAYBOOK](UPDATE_PLAYBOOK.md), not only method-name checks. For previous folder locations, see [MIGRATION_GUIDE](MIGRATION_GUIDE.md). Do not install every probe or dump as a gameplay mod.
+
+## Historical mod versions
+
+- [`history/BurdenReforged/v0.1.2/`](../history/BurdenReforged/v0.1.2/) preserves the complete former mod and regression tests unchanged. Do not install alongside Pocket Universe.

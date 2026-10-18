@@ -34,3 +34,10 @@ No Lua code, binary assets, baseline JSON, or ZIP bytes were rewritten by the re
 On an installed game, remove `reframework/autorun/weight_system_tweaks.lua`, then fully restart and install `reframework/autorun/burden_reforged.lua`. Only run one weight mod. Existing `reframework/data/WeightSystemTweaks.json` is left intact for one-time compatible boolean-settings import into `BurdenReforged.json`.
 
 This removes the old files from the branch's current tree only. Existing Git history and the 11 October 2026 weight-mod on/off research captures remain untouched. The historical version mismatch mentioned above applies to the removed mod, not to Burden Reforged.
+
+## 18 October 2026 — Pocket Universe replacement (separate PR)
+
+- Former `mods/BurdenReforged/` content was relocated **byte-for-byte** to `history/BurdenReforged/v0.1.2/`, preserving provenance and regression tests; Git commit history also remains available.
+- New maintained mod: `mods/PocketUniverse/reframework/autorun/pocket_universe.lua` with one Enable toggle. This is an independent read-time override, not a rename of the old script.
+- In DD2, remove/disable `reframework/autorun/burden_reforged.lua`, the weight-rank compatibility probe, and other competing weight scripts, **fully restart**, then install `pocket_universe.lua`. Preserve historical `BurdenReforged.json` and backups; new settings use `PocketUniverse.json` and do not import previous category options.
+- New behavior needs game validation; raw captures and archived release ZIPs are unchanged.

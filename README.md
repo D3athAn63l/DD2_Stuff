@@ -10,7 +10,7 @@ This is a research repository. **Read-only reflection is not a gameplay test**, 
 
 | Folder | Contains | Where to start |
 |---|---|---|
-| [`mods/`](mods/) | Playable mod Lua, assets and metadata | [Choose Your Beloved](mods/ChooseYourBeloved/), [CompleteHealthRestoration](mods/CompleteHealthRestoration/), [Burden Reforged](mods/BurdenReforged/) |
+| [`mods/`](mods/) | Playable mod Lua, assets and metadata | [Choose Your Beloved](mods/ChooseYourBeloved/), [CompleteHealthRestoration](mods/CompleteHealthRestoration/), [Pocket Universe](mods/PocketUniverse/) |
 | [`tools/`](tools/) | Read-only data dumper, offline merge/comparison scripts, tests | [DD2 Data Dumper](tools/DD2DataDumper/README.md) |
 | [`research/baselines/`](research/baselines/) | Known-working affinity and HP API captures, probes, references | [Affinity](research/baselines/affinity/2026-10-11/README.md), [Health](research/baselines/health/2026-10-11/README.md) |
 | [`research/dumps/`](research/dumps/) | Raw type profiles, item catalogs, runtime data and audits | [Basic item catalog](research/dumps/items/2026-10-11/basic-catalog/AUDIT.md), [current equipment research (v1.1)](research/dumps/items/2026-10-11/detailed-v5.2/README.md) |
@@ -23,7 +23,7 @@ This is a research repository. **Read-only reflection is not a gameplay test**, 
 
 - **Choose Your Beloved v2.7 experimental:** adds a full-screen menu suppression check to the existing contextual heart UI to hide it during merchant Buy/Sell, resuming when valid dialogue remains. [Details](mods/ChooseYourBeloved/README.md). In-game v2.7 test pending.
 - **CompleteHealthRestoration v2.0:** HP and Loss Gauge recovery. Owner reports both work in-game.
-- **Burden Reforged v0.1.2 experimental:** independent weight-rule implementation replacing the old WeightSystemTweaks files. Owner confirmed v0.1.1 restored pawn weights on disable and reported that v0.1.2 eliminates the repeated missing-key exceptions while enabled in-game (16 Oct). Other weight scenarios still require regression testing. [Source and tests](mods/BurdenReforged/README.md).
+- **Pocket Universe v0.1.0 experimental:** one Enable toggle for runtime-zero weight getters and forced Very Light rank. Mock tests pass; October 2026 two-overload rank experiments showed live rank changes, but new weight getter hooks, storage-overflow checks and online behavior still need in-game validation. Retired Burden Reforged v0.1.2 is preserved unchanged under `history/BurdenReforged/v0.1.2/`. [Details](mods/PocketUniverse/README.md).
 - **DD2 Data Dumper v5.2 experimental:** detailed catalog **now captured in-game**: 2,152 unique loaded dictionary IDs, including 495 weapon, 669 armor and 988 other parameter objects. Capture covers raw item fields; it does not establish valid EX/passive modifier combinations.
 
 ### Known environment evidence
