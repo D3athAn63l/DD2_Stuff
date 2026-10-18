@@ -18,9 +18,9 @@ A missing method reported by a failed enumeration is unresolved, *not proven rem
 | Choose Your Beloved | Locked NPC <=199; unlocked NPC >199; anti-loss, manual changes, NPC HUD and cross-save safeguards; v2.7 read-only Main Pawn 0–1000 display, centered heart-and-bar NPC/pawn HUD, short-dialogue hold, shop/menu suppression, no stale value after unload and no Johanne writer interference |
 | CompleteHealthRestoration | Regular HP and reduced-max HP recovery, pawn toggles, combat/pause gating, saved settings after restart |
 | Data Dumper | Bounded type scan, item export uniqueness, checkpoint resume, JSON writer errors, field coverage |
-| Burden Reforged | Arisen + pawn carried weights and enable/disable, equip/unequip, dragonforging, Warfarer, per-item tooltip values, persisted settings and hot-reload restoration. Run `python mods/BurdenReforged/tests/run_lua.py` for mocked regressions; owner confirmed full-party toggle recovery in v0.1.1 and reported that v0.1.2 eliminates the repeating missing-key exceptions. |
+| Pocket Universe | Confirm 3 weight getter hooks + 6 rank hooks install; toggle ON/OFF across full party, item pickup and transfers, native restoration, no repeating errors, and whether overflow still sends loot to storage. Run `python mods/PocketUniverse/tests/run_lua.py`. Online safety and storage redirection remain unverified. |
 
-### Burden Reforged managed-dictionary regression (16 October 2026)
+### Historical Burden Reforged managed-dictionary regression (16 October 2026; archived under history/BurdenReforged/v0.1.2/)
 
 - **Failure, v0.1.1:** `StorageDict:get_Item(characterID)` could be called for a pawn whose ID was present in a party list but absent from `StorageDict`. A managed `Dictionary<UInt32, List<app.ItemManager.StorageMasterData>>.get_Item` `KeyNotFoundException` still appeared in the REFramework log despite surrounding Lua `pcall`. Partial refresh also left `weightDirty` set, leading to repeated work every frame.
 - **Fix, v0.1.2:** Check `ContainsKey` before `get_Item` on both storage and weight dictionaries; initialize missing weight entries using `set_Item`; let missing storage entries retry on the normal 0.25/0.75-second refresh interval rather than every frame. Unknown dictionary membership fails closed instead of probing an unsafe key.
@@ -33,3 +33,9 @@ Never test risky save mutations without a backup.
 Make the smallest necessary code fix, run local tests, then validate in real DD2. Preserve the historical raw JSONs and publish a **new dated snapshot**. Record reproduction, environment, what changed, exact files, simulated tests and observed in-game results in the PR.
 
 For repository layout changes use [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md). Do not merge without the owner's approval.
+
+### Pocket Universe runtime override test (18 October 2026)
+
+- The new implementation hooks two `getStorageWeight` float overloads, one integer weight getter, and six rank overloads without editing `WeightDict` or item parameters. Some game logic may bypass these methods.
+- Earlier owner-tested rank-hook prototype changed all four party rank labels at 60/61/90/91 thresholds and to Very Heavy at 0/0/0/5. **This is not a live test of the new Pocket Universe weight hooks.**
+- Verify item pickup over-cap and actual storage redirection, and inspect log after pawn load/unload. Disable in REFramework and verify native results, then fully restart when changing older mods that changed item definitions.
