@@ -1,7 +1,10 @@
 -- =============================================================================
--- BelovedCap  v2.7
+-- BelovedCap  v2.8
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.8: Use one canonical unlock predicate for the UI, NPC cap enforcement,
+-- cheat actions and HUD; normalize legacy truthy saved unlock values.
 --
 -- v2.7: Hide the conversational HUD and pawn change toast in game menus.
 -- Preserve conversation targets and restore display when menu closes.
@@ -30,7 +33,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.7"
+local modVersion = "2.8"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -94,9 +97,19 @@ local function validateConfig()
             config[spec.key] = math.max(spec.min, math.min(spec.max, math.floor(n)))
         end
     end
-    -- Tables must be tables
+    -- Legacy JSON configurations may encode unlocks as "true" or 1.
+    -- The old UI interpreted any truthy value as UNLOCKED, while the cap
+    -- enforcement required == true. Canonicalize once to real booleans.
     if type(config.UnlockedNPCs) ~= "table" then
         config.UnlockedNPCs = {}
+    else
+        local normalized = {}
+        for key, value in pairs(config.UnlockedNPCs) do
+            if value == true or value == 1 or value == "true" or value == "1" then
+                normalized[tostring(key)] = true
+            end
+        end
+        config.UnlockedNPCs = normalized
     end
 end
 
@@ -172,6 +185,11 @@ local function getPermanentID(charaID)
     return tostring(charaID)
 end
 
+-- Single source of truth for unlock status in menu, HUD and enforcer.
+local function isNPCUnlocked(key)
+    return config.UnlockedNPCs[tostring(key)] == true
+end
+
 local function translateCharacterName(charaID)
     if getCharaName then
         return getCharaName:call(nil, charaID) or "Unknown"
@@ -233,7 +251,7 @@ end
 local function applyCapAndProtection(info, key)
     local current = tonumber(info.Value)
     if current == nil then return end
-    local isUnlocked = config.UnlockedNPCs[key] == true
+    local isUnlocked = isNPCUnlocked(key)
     if not isUnlocked and current > config.CapValue then
         current = config.CapValue
         info.Value = current
@@ -563,7 +581,7 @@ local function readGlobalAffinity(character)
     end)
     local value = info and tonumber(info.Value)
     if not value then return nil end
-    local unlocked = config.UnlockedNPCs[getPermanentID(charId)] == true
+    local unlocked = isNPCUnlocked(getPermanentID(charId))
     local max = unlocked and 299 or config.CapValue
     return {
         name = translateCharacterName(charId), value = value, max = max,
@@ -747,7 +765,7 @@ local function refreshNPCList()
         if npcHolder then
             local sentimentInfo = npcHolder:getSentimentInfo(playerCharaID, false)
             if sentimentInfo and (sentimentInfo.Value > 0
-                or config.UnlockedNPCs[getPermanentID(npcHolder.CharaID)]) then
+                or isNPCUnlocked(getPermanentID(npcHolder.CharaID))) then
                 table.insert(npcDataArray, {
                     name    = translateCharacterName(npcHolder.CharaID),
                     charaID = npcHolder.CharaID,
@@ -863,6 +881,7 @@ re.on_draw_ui(function()
     imgui.spacing()
 
     styledButton("Refresh NPC List", refreshNPCList)
+    imgui.text("UNLOCKED bypasses this mod's cap, not DD2's own 199 soft cap.")
 
     if #npcDataArray == 0 then
         imgui.text("Press 'Refresh NPC List' to view characters.")
@@ -891,7 +910,7 @@ re.on_draw_ui(function()
                 or string.find(string.lower(npc.name), filterLower, 1, true)
             if passFilter then
                 imgui.table_next_row()
-                local isUnlocked = config.UnlockedNPCs[npc.strID]
+                local isUnlocked = isNPCUnlocked(npc.strID)
 
                 -- Name
                 imgui.table_next_column()
@@ -905,8 +924,16 @@ re.on_draw_ui(function()
                 imgui.table_next_column()
                 if isUnlocked then
                     imgui.text_colored("UNLOCKED", 0xFF8AD950)
+                    if imgui.is_item_hovered() then
+                        imgui.set_tooltip("Mod 199 cap: INACTIVE for this NPC (ID: " .. npc.strID ..
+                            "). DD2 may independently hold affinity at 199 until a gift or quest.")
+                    end
                 else
                     imgui.text_colored("CAPPED",   0xFF60609C)
+                    if imgui.is_item_hovered() then
+                        imgui.set_tooltip("Mod cap active: " .. tostring(config.CapValue) ..
+                            " (NPC ID: " .. npc.strID .. ")")
+                    end
                 end
 
                 -- Lock / Unlock
@@ -922,6 +949,9 @@ re.on_draw_ui(function()
                 else
                     if imgui.button("Unlock##" .. npc.strID) then
                         config.UnlockedNPCs[npc.strID] = true
+                        -- Start a fresh anti-loss baseline on transition from
+                        -- a locked 199 state to the unlocked rule.
+                        sessionHighs[npc.strID] = nil
                         saveConfig()
                     end
                 end
@@ -942,7 +972,7 @@ re.on_draw_ui(function()
                                 if npcHolder then
                                     local sentiment = npcHolder:getSentimentInfo(player:get_CharaID(), false)
                                     if sentiment then
-                                        local maxVal = config.UnlockedNPCs[npc.strID] and 299 or config.CapValue
+                                        local maxVal = isNPCUnlocked(npc.strID) and 299 or config.CapValue
                                         local newVal = math.max(0, math.min(sentiment.Value + config.ManualAffinityChange, maxVal))
                                         sentiment.Value = newVal
                                         -- Explicit exception: a deliberate manual decrease (or
