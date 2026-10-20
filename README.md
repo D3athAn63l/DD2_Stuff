@@ -21,7 +21,7 @@ This is a research repository. **Read-only reflection is not a gameplay test**, 
 
 ## Current project status (16 October 2026)
 
-- **Choose Your Beloved v2.7 experimental:** adds a full-screen menu suppression check to the existing contextual heart UI to hide it during merchant Buy/Sell, resuming when valid dialogue remains. [Details](mods/ChooseYourBeloved/README.md). In-game v2.7 test pending.
+- **Choose Your Beloved v2.8 experimental:** fixes mismatched legacy unlock entry types, makes NPC cap/UI/HUD use one unlock rule, adds mod-cap diagnostics, and documents DD2's separate 199 soft cap. [Details](mods/ChooseYourBeloved/README.md). Ulrika verification pending.
 - **CompleteHealthRestoration v2.0:** HP and Loss Gauge recovery. Owner reports both work in-game.
 - **Burden Reforged v0.1.2 experimental:** independent weight-rule implementation replacing the old WeightSystemTweaks files. Owner confirmed v0.1.1 restored pawn weights on disable and reported that v0.1.2 eliminates the repeated missing-key exceptions while enabled in-game (16 Oct). Other weight scenarios still require regression testing. [Source and tests](mods/BurdenReforged/README.md).
 - **DD2 Data Dumper v5.2 experimental:** detailed catalog **now captured in-game**: 2,152 unique loaded dictionary IDs, including 495 weapon, 669 armor and 988 other parameter objects. Capture covers raw item fields; it does not establish valid EX/passive modifier combinations.
