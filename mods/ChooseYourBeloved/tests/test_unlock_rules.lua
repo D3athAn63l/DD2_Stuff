@@ -10,8 +10,8 @@ local function extract(startMark,endMark)
 end
 local cfg={}
 local defs={CapValue=199,ManualAffinityChange=50,UnlockedNPCs={},Enabled=true,PreventDecay=true,
- CheatModeEnabled=false,ShowFloatingBar=true,ShowMainPawnFloatingBar=true,ShowPawnChangeToast=true,
- HideDuringGameMenus=true,PawnHudSeconds=5,HudXPercent=50,HudYPercent=12,DialogueMinSeconds=4}
+ CheatModeEnabled=false,ShowPawnChangeToast=true,NativePromptEnabled=true,NativeDialogueAffinity=true,
+ HideDuringGameMenus=true,PawnToastSeconds=5}
 local env={config=cfg,defaultConfig=defs,sessionHighs={}}
 setmetatable(env,{__index=_G})
 local normalization=extract("local function validateConfig()","local function saveConfig()")
@@ -23,7 +23,7 @@ assert(cfg.UnlockedNPCs["321"]==nil and cfg.UnlockedNPCs["654"]==nil)
 local pred=extract("local function isNPCUnlocked(key)","local function translateCharacterName")
 local isUnlocked=assert(load(pred.."\nreturn isNPCUnlocked","predicate","t",env))()
 assert(isUnlocked("123") and isUnlocked("456") and isUnlocked("789") and not isUnlocked("321"))
-local cap=extract("local function applyCapAndProtection(info, key)","-- Compact, asset-free heart.")
+local cap=extract("local function applyCapAndProtection(info, key)","-- MAIN PAWN FAVORABILITY")
 local apply=assert(load(cap.."\nreturn applyCapAndProtection","apply","t",setmetatable({isNPCUnlocked=isUnlocked},{__index=env})))()
 local u={Value=245};apply(u,"123");assert(u.Value==245,"an unlocked NPC must not be re-capped to 199")
 local l={Value=245};apply(l,"321");assert(l.Value==199,"locked NPC must be clamped")
