@@ -55,3 +55,13 @@ Alpha2 adds a separate *optional* `app.GUIBase.getName(app.CharacterID)` post-ho
 Original GUI names for unrelated characters are returned unchanged. A reentrancy guard prevents modifying our own name-resolution calls. The hook reads native NPC sentiment or the Main Pawn's 0–1000 rating; it never writes affinity. The known-working prompt modification, v2.8 Ulrika fix, classic HUD fallback and pawn change toast remain intact.
 
 **Still experimental:** We verified the older Show Favorability mod used this exact name hook, but alpha2's scoped hook requires live testing. The global name function may also be used by other UI while a conversation is open; do not run Show Favorability simultaneously. Watch **Native dialogue: hooked, names=N, failures=N** while speaking and report the resulting screenshot.
+
+### Owner's in-game Alpha 2 confirmation — 26 October 2026
+
+The owner supplied two screenshots from the live game confirming **both native affinity surfaces work for the Main Pawn** in v2.9-alpha2:
+
+- **Before conversation:** the interaction prompt displays `Dahlia [1000]` using native `TxtTalk` text.
+- **During conversation:** the native dialogue speaker label displays `Dahlia [1000]` above the unchanged dialogue subtitle.
+- Previously, Alpha 1 was owner-confirmed to show `The Dragonforged [187]` **before talking**; it did not yet decorate the active dialogue name. The Alpha 2 Dahlia conversation screenshot confirms this second path works for the pawn.
+
+These are specific live UI confirmations, not proof that every NPC, merchant option, one-line conversation, or save transition is regression-safe. The experimental toggle remains default OFF, rollback remains available, and standalone Show Name / Show Favorability should stay disabled during this test.

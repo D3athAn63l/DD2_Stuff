@@ -5,4 +5,5 @@ Choose Your Beloved v2.9-alpha2 (26 October 2026)
 - No global name suffix for other NPCs; guard nested name lookups.
 - Optional Show Affinity on Native Dialogue Speaker toggle; gated on Native Talk Affinity OFF by default.
 - Main Pawn native rating and NPC sentiment read only; Ulrika unlock logic unchanged.
-- Native dialogue name-hook integration still needs game test.
+- **26 Oct 2026 OWNER-CONFIRMED:** native prompt shows Dahlia [1000] before interaction AND dialogue speaker shows Dahlia [1000] during conversation; live screenshots supplied.
+- Previously alpha1 pre-talk NPC prompt The Dragonforged [187] also confirmed. Other NPC dialogue/merchant cases still need regression testing.
