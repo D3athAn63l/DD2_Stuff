@@ -1,0 +1,8 @@
+Choose Your Beloved v2.9-alpha2 (26 October 2026)
+- Owner confirms alpha1 native interaction label works before speaking.
+- Add strict current-speaker name hook to display affinity on dialogue subtitles.
+- Require explicit talk event + live talking flag + matching ID + menu not blocked.
+- No global name suffix for other NPCs; guard nested name lookups.
+- Optional Show Affinity on Native Dialogue Speaker toggle; gated on Native Talk Affinity OFF by default.
+- Main Pawn native rating and NPC sentiment read only; Ulrika unlock logic unchanged.
+- Native dialogue name-hook integration still needs game test.

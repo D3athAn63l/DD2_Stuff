@@ -39,3 +39,19 @@ This experimental mode updates the *native Talk prompt* through TxtTalk:set_Mess
 - The v2.8 Ulrika unlock enforcement, NPC anti-loss, read-only pawn values and menu guard are unchanged. Save config and saves before testing.
 - Diagnostic line shows hook status, successful setter calls, failures, and last label; provide screenshots if UI truncates or fails.
 - No in-game write validation yet; the new behavior remains experimental even though all read-only native hooks were confirmed.
+
+## v2.9 Alpha 2 — Conversation speaker native affinity (26 Oct 2026)
+
+The owner confirmed alpha1's **native pre-talk interaction prompt** works in-game (e.g. `The Dragonforged [187]`), but the dialogue subtitle still showed only `The Dragonforged`. This is expected because `ui021301.TxtTalk` belongs to the interaction prompt, not the dialogue speaker name.
+
+Alpha2 adds a separate *optional* `app.GUIBase.getName(app.CharacterID)` post-hook to decorate the **current dialogue speaker** as `The Dragonforged [187]`, but only when ALL conditions hold:
+
+- Native Talk Affinity is enabled (default OFF).
+- **Show Affinity on Native Dialogue Speaker** is enabled (default ON, but inert without Native Talk Affinity).
+- `app.InteractManager.IsPlayerTalking` reports true and the last confirmed `selectTalkEvent` target is recent.
+- The requested CharacterID matches that exact speaker's ID.
+- A blocking game menu has not been detected.
+
+Original GUI names for unrelated characters are returned unchanged. A reentrancy guard prevents modifying our own name-resolution calls. The hook reads native NPC sentiment or the Main Pawn's 0–1000 rating; it never writes affinity. The known-working prompt modification, v2.8 Ulrika fix, classic HUD fallback and pawn change toast remain intact.
+
+**Still experimental:** We verified the older Show Favorability mod used this exact name hook, but alpha2's scoped hook requires live testing. The global name function may also be used by other UI while a conversation is open; do not run Show Favorability simultaneously. Watch **Native dialogue: hooked, names=N, failures=N** while speaking and report the resulting screenshot.

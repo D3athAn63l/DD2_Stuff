@@ -1,7 +1,11 @@
 -- =============================================================================
--- BelovedCap  v2.9-alpha1
+-- BelovedCap  v2.9-alpha2
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v2.9-alpha2: Add scoped native dialogue-speaker name affinity.
+-- Native prompt was confirmed in-game in alpha1; dialogue name missing.
+-- This new hook is separate from the already-working prompt hook.
 --
 -- v2.9-alpha1: Optional native interaction affinity label (disabled by default).
 -- v2.8: Use one canonical unlock predicate for the UI, NPC cap enforcement,
@@ -34,7 +38,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.9-alpha1"
+local modVersion = "2.9-alpha2"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -51,6 +55,7 @@ local defaultConfig = {
     ShowPawnChangeToast  = true,
     HideDuringGameMenus  = true,
     NativePromptEnabled  = false,
+    NativeDialogueAffinity = true, -- only active with NativePromptEnabled
     HudXPercent = 50,
     HudYPercent = 12,
     DialogueMinSeconds = 4,
@@ -73,7 +78,7 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast", "HideDuringGameMenus", "NativePromptEnabled" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast", "HideDuringGameMenus", "NativePromptEnabled", "NativeDialogueAffinity" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
@@ -602,6 +607,119 @@ local function readGlobalAffinity(character)
 end
 
 -- ---------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------
+-- v2.9-alpha2: NATIVE DIALOGUE SPEAKER TEXT (not the interaction prompt)
+-- ShowFavorability demonstrates that GUIBase.getName(app.CharacterID) returns
+-- the managed speaker name. Our hook restricts replacements to the exact
+-- character identified by the confirmed Arisen/speaker dialogue event.
+-- This is NOT a global suffix operation on every NPC name lookup.
+-- ---------------------------------------------------------------------------
+local nativeDialogue = {
+    installed = false, renamed = 0, skipped = 0, failures = 0,
+    last = "not installed", blocked = false, depth = 0, callStack = {}
+}
+
+local function dialogueSpeakerValue(character)
+    if not character then return nil end
+    if pawnState.character and sameHudCharacter(character, pawnState.character) then
+        return tonumber(pawnState.value)
+    end
+    local id = safePawnAccess(function() return character:get_CharaID() end)
+    local cm = getCharacterManager()
+    local player = cm and safePawnAccess(function() return cm:get_ManualPlayer() end)
+    if not id or not player or sameHudCharacter(character, player) then return nil end
+    local nm = getNPCManager()
+    local holder = nm and safePawnAccess(function() return nm:getNPCHolder(id) end)
+    local sentiment = holder and safePawnAccess(function()
+        return holder:getSentimentInfo(player:get_CharaID(), false)
+    end)
+    return sentiment and tonumber(sentiment.Value) or nil
+end
+
+local function currentDialogueSpeakerForID(charaID)
+    if nativeDialogue.depth > 0 or not config.NativePromptEnabled
+        or not config.NativeDialogueAffinity or nativeDialogue.blocked then return nil end
+    local mgr = safePawnAccess(function()
+        return sdk.get_managed_singleton("app.InteractManager")
+    end)
+    local isTalking = mgr and safePawnAccess(function()
+        return mgr:get_field("IsPlayerTalking")
+    end) == true
+    if not isTalking then return nil end
+
+    -- Require an *explicit* talk event. Mere proximity/target prompts don't
+    -- authorize modifying speaker names during a conversation.
+    if not talkTracker.eventTarget or not talkTracker.eventAt
+        or talkTracker.eventAt <= 0
+        or hudNow() - talkTracker.eventAt > 120 then return nil end
+    local speaker = talkTracker.eventTarget
+    local speakerID = safePawnAccess(function() return speaker:get_CharaID() end)
+    if not speakerID or not charaID then return nil end
+    if getPermanentID(speakerID) ~= getPermanentID(charaID) then return nil end
+    return speaker
+end
+
+local function installNativeDialogueNameHook()
+    local td = safePawnAccess(function()
+        return sdk.find_type_definition("app.GUIBase")
+    end)
+    local method = td and safePawnAccess(function()
+        return td:get_method("getName(app.CharacterID)")
+    end)
+    if not method or type(sdk.hook) ~= "function"
+        or type(sdk.to_int64) ~= "function"
+        or type(sdk.create_managed_string) ~= "function"
+        or type(sdk.to_ptr) ~= "function" then
+        nativeDialogue.last = "GUIBase name APIs unavailable"
+        return
+    end
+    local ok = pcall(function()
+        sdk.hook(method, function(args)
+            -- The static method's CharacterID is args[2]. Pair each pre/post
+            -- with a stack so nested name lookups don't steal each other.
+            local requested = args and safePawnAccess(function()
+                return sdk.to_int64(args[2])
+            end)
+            local target = currentDialogueSpeakerForID(requested)
+            local stack = nativeDialogue.callStack
+            stack[#stack + 1] = target or false
+        end, function(retval)
+            local stack = nativeDialogue.callStack
+            local target = stack[#stack]
+            stack[#stack] = nil
+            if not target then return retval end
+
+            -- No writes to NPC SentimentInfo, pawn rating or save data.
+            local okReplace, result = pcall(function()
+                local raw = sdk.to_managed_object(retval)
+                local name = raw and raw:ToString()
+                if type(name) ~= "string" or name == "" then return nil end
+                -- Don't duplicate a suffix if another hook already supplied one.
+                if name:match("%s%[%-?%d+%]$") then return nil end
+                local affinity = dialogueSpeakerValue(target)
+                if not affinity or affinity ~= affinity then return nil end
+                local label = name .. " [" .. tostring(math.floor(affinity + 0.5)) .. "]"
+                local managed = sdk.create_managed_string(label)
+                if not managed then return nil end
+                nativeDialogue.renamed = nativeDialogue.renamed + 1
+                nativeDialogue.last = label
+                return sdk.to_ptr(managed)
+            end)
+            if not okReplace then
+                nativeDialogue.failures = nativeDialogue.failures + 1
+                nativeDialogue.last = "dialogue name hook exception"
+                return retval
+            end
+            if result then return result end
+            nativeDialogue.skipped = nativeDialogue.skipped + 1
+            return retval
+        end)
+    end)
+    nativeDialogue.installed = ok
+    if not ok then nativeDialogue.last = "GUIBase name hook failed" end
+end
+installNativeDialogueNameHook()
+
 -- v2.9 ALPHA: NATIVE INTERACTION TEXT. Scope: current reqDisp target ONLY.
 -- The v0.2 report found TxtTalk 431/431 times, but original get_Message()
 -- failed 431/431 times. Never try to preserve unknown prompt strings.
@@ -610,7 +728,11 @@ local function nativePromptLabel(character)
     if not character then return nil end
     local id = safePawnAccess(function() return character:get_CharaID() end)
     if not id then return nil end
+    -- Keep internal name lookups vanilla even when the current dialogue
+    -- speaker matches the prompt target; prevents duplicated [affinity] tags.
+    nativeDialogue.depth = nativeDialogue.depth + 1
     local name = safePawnAccess(function() return translateCharacterName(id) end)
+    nativeDialogue.depth = nativeDialogue.depth - 1
     if type(name) ~= "string" or name == "" or name == "Unknown" then return nil end
     local number
     if pawnState.character and sameHudCharacter(character, pawnState.character) then
@@ -821,7 +943,9 @@ re.on_frame(function()
         if config.Enabled then pcall(runAffinityScan) end
     end
     -- Keep the last talk target while buying/selling; don't draw over menus.
-    if not updateMenuGuard() then
+    local blocked = updateMenuGuard()
+    nativeDialogue.blocked = blocked
+    if not blocked then
         -- Fall back to the proven classic HUD if the native hook is unavailable
         -- or this explicitly opt-in experiment is disabled.
         if not (config.NativePromptEnabled and nativePrompt.installed) then
@@ -896,6 +1020,17 @@ re.on_draw_ui(function()
     changed, config.NativePromptEnabled = imgui.checkbox(
         "Native Talk Affinity (Experimental)", config.NativePromptEnabled)
     if changed then nativePrompt.target = nil; saveConfig() end
+    changed, config.NativeDialogueAffinity = imgui.checkbox(
+        "Show Affinity on Native Dialogue Speaker", config.NativeDialogueAffinity)
+    if changed then saveConfig() end
+    if imgui.is_item_hovered() then
+        imgui.set_tooltip("Adds [affinity] after the current dialogue speaker's native name.\n"
+            .. "Requires Native Talk Affinity enabled; only matching talk-event IDs.")
+    end
+    imgui.text("Native dialogue: " .. (nativeDialogue.installed and "hooked" or "unavailable")
+        .. "; names=" .. tostring(nativeDialogue.renamed)
+        .. "; failures=" .. tostring(nativeDialogue.failures))
+    imgui.text("Last dialogue label: " .. nativeDialogue.last)
     if imgui.is_item_hovered() then
         imgui.set_tooltip("Opt-in native interaction prompt; disables custom conversation HUD.\n"
             .. "Disable standalone Show Name/Favorability when testing.\n"
@@ -1118,4 +1253,5 @@ re.on_script_reset(function()
         eventSerial = 0, handledEventSerial = 0, visibleUntil = 0
     }
     nativePrompt.target, nativePrompt.ui = nil, nil
+    nativeDialogue.callStack, nativeDialogue.depth, nativeDialogue.blocked = {}, 0, false
 end)
