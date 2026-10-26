@@ -8,4 +8,5 @@ Choose Your Beloved v2.8 — Unlock state normalization (20 October 2026; experi
 - Explain that the game's vanilla 199-point soft cap may still require gifts or quests to pass.
 - No artificial affinity injections, forced relationship changes, or changes to romance gameplay.
 - Main Pawn affinity, classic HUD, menu suppression and short dialogue detection unchanged.
-- Requires in-game Ulrika test; local test harness supplied for regression.
+- 20 Oct 2026: OWNER-CONFIRMED the v2.8 loose Lua fixes Ulrika Unlock in-game.
+- Both v2.8 handcrafted archives still fail CRC/extraction for the owner; do not recommend those ZIPs. Neither archive contains Cover.png.

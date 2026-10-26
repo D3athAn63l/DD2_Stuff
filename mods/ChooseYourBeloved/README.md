@@ -1,6 +1,6 @@
-# Choose Your Beloved v2.8 — Unlock consistency fix (experimental)
+# Choose Your Beloved v2.8 — Unlock consistency fix (Ulrika verified in-game)
 
-The user reported **Ulrika displaying UNLOCKED but remaining at affinity 199**.
+The user reported **Ulrika displaying UNLOCKED but remaining at affinity 199**. **20 October 2026: owner confirmed the v2.8 loose `BelovedCap.lua` fixes this issue in-game.** This verifies the reported Ulrika scenario; exact affinity values and the game build were not recorded.
 
 ## Distinguish two separate 199 caps
 
@@ -22,4 +22,6 @@ The audit also found a real inconsistency: the mod's list/UI interpreted truthy 
 No additional romance, affinity gain or cooldown overrides are installed. The anti-loss rule retains its previous behavior for both locked and unlocked NPCs. Main Pawn native FavorabilityRating stays read-only; classic conversation HUD, menu guard, 4-second short-NPC hold and saved HUD location remain unchanged.
 
 ### Testing
-A mock Lua regression test is supplied for unlock normalization and cap enforcement. Its result is not an in-game test; verify on Ulrika before merging.
+Owner-confirmed successful in-game Ulrika unlock test on 20 October 2026 using the loose Lua. Other NPC cases and the regression harness still require separate validation.
+
+**Packaging warning:** Both handmade v2.8 ZIP downloads caused extraction/CRC errors for the owner. Neither contains `Cover.png`; thus a corrupt PNG cannot directly explain errors for entries in those specific ZIPs. The archive problem remains unresolved. Install the confirmed-working loose Lua instead.
