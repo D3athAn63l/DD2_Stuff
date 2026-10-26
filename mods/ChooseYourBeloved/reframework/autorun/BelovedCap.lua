@@ -36,7 +36,7 @@
 -- for ALL NPCs. Protection is session-only so it cannot import affinity from
 -- another playthrough. Manual cheat-menu edits explicitly reset the baseline.
 --
--- The HUD uses REFramework's built-in draw API: no Affinity Bar / D2D required.
+-- Current native UI requires no custom floating dialogue bar or external D2D.
 -- BelovedCap.json from v2.0 is migrated (unlock list retained; persistent
 -- UnlockedNPCMaxAffinity intentionally discarded because it is save-unsafe).
 -- =============================================================================
@@ -85,7 +85,7 @@ local function validateConfig()
 
     if type(config.PawnToastSeconds) ~= "number"
         or config.PawnToastSeconds ~= config.PawnToastSeconds then
-        config.PawnToastSeconds = defaultConfig.PawnHudSeconds
+        config.PawnToastSeconds = defaultConfig.PawnToastSeconds
     else
         config.PawnToastSeconds = math.max(2, math.min(12, math.floor(config.PawnToastSeconds)))
     end
@@ -338,7 +338,7 @@ local function refreshMainPawnStatus()
 end
 
 
--- Native affinity target helpers and Main Pawn change notifications.
+-- Native affinity identity helpers and Main Pawn change notifications.
 local pawnHud = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
 local talkTracker = { eventTarget = nil, eventAt = 0, hookStatus = "Not installed" }
 
@@ -355,7 +355,7 @@ local function characterKey(character)
     return getPermanentID(id)
 end
 
-local function sameHudCharacter(a, b)
+local function sameCharacterID(a, b)
     if not a or not b then return false end
     if a == b then return true end
     local ak, bk = characterKey(a), characterKey(b)
@@ -421,8 +421,8 @@ local function installConversationObservers()
                         local player = manager and manager:get_ManualPlayer()
                         if not player then return end
                         local target = nil
-                        if sameHudCharacter(first, player) and second then target = second end
-                        if sameHudCharacter(second, player) and first then target = first end
+                        if sameCharacterID(first, player) and second then target = second end
+                        if sameCharacterID(second, player) and first then target = first end
                         if target and characterKey(target) then
                             talkTracker.eventTarget = target
                             talkTracker.eventAt = hudNow()
@@ -475,13 +475,13 @@ local nativeDialogue = {
 
 local function dialogueSpeakerValue(character)
     if not character then return nil end
-    if pawnState.character and sameHudCharacter(character, pawnState.character) then
+    if pawnState.character and sameCharacterID(character, pawnState.character) then
         return tonumber(pawnState.value)
     end
     local id = safePawnAccess(function() return character:get_CharaID() end)
     local cm = getCharacterManager()
     local player = cm and safePawnAccess(function() return cm:get_ManualPlayer() end)
-    if not id or not player or sameHudCharacter(character, player) then return nil end
+    if not id or not player or sameCharacterID(character, player) then return nil end
     local nm = getNPCManager()
     local holder = nm and safePawnAccess(function() return nm:getNPCHolder(id) end)
     local sentiment = holder and safePawnAccess(function()
@@ -589,12 +589,12 @@ local function nativePromptLabel(character)
     nativeDialogue.depth = nativeDialogue.depth - 1
     if type(name) ~= "string" or name == "" or name == "Unknown" then return nil end
     local number
-    if pawnState.character and sameHudCharacter(character, pawnState.character) then
+    if pawnState.character and sameCharacterID(character, pawnState.character) then
         number = pawnState.value
     else
         local manager = getCharacterManager()
         local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
-        if not player or sameHudCharacter(character, player) then return nil end
+        if not player or sameCharacterID(character, player) then return nil end
         local npcManager = getNPCManager()
         local holder = npcManager and safePawnAccess(function()
             return npcManager:getNPCHolder(id)
@@ -834,10 +834,10 @@ re.on_draw_ui(function()
         imgui.text("Native UI unavailable; check REFramework / game update.")
     end
     changed, config.HideDuringGameMenus = imgui.checkbox(
-        "Hide Affinity HUD in Game Menus", config.HideDuringGameMenus)
+        "Hide Affinity UI in Game Menus", config.HideDuringGameMenus)
     if changed then saveConfig() end
     if imgui.is_item_hovered() then
-        imgui.set_tooltip("Hide the HUD and affinity toast in shop, inventory and pause menus.\nThe conversation target is preserved when a menu opens.")
+        imgui.set_tooltip("Suppress native dialogue affinity and Main Pawn notifications over blocking menus.")
     end
     imgui.text("Menu checker: " .. (
         not config.HideDuringGameMenus and "OFF" or
