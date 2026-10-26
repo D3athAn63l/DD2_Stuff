@@ -1,7 +1,11 @@
 -- =============================================================================
--- BelovedCap  v3.0.1-compat
+-- BelovedCap  v3.0.1-compat2
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v3.0.1 compat2: Replace noisy lifetime prompt counters with two short,
+-- bounded diagnostic captures for merchant Hail vs normal Talk.
+-- No new hooks, affinity mutations, or always-on event logs.
 --
 -- v3.0.1 COMPAT (optional): native GUIBase name fallback for unsolicited pawn
 -- barks and forced-quest dialogue; observe merchant prompt callback coverage.
@@ -46,7 +50,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "3.0.1-compat"
+local modVersion = "3.0.1-compat2"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -411,6 +415,97 @@ local nativePrompt = {
     targetCalls=0, commonCalls=0, lastTargetKey="none", lastTargetAt=0
 }
 
+-- Targeted prompt sampling, replacing unusable lifetime counters. The game
+-- refreshes the interaction prompt continuously, including while idle, so
+-- raw totals are not meaningful. Record bounded 12-second windows and group
+-- prompt callbacks by distinct character ID instead.
+local hailProbe = {
+    active = nil, results = {}, seconds = 12, saveStatus = "not saved"
+}
+
+local function hailProbeStop()
+    local sample = hailProbe.active
+    if not sample then return end
+    sample.finishedAt = os.time()
+    sample.duration = math.max(0, sample.finishedAt - sample.startedAt)
+    hailProbe.results[sample.stage] = sample
+    hailProbe.active = nil
+end
+
+local function hailProbeCurrent()
+    local sample = hailProbe.active
+    if sample and os.time() >= sample.deadline then
+        hailProbeStop()
+        return nil
+    end
+    return sample
+end
+
+local function hailProbeBegin(stage)
+    hailProbeStop()
+    local t = os.time()
+    hailProbe.active = {
+        stage = stage, startedAt = t, deadline = t + hailProbe.seconds,
+        targetCalls = 0, commonCalls = 0, resolved = 0, unresolved = 0,
+        commonWithTarget = 0, commonWithUI = 0,
+        labelWrites = 0, labelSkips = 0, labelErrors = 0,
+        ids = {}, idOrder = {}, duration = 0
+    }
+    hailProbe.saveStatus = "unsaved changes"
+end
+
+local function hailProbeObserveTarget(target)
+    local sample = hailProbeCurrent()
+    if not sample then return end
+    sample.targetCalls = sample.targetCalls + 1
+    local id = target and characterKey(target)
+    if not id then
+        sample.unresolved = sample.unresolved + 1
+        return
+    end
+    sample.resolved = sample.resolved + 1
+    id = tostring(id)
+    local record = sample.ids[id]
+    if not record and #sample.idOrder < 12 then
+        local name = safePawnAccess(function()
+            return translateCharacterName(target:get_CharaID())
+        end)
+        record = { id = id, name = tostring(name or "Unknown"), calls = 0,
+            commonCalls = 0, writes = 0, skips = 0, errors = 0 }
+        sample.ids[id] = record
+        sample.idOrder[#sample.idOrder + 1] = id
+    end
+    if record then record.calls = record.calls + 1 end
+end
+
+local function hailProbeObserveCommon(target, ui)
+    local sample = hailProbeCurrent()
+    if not sample then return end
+    sample.commonCalls = sample.commonCalls + 1
+    if ui then sample.commonWithUI = sample.commonWithUI + 1 end
+    local id = target and characterKey(target)
+    if id then
+        sample.commonWithTarget = sample.commonWithTarget + 1
+        local record = sample.ids[tostring(id)]
+        if record then record.commonCalls = record.commonCalls + 1 end
+    end
+end
+
+local function hailProbeObserveOutcome(target, kind)
+    local sample = hailProbeCurrent()
+    if not sample then return end
+    if kind == "write" then sample.labelWrites = sample.labelWrites + 1
+    elseif kind == "error" then sample.labelErrors = sample.labelErrors + 1
+    else sample.labelSkips = sample.labelSkips + 1 end
+    local id = target and characterKey(target)
+    local record = id and sample.ids[tostring(id)]
+    if record then
+        if kind == "write" then record.writes = record.writes + 1
+        elseif kind == "error" then record.errors = record.errors + 1
+        else record.skips = record.skips + 1 end
+    end
+end
+
 local function installConversationObservers()
     local installed, promptInstalled = 0, false
     -- Source identity via selectTalkEvent: only recognize a conversation when
@@ -467,6 +562,7 @@ local function installConversationObservers()
             nativePrompt.lastTargetKey = nativePrompt.target
                 and characterKey(nativePrompt.target) or "none"
             nativePrompt.lastTargetAt = hudNow()
+            hailProbeObserveTarget(nativePrompt.target)
         end)
     end
     talkTracker.hookStatus = string.format("talk: %d, prompt: %s", installed,
@@ -681,6 +777,7 @@ local function installNativePromptHook()
             nativePrompt.ui = args and safePawnAccess(function()
                 return sdk.to_managed_object(args[2])
             end)
+            hailProbeObserveCommon(nativePrompt.target, nativePrompt.ui)
         end, function(retval)
             local target, ui = nativePrompt.target, nativePrompt.ui
             nativePrompt.target, nativePrompt.ui = nil, nil
@@ -691,14 +788,17 @@ local function installNativePromptHook()
                         or safePawnAccess(function() return ui:get_field("TxtTalk") end))
                     if not text then
                         nativePrompt.skipped = nativePrompt.skipped + 1
+                        hailProbeObserveOutcome(target, "skip")
                         return
                     end
                     text:set_Message(label)
                     nativePrompt.written = nativePrompt.written + 1
+                    hailProbeObserveOutcome(target, "write")
                     nativePrompt.last = label
                 end)
                 if not ok then
                     nativePrompt.failures = nativePrompt.failures + 1
+                    hailProbeObserveOutcome(target, "error")
                     nativePrompt.last = "set_Message failed"
                 end
             end
@@ -788,6 +888,7 @@ local function runAffinityScan()
 end
 
 re.on_frame(function()
+    hailProbeCurrent() -- automatically close bounded captures
     local dt = getDeltaTime()
     checkTimer = checkTimer + dt
     if checkTimer >= checkInterval then
@@ -896,9 +997,56 @@ re.on_draw_ui(function()
         .. "; ambient=" .. tostring(nativeDialogue.fallbackRenamed)
         .. "; calls=" .. tostring(nativeDialogue.getNameCalls)
         .. "; failures=" .. tostring(nativeDialogue.failures))
-    imgui.text("Prompt diagnostics: targets=" .. tostring(nativePrompt.targetCalls)
-        .. "; common=" .. tostring(nativePrompt.commonCalls)
-        .. "; last ID=" .. tostring(nativePrompt.lastTargetKey))
+    if imgui.tree_node("Merchant Hail Probe (Read-only)") then
+        imgui.text("Capture only 12 seconds of prompt activity, grouped by character.")
+        if imgui.button("Capture Normal Talk (12s)") then hailProbeBegin("talk") end
+        if imgui.button("Capture Merchant Hail (12s)") then hailProbeBegin("hail") end
+        if hailProbe.active then
+            imgui.text("Capturing " .. hailProbe.active.stage .. " — "
+                .. tostring(math.max(0, hailProbe.active.deadline - os.time()))
+                .. " seconds remaining")
+            if imgui.button("Stop Capture") then hailProbeStop() end
+        end
+        for _, phase in ipairs({"talk", "hail"}) do
+            local sample = hailProbe.results[phase]
+            if sample then
+                imgui.separator()
+                imgui.text(phase .. ": " .. tostring(sample.duration) .. "s; target hooks="
+                    .. tostring(sample.targetCalls) .. "; common hooks="
+                    .. tostring(sample.commonCalls))
+                imgui.text("Resolved=" .. tostring(sample.resolved)
+                    .. "; unresolved=" .. tostring(sample.unresolved)
+                    .. "; common with target=" .. tostring(sample.commonWithTarget)
+                    .. "; with UI=" .. tostring(sample.commonWithUI))
+                imgui.text("Native labels: written=" .. tostring(sample.labelWrites)
+                    .. "; skipped=" .. tostring(sample.labelSkips)
+                    .. "; failed=" .. tostring(sample.labelErrors))
+                for _, id in ipairs(sample.idOrder) do
+                    local actor = sample.ids[id]
+                    if actor then
+                        imgui.text("  " .. actor.name .. " [" .. id .. "]"
+                            .. " target=" .. tostring(actor.calls)
+                            .. ", common=" .. tostring(actor.commonCalls)
+                            .. ", written=" .. tostring(actor.writes))
+                    end
+                end
+            end
+        end
+        if imgui.button("Save Hail Probe JSON") then
+            hailProbeStop()
+            local payload = {
+                version = "v3.0.1-compat2", type = "read-only prompt comparison",
+                talk = hailProbe.results.talk, hail = hailProbe.results.hail
+            }
+            local ok = pcall(function()
+                json.dump_file("BelovedCap_HailProbe.json", payload)
+            end)
+            hailProbe.saveStatus = ok and "Saved reframework/data/BelovedCap_HailProbe.json"
+                or "JSON save failed"
+        end
+        imgui.text(hailProbe.saveStatus)
+        imgui.tree_pop()
+    end
     if not nativePrompt.installed or not nativeDialogue.installed then
         imgui.text("Native UI unavailable; check REFramework / game update.")
     end

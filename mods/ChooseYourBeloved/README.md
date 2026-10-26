@@ -71,3 +71,14 @@ v3.0 Stable is unchanged on `main`. The v3.0.1 compatibility branch requires a n
 - No prompt counter values (`targets`, `common`, `last ID`) have been supplied yet. **Merchant root cause remains undetermined**: alternative UI class, callback/target mismatch, or unavailable merchant sentiment are all possibilities. Avoid claiming a merchant fix or adding broad unsafe hooks before measuring.
 
 Targeted next check: stand clear of interactables, note prompt counters, approach a merchant until Hail appears, note deltas plus `last ID`, then compare with a normal NPC Talk prompt. If `targets` and `common` don't change on Hail, instrument a separate native prompt path. If they do, inspect failed target/affinity resolution within the existing `ui021301` callbacks. No further broad regression matrix needed.
+
+## Merchant Hail diagnostic improvement — compat2 (26 October 2026)
+
+The owner observed that raw `targetCalls` and `commonCalls` counters rise rapidly **even when not talking**. They measure frequent native UI refreshes and are therefore not a reliable standalone test of merchant-specific behavior.
+
+In **REFramework > BelovedCap > Merchant Hail Probe (Read-only)**:
+1. Stand near a regular NPC. Click **Capture Normal Talk (12s)**, close REFramework, let the regular Talk prompt appear, and allow the capture to stop.
+2. Approach the merchant. Click **Capture Merchant Hail (12s)**, close REFramework, and face the merchant until **Hail (Hold to Talk)** is shown.
+3. Return to the probe UI; two fixed-length summaries now show target IDs/names, unresolved target calls, matched `reqDispCommon` calls and successful native affinity writes. Click **Save Hail Probe JSON** and upload `reframework/data/BelovedCap_HailProbe.json`.
+
+This diagnostic records up to 12 distinct character identities per sample rather than storing every high-frequency UI event. No new native hooks, affinity modifications or UI label changes were added by compat2. The merchant UI is **not yet fixed**; the sample is to distinguish unresolved targets from an unsupported UI path. v3.0 Stable remains unchanged.
