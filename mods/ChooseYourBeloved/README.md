@@ -37,3 +37,50 @@ The repository's historical Cover.png is intentionally **not referenced** in sta
 The v3.0 source is based on the owner-tested Alpha 2 native hooks with the floating renderer, guesses and controls removed. Source-level invariant checks verify the old HUD references are gone and that the native UI, NPC cap/unlock and pawn notifications remain. Regression scripts in `tests/` cover native character routing, NPC cap/unlock and read-only Main Pawn behavior; real-game validation of the **exact post-cleanup build** is still outstanding. This does not downgrade the owner's acceptance of the native feature itself.
 
 No third-party mod code/assets from Show Name, Show Favorability or Affinity Bar have been incorporated.
+
+## v3.0.1 compatibility experiment — 26 October 2026
+
+The owner reported three native UI gaps in v3.0:
+- **Forced quest dialogue:** Glintt's speaker name appeared without affinity.
+- **Main Pawn spontaneous chatter:** Dahlia's speaker name appeared without affinity.
+- **Merchant before speaking:** `Hail (Hold to Talk)` was shown rather than the annotated native Talk prompt.
+
+Source audit: v3.0 `currentDialogueSpeakerForID` requires BOTH `IsPlayerTalking=true` AND an explicit, recent `selectTalkEvent` involving the Arisen. The first two scenarios may skip one or both, even when the speaker name is rendered through `GUIBase.getName(app.CharacterID)`.
+
+### Experimental option
+New **Include Ambient/Forced Speaker Names (Experimental)** (default OFF) uses the **exact CharacterID requested by the game's native `GUIBase.getName` function** to read either main-pawn favorability (0–1000) or NPC sentiment and append `[value]`. It does **not** infer nearby targets and **never writes affinity**. The proven v3.0 strict dialogue path remains first priority.
+
+**Tradeoff:** `getName` is a *shared name function*. This optional fallback may also add affinity to unrelated name labels in menus, quest UIs or elsewhere. Disable the experimental checkbox to restore v3.0 name behavior. This fallback does not guarantee that every ambient/quest subtitle uses `getName`.
+
+### Hail/merchant diagnostic
+The UI now displays cumulative `reqDisp` target callbacks, `reqDispCommon` text callbacks, and the last native prompt character ID. During a **Hail (Hold to Talk)** prompt, these numbers help determine whether it goes through the already-supported `app.ui021301` functions. If not, a separate targeted UI hook/probe will be needed; **no merchant-prompt fix is claimed in this release**.
+
+### Test (single quick play session)
+1. Back up your current v3.0 loose Lua and `BelovedCap.json`, replace the Lua and fully restart DD2.
+2. Enable **Include Ambient/Forced Speaker Names (Experimental)** in REFramework > BelovedCap.
+3. Stand near Dahlia until she speaks spontaneously, trigger a quest line if one occurs naturally, and approach a merchant. No need for separate saves or extensive NPC coverage.
+4. For unchanged labels, report whether `Native dialogue ... ambient=N` increased. For merchant Hail, note whether `Prompt diagnostics: targets=N; common=N` rises. Disable the fallback if it adds affinity in places you don't want it.
+
+v3.0 Stable is unchanged on `main`. The v3.0.1 compatibility branch requires a new live game test.
+
+
+### Owner live-test results — 26 October 2026
+- **CONFIRMED WORKING:** Forced quest dialogue now displays affinity using the optional native name fallback.
+- **CONFIRMED WORKING:** Spontaneous Main Pawn dialogue, without an Arisen-initiated conversation, now displays affinity.
+- **STILL MISSING:** Merchant `Hail (Hold to Talk)` prompt does not display merchant affinity.
+- No prompt counter values (`targets`, `common`, `last ID`) have been supplied yet. **Merchant root cause remains undetermined**: alternative UI class, callback/target mismatch, or unavailable merchant sentiment are all possibilities. Avoid claiming a merchant fix or adding broad unsafe hooks before measuring.
+
+Targeted next check: stand clear of interactables, note prompt counters, approach a merchant until Hail appears, note deltas plus `last ID`, then compare with a normal NPC Talk prompt. If `targets` and `common` don't change on Hail, instrument a separate native prompt path. If they do, inspect failed target/affinity resolution within the existing `ui021301` callbacks. No further broad regression matrix needed.
+
+## Merchant Hail diagnostic improvement — compat2 (26 October 2026)
+
+The owner observed that raw `targetCalls` and `commonCalls` counters rise rapidly **even when not talking**. They measure frequent native UI refreshes and are therefore not a reliable standalone test of merchant-specific behavior.
+
+In **REFramework > BelovedCap > Merchant Hail Probe (Read-only)**:
+1. Stand near a regular NPC. Click **Capture Normal Talk (12s)**, close REFramework, let the regular Talk prompt appear, and allow the capture to stop.
+2. Approach the merchant. Click **Capture Merchant Hail (12s)**, close REFramework, and face the merchant until **Hail (Hold to Talk)** is shown.
+3. Return to the probe UI; two fixed-length summaries now show target IDs/names, unresolved target calls, matched `reqDispCommon` calls and successful native affinity writes. Click **Save Hail Probe JSON** and upload `reframework/data/BelovedCap_HailProbe.json`.
+
+This diagnostic records up to 12 distinct character identities per sample rather than storing every high-frequency UI event. No new native hooks, affinity modifications or UI label changes were added by compat2. The merchant UI is **not yet fixed**; the sample is to distinguish unresolved targets from an unsupported UI path. v3.0 Stable remains unchanged.
+
+**Optional baseline:** Capture Idle (12s) first to see which IDs appear during routine background UI refreshes. The idle window is useful when raw counters advance continuously. You can skip the normal Talk capture if its working behavior is already established.

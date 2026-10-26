@@ -1,0 +1,11 @@
+Choose Your Beloved v3.0.1-compat (opt-in / experimental) — 26 Oct 2026
+
+- Add default-OFF native name fallback for ambient Main Pawn remarks and forced quest dialogue.
+- Resolve the exact GUIBase.getName CharacterID via NPCManager or Main Pawn instead of guessing a conversation speaker.
+- Instrument reqDisp and reqDispCommon native prompt hooks to diagnose Hail/merchant paths.
+- Preserve the owner-tested strict native dialogue prompt, v2.8 Ulrika unlock, cap/anti-loss, pawn rating and toast unchanged.
+- No merchant Hail fix yet; its manager/text callback remains unverified.
+- In-game fallback and UI collision behavior require owner test. Stable v3.0 main not modified.
+- 26 Oct: OWNER CONFIRMED opt-in fallback works for forced quest and ambient Main Pawn dialogue. Merchant Hail still lacks affinity; diagnose prompt callbacks before implementing merchant-specific UI hook.
+
+- compat2: Replace noisy always-rising prompt totals with two optional 12-second captures (normal Talk vs merchant Hail), grouped by unique actor ID and prompt-label outcomes; export compact BelovedCap_HailProbe.json. Merchant-specific UI fix still pending.
