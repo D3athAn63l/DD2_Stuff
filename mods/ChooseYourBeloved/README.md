@@ -62,3 +62,12 @@ The UI now displays cumulative `reqDisp` target callbacks, `reqDispCommon` text 
 4. For unchanged labels, report whether `Native dialogue ... ambient=N` increased. For merchant Hail, note whether `Prompt diagnostics: targets=N; common=N` rises. Disable the fallback if it adds affinity in places you don't want it.
 
 v3.0 Stable is unchanged on `main`. The v3.0.1 compatibility branch requires a new live game test.
+
+
+### Owner live-test results — 26 October 2026
+- **CONFIRMED WORKING:** Forced quest dialogue now displays affinity using the optional native name fallback.
+- **CONFIRMED WORKING:** Spontaneous Main Pawn dialogue, without an Arisen-initiated conversation, now displays affinity.
+- **STILL MISSING:** Merchant `Hail (Hold to Talk)` prompt does not display merchant affinity.
+- No prompt counter values (`targets`, `common`, `last ID`) have been supplied yet. **Merchant root cause remains undetermined**: alternative UI class, callback/target mismatch, or unavailable merchant sentiment are all possibilities. Avoid claiming a merchant fix or adding broad unsafe hooks before measuring.
+
+Targeted next check: stand clear of interactables, note prompt counters, approach a merchant until Hail appears, note deltas plus `last ID`, then compare with a normal NPC Talk prompt. If `targets` and `common` don't change on Hail, instrument a separate native prompt path. If they do, inspect failed target/affinity resolution within the existing `ui021301` callbacks. No further broad regression matrix needed.
