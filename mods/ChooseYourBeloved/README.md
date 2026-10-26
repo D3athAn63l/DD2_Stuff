@@ -82,3 +82,5 @@ In **REFramework > BelovedCap > Merchant Hail Probe (Read-only)**:
 3. Return to the probe UI; two fixed-length summaries now show target IDs/names, unresolved target calls, matched `reqDispCommon` calls and successful native affinity writes. Click **Save Hail Probe JSON** and upload `reframework/data/BelovedCap_HailProbe.json`.
 
 This diagnostic records up to 12 distinct character identities per sample rather than storing every high-frequency UI event. No new native hooks, affinity modifications or UI label changes were added by compat2. The merchant UI is **not yet fixed**; the sample is to distinguish unresolved targets from an unsupported UI path. v3.0 Stable remains unchanged.
+
+**Optional baseline:** Capture Idle (12s) first to see which IDs appear during routine background UI refreshes. The idle window is useful when raw counters advance continuously. You can skip the normal Talk capture if its working behavior is already established.

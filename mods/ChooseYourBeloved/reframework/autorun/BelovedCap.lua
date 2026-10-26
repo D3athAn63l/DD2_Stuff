@@ -998,7 +998,9 @@ re.on_draw_ui(function()
         .. "; calls=" .. tostring(nativeDialogue.getNameCalls)
         .. "; failures=" .. tostring(nativeDialogue.failures))
     if imgui.tree_node("Merchant Hail Probe (Read-only)") then
-        imgui.text("Capture only 12 seconds of prompt activity, grouped by character.")
+        imgui.text("12-second prompt samples; compare unique characters, not totals.")
+        imgui.text("Idle and Normal Talk are optional reference captures.")
+        if imgui.button("Capture Idle (12s)") then hailProbeBegin("idle") end
         if imgui.button("Capture Normal Talk (12s)") then hailProbeBegin("talk") end
         if imgui.button("Capture Merchant Hail (12s)") then hailProbeBegin("hail") end
         if hailProbe.active then
@@ -1007,7 +1009,7 @@ re.on_draw_ui(function()
                 .. " seconds remaining")
             if imgui.button("Stop Capture") then hailProbeStop() end
         end
-        for _, phase in ipairs({"talk", "hail"}) do
+        for _, phase in ipairs({"idle", "talk", "hail"}) do
             local sample = hailProbe.results[phase]
             if sample then
                 imgui.separator()
@@ -1036,7 +1038,8 @@ re.on_draw_ui(function()
             hailProbeStop()
             local payload = {
                 version = "v3.0.1-compat2", type = "read-only prompt comparison",
-                talk = hailProbe.results.talk, hail = hailProbe.results.hail
+                idle = hailProbe.results.idle, talk = hailProbe.results.talk,
+                hail = hailProbe.results.hail
             }
             local ok = pcall(function()
                 json.dump_file("BelovedCap_HailProbe.json", payload)
