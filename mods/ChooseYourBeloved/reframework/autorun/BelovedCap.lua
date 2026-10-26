@@ -1,7 +1,11 @@
 -- =============================================================================
--- BelovedCap  v3.0.0
+-- BelovedCap  v3.0.1-compat
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v3.0.1 COMPAT (optional): native GUIBase name fallback for unsolicited pawn
+-- barks and forced-quest dialogue; observe merchant prompt callback coverage.
+-- No changes to the v3.0 stable strict dialogue path, NPC cap or pawn rules.
 --
 -- v3.0.0 STABLE: native prompt + speaker affinity are the only dialogue UI.
 -- Retire custom floating bar, uncertain target inference and HUD controls.
@@ -42,7 +46,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "3.0.0"
+local modVersion = "3.0.1-compat"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -58,6 +62,7 @@ local defaultConfig = {
     HideDuringGameMenus  = true,
     NativePromptEnabled  = true,
     NativeDialogueAffinity = true,
+    NativeAmbientAffinity = false, -- opt-in: global GUIBase.getName fallback
     CheatModeEnabled     = false,
     ManualAffinityChange = 50,
 }
@@ -77,7 +82,7 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowPawnChangeToast", "HideDuringGameMenus", "NativePromptEnabled", "NativeDialogueAffinity" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowPawnChangeToast", "HideDuringGameMenus", "NativePromptEnabled", "NativeDialogueAffinity", "NativeAmbientAffinity" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
@@ -398,7 +403,8 @@ end
 
 local nativePrompt = {
     target=nil, ui=nil, installed=false, written=0, skipped=0,
-    failures=0, last="not installed"
+    failures=0, last="not installed",
+    targetCalls=0, commonCalls=0, lastTargetKey="none", lastTargetAt=0
 }
 
 local function installConversationObservers()
@@ -445,6 +451,7 @@ local function installConversationObservers()
             return uiType:get_method("reqDisp(via.GameObject, System.Single, System.Guid)")
         end)
         promptInstalled = safeHook(method, function(args)
+            nativePrompt.targetCalls = nativePrompt.targetCalls + 1
             if not args then return end
             local obj = sdk.to_managed_object(args[3])
             if not obj then return end
@@ -453,7 +460,9 @@ local function installConversationObservers()
             -- Pair this object with the following reqDispCommon callback.
             -- Never reuse a prior character for unrelated prompt refreshes.
             nativePrompt.target = target and characterKey(target) and target or nil
-
+            nativePrompt.lastTargetKey = nativePrompt.target
+                and characterKey(nativePrompt.target) or "none"
+            nativePrompt.lastTargetAt = hudNow()
         end)
     end
     talkTracker.hookStatus = string.format("talk: %d, prompt: %s", installed,
@@ -469,8 +478,9 @@ installConversationObservers()
 -- This is NOT a global suffix operation on every NPC name lookup.
 -- ---------------------------------------------------------------------------
 local nativeDialogue = {
-    installed = false, renamed = 0, skipped = 0, failures = 0,
-    last = "not installed", blocked = false, depth = 0, callStack = {}
+    installed = false, renamed = 0, fallbackRenamed = 0, skipped = 0,
+    failures = 0, getNameCalls = 0, last = "not installed",
+    blocked = false, depth = 0, callStack = {}
 }
 
 local function dialogueSpeakerValue(character)
@@ -486,6 +496,31 @@ local function dialogueSpeakerValue(character)
     local holder = nm and safePawnAccess(function() return nm:getNPCHolder(id) end)
     local sentiment = holder and safePawnAccess(function()
         return holder:getSentimentInfo(player:get_CharaID(), false)
+    end)
+    return sentiment and tonumber(sentiment.Value) or nil
+end
+
+-- Experimental fallback: bind the requested CharacterID to its own native
+-- sentiment, not to a guessed or stale conversation target. This can affect
+-- other UI name lookups that share GUIBase.getName, so it is OFF by default.
+local function ambientAffinityForID(charaID)
+    if not charaID or not config.NativeAmbientAffinity
+        or not config.NativePromptEnabled or not config.NativeDialogueAffinity
+        or nativeDialogue.blocked or nativeDialogue.depth > 0 then return nil end
+    local key = getPermanentID(charaID)
+    if pawnState.character and characterKey(pawnState.character) == key then
+        return tonumber(pawnState.value)
+    end
+    local cm = getCharacterManager()
+    local player = cm and safePawnAccess(function() return cm:get_ManualPlayer() end)
+    local playerID = player and safePawnAccess(function() return player:get_CharaID() end)
+    if not playerID or getPermanentID(playerID) == key then return nil end
+    local nm = getNPCManager()
+    -- This follows the typed CharacterID lookup used by Show Favorability,
+    -- without copying its hook implementation or using persistent affinity.
+    local holder = nm and safePawnAccess(function() return nm:getNPCHolder(charaID) end)
+    local sentiment = holder and safePawnAccess(function()
+        return holder:getSentimentInfo(playerID, false)
     end)
     return sentiment and tonumber(sentiment.Value) or nil
 end
@@ -531,17 +566,26 @@ local function installNativeDialogueNameHook()
         sdk.hook(method, function(args)
             -- The static method's CharacterID is args[2]. Pair each pre/post
             -- with a stack so nested name lookups don't steal each other.
+            nativeDialogue.getNameCalls = nativeDialogue.getNameCalls + 1
             local requested = args and safePawnAccess(function()
                 return sdk.to_int64(args[2])
             end)
             local target = currentDialogueSpeakerForID(requested)
             local stack = nativeDialogue.callStack
-            stack[#stack + 1] = target or false
+            -- Snapshot opt-in state at the original name request, not later
+            -- in the post-hook. Keep the original strict speaker path intact.
+            local fallback = not target and config.NativeAmbientAffinity
+                and config.NativePromptEnabled and config.NativeDialogueAffinity
+                and not nativeDialogue.blocked and nativeDialogue.depth == 0
+            stack[#stack + 1] = { speaker = target, requested = requested,
+                allowFallback = fallback }
         end, function(retval)
             local stack = nativeDialogue.callStack
-            local target = stack[#stack]
+            local entry = stack[#stack]
             stack[#stack] = nil
-            if not target then return retval end
+            if not entry then return retval end
+            local target = entry.speaker
+            if not target and not entry.allowFallback then return retval end
 
             -- No writes to NPC SentimentInfo, pawn rating or save data.
             local okReplace, result = pcall(function()
@@ -550,12 +594,17 @@ local function installNativeDialogueNameHook()
                 if type(name) ~= "string" or name == "" then return nil end
                 -- Don't duplicate a suffix if another hook already supplied one.
                 if name:match("%s%[%-?%d+%]$") then return nil end
-                local affinity = dialogueSpeakerValue(target)
+                local affinity = target and dialogueSpeakerValue(target)
+                    or ambientAffinityForID(entry.requested)
                 if not affinity or affinity ~= affinity then return nil end
                 local label = name .. " [" .. tostring(math.floor(affinity + 0.5)) .. "]"
                 local managed = sdk.create_managed_string(label)
                 if not managed then return nil end
-                nativeDialogue.renamed = nativeDialogue.renamed + 1
+                if target then
+                    nativeDialogue.renamed = nativeDialogue.renamed + 1
+                else
+                    nativeDialogue.fallbackRenamed = nativeDialogue.fallbackRenamed + 1
+                end
                 nativeDialogue.last = label
                 return sdk.to_ptr(managed)
             end)
@@ -622,6 +671,7 @@ local function installNativePromptHook()
     end
     local success = pcall(function()
         sdk.hook(method, function(args)
+            nativePrompt.commonCalls = nativePrompt.commonCalls + 1
             nativePrompt.ui = args and safePawnAccess(function()
                 return sdk.to_managed_object(args[2])
             end)
@@ -824,12 +874,25 @@ re.on_draw_ui(function()
     if imgui.is_item_hovered() then
         imgui.set_tooltip("Show affinity beside the native dialogue speaker name.")
     end
+    changed, config.NativeAmbientAffinity = imgui.checkbox(
+        "Include Ambient/Forced Speaker Names (Experimental)", config.NativeAmbientAffinity)
+    if changed then saveConfig() end
+    if imgui.is_item_hovered() then
+        imgui.set_tooltip("Try adding affinity when the game requests any NPC/Main Pawn name,\n"
+            .. "including unsolicited pawn barks and quest dialogue.\n"
+            .. "Can also annotate names in OTHER game menus. Switch off if unwanted.")
+    end
     imgui.text("Native prompt: " .. (nativePrompt.installed and "hooked" or "unavailable")
         .. "; writes=" .. tostring(nativePrompt.written)
         .. "; failures=" .. tostring(nativePrompt.failures))
     imgui.text("Native dialogue: " .. (nativeDialogue.installed and "hooked" or "unavailable")
-        .. "; names=" .. tostring(nativeDialogue.renamed)
+        .. "; scoped=" .. tostring(nativeDialogue.renamed)
+        .. "; ambient=" .. tostring(nativeDialogue.fallbackRenamed)
+        .. "; calls=" .. tostring(nativeDialogue.getNameCalls)
         .. "; failures=" .. tostring(nativeDialogue.failures))
+    imgui.text("Prompt diagnostics: targets=" .. tostring(nativePrompt.targetCalls)
+        .. "; common=" .. tostring(nativePrompt.commonCalls)
+        .. "; last ID=" .. tostring(nativePrompt.lastTargetKey))
     if not nativePrompt.installed or not nativeDialogue.installed then
         imgui.text("Native UI unavailable; check REFramework / game update.")
     end
