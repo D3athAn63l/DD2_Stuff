@@ -10,7 +10,7 @@
 - **NPC rules:** configurable locked cap (default 199), explicit unlock allowing up to 299, optional anti-loss, and opt-in manual adjustments. The **v2.8 Ulrika unlock fix remains unchanged**.
 - **Menu protection:** native dialogue suffixes are guarded against blocking game menus. Native label and speaker affinity are enabled by default.
 
-The native prompt and dialogue name can be toggled independently in **REFramework > BelovedCap**. Disable standalone **Show Name** and **Show Favorability** scripts when using these hooks, as they overlap.
+The native prompt and dialogue-speaker settings have separate checkboxes in **REFramework > BelovedCap**, but the speaker-name suffix currently requires the native Talk prompt option to be enabled (as in the owner-tested Alpha 2). Disable standalone **Show Name** and **Show Favorability** scripts when using these hooks, as they overlap.
 
 ## In-game evidence / meaning of Stable
 
