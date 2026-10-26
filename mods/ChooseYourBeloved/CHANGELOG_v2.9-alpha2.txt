@@ -8,3 +8,4 @@ Choose Your Beloved v2.9-alpha2 (26 October 2026)
 - **26 Oct 2026 OWNER-CONFIRMED:** native prompt shows Dahlia [1000] before interaction AND dialogue speaker shows Dahlia [1000] during conversation; live screenshots supplied.
 - Previously alpha1 pre-talk NPC prompt The Dragonforged [187] also confirmed. Other NPC dialogue/merchant cases still need regression testing.
 - **26 Oct 2026 OWNER-CONFIRMED:** The Dragonforged NPC retains the native affinity label through prolonged conversation and multiple selectable dialogue options (v2.9-alpha2). Generic one-line NPC, shop transaction UI and save-transition cases remain unverified.
+- 26 Oct 2026: Owner accepts native affinity UI as successful after native prompt, Main Pawn and multi-option Dragonforged dialogue tests. No exhaustive NPC/quest/zone testing required; fix real-world regressions if encountered.
