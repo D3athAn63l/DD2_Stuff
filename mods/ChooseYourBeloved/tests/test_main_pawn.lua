@@ -50,7 +50,7 @@ sdk={
         end
     end,
 }
-json={dump_file=function()return true end,load_file=function()return {Enabled=false,ShowMainPawnFloatingBar=true} end}
+json={dump_file=function()return true end,load_file=function()return {Enabled=false,NativePromptEnabled=true} end}
 re={
     on_frame=function(f) frames[#frames+1]=f end,
     on_draw_ui=function(f) menus[#menus+1]=f end,
@@ -97,4 +97,4 @@ assert(messageContains('Main Pawn affinity unavailable'),'no stale values after 
 assert(#draws==0,'no pawn overlay when unloaded')
 assert(writes==0,'read-only Main Pawn behavior')
 resets[1]()
-print('PASS: integrated read-only Main Pawn menu/HUD + load/unload and cap-independent display')
+print('PASS: stable native release preserves read-only Main Pawn menu, change toast, unload reset')

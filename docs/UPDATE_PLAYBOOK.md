@@ -15,7 +15,7 @@ A missing method reported by a failed enumeration is unresolved, *not proven rem
 ## 3. Behavioral regression checklist
 | Component | Minimum hands-on verification |
 |---|---|
-| Choose Your Beloved | Locked NPC <=199; unlocked NPC >199; anti-loss, manual changes, NPC HUD and cross-save safeguards; v2.7 read-only Main Pawn 0–1000 display, centered heart-and-bar NPC/pawn HUD, short-dialogue hold, shop/menu suppression, no stale value after unload and no Johanne writer interference |
+| Choose Your Beloved | Stable v3.0 native interaction/dialogue speaker affinity (NPC + Main Pawn), no floating heart HUD; owner-accepted previous Alpha 2 in-game. Locked NPC <=199; unlocked NPC 199→299 exemption including Ulrika fix, anti-loss/manual settings; Main Pawn 0–1000 remains read-only; standalone pawn toast, menu guard and legacy config migration. Run `test_main_pawn.lua`, `test_unlock_rules.lua`, `test_native_ui.lua` via `tests/run_lua.py`. |
 | CompleteHealthRestoration | Regular HP and reduced-max HP recovery, pawn toggles, combat/pause gating, saved settings after restart |
 | Data Dumper | Bounded type scan, item export uniqueness, checkpoint resume, JSON writer errors, field coverage |
 | Burden Reforged | Arisen + pawn carried weights and enable/disable, equip/unequip, dragonforging, Warfarer, per-item tooltip values, persisted settings and hot-reload restoration. Run `python mods/BurdenReforged/tests/run_lua.py` for mocked regressions; owner confirmed full-party toggle recovery in v0.1.1 and reported that v0.1.2 eliminates the repeating missing-key exceptions. |

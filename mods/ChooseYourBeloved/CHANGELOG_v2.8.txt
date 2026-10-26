@@ -1,0 +1,12 @@
+Choose Your Beloved v2.8 — Unlock state normalization (20 October 2026; experimental)
+
+- Fix inconsistency: NPC list considered any truthy value UNLOCKED while cap enforcement accepted only boolean true.
+- Normalize legacy saved unlock entries: boolean true, string "true", numeric 1 or string "1" become boolean true. Other entries do not count as unlocked.
+- Share one isNPCUnlocked() helper across NPC scan/cap, floating HUD, list display and cheat controls.
+- Clear previous NPC anti-loss baseline when unlocking to avoid carrying old capped state.
+- Add tooltips showing the NPC's effective in-mod cap rule and stable ID.
+- Explain that the game's vanilla 199-point soft cap may still require gifts or quests to pass.
+- No artificial affinity injections, forced relationship changes, or changes to romance gameplay.
+- Main Pawn affinity, classic HUD, menu suppression and short dialogue detection unchanged.
+- 20 Oct 2026: OWNER-CONFIRMED the v2.8 loose Lua fixes Ulrika Unlock in-game.
+- Both v2.8 handcrafted archives still fail CRC/extraction for the owner; do not recommend those ZIPs. Neither archive contains Cover.png.

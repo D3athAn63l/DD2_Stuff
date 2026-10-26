@@ -1,0 +1,12 @@
+Choose Your Beloved v3.0.0 — STABLE — 26 October 2026
+
+- Promote the owner-accepted native interaction and dialogue affinity UI to stable.
+- Native Talk prompt and speaker-name affinity are now enabled by default (existing saved opt-outs respected).
+- REMOVE obsolete floating dialogue HUD: procedural heart/bar renderer, position sliders, short-dialogue hold timers and guessed conversation target state.
+- KEEP independent screen-corner Main Pawn affinity-change notifications (renamed duration key PawnToastSeconds; old PawnHudSeconds migrated).
+- KEEP read-only Main Pawn 0–1000 rating, pawn name and native dialogue matching.
+- KEEP owner-verified Ulrika unlock fix from v2.8, NPC 199/299 cap/exception, opt-in anti-loss and manual edits.
+- KEEP merchant/pause GUI guard; native prompt and dialogue speaker checkboxes still available.
+- No additional game hooks or permissions; old Cover.png metadata reference removed.
+- Owner accepted v2.9-alpha2 in-game interactions as feature-complete 26 Oct; exact v3.0 cleanup build still requires optional smoke check.
+- Historical v2.8 handcrafted ZIPs had owner-reported CRC errors; distribute verified loose Lua, not those archives.

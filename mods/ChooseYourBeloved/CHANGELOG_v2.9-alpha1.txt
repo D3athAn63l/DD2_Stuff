@@ -1,0 +1,8 @@
+Choose Your Beloved v2.9-alpha1 (26 Oct 2026)
+
+- Optional native Talk prompt displaying character name and NPC/Main Pawn affinity.
+- Uses scoped reqDisp target and reqDispCommon post-hook; not a global name hook.
+- Disabled by default; original floating conversation HUD remains fallback.
+- Pawn change toast, v2.8 owner-confirmed Ulrika unlock, NPC cap and menu guard intact.
+- Probe confirms 431/431 native TxtTalk components; reading original message failed 0/431.
+- Writing TxtTalk message is new and unverified in game.

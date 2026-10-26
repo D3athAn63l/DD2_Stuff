@@ -1,16 +1,39 @@
-# Choose Your Beloved v2.7 — Menu HUD Guard (experimental)
+# Choose Your Beloved v3.0.0 — Stable Native Affinity UI
 
-The user's v2.6 affinity heart HUD works, but stays visible over **merchant Buy/Sell** menus because `app.InteractManager.IsPlayerTalking` may remain true while shopping.
+**Stable feature scope, accepted by the owner on 26 October 2026.** The custom floating conversation HUD has been **fully removed**. Character affinity now appears inside DD2's own UI, without screen-position sliders or guessed dialogue targets.
 
-This release adds **Hide Affinity HUD in Game Menus** (default ON) in REFramework > BelovedCap. During a blocking UI the classic shared NPC/Main Pawn heart bar and optional screen-corner pawn change toast are both suppressed. NPC cap/unlock/anti-loss and Main Pawn affinity tracking continue unchanged.
+## What it does
 
-## Implementation
-Checks `app.GuiManager:isPausedGUI()`, `get_IsLoadGui()`, `app.PauseManager:isPausedAny()`, and the photo-mode flag. Missing managers/methods are handled safely. This is a display-only guard; it does not reset a remembered conversation target. The existing dialogue checker runs again when the menu closes and shows the bar **if** the conversation remains valid.
+- **Before speaking:** DD2's native interaction prompt shows `Dahlia [1000]` or `The Dragonforged [187]` (native `app.ui021301` / `TxtTalk`).
+- **During dialogue:** the actual native speaker-name field shows `Dahlia [1000]` or a matching NPC's affinity using a guarded `app.GUIBase.getName(app.CharacterID)` hook.
+- **Main Pawn:** its separate `MainPawnDataContext:get_FavorabilityRating()` remains **read-only**, 0–1000, with an optional **screen-corner gain/loss notification**. This notification is **not** the retired conversation HUD.
+- **NPC rules:** configurable locked cap (default 199), explicit unlock allowing up to 299, optional anti-loss, and opt-in manual adjustments. The **v2.8 Ulrika unlock fix remains unchanged**.
+- **Menu protection:** native dialogue suffixes are guarded against blocking game menus. Native label and speaker affinity are enabled by default.
 
-The settings menu displays `Menu checker:` and its reason (`GUI paused`, `full-screen GUI`, `game paused`, `photo mode`, `no blocking menu` or `GUI state unavailable`). If an ordinary NPC dialogue is suppressed incorrectly, switch **Hide Affinity HUD in Game Menus** off and report the diagnostic.
+The native prompt and dialogue-speaker settings have separate checkboxes in **REFramework > BelovedCap**, but the speaker-name suffix currently requires the native Talk prompt option to be enabled (as in the owner-tested Alpha 2). Disable standalone **Show Name** and **Show Favorability** scripts when using these hooks, as they overlap.
 
-## Install & test
-Back up your DD2 save and `reframework/data/BelovedCap.json`. Replace `reframework/autorun/BelovedCap.lua` from the ZIP, fully restart DD2, and check an ordinary NPC, Main Pawn, and merchant. The bar should hide while Buy/Sell is open and can reappear if the conversation persists after returning. Verify the original heart style, centered X/Y position and one-line NPC grace period are unchanged.
+## In-game evidence / meaning of Stable
 
-## Evidence and status
-The available Affinity Bar and DD2 menu-state reference scripts support these API checks; no third-party source or assets were copied. An isolated Lua 5.4 simulation passed all menu-flag, toggle, restoration and absent-manager cases. **Whether the current merchant screen sets one of these flags still needs confirmation in-game.**
+- **20 Oct 2026:** owner confirmed v2.8 loose Lua resolved the Ulrika 199 Unlock defect.
+- **26 Oct 2026:** owner confirmed native prompt for The Dragonforged before conversation.
+- **26 Oct 2026:** owner screenshots confirmed Dahlia's `[1000]` in both native interaction and dialogue speaker fields.
+- **26 Oct 2026:** owner confirmed The Dragonforged's native affinity label persisted through long conversations with multiple dialogue options.
+- **26 Oct 2026:** owner explicitly accepted this coverage as sufficient for a stable feature release; exhaustive permutations of NPC, zone, quest, hour or combat are not release blockers.
+
+This evidence supports the native approach's normal operation, **not** a guarantee against every edge case. In particular the pre-existing scoped native name hook may affect other name lookups while actively talking. Fix observed regressions as reported.
+
+## Upgrade from v2.8 or v2.9-alpha2
+
+1. Back up saves and `reframework/data/BelovedCap.json`.
+2. Replace the old `reframework/autorun/BelovedCap.lua` with this release's single loose Lua, then **fully restart DD2**. Never run two copies.
+3. Your `UnlockedNPCs`, cap, anti-loss and cheat settings remain. Native UI is **ON by default** for new configurations. An explicitly saved `NativePromptEnabled=false` from alpha builds remains respected; switch it on in REFramework.
+4. `PawnHudSeconds` is migrated to `PawnToastSeconds` (only the independent notification duration). Old floating-bar switches, HUD X/Y coordinates and short-dialogue timers are removed from the configuration upon load.
+5. The earlier v2.8 handmade ZIP releases produced owner-reported CRC errors and are **not recommended**. Install the stable **loose Lua** until a standard-packaged archive is independently validated.
+
+The repository's historical Cover.png is intentionally **not referenced** in stable modinfo.ini; no PNG is required for the Lua mod.
+
+## Quality checks
+
+The v3.0 source is based on the owner-tested Alpha 2 native hooks with the floating renderer, guesses and controls removed. Source-level invariant checks verify the old HUD references are gone and that the native UI, NPC cap/unlock and pawn notifications remain. Regression scripts in `tests/` cover native character routing, NPC cap/unlock and read-only Main Pawn behavior; real-game validation of the **exact post-cleanup build** is still outstanding. This does not downgrade the owner's acceptance of the native feature itself.
+
+No third-party mod code/assets from Show Name, Show Favorability or Affinity Bar have been incorporated.

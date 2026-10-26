@@ -1,7 +1,19 @@
 -- =============================================================================
--- BelovedCap  v2.7
+-- BelovedCap  v3.0.0
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
+--
+-- v3.0.0 STABLE: native prompt + speaker affinity are the only dialogue UI.
+-- Retire custom floating bar, uncertain target inference and HUD controls.
+-- Retain the separate Main Pawn affinity-change notification.
+--
+-- v2.9-alpha2: Add scoped native dialogue-speaker name affinity.
+-- Native prompt was confirmed in-game in alpha1; dialogue name missing.
+-- This new hook is separate from the already-working prompt hook.
+--
+-- v2.9-alpha1: Optional native interaction affinity label (disabled by default).
+-- v2.8: Use one canonical unlock predicate for the UI, NPC cap enforcement,
+-- cheat actions and HUD; normalize legacy truthy saved unlock values.
 --
 -- v2.7: Hide the conversational HUD and pawn change toast in game menus.
 -- Preserve conversation targets and restore display when menu closes.
@@ -24,13 +36,13 @@
 -- for ALL NPCs. Protection is session-only so it cannot import affinity from
 -- another playthrough. Manual cheat-menu edits explicitly reset the baseline.
 --
--- The HUD uses REFramework's built-in draw API: no Affinity Bar / D2D required.
+-- Current native UI requires no custom floating dialogue bar or external D2D.
 -- BelovedCap.json from v2.0 is migrated (unlock list retained; persistent
 -- UnlockedNPCMaxAffinity intentionally discarded because it is save-unsafe).
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.7"
+local modVersion = "3.0.0"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -41,14 +53,11 @@ local defaultConfig = {
     CapValue             = 199,
     UnlockedNPCs         = {},
     PreventDecay         = true,
-    ShowFloatingBar      = true,
-    ShowMainPawnFloatingBar = true,
-    PawnHudSeconds       = 5,
+    PawnToastSeconds     = 5,
     ShowPawnChangeToast  = true,
     HideDuringGameMenus  = true,
-    HudXPercent = 50,
-    HudYPercent = 12,
-    DialogueMinSeconds = 4,
+    NativePromptEnabled  = true,
+    NativeDialogueAffinity = true,
     CheatModeEnabled     = false,
     ManualAffinityChange = 50,
 }
@@ -68,35 +77,32 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast", "HideDuringGameMenus" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowPawnChangeToast", "HideDuringGameMenus", "NativePromptEnabled", "NativeDialogueAffinity" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
     end
 
-    if type(config.PawnHudSeconds) ~= "number"
-        or config.PawnHudSeconds ~= config.PawnHudSeconds then
-        config.PawnHudSeconds = defaultConfig.PawnHudSeconds
+    if type(config.PawnToastSeconds) ~= "number"
+        or config.PawnToastSeconds ~= config.PawnToastSeconds then
+        config.PawnToastSeconds = defaultConfig.PawnToastSeconds
     else
-        config.PawnHudSeconds = math.max(2, math.min(12, math.floor(config.PawnHudSeconds)))
+        config.PawnToastSeconds = math.max(2, math.min(12, math.floor(config.PawnToastSeconds)))
     end
 
-    for _, spec in ipairs({
-        { key = "HudXPercent", min = 10, max = 90 },
-        { key = "HudYPercent", min = 5, max = 85 },
-        { key = "DialogueMinSeconds", min = 2, max = 8 }
-    }) do
-        local n = config[spec.key]
-        if type(n) ~= "number" or n ~= n or
-            n == math.huge or n == -math.huge then
-            config[spec.key] = defaultConfig[spec.key]
-        else
-            config[spec.key] = math.max(spec.min, math.min(spec.max, math.floor(n)))
-        end
-    end
-    -- Tables must be tables
+    -- Legacy JSON configurations may encode unlocks as "true" or 1.
+    -- The old UI interpreted any truthy value as UNLOCKED, while the cap
+    -- enforcement required == true. Canonicalize once to real booleans.
     if type(config.UnlockedNPCs) ~= "table" then
         config.UnlockedNPCs = {}
+    else
+        local normalized = {}
+        for key, value in pairs(config.UnlockedNPCs) do
+            if value == true or value == 1 or value == "true" or value == "1" then
+                normalized[tostring(key)] = true
+            end
+        end
+        config.UnlockedNPCs = normalized
     end
 end
 
@@ -118,10 +124,21 @@ local function loadConfig()
                 config[k] = v
             end
         end
+        -- Migrate the pawn notification delay; obsolete floating HUD settings
+        -- are deliberately discarded while preserving NPC unlocks.
+        if loaded.PawnToastSeconds == nil and type(loaded.PawnHudSeconds) == "number" then
+            config.PawnToastSeconds = loaded.PawnHudSeconds
+        end
         validateConfig()
         -- v2.0 saved high-water marks globally. Intentionally drop those values:
         -- restoring them in another save/new game could change quest outcomes.
-        if loaded.UnlockedNPCMaxAffinity ~= nil then
+        if loaded.UnlockedNPCMaxAffinity ~= nil
+            or loaded.ShowFloatingBar ~= nil
+            or loaded.ShowMainPawnFloatingBar ~= nil
+            or loaded.HudXPercent ~= nil
+            or loaded.HudYPercent ~= nil
+            or loaded.DialogueMinSeconds ~= nil
+            or loaded.PawnHudSeconds ~= nil then
             saveConfig()
         end
     else
@@ -170,6 +187,11 @@ local function getPermanentID(charaID)
     local ok, val = pcall(function() return charaID:call("ToString") end)
     if ok and val then return tostring(val) end
     return tostring(charaID)
+end
+
+-- Single source of truth for unlock status in menu, HUD and enforcer.
+local function isNPCUnlocked(key)
+    return config.UnlockedNPCs[tostring(key)] == true
 end
 
 local function translateCharacterName(charaID)
@@ -233,7 +255,7 @@ end
 local function applyCapAndProtection(info, key)
     local current = tonumber(info.Value)
     if current == nil then return end
-    local isUnlocked = config.UnlockedNPCs[key] == true
+    local isUnlocked = isNPCUnlocked(key)
     if not isUnlocked and current > config.CapValue then
         current = config.CapValue
         info.Value = current
@@ -254,27 +276,6 @@ local function applyCapAndProtection(info, key)
     end
 end
 
--- Compact, asset-free heart. Heart outline follows the usual parametric curve;
--- built-in draw.filled_quad supplies the triangle-fan pieces.
-local function drawHeart(cx, cy, size, color)
-    local pts = {}
-    local n = 24
-    for i = 0, n - 1 do
-        local t = (i / n) * math.pi * 2
-        local st = math.sin(t)
-        pts[#pts + 1] = {
-            cx + (16 * st * st * st) * size / 34,
-            cy - (13 * math.cos(t) - 5 * math.cos(2 * t)
-                - 2 * math.cos(3 * t) - math.cos(4 * t)) * size / 34
-        }
-    end
-    for i = 1, n, 2 do
-        local a, b, c = pts[i], pts[i % n + 1], pts[(i + 1) % n + 1]
-        draw.filled_quad(cx, cy, a[1], a[2], b[1], b[2], c[1], c[2], color)
-    end
-end
-
--- ---------------------------------------------------------------------------
 -- MAIN PAWN FAVORABILITY (read-only; deliberately separate from NPC sentiment)
 -- Uses the native MainPawnDataContext rating. No setters, rewards, cap or
 -- anti-decay logic is ever applied to the Main Pawn. Plays nicely with mods
@@ -337,16 +338,9 @@ local function refreshMainPawnStatus()
 end
 
 
--- BEGIN CONTEXTUAL HUD v2.6
--- Choose Your Beloved 2.4 -- contextual, read-only HUD extension.
--- This block is spliced after refreshMainPawnStatus() in BelovedCap.lua.
--- Original NPC sentiment enforcement remains in the parent mod.
+-- Native affinity identity helpers and Main Pawn change notifications.
 local pawnHud = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
-local talkTracker = {
-    target = nil, eventTarget = nil, eventAt = 0, prompt = nil, promptAt = 0,
-    wasTalking = false, active = false, source = "none", hookStatus = "Not installed",
-    eventSerial = 0, handledEventSerial = 0, visibleUntil = 0
-}
+local talkTracker = { eventTarget = nil, eventAt = 0, hookStatus = "Not installed" }
 
 local function hudNow()
     -- Monotonic precision is not exposed by all DD2 REFramework builds. A
@@ -361,7 +355,7 @@ local function characterKey(character)
     return getPermanentID(id)
 end
 
-local function sameHudCharacter(a, b)
+local function sameCharacterID(a, b)
     if not a or not b then return false end
     if a == b then return true end
     local ak, bk = characterKey(a), characterKey(b)
@@ -387,7 +381,7 @@ local function trackMainPawnChanges()
     end
     if pawnHud.previous ~= nil and pawnHud.previous ~= value then
         pawnHud.delta = value - pawnHud.previous
-        pawnHud.changeEnds = hudNow() + config.PawnHudSeconds
+        pawnHud.changeEnds = hudNow() + config.PawnToastSeconds
     end
     pawnHud.previous = value
 end
@@ -401,6 +395,11 @@ local function safeHook(method, before)
     end)
     return success
 end
+
+local nativePrompt = {
+    target=nil, ui=nil, installed=false, written=0, skipped=0,
+    failures=0, last="not installed"
+}
 
 local function installConversationObservers()
     local installed, promptInstalled = 0, false
@@ -422,25 +421,19 @@ local function installConversationObservers()
                         local player = manager and manager:get_ManualPlayer()
                         if not player then return end
                         local target = nil
-                        if sameHudCharacter(first, player) and second then target = second end
-                        if sameHudCharacter(second, player) and first then target = first end
+                        if sameCharacterID(first, player) and second then target = second end
+                        if sameCharacterID(second, player) and first then target = first end
                         if target and characterKey(target) then
                             talkTracker.eventTarget = target
                             talkTracker.eventAt = hudNow()
-                            talkTracker.eventSerial = talkTracker.eventSerial + 1
-                            -- A new event can update the target mid-conversation.
-                            if talkTracker.active then
-                                talkTracker.target = target
-                                talkTracker.source = "talk event"
-                            end
+                            -- Native speaker identification only; no HUD target guess.
                         end
                     end) then installed = installed + 1 end
                 end
             end
         end
     end
-    -- Fallback for versions where a dialogue event does not identify speakers.
-    -- Prompt tracking alone never triggers the HUD: IsPlayerTalking must be true.
+    -- Observe the current native interaction prompt target only.
     local uiType = safePawnAccess(function()
         return sdk.find_type_definition("app.ui021301")
     end)
@@ -457,10 +450,10 @@ local function installConversationObservers()
             if not obj then return end
             local rt = charType:get_runtime_type()
             local target = obj:call("getComponent(System.Type)", rt)
-            if target and characterKey(target) then
-                talkTracker.prompt = target
-                talkTracker.promptAt = hudNow()
-            end
+            -- Pair this object with the following reqDispCommon callback.
+            -- Never reuse a prior character for unrelated prompt refreshes.
+            nativePrompt.target = target and characterKey(target) and target or nil
+
         end)
     end
     talkTracker.hookStatus = string.format("talk: %d, prompt: %s", installed,
@@ -468,162 +461,198 @@ local function installConversationObservers()
 end
 installConversationObservers()
 
-local function activeTalkTarget()
-    local now = hudNow()
-    local interact = safePawnAccess(function()
-        return sdk.get_managed_singleton("app.InteractManager")
-    end)
-    local isTalking = interact and safePawnAccess(function()
-        return interact:get_field("IsPlayerTalking")
-    end) == true
-    local manager = getCharacterManager()
-    local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
-    if not player then
-        talkTracker.target = nil
-        talkTracker.wasTalking = false
-        talkTracker.active = false
-        talkTracker.source = "none"
-        return nil
-    end
+-- ---------------------------------------------------------------------------
+-- v2.9-alpha2: NATIVE DIALOGUE SPEAKER TEXT (not the interaction prompt)
+-- ShowFavorability demonstrates that GUIBase.getName(app.CharacterID) returns
+-- the managed speaker name. Our hook restricts replacements to the exact
+-- character identified by the confirmed Arisen/speaker dialogue event.
+-- This is NOT a global suffix operation on every NPC name lookup.
+-- ---------------------------------------------------------------------------
+local nativeDialogue = {
+    installed = false, renamed = 0, skipped = 0, failures = 0,
+    last = "not installed", blocked = false, depth = 0, callStack = {}
+}
 
-    -- An explicit talk-event involving the Arisen can be shorter than one
-    -- IsPlayerTalking frame (especially one-line generic NPC responses).
-    -- Consume each event only once, never treat a proximity prompt as a talk.
-    local freshEvent = talkTracker.eventSerial ~= talkTracker.handledEventSerial
-        and talkTracker.eventTarget and now - talkTracker.eventAt <= 2
-    if talkTracker.eventSerial ~= talkTracker.handledEventSerial then
-        talkTracker.handledEventSerial = talkTracker.eventSerial
-    end
-
-    local target = talkTracker.target
-    if isTalking then
-        if freshEvent then
-            target = talkTracker.eventTarget
-            talkTracker.source = "talk event"
-        elseif not target or not talkTracker.wasTalking then
-            if talkTracker.eventTarget and now - talkTracker.eventAt <= 6 then
-                target = talkTracker.eventTarget
-                talkTracker.source = "talk event"
-            elseif talkTracker.prompt and now - talkTracker.promptAt <= 3 then
-                target = talkTracker.prompt
-                talkTracker.source = "interaction prompt"
-            end
-        end
-        if target and sameHudCharacter(target, player) then target = nil end
-        if target and (freshEvent or not talkTracker.wasTalking
-            or not sameHudCharacter(target, talkTracker.target)) then
-            talkTracker.visibleUntil = now + config.DialogueMinSeconds
-        end
-        talkTracker.target = target
-        talkTracker.wasTalking = true
-        talkTracker.active = true
-        return target
-    end
-
-    -- No active dialogue: a verified Arisen dialogue event can still trigger
-    -- a brief HUD, even if the live talking flag never survived a full frame.
-    if freshEvent and not sameHudCharacter(talkTracker.eventTarget, player) then
-        talkTracker.target = talkTracker.eventTarget
-        talkTracker.visibleUntil = now + config.DialogueMinSeconds
-        talkTracker.source = "short talk event"
-        target = talkTracker.target
-    elseif talkTracker.wasTalking then
-        talkTracker.source = "short dialogue grace"
-    end
-    talkTracker.wasTalking = false
-    talkTracker.active = false
-    if target and now < talkTracker.visibleUntil then return target end
-    talkTracker.target = nil
-    talkTracker.eventTarget = nil -- do not reuse the previous speaker on next dialogue
-    talkTracker.eventAt = 0
-    talkTracker.source = "none"
-    return nil
-end
-
-local function readGlobalAffinity(character)
+local function dialogueSpeakerValue(character)
     if not character then return nil end
-    if pawnState.character and sameHudCharacter(character, pawnState.character) then
-        if not config.ShowMainPawnFloatingBar or pawnState.value == nil then return nil end
-        local value = pawnState.value
-        return {
-            name = pawnState.name or "Main Pawn", value = value, max = PAWN_FAVORABILITY_MAX,
-            tint = value >= PAWN_BLUSH_THRESHOLD and 0xFF9C74E9 or 0xFF92C9D6,
-            threshold = PAWN_BLUSH_THRESHOLD, pawn = true
-        }
+    if pawnState.character and sameCharacterID(character, pawnState.character) then
+        return tonumber(pawnState.value)
     end
-    if not config.Enabled or not config.ShowFloatingBar then return nil end
-    local charId = safePawnAccess(function() return character:get_CharaID() end)
-    local charMgr, npcMgr = getCharacterManager(), getNPCManager()
-    local player = charMgr and safePawnAccess(function() return charMgr:get_ManualPlayer() end)
-    local holder = npcMgr and charId and safePawnAccess(function()
-        return npcMgr:getNPCHolder(charId)
-    end)
-    local info = holder and player and safePawnAccess(function()
+    local id = safePawnAccess(function() return character:get_CharaID() end)
+    local cm = getCharacterManager()
+    local player = cm and safePawnAccess(function() return cm:get_ManualPlayer() end)
+    if not id or not player or sameCharacterID(character, player) then return nil end
+    local nm = getNPCManager()
+    local holder = nm and safePawnAccess(function() return nm:getNPCHolder(id) end)
+    local sentiment = holder and safePawnAccess(function()
         return holder:getSentimentInfo(player:get_CharaID(), false)
     end)
-    local value = info and tonumber(info.Value)
-    if not value then return nil end
-    local unlocked = config.UnlockedNPCs[getPermanentID(charId)] == true
-    local max = unlocked and 299 or config.CapValue
-    return {
-        name = translateCharacterName(charId), value = value, max = max,
-        tint = value < 0 and 0xFF5A5ADD or
-            (value >= 200 and 0xFF9C74E9 or (unlocked and 0xFF84CE95 or 0xFFBBB9A9)),
-        threshold = unlocked and 200 or nil, pawn = false
-    }
+    return sentiment and tonumber(sentiment.Value) or nil
 end
 
--- The classic v2.1 procedural heart-and-bar style, within the v2.5
--- shared conversational HUD. Target resolution and display timing unchanged.
-local function drawGlobalAffinityHUD()
-    if not draw or not draw.filled_rect or not draw.text then return end
-    local target = activeTalkTarget()
-    local info = target and readGlobalAffinity(target)
-    if not info then return end
-    pcall(function()
-        local size = imgui.get_display_size()
-        if not size or not size.x or not size.y or size.x < 320 or size.y < 280 then return end
-        local w = 195
-        local x = math.max(12, math.min(size.x - w - 24,
-            math.floor(size.x * config.HudXPercent * 0.01 - w * 0.5)))
-        local y = math.max(42, math.min(size.y - 66,
-            math.floor(size.y * config.HudYPercent * 0.01)))
-        local value, max = info.value, math.max(1, info.max)
-        local ratio = value >= 0 and math.min(1, value / max)
-            or math.min(1, -value / 199)
-        local tint = info.tint
-        local panelX, panelY, panelW = x - 8, y - 29, w + 20
-        local barX, barY, barW = x + 2, y + 19, w - 4
-
-        draw.filled_rect(panelX, panelY, panelW, 64, 0xD41A1D25)
-        draw.filled_rect(panelX, panelY, panelW, 1, 0xA09A9590)
-        draw.filled_rect(panelX, panelY, 3, 64, tint)
-        draw.filled_rect(panelX, panelY + 63, panelW, 1, 0x886B737C)
-        draw.filled_rect(x + 27, y + 4, w - 31, 1, 0x5C9E9C99)
-
-        if draw.filled_quad then drawHeart(x + 9, y - 9, 24, tint) end
-        local prefix = info.pawn and "PAWN " or "NPC "
-        local label = prefix .. tostring(info.name or "Unknown")
-        if #label > 22 then label = label:sub(1, 19) .. "..." end
-        draw.text(label, x + 30, y - 21, 0xFFF8F5EB)
-        draw.text(tostring(math.floor(value)) .. " / " .. tostring(max),
-            x + 30, y - 9, 0xFFD9D7D0)
-        local status = info.pawn and "BOND" or
-            (info.threshold == 200 and "FREE" or "CAPPED")
-        draw.text(status, x + w - 54, y - 9, tint)
-
-        draw.filled_rect(barX - 1, barY - 1, barW + 2, 11, 0xAA77756E)
-        draw.filled_rect(barX, barY, barW, 9, 0xFF393C46)
-        if ratio > 0 then
-            draw.filled_rect(barX, barY, barW * ratio, 9, tint)
-            draw.filled_rect(barX, barY, barW * ratio, 2, 0x55FFFFFF)
-        end
-        if info.threshold then
-            local markerX = barX + barW * info.threshold / max
-            draw.filled_rect(markerX, barY - 2, 2, 13, 0xFFEAE7DD)
-        end
+local function currentDialogueSpeakerForID(charaID)
+    if nativeDialogue.depth > 0 or not config.NativePromptEnabled
+        or not config.NativeDialogueAffinity or nativeDialogue.blocked then return nil end
+    local mgr = safePawnAccess(function()
+        return sdk.get_managed_singleton("app.InteractManager")
     end)
+    local isTalking = mgr and safePawnAccess(function()
+        return mgr:get_field("IsPlayerTalking")
+    end) == true
+    if not isTalking then return nil end
+
+    -- Require an *explicit* talk event. Mere proximity/target prompts don't
+    -- authorize modifying speaker names during a conversation.
+    if not talkTracker.eventTarget or not talkTracker.eventAt
+        or talkTracker.eventAt <= 0
+        or hudNow() - talkTracker.eventAt > 120 then return nil end
+    local speaker = talkTracker.eventTarget
+    local speakerID = safePawnAccess(function() return speaker:get_CharaID() end)
+    if not speakerID or not charaID then return nil end
+    if getPermanentID(speakerID) ~= getPermanentID(charaID) then return nil end
+    return speaker
 end
+
+local function installNativeDialogueNameHook()
+    local td = safePawnAccess(function()
+        return sdk.find_type_definition("app.GUIBase")
+    end)
+    local method = td and safePawnAccess(function()
+        return td:get_method("getName(app.CharacterID)")
+    end)
+    if not method or type(sdk.hook) ~= "function"
+        or type(sdk.to_int64) ~= "function"
+        or type(sdk.create_managed_string) ~= "function"
+        or type(sdk.to_ptr) ~= "function" then
+        nativeDialogue.last = "GUIBase name APIs unavailable"
+        return
+    end
+    local ok = pcall(function()
+        sdk.hook(method, function(args)
+            -- The static method's CharacterID is args[2]. Pair each pre/post
+            -- with a stack so nested name lookups don't steal each other.
+            local requested = args and safePawnAccess(function()
+                return sdk.to_int64(args[2])
+            end)
+            local target = currentDialogueSpeakerForID(requested)
+            local stack = nativeDialogue.callStack
+            stack[#stack + 1] = target or false
+        end, function(retval)
+            local stack = nativeDialogue.callStack
+            local target = stack[#stack]
+            stack[#stack] = nil
+            if not target then return retval end
+
+            -- No writes to NPC SentimentInfo, pawn rating or save data.
+            local okReplace, result = pcall(function()
+                local raw = sdk.to_managed_object(retval)
+                local name = raw and raw:ToString()
+                if type(name) ~= "string" or name == "" then return nil end
+                -- Don't duplicate a suffix if another hook already supplied one.
+                if name:match("%s%[%-?%d+%]$") then return nil end
+                local affinity = dialogueSpeakerValue(target)
+                if not affinity or affinity ~= affinity then return nil end
+                local label = name .. " [" .. tostring(math.floor(affinity + 0.5)) .. "]"
+                local managed = sdk.create_managed_string(label)
+                if not managed then return nil end
+                nativeDialogue.renamed = nativeDialogue.renamed + 1
+                nativeDialogue.last = label
+                return sdk.to_ptr(managed)
+            end)
+            if not okReplace then
+                nativeDialogue.failures = nativeDialogue.failures + 1
+                nativeDialogue.last = "dialogue name hook exception"
+                return retval
+            end
+            if result then return result end
+            nativeDialogue.skipped = nativeDialogue.skipped + 1
+            return retval
+        end)
+    end)
+    nativeDialogue.installed = ok
+    if not ok then nativeDialogue.last = "GUIBase name hook failed" end
+end
+installNativeDialogueNameHook()
+
+-- v2.9 ALPHA: NATIVE INTERACTION TEXT. Scope: current reqDisp target ONLY.
+-- The v0.2 report found TxtTalk 431/431 times, but original get_Message()
+-- failed 431/431 times. Never try to preserve unknown prompt strings.
+-- ---------------------------------------------------------------------------
+local function nativePromptLabel(character)
+    if not character then return nil end
+    local id = safePawnAccess(function() return character:get_CharaID() end)
+    if not id then return nil end
+    -- Keep internal name lookups vanilla even when the current dialogue
+    -- speaker matches the prompt target; prevents duplicated [affinity] tags.
+    nativeDialogue.depth = nativeDialogue.depth + 1
+    local name = safePawnAccess(function() return translateCharacterName(id) end)
+    nativeDialogue.depth = nativeDialogue.depth - 1
+    if type(name) ~= "string" or name == "" or name == "Unknown" then return nil end
+    local number
+    if pawnState.character and sameCharacterID(character, pawnState.character) then
+        number = pawnState.value
+    else
+        local manager = getCharacterManager()
+        local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
+        if not player or sameCharacterID(character, player) then return nil end
+        local npcManager = getNPCManager()
+        local holder = npcManager and safePawnAccess(function()
+            return npcManager:getNPCHolder(id)
+        end)
+        local sentiment = holder and safePawnAccess(function()
+            return holder:getSentimentInfo(player:get_CharaID(), false)
+        end)
+        number = sentiment and tonumber(sentiment.Value)
+    end
+    number = tonumber(number)
+    if not number or number ~= number then return nil end
+    if #name > 22 then name = name:sub(1,19) .. "..." end
+    -- ASCII is used until the native prompt's available font/width is tested.
+    return name .. " [" .. tostring(math.floor(number + 0.5)) .. "]"
+end
+
+local function installNativePromptHook()
+    local td = safePawnAccess(function() return sdk.find_type_definition("app.ui021301") end)
+    local method = td and safePawnAccess(function()
+        return td:get_method("reqDispCommon(System.Single, System.Guid)")
+    end)
+    if not method or type(sdk.hook) ~= "function" then
+        nativePrompt.last = "missing reqDispCommon"
+        return
+    end
+    local success = pcall(function()
+        sdk.hook(method, function(args)
+            nativePrompt.ui = args and safePawnAccess(function()
+                return sdk.to_managed_object(args[2])
+            end)
+        end, function(retval)
+            local target, ui = nativePrompt.target, nativePrompt.ui
+            nativePrompt.target, nativePrompt.ui = nil, nil
+            if config.NativePromptEnabled and target and ui then
+                local ok = pcall(function()
+                    local label = nativePromptLabel(target)
+                    local text = label and (safePawnAccess(function() return ui.TxtTalk end)
+                        or safePawnAccess(function() return ui:get_field("TxtTalk") end))
+                    if not text then
+                        nativePrompt.skipped = nativePrompt.skipped + 1
+                        return
+                    end
+                    text:set_Message(label)
+                    nativePrompt.written = nativePrompt.written + 1
+                    nativePrompt.last = label
+                end)
+                if not ok then
+                    nativePrompt.failures = nativePrompt.failures + 1
+                    nativePrompt.last = "set_Message failed"
+                end
+            end
+            return retval
+        end)
+    end)
+    nativePrompt.installed = success
+    if not success then nativePrompt.last = "hook failed" end
+end
+installNativePromptHook()
 
 local function drawPawnChangeToast()
     if not config.ShowPawnChangeToast or pawnState.value == nil then return end
@@ -640,7 +669,7 @@ local function drawPawnChangeToast()
             .. "  (" .. tostring(pawnState.value) .. "/1000)", x, y, color)
     end)
 end
--- END CONTEXTUAL HUD v2.6
+-- End of native UI and pawn-notification helpers.
 
 -- v2.7: DD2 shop/buy/sell/pause menu overlay suppression.
 -- Do not clear the dialogue target or alter NPC/pawn values while suppressed.
@@ -715,11 +744,10 @@ re.on_frame(function()
         trackMainPawnChanges()
         if config.Enabled then pcall(runAffinityScan) end
     end
-    -- Keep the last talk target while buying/selling; don't draw over menus.
-    if not updateMenuGuard() then
-        drawGlobalAffinityHUD()
-        drawPawnChangeToast()
-    end
+    -- The only custom overlay is the independent Main Pawn gain/loss toast.
+    local blocked = updateMenuGuard()
+    nativeDialogue.blocked = blocked
+    if not blocked then drawPawnChangeToast() end
 end)
 
 -- ---------------------------------------------------------------------------
@@ -747,7 +775,7 @@ local function refreshNPCList()
         if npcHolder then
             local sentimentInfo = npcHolder:getSentimentInfo(playerCharaID, false)
             if sentimentInfo and (sentimentInfo.Value > 0
-                or config.UnlockedNPCs[getPermanentID(npcHolder.CharaID)]) then
+                or isNPCUnlocked(getPermanentID(npcHolder.CharaID))) then
                 table.insert(npcDataArray, {
                     name    = translateCharacterName(npcHolder.CharaID),
                     charaID = npcHolder.CharaID,
@@ -784,25 +812,32 @@ re.on_draw_ui(function()
         imgui.set_tooltip("Natural decay and ALL other decreases are reversed for both LOCKED and UNLOCKED NPCs.\nNatural increases remain allowed. Manual changes via this menu become the new baseline.")
     end
 
-    changed, config.ShowFloatingBar = imgui.checkbox("Show NPC Affinity During Conversation", config.ShowFloatingBar)
-    if changed then saveConfig() end
+    changed, config.NativePromptEnabled = imgui.checkbox(
+        "Show Affinity in Native Talk Prompt", config.NativePromptEnabled)
+    if changed then nativePrompt.target = nil; saveConfig() end
     if imgui.is_item_hovered() then
-        imgui.set_tooltip("One shared affinity HUD, with a minimum display duration for short NPC remarks.")
+        imgui.set_tooltip("Display name and affinity in the native Talk prompt.")
     end
-    changed, config.HudXPercent = imgui.slider_int(
-        "Affinity HUD horizontal (%)", config.HudXPercent, 10, 90)
-    if changed then saveConfig() end
-    changed, config.HudYPercent = imgui.slider_int(
-        "Affinity HUD vertical (%)", config.HudYPercent, 5, 85)
-    if changed then saveConfig() end
-    changed, config.DialogueMinSeconds = imgui.slider_int(
-        "Short dialogue display seconds", config.DialogueMinSeconds, 2, 8)
-    if changed then saveConfig() end
-    changed, config.HideDuringGameMenus = imgui.checkbox(
-        "Hide Affinity HUD in Game Menus", config.HideDuringGameMenus)
+    changed, config.NativeDialogueAffinity = imgui.checkbox(
+        "Show Affinity on Native Dialogue Speaker", config.NativeDialogueAffinity)
     if changed then saveConfig() end
     if imgui.is_item_hovered() then
-        imgui.set_tooltip("Hide the HUD and affinity toast in shop, inventory and pause menus.\nThe conversation target is preserved when a menu opens.")
+        imgui.set_tooltip("Show affinity beside the native dialogue speaker name.")
+    end
+    imgui.text("Native prompt: " .. (nativePrompt.installed and "hooked" or "unavailable")
+        .. "; writes=" .. tostring(nativePrompt.written)
+        .. "; failures=" .. tostring(nativePrompt.failures))
+    imgui.text("Native dialogue: " .. (nativeDialogue.installed and "hooked" or "unavailable")
+        .. "; names=" .. tostring(nativeDialogue.renamed)
+        .. "; failures=" .. tostring(nativeDialogue.failures))
+    if not nativePrompt.installed or not nativeDialogue.installed then
+        imgui.text("Native UI unavailable; check REFramework / game update.")
+    end
+    changed, config.HideDuringGameMenus = imgui.checkbox(
+        "Hide Affinity UI in Game Menus", config.HideDuringGameMenus)
+    if changed then saveConfig() end
+    if imgui.is_item_hovered() then
+        imgui.set_tooltip("Suppress native dialogue affinity and Main Pawn notifications over blocking menus.")
     end
     imgui.text("Menu checker: " .. (
         not config.HideDuringGameMenus and "OFF" or
@@ -816,18 +851,15 @@ re.on_draw_ui(function()
     -- Its UI remains available even when NPC affinity capping is disabled.
     imgui.separator()
     if imgui.tree_node("Main Pawn Affinity (Read-only)") then
-        changed, config.ShowMainPawnFloatingBar = imgui.checkbox(
-            "Show Main Pawn Affinity During Conversation", config.ShowMainPawnFloatingBar)
-        if changed then saveConfig() end
+
         changed, config.ShowPawnChangeToast = imgui.checkbox(
             "Notify on Main Pawn Affinity Change", config.ShowPawnChangeToast)
         if changed then saveConfig() end
-        changed, config.PawnHudSeconds = imgui.slider_int(
-            "Notification seconds", config.PawnHudSeconds, 2, 12)
+        changed, config.PawnToastSeconds = imgui.slider_int(
+            "Notification seconds", config.PawnToastSeconds, 2, 12)
         if changed then saveConfig() end
-        imgui.text("Shared HUD: one target, only during active conversation.")
-        imgui.text("Observers: " .. talkTracker.hookStatus)
-        imgui.text("Target source: " .. talkTracker.source)
+        imgui.text("Native affinity display; Main Pawn favorability is read-only.")
+        imgui.text("Dialogue observer: " .. talkTracker.hookStatus)
         if pawnState.value ~= nil then
             imgui.text(pawnState.name .. ": " .. pawnState.value .. " / " .. PAWN_FAVORABILITY_MAX)
             if pawnState.value >= PAWN_BLUSH_THRESHOLD then
@@ -863,6 +895,7 @@ re.on_draw_ui(function()
     imgui.spacing()
 
     styledButton("Refresh NPC List", refreshNPCList)
+    imgui.text("UNLOCKED bypasses this mod's cap, not DD2's own 199 soft cap.")
 
     if #npcDataArray == 0 then
         imgui.text("Press 'Refresh NPC List' to view characters.")
@@ -891,7 +924,7 @@ re.on_draw_ui(function()
                 or string.find(string.lower(npc.name), filterLower, 1, true)
             if passFilter then
                 imgui.table_next_row()
-                local isUnlocked = config.UnlockedNPCs[npc.strID]
+                local isUnlocked = isNPCUnlocked(npc.strID)
 
                 -- Name
                 imgui.table_next_column()
@@ -905,8 +938,16 @@ re.on_draw_ui(function()
                 imgui.table_next_column()
                 if isUnlocked then
                     imgui.text_colored("UNLOCKED", 0xFF8AD950)
+                    if imgui.is_item_hovered() then
+                        imgui.set_tooltip("Mod 199 cap: INACTIVE for this NPC (ID: " .. npc.strID ..
+                            "). DD2 may independently hold affinity at 199 until a gift or quest.")
+                    end
                 else
                     imgui.text_colored("CAPPED",   0xFF60609C)
+                    if imgui.is_item_hovered() then
+                        imgui.set_tooltip("Mod cap active: " .. tostring(config.CapValue) ..
+                            " (NPC ID: " .. npc.strID .. ")")
+                    end
                 end
 
                 -- Lock / Unlock
@@ -922,6 +963,9 @@ re.on_draw_ui(function()
                 else
                     if imgui.button("Unlock##" .. npc.strID) then
                         config.UnlockedNPCs[npc.strID] = true
+                        -- Start a fresh anti-loss baseline on transition from
+                        -- a locked 199 state to the unlocked rule.
+                        sessionHighs[npc.strID] = nil
                         saveConfig()
                     end
                 end
@@ -942,7 +986,7 @@ re.on_draw_ui(function()
                                 if npcHolder then
                                     local sentiment = npcHolder:getSentimentInfo(player:get_CharaID(), false)
                                     if sentiment then
-                                        local maxVal = config.UnlockedNPCs[npc.strID] and 299 or config.CapValue
+                                        local maxVal = isNPCUnlocked(npc.strID) and 299 or config.CapValue
                                         local newVal = math.max(0, math.min(sentiment.Value + config.ManualAffinityChange, maxVal))
                                         sentiment.Value = newVal
                                         -- Explicit exception: a deliberate manual decrease (or
@@ -979,9 +1023,8 @@ re.on_script_reset(function()
     _npcMgr         = nil
     pawnState       = { value = nil, character = nil, name = "Main Pawn", status = "Not checked" }
     pawnHud         = { previous = nil, delta = 0, changeEnds = 0, pawnKey = nil }
-    talkTracker     = {
-        target = nil, eventTarget = nil, eventAt = 0, prompt = nil, promptAt = 0,
-        wasTalking = false, active = false, source = "none", hookStatus = talkTracker.hookStatus,
-        eventSerial = 0, handledEventSerial = 0, visibleUntil = 0
-    }
+    talkTracker     = { eventTarget = nil, eventAt = 0,
+        hookStatus = talkTracker.hookStatus }
+    nativePrompt.target, nativePrompt.ui = nil, nil
+    nativeDialogue.callStack, nativeDialogue.depth, nativeDialogue.blocked = {}, 0, false
 end)
