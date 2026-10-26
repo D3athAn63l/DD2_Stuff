@@ -65,3 +65,9 @@ The owner supplied two screenshots from the live game confirming **both native a
 - Previously, Alpha 1 was owner-confirmed to show `The Dragonforged [187]` **before talking**; it did not yet decorate the active dialogue name. The Alpha 2 Dahlia conversation screenshot confirms this second path works for the pawn.
 
 These are specific live UI confirmations, not proof that every NPC, merchant option, one-line conversation, or save transition is regression-safe. The experimental toggle remains default OFF, rollback remains available, and standalone Show Name / Show Favorability should stay disabled during this test.
+
+### Extended NPC dialogue regression — The Dragonforged (26 October 2026)
+
+The owner tested **The Dragonforged** again using v2.9-alpha2 and confirmed the native affinity suffix **remained visible throughout his extended dialogue and multiple selectable conversation options**. This validates the speaker-name hook beyond the first dialogue line for a multi-option NPC, alongside the earlier Main Pawn Dahlia confirmation.
+
+**Scope:** The reported test establishes persistence of the visible native affinity label across those conversation lines/options. It does **not** yet establish correct behavior for every merchant's Buy/Sell screen, generic one-line NPCs, unrelated UI name lookups, or game reload/NG+ transitions. No extra screenshot, updated affinity number, or REFramework diagnostics were supplied for this regression.
