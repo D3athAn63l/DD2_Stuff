@@ -199,11 +199,15 @@ local function isNPCUnlocked(key)
     return config.UnlockedNPCs[tostring(key)] == true
 end
 
+-- Calls made by this mod (NPC search, pawn status, prompt name generation)
+-- must always receive unmodified names, even when global fallback is enabled.
+local internalNameDepth = 0
 local function translateCharacterName(charaID)
-    if getCharaName then
-        return getCharaName:call(nil, charaID) or "Unknown"
-    end
-    return "Unknown"
+    if not getCharaName then return "Unknown" end
+    internalNameDepth = internalNameDepth + 1
+    local ok, name = pcall(function() return getCharaName:call(nil, charaID) end)
+    internalNameDepth = internalNameDepth - 1
+    return ok and name or "Unknown"
 end
 
 -- Styled button helper (avoids repeating push/pop × 3 everywhere)
@@ -506,7 +510,8 @@ end
 local function ambientAffinityForID(charaID)
     if not charaID or not config.NativeAmbientAffinity
         or not config.NativePromptEnabled or not config.NativeDialogueAffinity
-        or nativeDialogue.blocked or nativeDialogue.depth > 0 then return nil end
+        or nativeDialogue.blocked or nativeDialogue.depth > 0
+        or internalNameDepth > 0 then return nil end
     local key = getPermanentID(charaID)
     if pawnState.character and characterKey(pawnState.character) == key then
         return tonumber(pawnState.value)
@@ -577,6 +582,7 @@ local function installNativeDialogueNameHook()
             local fallback = not target and config.NativeAmbientAffinity
                 and config.NativePromptEnabled and config.NativeDialogueAffinity
                 and not nativeDialogue.blocked and nativeDialogue.depth == 0
+                and internalNameDepth == 0
             stack[#stack + 1] = { speaker = target, requested = requested,
                 allowFallback = fallback }
         end, function(retval)
