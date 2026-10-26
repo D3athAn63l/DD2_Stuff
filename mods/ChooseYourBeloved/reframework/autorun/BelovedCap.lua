@@ -1,8 +1,9 @@
 -- =============================================================================
--- BelovedCap  v2.8
+-- BelovedCap  v2.9-alpha1
 -- Caps locked NPCs at 199 by default; optional no-loss protection for all NPCs.
 -- Reference: Affinity Bar v1.2.6 (game API patterns)
 --
+-- v2.9-alpha1: Optional native interaction affinity label (disabled by default).
 -- v2.8: Use one canonical unlock predicate for the UI, NPC cap enforcement,
 -- cheat actions and HUD; normalize legacy truthy saved unlock values.
 --
@@ -33,7 +34,7 @@
 -- =============================================================================
 
 local modName    = "BelovedCap"
-local modVersion = "2.8"
+local modVersion = "2.9-alpha1"
 local configPath = "BelovedCap.json"
 
 -- ---------------------------------------------------------------------------
@@ -49,6 +50,7 @@ local defaultConfig = {
     PawnHudSeconds       = 5,
     ShowPawnChangeToast  = true,
     HideDuringGameMenus  = true,
+    NativePromptEnabled  = false,
     HudXPercent = 50,
     HudYPercent = 12,
     DialogueMinSeconds = 4,
@@ -71,7 +73,7 @@ local function validateConfig()
         config.ManualAffinityChange = defaultConfig.ManualAffinityChange
     end
 
-    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast", "HideDuringGameMenus" }) do
+    for _, field in ipairs({ "Enabled", "PreventDecay", "CheatModeEnabled", "ShowFloatingBar", "ShowMainPawnFloatingBar", "ShowPawnChangeToast", "HideDuringGameMenus", "NativePromptEnabled" }) do
         if type(config[field]) ~= "boolean" then
             config[field] = defaultConfig[field]
         end
@@ -420,6 +422,11 @@ local function safeHook(method, before)
     return success
 end
 
+local nativePrompt = {
+    target=nil, ui=nil, installed=false, written=0, skipped=0,
+    failures=0, last="not installed"
+}
+
 local function installConversationObservers()
     local installed, promptInstalled = 0, false
     -- Source identity via selectTalkEvent: only recognize a conversation when
@@ -475,7 +482,10 @@ local function installConversationObservers()
             if not obj then return end
             local rt = charType:get_runtime_type()
             local target = obj:call("getComponent(System.Type)", rt)
-            if target and characterKey(target) then
+            -- Pair this object with the following reqDispCommon callback.
+            -- Never reuse a prior character for unrelated prompt refreshes.
+            nativePrompt.target = target and characterKey(target) and target or nil
+            if nativePrompt.target then
                 talkTracker.prompt = target
                 talkTracker.promptAt = hudNow()
             end
@@ -590,6 +600,83 @@ local function readGlobalAffinity(character)
         threshold = unlocked and 200 or nil, pawn = false
     }
 end
+
+-- ---------------------------------------------------------------------------
+-- v2.9 ALPHA: NATIVE INTERACTION TEXT. Scope: current reqDisp target ONLY.
+-- The v0.2 report found TxtTalk 431/431 times, but original get_Message()
+-- failed 431/431 times. Never try to preserve unknown prompt strings.
+-- ---------------------------------------------------------------------------
+local function nativePromptLabel(character)
+    if not character then return nil end
+    local id = safePawnAccess(function() return character:get_CharaID() end)
+    if not id then return nil end
+    local name = safePawnAccess(function() return translateCharacterName(id) end)
+    if type(name) ~= "string" or name == "" or name == "Unknown" then return nil end
+    local number
+    if pawnState.character and sameHudCharacter(character, pawnState.character) then
+        number = pawnState.value
+    else
+        local manager = getCharacterManager()
+        local player = manager and safePawnAccess(function() return manager:get_ManualPlayer() end)
+        if not player or sameHudCharacter(character, player) then return nil end
+        local npcManager = getNPCManager()
+        local holder = npcManager and safePawnAccess(function()
+            return npcManager:getNPCHolder(id)
+        end)
+        local sentiment = holder and safePawnAccess(function()
+            return holder:getSentimentInfo(player:get_CharaID(), false)
+        end)
+        number = sentiment and tonumber(sentiment.Value)
+    end
+    number = tonumber(number)
+    if not number or number ~= number then return nil end
+    if #name > 22 then name = name:sub(1,19) .. "..." end
+    -- ASCII is used until the native prompt's available font/width is tested.
+    return name .. " [" .. tostring(math.floor(number + 0.5)) .. "]"
+end
+
+local function installNativePromptHook()
+    local td = safePawnAccess(function() return sdk.find_type_definition("app.ui021301") end)
+    local method = td and safePawnAccess(function()
+        return td:get_method("reqDispCommon(System.Single, System.Guid)")
+    end)
+    if not method or type(sdk.hook) ~= "function" then
+        nativePrompt.last = "missing reqDispCommon"
+        return
+    end
+    local success = pcall(function()
+        sdk.hook(method, function(args)
+            nativePrompt.ui = args and safePawnAccess(function()
+                return sdk.to_managed_object(args[2])
+            end)
+        end, function(retval)
+            local target, ui = nativePrompt.target, nativePrompt.ui
+            nativePrompt.target, nativePrompt.ui = nil, nil
+            if config.NativePromptEnabled and target and ui then
+                local ok = pcall(function()
+                    local label = nativePromptLabel(target)
+                    local text = label and (safePawnAccess(function() return ui.TxtTalk end)
+                        or safePawnAccess(function() return ui:get_field("TxtTalk") end))
+                    if not text then
+                        nativePrompt.skipped = nativePrompt.skipped + 1
+                        return
+                    end
+                    text:set_Message(label)
+                    nativePrompt.written = nativePrompt.written + 1
+                    nativePrompt.last = label
+                end)
+                if not ok then
+                    nativePrompt.failures = nativePrompt.failures + 1
+                    nativePrompt.last = "set_Message failed"
+                end
+            end
+            return retval
+        end)
+    end)
+    nativePrompt.installed = success
+    if not success then nativePrompt.last = "hook failed" end
+end
+installNativePromptHook()
 
 -- The classic v2.1 procedural heart-and-bar style, within the v2.5
 -- shared conversational HUD. Target resolution and display timing unchanged.
@@ -735,7 +822,11 @@ re.on_frame(function()
     end
     -- Keep the last talk target while buying/selling; don't draw over menus.
     if not updateMenuGuard() then
-        drawGlobalAffinityHUD()
+        -- Fall back to the proven classic HUD if the native hook is unavailable
+        -- or this explicitly opt-in experiment is disabled.
+        if not (config.NativePromptEnabled and nativePrompt.installed) then
+            drawGlobalAffinityHUD()
+        end
         drawPawnChangeToast()
     end
 end)
@@ -802,6 +893,18 @@ re.on_draw_ui(function()
         imgui.set_tooltip("Natural decay and ALL other decreases are reversed for both LOCKED and UNLOCKED NPCs.\nNatural increases remain allowed. Manual changes via this menu become the new baseline.")
     end
 
+    changed, config.NativePromptEnabled = imgui.checkbox(
+        "Native Talk Affinity (Experimental)", config.NativePromptEnabled)
+    if changed then nativePrompt.target = nil; saveConfig() end
+    if imgui.is_item_hovered() then
+        imgui.set_tooltip("Opt-in native interaction prompt; disables custom conversation HUD.\n"
+            .. "Disable standalone Show Name/Favorability when testing.\n"
+            .. "Original Talk label cannot yet be read or restored.")
+    end
+    imgui.text("Native prompt: " .. (nativePrompt.installed and "hooked" or "unavailable")
+        .. "; writes=" .. tostring(nativePrompt.written)
+        .. "; failures=" .. tostring(nativePrompt.failures))
+    imgui.text("Last native prompt: " .. nativePrompt.last)
     changed, config.ShowFloatingBar = imgui.checkbox("Show NPC Affinity During Conversation", config.ShowFloatingBar)
     if changed then saveConfig() end
     if imgui.is_item_hovered() then
@@ -1014,4 +1117,5 @@ re.on_script_reset(function()
         wasTalking = false, active = false, source = "none", hookStatus = talkTracker.hookStatus,
         eventSerial = 0, handledEventSerial = 0, visibleUntil = 0
     }
+    nativePrompt.target, nativePrompt.ui = nil, nil
 end)

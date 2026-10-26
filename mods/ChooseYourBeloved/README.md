@@ -25,3 +25,17 @@ No additional romance, affinity gain or cooldown overrides are installed. The an
 Owner-confirmed successful in-game Ulrika unlock test on 20 October 2026 using the loose Lua. Other NPC cases and the regression harness still require separate validation.
 
 **Packaging warning:** Both handmade v2.8 ZIP downloads caused extraction/CRC errors for the owner. Neither contains `Cover.png`; thus a corrupt PNG cannot directly explain errors for entries in those specific ZIPs. The archive problem remains unresolved. Install the confirmed-working loose Lua instead.
+
+## v2.9-alpha1: Native interaction UI — opt-in test
+
+Read-only probe v0.2, 26 Oct 2026: 431 prompt target and 431 native UI callbacks; TxtTalk was present on all 431 calls; six unique actors, including Main Pawn Dahlia (1000), Luz (42), Sigurd (199), The Dragonforged (187) and a generic NPC. The original TxtTalk message was readable 0/431 times.
+
+This experimental mode updates the *native Talk prompt* through TxtTalk:set_Message(), using a **scoped** current character ID obtained from reqDisp (no global GUIBase name hook). It shows labels such as `Dahlia [1000]` or `Ulrika [245]`.
+
+- Enable **REFramework > BelovedCap > Native Talk Affinity (Experimental)** to test. **Default is OFF**.
+- When enabled and native hook installs, the custom floating dialogue HUD is hidden; the Main Pawn affinity change toast remains independent.
+- Disable standalone Show Name and Show Favorability scripts for this test (same native UI functions).
+- The original Talk message could not be read, so **this alpha cannot preserve the vanilla verb/action label**. Test a generic NPC, your Main Pawn and merchant, and look for incorrect replacement of Buy/Sell, Give Gift or other action text. Disable immediately if misleading.
+- The v2.8 Ulrika unlock enforcement, NPC anti-loss, read-only pawn values and menu guard are unchanged. Save config and saves before testing.
+- Diagnostic line shows hook status, successful setter calls, failures, and last label; provide screenshots if UI truncates or fails.
+- No in-game write validation yet; the new behavior remains experimental even though all read-only native hooks were confirmed.
